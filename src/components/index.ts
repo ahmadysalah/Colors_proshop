@@ -7,4 +7,4 @@ export { default as Image } from './Image';
 export { default as Rating } from './Rating';
 export { Navbar } from './Navbar';
 export { default as Typography } from './Typography';
-export { categoryCard, productCard } from './Card';
+export { CategoryCard, ProductCard } from './Card';
