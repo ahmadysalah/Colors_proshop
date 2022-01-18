@@ -1,21 +1,27 @@
 import React from 'react';
+import Img from './styles';
 
-interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;
   height?: string;
   fit?: string;
   loading?: 'eager' | 'lazy' | undefined;
+  variant?: 'circle' | 'square';
+  border?: boolean;
+  objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
 }
 
 const Image = (props: IProps) => {
-  return <img src="" alt="" max-height="100%" {...props} />;
+  return <Img {...props} />;
 };
-
-export default Image;
 
 Image.defaultProps = {
   width: '100%',
-  height: 'auto',
-  fit: 'fill',
+  height: '100%',
+  objectFit: 'fill',
   loading: 'lazy',
+  variant: 'square',
+  border: false,
 };
+
+export default Image;
