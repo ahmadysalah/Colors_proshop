@@ -47,6 +47,14 @@ export const StyledImage = styled('img')<any>`
   object-position: center;
   display: block;
   max-width: 100%;
+  border: ${props =>
+    props?.border && `1px solid${props.theme.primary.lightYallow}`};
+  border-radius: ${props =>
+    props.variant === 'circle'
+      ? '50%'
+      : props.variant === 'square'
+      ? '12px'
+      : '0'};
   max-height: ${props =>
     props.maxHeight || (props?.size && getImageHeight(props.size)) || '100%'};
   margin: 0 auto;

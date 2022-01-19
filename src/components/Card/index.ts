@@ -1,2 +1,2 @@
-export { default as categoryCard } from './categoryCard';
-export { default as productCard } from './productCard';
+export { default as CategoryCard } from './CategoryCard';
+export { default as ProductCard } from './ProductCard';

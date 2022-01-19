@@ -1,4 +1,4 @@
-import { Container, Rating, Typography } from '../../../components';
+import { Container, Rating, Typography } from '../../../../components';
 
 const data = [
   {

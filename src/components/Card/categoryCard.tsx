@@ -1,6 +1,7 @@
 import Typography from '../Typography';
 import { Content, ContentAction, MainCard } from './cardStyles';
 import img from '../../assets/tow.jpg';
+import { Image } from '../index';
 
 const CategoryCard = () => {
   return (
@@ -10,11 +11,7 @@ const CategoryCard = () => {
         margin="none"
         boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       >
-        <img
-          src={img}
-          style={{ width: '100%', height: '100%', borderRadius: '10px' }}
-          alt=""
-        />
+        <img src={img} alt="" />
       </ContentAction>
       <Content margin="16px auto">
         <Typography variant="h1">Shooes Shooes</Typography>

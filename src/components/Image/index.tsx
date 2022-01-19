@@ -6,6 +6,8 @@ interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fit?: string;
   loading?: 'eager' | 'lazy' | undefined;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
+  variant?: 'circle' | 'square';
+  border?: boolean;
 }
 
 const Image: React.FC<IProps> = props => <StyledImage {...props} />;
