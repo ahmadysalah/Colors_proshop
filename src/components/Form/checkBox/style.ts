@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Row } from '../../index';
+import { Row } from '../../Row';
 
 export const Remember = styled('p')`
   font-size: 22px;
@@ -12,6 +12,8 @@ export const Remember = styled('p')`
 export const WarperCheckBox = styled(Row)`
   cursor: pointer;
   border-radius: 6px;
+  justify-content: center;
+  align-items: center;
 `;
 export const WarperFileBox = styled('label')`
   cursor: pointer;

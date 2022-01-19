@@ -7,7 +7,7 @@ import {
   Typography,
   Icon,
   Counter,
-} from '../../../components';
+} from '../../../../components';
 import { ProductImage } from './style';
 
 const images = [

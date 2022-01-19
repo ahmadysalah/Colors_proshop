@@ -37,7 +37,6 @@ Row.defaultProps = {
 };
 
 export const Column = styled(Row)`
-  display: flex;
   flex-direction: column;
   justify-content: ${props => props.JC};
   justify-items: ${props => props.item};

@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { Row } from '../../Row';
 
 export const FiledWrapper = styled('div')`
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 30px;
+  height: 40px;
 `;
 
 export const Label = styled('label')`
@@ -23,8 +24,9 @@ interface IInput {
 }
 export const Input = styled('input')<IInput>`
   width: 100% !important;
-  min-height: 40px;
+  height: 100%;
   border: none;
+  background: transparent;
 
   /* border: ${props =>
     props.isError ? '1px solid red' : '1px solid green'}; */
@@ -36,16 +38,19 @@ export const Input = styled('input')<IInput>`
   ::placeholder {
     padding-left: 5px;
     outline: none;
+    background: transparent;
   }
   &:disabled {
     box-shadow: none;
     cursor: not-allowed;
     outline: none;
+    background: transparent;
   }
 
   &:focus:not(:disabled) {
     outline: none;
     border-left: none;
+    background: transparent;
   }
 `;
 
