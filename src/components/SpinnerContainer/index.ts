@@ -4,11 +4,11 @@ const SpinnerContainer = styled.div`
   display: inline-block;
   width: 80px;
   height: 80px;
-  border: 6px solid #fcdd06;
+  border: 6px solid ${props => props.theme?.primary?.lightYallow};
   box-sizing: border-box;
   border-radius: 50%;
   border-top-color: #ddd;
-  margin: auto auto;
+  margin: 0px auto;
   animation: spin 3s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
   @keyframes spin {

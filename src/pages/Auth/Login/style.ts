@@ -66,7 +66,7 @@ export const ForgotPassword = styled('a')`
   margin-top: 16px;
   text-align: center;
   margin-bottom: 22px;
-  font-family: normal normal 300 22px/15px Muli;
+  font-family: normal normal 300 22px/15px Mulish;
 `;
 
 export const ButtonSuginup = styled('button')`
@@ -87,7 +87,7 @@ export const ButtonSuginup = styled('button')`
 export const ButtonLogin = styled('button')`
   width: 100%;
   min-height: 56px;
-  border: 3px solid #fcdd06;
+  border: 3px solid ${props => props.theme?.primary?.lightYallow};
   border-radius: 20px;
   opacity: 1;
   font-size: 22px;
