@@ -1,4 +1,8 @@
+import { ReactNode, CSSProperties } from 'react';
+
 export interface IStyleButton {
+  style?: CSSProperties;
+  children: ReactNode;
   minWidth?: string;
   borderRadius?: string;
   border?: string;
@@ -12,4 +16,5 @@ export interface IStyleButton {
   padding?: string;
   letterSpace?: string;
   margin?: string;
+  brand?: boolean;
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BsBookmark } from 'react-icons/bs';
 import { Button } from '../Button/ButtonStyle';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
@@ -54,7 +55,7 @@ const ComplexCard = ({
           padding="none"
           margin="0 13px 34px 62px"
         >
-          Add
+          <BsBookmark />
         </Button>
         <Button height="62px" width="324px" background="none">
           Add to cart
