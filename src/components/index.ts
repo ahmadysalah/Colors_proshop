@@ -9,6 +9,7 @@ export { Navbar } from './Navbar';
 export { default as Typography } from './Typography';
 export { CategoryCard, ProductCard } from './Card';
 export { default as Counter } from './Counter';
+export { default as PathNavigate } from './PathNavigate';
 export { SpinnerContainer } from './SpinnerContainer';
 export { default as Loadable } from './Loadable';
 export { default as ErrorBoundary } from './ErrorBoundary';
