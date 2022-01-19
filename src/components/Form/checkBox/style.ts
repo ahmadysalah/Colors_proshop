@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Row } from '../../Row';
 
 export const Remember = styled('p')`
-  font-size: 22px;
+  font-size: 18px;
   letter-spacing: 0.88px;
   color: #707070;
   opacity: 0.7;

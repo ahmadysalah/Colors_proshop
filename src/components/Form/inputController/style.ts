@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Row } from '../../Row';
 
 export const FiledWrapper = styled('div')`
-  margin-bottom: 30px;
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
   width: 100%;

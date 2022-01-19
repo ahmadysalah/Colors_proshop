@@ -41,6 +41,7 @@ export const InputController = ({ ...props }: InputControllerProps) => {
             onBlur={props.onBlur}
             required={props.isRequired}
             placeholder={props.placeholder}
+            autoComplete="off"
           />
         </InputWrapper>
         <ErrorSection errors={props.errors} touched={props.touched} />
