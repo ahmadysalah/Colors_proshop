@@ -9,3 +9,4 @@ export { Navbar } from './Navbar';
 export { default as Typography } from './Typography';
 export { categoryCard, productCard } from './Card';
 export { default as Counter } from './Counter';
+export { default as PathNavigate } from './PathNavigate';
