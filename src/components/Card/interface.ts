@@ -34,3 +34,15 @@ export interface IactionProps {
   width?: string;
   space?: boolean;
 }
+
+export interface ICategoryProps {
+  description: string;
+  img: string;
+}
+
+export interface IComplexProps {
+  img: string;
+  valueOfDiscount: number;
+  description: string;
+  price: number;
+}

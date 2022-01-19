@@ -1,9 +1,8 @@
 import Typography from '../Typography';
 import { Content, ContentAction, MainCard } from './cardStyles';
-import img from '../../assets/tow.jpg';
-import { Image } from '../index';
+import { ICategoryProps } from './interface';
 
-const CategoryCard = () => {
+const CategoryCard = ({ img, description }: ICategoryProps) => {
   return (
     <MainCard width="380px" height="392px" boxShadow="none">
       <ContentAction
@@ -14,7 +13,7 @@ const CategoryCard = () => {
         <img src={img} alt="" />
       </ContentAction>
       <Content margin="16px auto">
-        <Typography variant="h1">Shooes Shooes</Typography>
+        <Typography variant="h1">{description}</Typography>
       </Content>
     </MainCard>
   );

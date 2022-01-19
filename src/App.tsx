@@ -1,4 +1,3 @@
-
 import { Suspense } from 'react';
 import { AllRouter } from './AllRouter';
 import ErrorBoundary from './components/ErrorBoundary';
