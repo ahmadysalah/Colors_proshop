@@ -6,7 +6,7 @@ export const theme: DefaultTheme = {
     white: '#ffffff',
   },
   primary: {
-    lightYallow: '#FCD061A',
+    lightYallow: '#FCDD06',
     darkYallow: '#FFC727',
     disCount: '#FC4059',
   },

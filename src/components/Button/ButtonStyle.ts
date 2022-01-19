@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { IStyleButton } from './IStyleButton';
 
+// normal normal bold 16px/20px
+
 const ButtonStyle = styled.button<IStyleButton>(
   ({
     width = 'none',
     height = 'none',
-    padding = '16px 32px',
+    padding = '.5em 1em',
     borderRadius = '10px',
     border = 'none',
     fontWeight = 'bold',
@@ -15,6 +17,7 @@ const ButtonStyle = styled.button<IStyleButton>(
     cursor = 'pointer',
     letterSpace = '0px',
     margin = 'none',
+    brand = false,
     ...props
   }) => ({
     width: `${width}`,
@@ -23,7 +26,13 @@ const ButtonStyle = styled.button<IStyleButton>(
     borderRadius: `${borderRadius}`,
     border: `${border}`,
     fontWeight: `${fontWeight}`,
-    background: `${background || props.theme.background?.lightGrey}`,
+    background: `${
+      background ||
+      (brand
+        ? props.theme.primary?.lightYallow
+        : props.theme.background?.lightGrey)
+    }`,
+
     color: `${color}`,
     fontSize: `${fontSize}`,
     cursor: `${cursor}`,
@@ -36,6 +45,6 @@ const ButtonStyle = styled.button<IStyleButton>(
 export const Button = styled(ButtonStyle)`
   &:hover {
     color: white;
-    background: #bfa90d;
+    background: #fcdd06;
   }
 `;
