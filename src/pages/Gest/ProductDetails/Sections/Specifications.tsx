@@ -1,4 +1,4 @@
-import { Container, Typography } from '../../../components';
+import { Container, Typography } from '../../../../components';
 
 const data = [
   {
