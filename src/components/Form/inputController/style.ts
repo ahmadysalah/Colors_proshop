@@ -10,7 +10,7 @@ export const FiledWrapper = styled('div')`
 `;
 
 export const Label = styled('label')`
-  font-family: normal normal normal 22px/15px Muli;
+  font-family: normal normal normal 22px/15px Mulish;
   letter-spacing: 0.88px;
   color: #242424;
   padding-bottom: 10px;
