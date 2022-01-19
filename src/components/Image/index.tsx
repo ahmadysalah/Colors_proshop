@@ -1,21 +1,13 @@
-import React from 'react';
+import { StyledImage } from './style';
 
 interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;
   height?: string;
   fit?: string;
   loading?: 'eager' | 'lazy' | undefined;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 }
 
-const Image = (props: IProps) => {
-  return <img src="" alt="" max-height="100%" {...props} />;
-};
+const Image: React.FC<IProps> = props => <StyledImage {...props} />;
 
 export default Image;
-
-Image.defaultProps = {
-  width: '100%',
-  height: 'auto',
-  fit: 'fill',
-  loading: 'lazy',
-};
