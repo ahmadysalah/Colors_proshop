@@ -6,12 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import {
   LoginText,
   LoginSubText,
-  ImageShape,
   Wrapper,
-  WrapperRemmber,
   ForgotPassword,
   ButtonSuginup,
-  LeftLogin,
   ButtonLogin,
 } from './style';
 import {
@@ -19,7 +16,7 @@ import {
   schemaValidationLogin as validationSchema,
 } from '../../../utils/helper/validation';
 import LoginImage from '../../../assets/Images/login.png';
-import { Column, InnerColSection } from '../../../components/Row';
+import { InnerColSection } from '../../../components/Row';
 import Divider from '../../../components/Divider';
 import { CheckBox } from '../../../components/Form/checkBox';
 import { InputController } from '../../../components/Form/inputController';
@@ -34,9 +31,9 @@ const initialValues: IschemaValidationLogin = {
 const Login = () => {
   const [checked, setChecked] = useState<boolean>(true);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-  };
+  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setChecked(event.target.checked);
+  // };
   const navigate = useNavigate();
 
   const formik = useFormik<IschemaValidationLogin>({
