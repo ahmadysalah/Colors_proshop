@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import Loadable from './components/Loadable';
 import { Container } from './components';
+import Home from './pages/Gest/Home';
 
 const Signup = Loadable(lazy(() => import('./pages/Auth/Signup')));
 const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
@@ -15,6 +16,7 @@ export const AllRouter = () => {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/Signup" element={<Signup />} />
+      <Route path="/Home" element={<Home />} />
       <Route path="/product/:id" element={<Product />} />
       <Route path="/review" element={<ReviewOrder />} />
     </Routes>
