@@ -1,4 +1,5 @@
 import { Container } from '../../../components';
+import { FeaturedProduct } from '../../../components/sections/FeaturedProducts/FeaturedProducts';
 import { Slider } from '../../../components/Slider/slider';
 
 const data = [
@@ -43,6 +44,7 @@ const Home: React.FC = () => {
   return (
     <Container width="100%" direction="column">
       <Slider data={data} />
+      <FeaturedProduct />
     </Container>
   );
 };
