@@ -15,12 +15,14 @@ interface InputControllerProps {
   isRequired?: boolean;
   onBlur?: (e: React.FocusEvent<any, Element>) => any;
   onChange?: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+  style?: React.CSSProperties;
+  marginLeft?: string;
 }
 
 export const InputController = ({ ...props }: InputControllerProps) => {
   return (
     <>
-      <FiledWrapper>
+      <FiledWrapper marginLeft={props.marginLeft}>
         {props.label && <Label htmlFor={props.name}>{props.label}</Label>}
 
         <InputWrapper isError={!!props.errors?.length}>
@@ -41,6 +43,7 @@ export const InputController = ({ ...props }: InputControllerProps) => {
             onBlur={props.onBlur}
             required={props.isRequired}
             placeholder={props.placeholder}
+            autoComplete="off"
           />
         </InputWrapper>
         <ErrorSection errors={props.errors} touched={props.touched} />

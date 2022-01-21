@@ -49,15 +49,14 @@ export const InnerSection = styled(Column)`
   width: 100%;
 `;
 export const InnerColSection = styled(InnerSection)`
+  display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 `;
 
 export const FlexBox = styled('div')`
-  align-items: flex-start;
   display: flex;
   height: auto;
-  justify-content: flex-start;
   width: 100%;
 `;
 

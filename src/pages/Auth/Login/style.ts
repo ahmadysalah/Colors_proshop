@@ -1,27 +1,24 @@
 import styled from 'styled-components';
+import { Typography } from '../../../components';
 
 export const WrapperRemmber = styled('div')`
-  margin-top: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
+  margin: 0;
 `;
 
-export const LoginText = styled('p')`
-  font-size: 60px;
+export const LoginText = styled(Typography)`
+  font-size: 35px;
   font-weight: bold;
-  letter-spacing: 2.4px;
   color: #242424;
-  opacity: 1;
-  color: #242424;
-  margin-bottom: 16px;
 `;
 export const LoginSubText = styled('p')`
-  font-size: 32px;
-  width: 100%;
-  letter-spacing: 1.28px;
+  font-size: 25px;
+  width: 25rem;
   color: #70707070;
-  margin-bottom: 52px;
+  font-family: Mulish;
 `;
 
 export const LeftLogin = styled('div')`
@@ -44,10 +41,10 @@ export const ImageShape = styled.img`
 `;
 
 export const Wrapper = styled('div')`
-  margin-top: 44px;
-  margin-bottom: 160px;
+  margin-top: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
   align-items: center;
   overflow-y: hidden;
 `;
@@ -59,18 +56,17 @@ export const Remmber = styled('p')`
   opacity: 0.7;
   margin-left: 13px;
 `;
-export const ForgotPassword = styled('a')`
-  font-size: 22px;
+export const ForgotPassword = styled(Typography)`
+  font-size: 18px;
   letter-spacing: 0.88px;
   color: #242424;
-  margin-top: 16px;
   text-align: center;
-  margin-bottom: 22px;
   font-family: normal normal 300 22px/15px Mulish;
+  margin-bottom: 1rem;
 `;
 
 export const ButtonSuginup = styled('button')`
-  width: 220px;
+  width: 200px;
   height: 56px;
   border: 3px solid #fcdd06;
   border-radius: 20px;
@@ -82,11 +78,12 @@ export const ButtonSuginup = styled('button')`
   letter-spacing: 0.88px;
   color: #242424;
   outline: none;
-  margin-top: 161px;
+  align-self: center;
+  margin-top: 1rem;
 `;
 export const ButtonLogin = styled('button')`
   width: 100%;
-  min-height: 56px;
+  min-height: 40px;
   border: 3px solid ${props => props.theme?.primary?.lightYallow};
   border-radius: 20px;
   opacity: 1;
@@ -98,7 +95,6 @@ export const ButtonLogin = styled('button')`
   letter-spacing: 0.88px;
   color: #242424;
   outline: none;
-  margin-top: 30px;
   background: #fcdd06 0% 0% no-repeat padding-box;
   border-radius: 6px;
 `;

@@ -47,8 +47,8 @@ export const StyledImage = styled('img')<any>`
   object-position: center;
   display: block;
   max-width: 100%;
-  border: ${props =>
-    props?.border && `1px solid${props.theme.primary.lightYallow}`};
+
+  border: ${props => props?.border && '1px solid grey'};
   border-radius: ${props =>
     props.variant === 'circle'
       ? '50%'
@@ -70,4 +70,7 @@ export const StyledImage = styled('img')<any>`
     background-position: center;
   }
 `}
+  @media (max-width: 768px) {
+    display: ${props => (props.responsive ? 'none' : 'block')};
+  }
 `;

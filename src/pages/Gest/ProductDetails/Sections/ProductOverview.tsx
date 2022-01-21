@@ -3,10 +3,10 @@ import { BsBookmarks } from 'react-icons/bs';
 import {
   Container,
   Button,
-  Circle,
   Typography,
   Icon,
   Counter,
+  GroupCircle,
 } from '../../../../components';
 import { ProductImage } from './style';
 
@@ -29,31 +29,37 @@ const ProductOverview: React.FC = () => {
   };
   return (
     <>
-      <Container align-Items="flex-start" flex-Wrap="wrap">
-        <Container direction="column" max-width="25rem" margin="2em 0">
-          <Container padding="2em" width="80%">
+      <Container
+        align-Items="flex-start"
+        // flex-Wrap="wrap"
+        justify-ontent="space-between"
+      >
+        <Container direction="column" max-width="23rem">
+          <Container padding="2em" width="80%" height="300px">
             <ProductImage size="lg" src={currentImages[0]} />
           </Container>
-          <Container direction="row" margin=".5em 0">
+          <Container direction="row" margin=".1em 0">
             {currentImages.map(
               (image, index) =>
                 index > 0 && (
                   <ProductImage
                     key={index.toString()}
-                    size="sm"
                     src={image}
                     onClick={() => handleImageClick(index)}
+                    border
+                    height="6em"
+                    width="5em"
                   />
                 ),
             )}
           </Container>
         </Container>
-        <Container direction="column" margin-left="2em" width="60%">
+        <Container direction="column" margin-left="2em">
           <Container justify-Content="space-between">
-            <Typography variant="h3" font-Size="1.5rem" bold>
+            <Typography variant="h3" font-Size="1.2rem" bold>
               Apple iPhone 11 Pro 256GB Memory
             </Typography>
-            <Typography bold variant="h2">
+            <Typography bold variant="h2" font-Size="1.3rem">
               $499.99
             </Typography>
           </Container>
@@ -68,17 +74,10 @@ const ProductOverview: React.FC = () => {
               silver
             </Typography>
           </Container>
-          <Container
-            margin="1em 0"
-            max-Width="12rem"
-            min-Width="10rem"
-            justify-Content="space-between"
-          >
-            <Circle bgColor="#EE8C4B" />
-            <Circle bgColor="#2F58DE" borderColor="black" />
-            <Circle bgColor="#101311" />
-            <Circle bgColor="#AFB5B1" />
-          </Container>
+          <GroupCircle
+            colors={['#EDEAE3', '#242424']}
+            setColorActive={console.log}
+          />
           <Container>
             <Typography variant="h3" color="grey">
               Size:
@@ -111,6 +110,7 @@ const ProductOverview: React.FC = () => {
             line-Height={1.5}
             text-Align="justify"
             font-Family="Mulish"
+            font-Size=".8rem"
           >
             Et placeat odio voluptas saepe ullam enim sed. Sint rem sint. Ex
             enim aperiam consequatur. Est temporibus ab. Pariatur aut ut
