@@ -10,11 +10,12 @@ interface Props {
   placeholder?: string;
   value?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  margin?: string;
 }
 
 export const FileInput = ({ name, ...props }: Props) => {
   return (
-    <WarperFileBox htmlFor={name}>
+    <WarperFileBox margin={props.margin} htmlFor={name}>
       <AiOutlinePlus size="40px" />
       <InputFile
         onChange={props.onChange}

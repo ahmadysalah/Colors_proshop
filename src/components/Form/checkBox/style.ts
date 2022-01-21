@@ -15,7 +15,7 @@ export const WarperCheckBox = styled(Row)`
   justify-content: center;
   align-items: center;
 `;
-export const WarperFileBox = styled('label')`
+export const WarperFileBox = styled('label')<{ margin?: string }>`
   cursor: pointer;
   border-radius: 6px;
   width: 102px;
@@ -24,6 +24,7 @@ export const WarperFileBox = styled('label')`
   border: 1px dashed #707070;
   justify-content: center;
   align-items: center;
+  margin: ${props => props.margin || 0};
 `;
 export const Checkbox = styled('input').attrs({
   type: 'checkbox',

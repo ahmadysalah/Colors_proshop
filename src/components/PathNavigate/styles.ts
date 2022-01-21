@@ -11,7 +11,7 @@ export const PathWrapper = styled.div`
 
 export const PathName = styled.h2`
   color: #242424;
-  font-size: 24px;
+  font-size: 1rem;
   font-weight: 500;
   padding-left: 5px;
 `;
@@ -22,7 +22,7 @@ export const PathLink = styled.button`
   background: none;
   outline: none;
   color: #707070;
-  font-size: 24px;
+  font-size: 1rem;
   letter-spacing: 0.96px;
   font-weight: 500;
   &: hover {

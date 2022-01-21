@@ -5,17 +5,18 @@ import { Icon } from '..';
 import { Button } from '../Button/ButtonStyle';
 
 const Count = styled.div`
-  width: 204px;
-  height: 40px;
+  width: 8rem;
+  height: 1.8rem;
   display: flex;
   flex-direction: row;
 `;
 
 const Value = styled.div`
-  width: 108px;
+  width: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #eeeeee;
 `;
 
 const Counter = () => {
@@ -33,7 +34,7 @@ const Counter = () => {
     <>
       <Count>
         <Button
-          width="48px"
+          width="2rem"
           borderRadius="none"
           border="1px solid #FCDD06"
           background="#FFFFFF"
@@ -44,7 +45,7 @@ const Counter = () => {
         </Button>
         <Value>{number}</Value>
         <Button
-          width="48px"
+          width="2rem"
           borderRadius="none"
           border="1px solid #FCDD06"
           background="#FFFFFF"
