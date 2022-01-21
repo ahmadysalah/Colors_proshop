@@ -1,6 +1,6 @@
 import React from 'react';
 import { GrFormClose } from 'react-icons/gr';
-import { Container, Counter, Image, Typography } from '../../../components';
+import { Counter, Image, Typography } from '../../../components';
 import {
   CloseIcon,
   OldPrice,
@@ -19,38 +19,40 @@ const CartList = ({ item }: any) => {
       background-color="#F2F2F2"
       height="242px"
       border-radius="16px"
-      text-align="center"
       position="relative"
-      margin="0 0 30px 0"
+      padding="1em"
+      margin-bottom="30px"
+      justify-content="space-between"
     >
       <CloseIcon onClick={() => handleRemoveFormCart(item.id)}>
         <GrFormClose />
       </CloseIcon>
-      <OldPrice>
-        <Typography
-          children="$999.97"
-          variant="span"
-          color="#707070"
-          fontSize="24px"
-          letter-spacing="0.48px"
-          margin="0 0 10px 0"
-          text-decoration="line-through"
-        />
-      </OldPrice>
+      {item.isDescount && (
+        <OldPrice>
+          <Typography
+            children="$999.97"
+            variant="span"
+            color="#707070"
+            fontSize="24px"
+            letter-spacing="0.48px"
+            text-decoration="line-through"
+          />
+        </OldPrice>
+      )}
 
-      <ImgContainer width="50%" align-items="start" margin="0">
-        <Image
-          src={item.imageUrl}
-          alt={item.name}
-          width="50%"
-          fit="cover"
-          style={{ margin: '0' }}
-        />
-        <ItemTitle href={`/product/${item.id}`}>
+      <ImgContainer
+        width="60%"
+        align-items="start"
+        justify-content="space-between"
+      >
+        <Image src={item.imageUrl} alt={item.name} width="40%" fit="cover" />
+        <ItemTitle to={`/product/${item.id}`}>
           <Typography
             children={item.name}
             variant="h2"
-            letter-spacing="0.48px"
+            margin-left="0.5em"
+            padding="0.5em"
+            overflow-wrap="break-word"
           />
         </ItemTitle>
       </ImgContainer>
@@ -61,10 +63,8 @@ const CartList = ({ item }: any) => {
         children={String(`$${item.price}`)}
         variant="h2"
         fontSize="38px"
-        width="25%"
+        width="auto"
         text-align="right"
-        padding-right="15px"
-        margin="0.5em 0 0 0"
       />
     </ItemContainer>
   );
