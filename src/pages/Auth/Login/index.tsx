@@ -10,6 +10,8 @@ import {
   ForgotPassword,
   ButtonSuginup,
   ButtonLogin,
+  ContainerLogin,
+  FormContainer,
 } from './style';
 import {
   IschemaValidationLogin,
@@ -45,7 +47,7 @@ const Login = () => {
   });
 
   return (
-    <Container
+    <ContainerLogin
       height="100vh"
       padding={0}
       overflow="hidden"
@@ -59,56 +61,58 @@ const Login = () => {
             <LoginSubText>
               Login with your data that you entered during registration
             </LoginSubText>
-            <form
-              style={{
-                width: '300px',
-              }}
-              onSubmit={e => {
-                e.preventDefault();
-                formik.handleSubmit();
-                formik.resetForm();
-              }}
-            >
-              <Container width="100%" direction="column" padding={0}>
-                <InputController
-                  name="email"
-                  label="Enter your email address"
-                  type="email"
-                  placeholder="Enter Email"
-                  isRequired
-                  errors={formik.errors?.email}
-                  touched={formik.touched.email}
-                  onBlur={formik.handleBlur}
-                  onChange={formik.handleChange}
-                  icon={<AiOutlineMail />}
-                  value={formik.values.email}
-                />
+            <FormContainer>
+              <form
+                style={{
+                  width: '100%',
+                }}
+                onSubmit={e => {
+                  e.preventDefault();
+                  formik.handleSubmit();
+                  formik.resetForm();
+                }}
+              >
+                <Container width="100%" direction="column" padding={0}>
+                  <InputController
+                    name="email"
+                    label="Enter your email address"
+                    type="email"
+                    placeholder="Enter Email"
+                    isRequired
+                    errors={formik.errors?.email}
+                    touched={formik.touched.email}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    icon={<AiOutlineMail />}
+                    value={formik.values.email}
+                  />
 
-                <InputController
-                  name="password"
-                  label="Enter your password"
-                  type="password"
-                  placeholder="Enter Password"
-                  isRequired
-                  errors={formik.errors?.password}
-                  onBlur={formik.handleBlur}
-                  touched={formik.touched.password}
-                  onChange={formik.handleChange}
-                  icon={<RiLockPasswordFill />}
-                  value={formik.values.password}
-                />
+                  <InputController
+                    name="password"
+                    label="Enter your password"
+                    type="password"
+                    placeholder="Enter Password"
+                    isRequired
+                    errors={formik.errors?.password}
+                    onBlur={formik.handleBlur}
+                    touched={formik.touched.password}
+                    onChange={formik.handleChange}
+                    icon={<RiLockPasswordFill />}
+                    value={formik.values.password}
+                  />
 
-                <ButtonLogin disabled={!formik.isValid} type="submit">
-                  Login
-                </ButtonLogin>
-                <CheckBox label="Remember me" name="Remember me" />
-                <ForgotPassword>Forgot your password?</ForgotPassword>
-                <Divider thick="2px" width="100%" />
-                <ButtonSuginup onClick={() => navigate('/signup')}>
-                  Sign up now
-                </ButtonSuginup>
-              </Container>
-            </form>
+                  <ButtonLogin disabled={!formik.isValid} type="submit">
+                    Login
+                  </ButtonLogin>
+                  <CheckBox label="Remember me" name="Remember me" />
+                  <ForgotPassword>Forgot your password?</ForgotPassword>
+                  <Divider thick="2px" width="100%" />
+                  <ButtonSuginup onClick={() => navigate('/signup')}>
+                    Sign up now
+                  </ButtonSuginup>
+                </Container>
+              </form>
+            </FormContainer>
           </Container>
           <Container>
             <Image
@@ -120,7 +124,7 @@ const Login = () => {
           </Container>
         </Wrapper>
       </InnerColSection>
-    </Container>
+    </ContainerLogin>
   );
 };
 export default Login;
