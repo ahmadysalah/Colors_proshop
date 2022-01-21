@@ -3,17 +3,17 @@ import styled from 'styled-components';
 const getTypographySize = (variant: string) => {
   switch (variant) {
     case 'h1':
-      return '2em';
+      return '1.8em';
     case 'h2':
-      return '1.5em';
+      return '1.3em';
     case 'h3':
-      return '1.17em';
-    case 'h4':
       return '1em';
+    case 'h4':
+      return '.8em';
     case 'h5':
-      return '.83em';
+      return '.5em';
     case 'h6':
-      return '0.76em';
+      return '0.4em';
     default:
       return '1em';
   }
@@ -22,10 +22,14 @@ const getTypographySize = (variant: string) => {
 const Wrapper = styled.div<any>`
   /* color: ${props => props.color || 'black'}; */
   font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
-  color: ${props => props?.color || props.theme?.Typography.color};
+  color: ${props =>
+    props
+      ? props.color
+      : props.theme
+      ? props.theme.Typography.color
+      : '#242424'};
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
-  width: ${props => props?.width || '100%'};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
   font-family: ${props => props?.fontFamily || 'PlusJakartaSans'};
   ${props =>

@@ -111,7 +111,12 @@ const Login = () => {
             </form>
           </Container>
           <Container>
-            <Image src={LoginImage} alt="image login continer" size="xl" />
+            <Image
+              src={LoginImage}
+              alt="image login continer"
+              size="xl"
+              responsive
+            />
           </Container>
         </Wrapper>
       </InnerColSection>

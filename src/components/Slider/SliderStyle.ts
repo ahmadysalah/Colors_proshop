@@ -4,6 +4,7 @@ import { Button } from '../Button/ButtonStyle';
 import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
 import { Typography } from '..';
+import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
   background: #f2f2f2;
@@ -27,7 +28,7 @@ export const ShopeButton = styled(Button)`
   text-transform: uppercase;
   width: 220px;
 `;
-export const PriceText = styled(Typography)`
+export const PriceText = styled<any>(Typography)`
   color: #242424;
   font-size: 2rem;
   margin-bottom: 10px;

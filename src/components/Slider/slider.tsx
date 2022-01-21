@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/extensions */
 import React, { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { SliderItem } from './SliderItem';

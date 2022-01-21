@@ -2,13 +2,12 @@ import { Route, Routes } from 'react-router-dom';
 
 import { lazy } from 'react';
 import Loadable from './components/Loadable';
-import { Container } from './components';
-import Home from './pages/Gest/Home';
 
 const Signup = Loadable(lazy(() => import('./pages/Auth/Signup')));
 const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
 const Product = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
+const Home = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 
 export const AllRouter = () => {
   return (

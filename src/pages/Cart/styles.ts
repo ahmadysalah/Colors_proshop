@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import { Container } from '../../components';
 
@@ -12,10 +13,8 @@ export const GlobalStyle = createGlobalStyle`
 export const CloseIcon = styled.i`
   position: absolute;
   top: 17px;
-  right: 13px;
+  right: 1em;
   color: #242424;
-  width: 32px;
-  height: 32px;
   &: hover {
     cursor: pointer;
   }
@@ -23,41 +22,49 @@ export const CloseIcon = styled.i`
 
 export const OldPrice = styled.div`
   position: absolute;
-  top: 68px;
-  right: 35px;
+  top: 4em;
+  right: 1em;
   @media only screen and (max-width: 767px) {
     top: unset;
-    bottom: 15px;
-    right: 10px;
+    bottom: 1.6em;
   }
 `;
 
-export const ItemTitle = styled.a`
-  width: 50%;
+export const ItemTitle = styled(Link)`
+  width: 60%;
   text-decoration: none;
   color: #242424;
-  padding-top: 20px;
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 export const WrapCounter = styled.div`
   background: #fff;
+  @media only screen and (max-width: 767px) {
+    margin-bottom: 1em;
+  }
 `;
 
 export const CartContainer = styled(Container)`
   @media only screen and (max-width: 767px) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
 export const ListContainer = styled(Container)`
   @media only screen and (max-width: 767px) {
     width: 100%;
+    align-items: center;
   }
 `;
 
 export const ItemContainer = styled(Container)`
   @media only screen and (max-width: 767px) {
     width: 100%;
+    max-width: 25rem;
     flex-direction: column;
     height: auto;
     align-items: center;
@@ -75,6 +82,7 @@ export const ImgContainer = styled(Container)`
 export const TotalContainer = styled(Container)`
   @media only screen and (max-width: 767px) {
     width: 100%;
-    margin-left: 0;
+    max-width: 25rem;
+    margin: 0;
   }
 `;
