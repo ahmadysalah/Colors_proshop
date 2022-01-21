@@ -22,7 +22,12 @@ const getTypographySize = (variant: string) => {
 const Wrapper = styled.div<any>`
   /* color: ${props => props.color || 'black'}; */
   font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
-  color: ${props => props?.color || props.theme?.Typography.color};
+  color: ${props =>
+    props
+      ? props.color
+      : props.theme
+      ? props.theme.Typography.color
+      : '#242424'};
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
