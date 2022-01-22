@@ -136,7 +136,7 @@ export const FeaturedProduct = () => {
         margin="auto"
       >
         <DeviderTitle title="Featured Product" position="center" />
-        <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+        <SwipeableViews index={sliderIndex} style={cssStyle}>
           {getSlides()}
         </SwipeableViews>
 
