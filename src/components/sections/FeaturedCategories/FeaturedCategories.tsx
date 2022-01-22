@@ -113,7 +113,7 @@ export const FeaturedCategories = () => {
         </WrapperDots>
       </Container>
       <Divider width="100%" height="1px" color="#707070" />
-      <SwipeableViews index={sliderIndex} style={cssStyle}>
+      <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
         {getSlides()}
       </SwipeableViews>
     </Container>

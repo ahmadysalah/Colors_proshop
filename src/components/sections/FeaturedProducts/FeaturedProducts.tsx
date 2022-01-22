@@ -47,13 +47,12 @@ export interface IProduct {
 export const FeaturedProduct = () => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleSize = () => {
-      setWidth(window.innerWidth);
-    };
+  const handleSize = () => {
+    setWidth(window.innerWidth);
     setSliderIndex(0);
-    window.addEventListener('resize', handleSize);
-    return () => window.removeEventListener('resize', handleSize);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', handleSize, false);
   }, [width]);
 
   const data = Array(9).fill({
@@ -69,32 +68,7 @@ export const FeaturedProduct = () => {
 
   const chunkSize =
     window.innerWidth > 1100 ? 3 : window.innerWidth > 1100 ? 2 : 1;
-  const getSlider = useCallback(() => {
-    const chunks: any = [];
-
-    data.map((i: any, idx: number) => {
-      if (idx % chunkSize === 0) {
-        chunks.push([]);
-      }
-
-      const firstArrayLength = chunks.length;
-      const secondArrayLength = chunks[firstArrayLength - 1].length;
-
-      chunks[firstArrayLength - 1][secondArrayLength] = i;
-
-      return i;
-    });
-
-    return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx}>
-        {i.map((item: IProduct) => (
-          <ComplexCard />
-        ))}
-      </RowInnerSlider>
-    ));
-  }, [width]);
-
-  const getSlides = () => {
+  const getSlider = () => {
     const chunks: any = [];
 
     data.map((i: any, idx: number) => {
@@ -135,12 +109,12 @@ export const FeaturedProduct = () => {
         margin="auto"
       >
         <DeviderTitle title="Featured Product" position="center" />
-        <SwipeableViews index={sliderIndex} style={cssStyle}>
-          {getSlides()}
+        <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+          {getSlider()}
         </SwipeableViews>
 
         <Container flexDirection="row" background="#F7F8FC" padding="1em">
-          {Array(getSlides().length)
+          {Array(getSlider().length)
             .fill(0)
             .map((x, i) => (
               <Dot
