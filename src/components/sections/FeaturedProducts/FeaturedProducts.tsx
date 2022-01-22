@@ -56,6 +56,10 @@ export const FeaturedProduct = () => {
     return () => window.removeEventListener('resize', handleSize);
   }, []);
 
+  useEffect(() => {
+    setSliderIndex(0);
+  }, [width]);
+
   const data = Array(9).fill({
     rating: 3.5384615384615383,
     price: 89.99,
