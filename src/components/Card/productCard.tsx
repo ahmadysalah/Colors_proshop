@@ -5,6 +5,7 @@ import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
+import { Container } from '..';
 
 const ComplexCard = () => {
   const [disCount, setDisCount] = useState(false);
@@ -13,7 +14,7 @@ const ComplexCard = () => {
 
   return (
     <MainCard
-      width="520px"
+      width="100%"
       height="655px"
       boxShadow="none"
       backgroundColor="white"
@@ -52,13 +53,18 @@ const ComplexCard = () => {
       <Content>
         <ReactStars isHalf name="rate" edit={false} value={rates} size={40} />
       </Content>
-      <ContentAction>
+      <Container
+        direction="row"
+        margin="auto"
+        justifyContent="center"
+        padding="15px"
+      >
         <Button
           height="62px"
           background="#F2F2F2"
           width="54px"
           padding="none"
-          margin="0 13px 34px 62px"
+          margin="0 13px 0px 62px"
         >
           <BsBookmark />
         </Button>
@@ -70,7 +76,7 @@ const ComplexCard = () => {
         >
           Add to cart
         </Button>
-      </ContentAction>
+      </Container>
     </MainCard>
   );
 };
