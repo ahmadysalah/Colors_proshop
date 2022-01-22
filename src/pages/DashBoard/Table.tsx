@@ -18,6 +18,14 @@ const Table = () => {
       CATEGORY: 2008,
       ACTION: <Icons />,
     },
+    {
+      PRODUCTID: 'Michael Phelps',
+      headerClass: 'country-header',
+      PRODUCTNAME: 23,
+      PRODUCTPRICE: 'United States',
+      CATEGORY: 2008,
+      ACTION: <Icons />,
+    },
   ]);
 
   return (
