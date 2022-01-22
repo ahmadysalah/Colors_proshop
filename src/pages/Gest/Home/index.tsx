@@ -1,4 +1,5 @@
 import { Container } from '../../../components';
+import { FeaturedCategories } from '../../../components/sections/FeaturedCategories/FeaturedCategories';
 import { FeaturedProduct } from '../../../components/sections/FeaturedProducts/FeaturedProducts';
 import { Slider } from '../../../components/Slider/slider';
 
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
   return (
     <Container width="100%" direction="column">
       <Slider data={data} />
+      <FeaturedCategories />
       <FeaturedProduct />
     </Container>
   );
