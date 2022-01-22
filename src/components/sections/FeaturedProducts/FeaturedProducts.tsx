@@ -9,7 +9,7 @@ import {
   RowInnerSlider,
 } from './styles';
 import { Container, SpinnerContainer } from '../..';
-import ComplexCard from '../../Card/ProductCard';
+import ComplexCard from '../../Card/productCard';
 import { ContainerWrapper } from '../../Container/style';
 import { Dot } from '../../Slider/SliderStyle';
 import { InnerSection } from '../../../pages/User/ReviewOrder/Sections/style';

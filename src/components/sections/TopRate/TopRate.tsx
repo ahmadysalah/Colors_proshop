@@ -1,11 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Container, InnerSection } from '../..';
-import ComplexCard from '../../Card/ProductCard';
+import { Container } from '../..';
+import ComplexCard from '../../Card/productCard';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
-import { CardItem } from '../FeaturedProducts/CardItem';
 import { IProduct } from '../FeaturedProducts/FeaturedProducts';
-import { RowWithRadius, CustomTopRate, CustomInnerSection } from './style';
+import { RowWithRadius } from './style';
 
 interface Props {
   dataItem: IProduct[];
