@@ -44,7 +44,7 @@ const ReviewOrder = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-  const [stepperNumber, setstepperNumber] = useState(1);
+  const [stepperNumber, setstepperNumber] = useState(0);
   return (
     <Column>
       <InnerSection>
