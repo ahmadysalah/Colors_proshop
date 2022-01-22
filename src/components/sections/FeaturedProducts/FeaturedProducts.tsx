@@ -52,12 +52,9 @@ export const FeaturedProduct = () => {
       setWidth(window.innerWidth);
       console.log(width);
     };
+    setSliderIndex(0);
     window.addEventListener('resize', handleSize);
     return () => window.removeEventListener('resize', handleSize);
-  }, []);
-
-  useEffect(() => {
-    setSliderIndex(0);
   }, [width]);
 
   const data = Array(9).fill({
