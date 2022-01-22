@@ -4,8 +4,7 @@ export const PathWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 1em;
-  // padding-bottom: 0;
+  padding: 1em 0;
   letter-spacing: 0.96px;
 `;
 

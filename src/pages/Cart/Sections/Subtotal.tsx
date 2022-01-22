@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Container, Divider, Typography } from '../../../components';
 
-const Subtotal = () => {
+const Subtotal = ({ cartItems, checkoutHandler }: any) => {
   const [isDescount, setiIsDescount] = useState(true);
   return (
     <>
@@ -37,6 +37,8 @@ const Subtotal = () => {
         width="80%"
         style={{ margin: '2em auto', padding: '1em' }}
         background="#FCDD06"
+        disabled={cartItems.length === 0}
+        onClick={checkoutHandler}
       >
         Proceed to checkout
       </Button>

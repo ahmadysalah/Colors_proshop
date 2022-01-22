@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 import {
   CartContainer,
   GlobalStyle,
@@ -6,11 +7,33 @@ import {
   TotalContainer,
 } from './styles';
 import EmptyCart from './Sections/EmptyCart';
-import { PathNavigate } from '../../components';
+import { Container, PathNavigate } from '../../components';
 import CartList from './Sections/CartList';
 import Subtotal from './Sections/Subtotal';
 
 const Cart = () => {
+  const [productId, setProductId] = useState('one');
+  const [qty, setQty] = useState(2);
+
+  // const dispatch = useDispatch();
+  // const cart = useSelector(state => state.cart);
+  // const { cartList, cartCount, totalPrice } = cart;
+
+  // useEffect(() => {
+  //   if (productId) {
+  //     dispatch(addToCart(productId, qty));
+  //   }
+  // }, [dispatch, productId, qty]);
+
+  const removeFromCart = id => {
+    // dispatch(removeFromCart(id));
+    console.log('The item removed from cart is: ', id);
+  };
+
+  const checkoutHandler = () => {
+    console.log('checkoutHandler');
+  };
+
   const [cartItems, setCartItems] = useState([
     {
       id: 'One',
@@ -34,7 +57,7 @@ const Cart = () => {
     },
   ]);
   return (
-    <>
+    <Container direction="column" padding="0 3em 0 5em">
       <GlobalStyle />
       <PathNavigate name="Shopping Cart" />
       {cartItems.length === 0 ? (
@@ -43,7 +66,14 @@ const Cart = () => {
         <CartContainer align-items="flex-start">
           <ListContainer direction="column" width="70%">
             {cartItems.map((item: IProduct) => {
-              return <CartList item={item} key={item.id} />;
+              return (
+                <CartList
+                  item={item}
+                  key={item.id}
+                  qty={qty}
+                  removeFromCart={removeFromCart}
+                />
+              );
             })}
           </ListContainer>
 
@@ -54,11 +84,11 @@ const Cart = () => {
             border-radius="16px"
             margin-left="2em"
           >
-            <Subtotal />
+            <Subtotal cartItems={cartItems} checkoutHandler={checkoutHandler} />
           </TotalContainer>
         </CartContainer>
       )}
-    </>
+    </Container>
   );
 };
 

@@ -10,10 +10,7 @@ import {
   ImgContainer,
 } from '../styles';
 
-const CartList = ({ item }: any) => {
-  const handleRemoveFormCart = (id: string) => {
-    console.log('The item removed from cart is: ', id);
-  };
+const CartList = ({ item, qty, removeFromCart }: any) => {
   return (
     <ItemContainer
       background-color="#F2F2F2"
@@ -24,7 +21,7 @@ const CartList = ({ item }: any) => {
       margin-bottom="30px"
       justify-content="space-between"
     >
-      <CloseIcon onClick={() => handleRemoveFormCart(item.id)}>
+      <CloseIcon onClick={() => removeFromCart(item.id)}>
         <GrFormClose />
       </CloseIcon>
       {item.isDescount && (

@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from 'react';
+import { ReactNode, CSSProperties, FC } from 'react';
 
 export interface IStyleButton {
   style?: CSSProperties;
@@ -17,4 +17,6 @@ export interface IStyleButton {
   letterSpace?: string;
   margin?: string;
   brand?: boolean;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
