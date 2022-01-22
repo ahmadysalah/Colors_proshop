@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { SliderItem } from './SliderItem';
@@ -5,6 +6,7 @@ import { Column } from '../Col';
 import { InnerSection, Row } from '../Row';
 import { Arrow, Dot, RowArrowWrapper, SliderSection } from './SliderStyle';
 import { Container } from '..';
+import { IProducts } from '../../redux/Product/type';
 
 const cssStyle: CSSProperties = {
   position: 'relative',
@@ -22,7 +24,7 @@ interface ProductItem {
   image: string;
 }
 interface IProps {
-  data: ProductItem[];
+  data?: IProducts[];
 }
 export const Slider = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
@@ -39,6 +41,7 @@ export const Slider = ({ data }: IProps) => {
   };
 
   const sliders =
+    data &&
     data.length &&
     data.map(item => (
       <SliderItem
@@ -46,7 +49,7 @@ export const Slider = ({ data }: IProps) => {
         name={item.name}
         price={item.price}
         description={item.description}
-        image={item.image}
+        image="https://proshop-ms.herokuapp.com/images/playstation.jpg"
       />
     ));
 
