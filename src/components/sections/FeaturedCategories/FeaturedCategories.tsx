@@ -1,7 +1,9 @@
 /* eslint-disable import/extensions */
 import React, { useState, CSSProperties, useCallback, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import { Row, Column, CategoryCard, Container } from '../..';
+import { ThunkDispatch } from 'redux-thunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Column, CategoryCard, Container, SpinnerContainer } from '../..';
 import { ColumnCusom, Divider, Title } from '../../DeviderTitle/style';
 import Play from '../../../assets/Images/play.jpg';
 import { CategDots, Dot } from '../../Slider/SliderStyle';
@@ -10,6 +12,14 @@ import {
   RowInnerSlider,
   WrapperDots,
 } from '../FeaturedProducts/styles';
+import {
+  IGetAllCategory,
+  IProducts,
+  TAllActionProduct,
+} from '../../../redux/Product/type';
+import { getAlCategory } from '../../../redux/Product/action';
+import { AppState } from '../../../redux/store';
+import ComplexCard from '../../Card/ProductCard';
 
 interface IObjFeaturedCategories {
   image: string;
@@ -33,47 +43,48 @@ const DotsStyles: CSSProperties = {
   zIndex: 2,
   margin: 10,
 };
-
-export const FeaturedCategories = () => {
+interface IProps {
+  data?: IProducts[];
+}
+export const FeaturedCategories = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [width, setWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    const handleSize = () => {
-      setWidth(window.innerWidth);
-      console.log(width);
-    };
-    setSliderIndex(0);
-    window.addEventListener('resize', handleSize);
-    return () => window.removeEventListener('resize', handleSize);
-  }, [width]);
+  const [dataNew, setDataNew] = useState(data);
+  //   const handleSize = () => {
+  //     setWidth(window.innerWidth);
+  //   };
+  //   // dispatch(getAlCategory());
 
-  const chunkSize = width > 1100 ? 4 : width > 1100 ? 2 : 1;
+  //   setSliderIndex(0);
+  //   window.addEventListener('resize', handleSize);
+  //   return () => window.removeEventListener('resize', handleSize);
+  // }
+  console.log('dataccccccc', dataNew);
 
-  const getSlides = useCallback(() => {
-    const chunks: any = [];
-    Array(12)
-      .fill(obj)
-      .map((i: any, idx: number) => {
-        if (idx % chunkSize === 0) {
-          chunks.push([]);
-        }
+  const chunkSize =
+    window.innerWidth > 1100 ? 4 : window.innerWidth > 1100 ? 3 : 1;
+  const chunks: any = [];
+  const getSlider = () => {
+    data?.map((i: any, idx: number) => {
+      if (idx % chunkSize === 0) {
+        chunks.push([]);
+      }
 
-        const firstArrayLength = chunks.length;
-        const secondArrayLength = chunks[firstArrayLength - 1].length;
+      const firstArrayLength = chunks.length;
+      const secondArrayLength = chunks[firstArrayLength - 1].length;
 
-        chunks[firstArrayLength - 1][secondArrayLength] = i;
+      chunks[firstArrayLength - 1][secondArrayLength] = i;
 
-        return chunks;
-      });
-
+      return i;
+    });
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx}>
         {i.map(item => (
-          <CategoryCard description="Devices" img={Play} />
+          <ComplexCard {...item} image={item.images[0]} />
         ))}
       </RowInnerSlider>
     ));
-  }, [width]);
+  };
 
   return (
     <Container
@@ -93,28 +104,28 @@ export const FeaturedCategories = () => {
               marginTop: '0',
             }}
           />
+          <WrapperDots
+            item="center"
+            style={{
+              marginTop: '22px',
+            }}
+          >
+            {Array(getSlider().length)
+              .fill(0)
+              .map((x, i) => (
+                <CategDots
+                  style={DotsStyles}
+                  width="14px"
+                  isGrey={sliderIndex !== i}
+                  onClick={() => setSliderIndex(i)}
+                />
+              ))}
+          </WrapperDots>
         </Container>
-        <WrapperDots
-          item="center"
-          style={{
-            marginTop: '22px',
-          }}
-        >
-          {Array(getSlides().length)
-            .fill(0)
-            .map((x, i) => (
-              <CategDots
-                style={DotsStyles}
-                width="14px"
-                isGrey={sliderIndex !== i}
-                onClick={() => setSliderIndex(i)}
-              />
-            ))}
-        </WrapperDots>
       </Container>
       <Divider width="100%" height="1px" color="#707070" />
       <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
-        {getSlides()}
+        {getSlider()}
       </SwipeableViews>
     </Container>
   );

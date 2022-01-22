@@ -141,6 +141,8 @@ export const getAlCategory = () => {
             product: response.data,
           },
         });
+
+        console.log('allCatogory.categories', response.data);
       } else {
         throw new Error('some  error habbend  in th e Top  reated  peoduct');
       }

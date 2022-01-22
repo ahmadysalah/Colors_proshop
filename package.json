@@ -20,13 +20,11 @@
     "react-dom": "^17.0.2",
     "react-helmet-async": "^1.2.2",
     "react-icons": "^4.3.1",
-<<<<<<< HEAD
     "react-rating-stars-component": "^2.2.0",
-=======
->>>>>>> f0f17545777aa6939ecea09bc0f7458be10491df
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-star-rating-component": "^1.4.1",
     "react-swipeable-views": "^0.14.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",

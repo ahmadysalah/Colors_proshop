@@ -7,11 +7,17 @@ import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
 import { Container } from '..';
 
-const ComplexCard = () => {
-  const [disCount, setDisCount] = useState(false);
-  const [discountValue, setDiscountValue] = useState(0);
-  const [rates, setRate] = useState(3);
-
+export interface IProducts {
+  image: string;
+  rating: number;
+  price: number;
+  discount?: number;
+  countInStock: number;
+  _id: string;
+  name: string;
+  description: string;
+}
+const ComplexCard = ({ ...props }: IProducts) => {
   return (
     <MainCard
       width="100%"
@@ -20,38 +26,44 @@ const ComplexCard = () => {
       backgroundColor="white"
       flexDirection="column"
     >
-      {disCount ? (
+      {props.discount ? (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`${discountValue}`}
+            {`${props.discount}`}
           </Typography>
         </Discount>
       ) : null}
       <ContentAction>
         <img
-          src={img}
+          src={props.image}
           alt=""
           style={{ width: '342px', height: '342px', margin: 'auto' }}
         />
       </ContentAction>
       <Content>
-        <Typography variant="h3">Description for the product</Typography>
+        <Typography variant="h3">{props.name}</Typography>
       </Content>
       <Content>
-        {disCount ? (
+        {props.discount && (
           <Typography variant="h2" margin="0 10px" color="#FC4059">
-            $999
+            ${props.price - (props.price / props.discount) * props.discount}
           </Typography>
-        ) : null}
+        )}
         <Typography
           variant="h2"
-          text-decoration={disCount ? 'line-through' : 'none'}
+          text-decoration={props.discount ? 'line-through' : 'none'}
         >
-          $999
+          ${props.price}
         </Typography>
       </Content>
       <Content>
-        <ReactStars isHalf name="rate" edit={false} value={rates} size={40} />
+        <ReactStars
+          isHalf
+          name="rate"
+          edit={false}
+          value={props.rating}
+          size={40}
+        />
       </Content>
       <Container
         direction="row"

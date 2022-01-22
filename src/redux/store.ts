@@ -7,7 +7,6 @@ import { ProductReducer } from './Product/reducer';
 import { AuthReducer } from './Auth/reducer';
 import { AdminReducer } from './Admin/reducer';
 import { UserReducer } from './User/reducer';
-import { CartReducer } from './Cart/reducer';
 
 const middleware = [thunk];
 
@@ -16,7 +15,6 @@ const reducers = combineReducers({
   product: ProductReducer,
   admin: AdminReducer,
   user: UserReducer,
-  cart: CartReducer,
 });
 const Store = createStore(
   reducers,

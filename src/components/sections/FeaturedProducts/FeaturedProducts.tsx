@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/extensions */
 /* eslint-disable no-underscore-dangle */
 import { useState, CSSProperties, useCallback, useEffect } from 'react';
@@ -14,6 +15,7 @@ import { ContainerWrapper } from '../../Container/style';
 import { Dot } from '../../Slider/SliderStyle';
 import { InnerSection } from '../../../pages/User/ReviewOrder/Sections/style';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
+import { IGetAllProduct, IProducts } from '../../../redux/Product/type';
 
 interface Props {
   data: IProduct[];
@@ -44,34 +46,23 @@ export interface IProduct {
   rating: number;
   discount: number;
 }
-export const FeaturedProduct = () => {
+interface IProps {
+  data?: IProducts[];
+}
+export const FeaturedProduct = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [width, setWidth] = useState(window.innerWidth);
   const handleSize = () => {
     setWidth(window.innerWidth);
     setSliderIndex(0);
   };
-  useEffect(() => {
-    window.addEventListener('resize', handleSize, false);
-  }, [width]);
-
-  const data = Array(9).fill({
-    rating: 3.5384615384615383,
-    price: 89.99,
-    _id: '60df749a5027923750d7972e',
-    name: 'Airpods Wireless Bluetooth Headphones',
-    image: '/images/airpods.jpg',
-    description:
-      'Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working',
-    discount: 20,
-  });
 
   const chunkSize =
     window.innerWidth > 1100 ? 3 : window.innerWidth > 1100 ? 2 : 1;
   const getSlider = () => {
     const chunks: any = [];
 
-    data.map((i: any, idx: number) => {
+    data?.map((i: any, idx: number) => {
       if (idx % chunkSize === 0) {
         chunks.push([]);
       }
@@ -83,15 +74,15 @@ export const FeaturedProduct = () => {
 
       return i;
     });
-
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx}>
-        {i.map((item: IProduct) => (
-          <ComplexCard />
+        {i.map((item: IProducts) => (
+          <ComplexCard {...item} image={item.images[0]} />
         ))}
       </RowInnerSlider>
     ));
   };
+  console.log('dflkjflflkj0', data);
 
   const fetchFeathers = {
     isLoading: false,
