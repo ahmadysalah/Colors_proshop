@@ -50,7 +50,6 @@ export const FeaturedProduct = () => {
   useEffect(() => {
     const handleSize = () => {
       setWidth(window.innerWidth);
-      console.log(width);
     };
     setSliderIndex(0);
     window.addEventListener('resize', handleSize);
