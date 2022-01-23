@@ -201,7 +201,6 @@ export const FooterTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: start;
-  margin-top: 12px;
   @media (max-width: 768px) {
     width: 90%;
     margin: auto;
