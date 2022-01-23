@@ -12,6 +12,8 @@ import {
   ForgotPassword,
   ButtonSuginup,
   ButtonLogin,
+  ContainerLogin,
+  FormContainer,
 } from './style';
 import {
   IschemaValidationLogin,
@@ -60,7 +62,7 @@ const Login = () => {
     },
   });
   return (
-    <Container
+    <ContainerLogin
       height="100vh"
       padding={0}
       overflow="hidden"
@@ -129,7 +131,7 @@ const Login = () => {
           </Container>
         </Wrapper>
       </InnerColSection>
-    </Container>
+    </ContainerLogin>
   );
 };
 export default Login;

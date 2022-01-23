@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
-import { BsFillBookmarkDashFill, BsBookmark } from 'react-icons/bs';
+import { BsBookmark } from 'react-icons/bs';
 import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
