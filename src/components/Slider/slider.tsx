@@ -2,9 +2,7 @@
 import React, { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { SliderItem } from './SliderItem';
-import { Column } from '../Col';
-import { InnerSection, Row } from '../Row';
-import { Arrow, Dot, RowArrowWrapper, SliderSection } from './SliderStyle';
+import { Arrow, Dot, SliderSection } from './SliderStyle';
 import { Container } from '..';
 import { IProducts } from '../../redux/Product/type';
 
@@ -45,6 +43,7 @@ export const Slider = ({ data }: IProps) => {
     data.length &&
     data.map(item => (
       <SliderItem
+        // eslint-disable-next-line no-underscore-dangle
         _id={item._id}
         name={item.name}
         price={item.price}

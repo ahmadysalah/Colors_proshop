@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '../../../components';
+import { Container, Typography } from '../../../components';
 
 export const WrapperRemmber = styled('div')`
   display: flex;
@@ -97,4 +97,16 @@ export const ButtonLogin = styled('button')`
   outline: none;
   background: #fcdd06 0% 0% no-repeat padding-box;
   border-radius: 6px;
+`;
+
+export const FormContainer = styled(Container)`
+  width: 60%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+export const ContainerLogin = styled(Container)`
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `;
