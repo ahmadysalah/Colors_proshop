@@ -26,9 +26,26 @@ import {
   getUserById,
 } from './redux/Admin/action';
 import { getProfile, updateUser } from './redux/User/action';
+import { ActionCartType } from './redux/Cart/type';
+import { deleteActionCart, upduteActionCart } from './redux/Cart/action';
+import { getMyOrder, getOrders } from './redux/Order/action';
+import { ActionOrderType } from './redux/Order/type';
 
 const App: React.FC = () => {
   // const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const dispatch2 =
+    useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+
+  useEffect(() => {
+    // upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 1 }),
+    // dispatch(
+    //   upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 3 }),
+    // );
+    dispatch2(getOrders());
+    // deleteActionCart('61ec6095edddbd1f4c72e28a')
+    // upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 1 }),
+  }, [dispatch2]);
   // const dispatch =
   //   useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
 

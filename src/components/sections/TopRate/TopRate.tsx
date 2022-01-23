@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container, InnerSection } from '../..';
 import { IProducts } from '../../../redux/Product/type';
-import ComplexCard from '../../Card/ProductCard';
+import ComplexCard from '../../Card/productCard';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
 import { CardItem } from '../FeaturedProducts/CardItem';
 import { IProduct } from '../FeaturedProducts/FeaturedProducts';

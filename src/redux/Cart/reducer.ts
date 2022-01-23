@@ -1,0 +1,58 @@
+import { EnumCartAction } from './constant';
+import { ActionCartType, ICartState } from './type';
+
+const initialState: ICartState = {
+  cart: {
+    items: [],
+    totalQty: 0,
+    totalPrice: 0,
+  },
+  success: false,
+  isLoading: false,
+  error: '',
+};
+
+export const CartReducer = (
+  state = initialState,
+  action: ActionCartType,
+): ICartState => {
+  switch (action.type) {
+    case EnumCartAction.UPDATE_ITEM_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case EnumCartAction.UPDATE_ITEM_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        success: true,
+        cart: action.payload.cart,
+      };
+
+    case EnumCartAction.UPDATE_ITEM_FILL:
+      return { ...state, error: action.payload.error };
+
+    case EnumCartAction.DELETE_ITEM_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    /* eslint no-case-declarations: "error" */
+
+    case EnumCartAction.DELETE_ITEM_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        success: true,
+      };
+    case EnumCartAction.DELETE_ITEM_FILL:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
+
+    default:
+      return state;
+  }
+};
