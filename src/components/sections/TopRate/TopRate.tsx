@@ -1,11 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Container, InnerSection } from '../..';
+import { Container } from '../..';
+import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
+import { RowWithRadius } from './style';
 import { IProducts } from '../../../redux/Product/type';
 import ComplexCard from '../../Card/productCard';
-import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
-import { IProduct } from '../FeaturedProducts/FeaturedProducts';
-import { RowWithRadius } from './style';
 
 interface Props {
   data?: IProducts[];

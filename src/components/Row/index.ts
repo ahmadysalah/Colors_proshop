@@ -40,6 +40,7 @@ export const Column = styled(Row)`
   flex-direction: column;
   justify-content: ${props => props.JC};
   justify-items: ${props => props.item};
+  width: 100%;
 `;
 
 export const InnerSection = styled(Column)`

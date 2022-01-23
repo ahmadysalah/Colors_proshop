@@ -70,14 +70,14 @@ export type updateProfileSchemaType = Yup.InferType<typeof updateProfileSchema>;
 export interface IShippingSchema {
   country: string;
   city: string;
-  zip: number;
+  zip: string;
   address: string;
 }
 export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
   return Yup.object().shape({
     country: Yup.string().required('Please enter country name'),
     city: Yup.string().required('Please enter city name'),
-    zip: Yup.number().required('Please enter your address'),
+    zip: Yup.string().required('Please enter your address'),
     address: Yup.string().required('Please enter your address'),
   });
 };
