@@ -28,12 +28,11 @@ export const Badge = styled('div')`
 
 export const SearchButton = styled(FlexBox)`
   cursor: pointer;
-
   align-items: center;
   background: #fcdd06;
   border-radius: 6px;
   display: flex;
-  height: 40px;
+  height: 100%;
   justify-content: center;
   opacity: 1;
   width: 152px;

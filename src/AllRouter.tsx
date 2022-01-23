@@ -10,6 +10,7 @@ const Product = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
 const Home = Loadable(lazy(() => import('./pages/Gest/Home/index')));
 const Search = Loadable(lazy(() => import('./pages/Gest/Search/index')));
+const Profile = Loadable(lazy(() => import('./pages/Profile/index')));
 
 export const AllRouter = () => {
   return (
@@ -22,6 +23,7 @@ export const AllRouter = () => {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/review" element={<ReviewOrder />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </>
   );

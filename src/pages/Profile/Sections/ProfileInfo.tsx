@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { Button, Container, Typography, Image } from '../../../components';
 import {
   DataValue,
@@ -7,8 +7,15 @@ import {
   ImageContainer,
   DetailsContainer,
 } from '../style';
+import { IUser } from '../../../redux/Auth/type';
+import { formatDate } from '../../../utils/helper/formatDay';
 
-const ProfileInfo: React.FC = () => {
+
+interface IProfileDashboard {
+  user?: IUser;
+}
+
+const ProfileInfo = ({ user }: IProfileDashboard) => {
   return (
     <InfoContainer
       align-items="flex-start"
@@ -52,10 +59,10 @@ const ProfileInfo: React.FC = () => {
             margin-left="0"
             padding="0"
           >
-            <DataValue>Amy</DataValue>
-            <DataValue>Mayer</DataValue>
-            <DataValue>amymay@gmail.com</DataValue>
-            <DataValue>12/04/1991</DataValue>
+            <DataValue>{user?.firstName}</DataValue>
+            <DataValue>{user?.lastName}</DataValue>
+            <DataValue>{user?.email}</DataValue>
+            <DataValue>{formatDate(user?.dateOfBirth!)}</DataValue>
           </Container>
         </Container>
         <Button
@@ -69,7 +76,7 @@ const ProfileInfo: React.FC = () => {
       </DetailsContainer>
       <ImageContainer direction="column" width="35%" padding="0">
         <Image
-          src="https://image.winudf.com/v2/image1/Y29tLmJ1bnR5YXBweC5hdnRhcm1ha2VyX3NjcmVlbl8wXzE1NjM0OTUwODFfMDg3/screen-0.jpg?fakeurl=1&type=.jpg"
+          src={user?.profileImage}
           width="198px"
           height="198px"
           style={{ borderRadius: '50%', marginBottom: '2em' }}
