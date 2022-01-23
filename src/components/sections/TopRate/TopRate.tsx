@@ -1,24 +1,28 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
-import { Container } from '../..';
+import { Container, InnerSection } from '../..';
+import { IProducts } from '../../../redux/Product/type';
 import ComplexCard from '../../Card/productCard';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
 import { IProduct } from '../FeaturedProducts/FeaturedProducts';
 import { RowWithRadius } from './style';
 
 interface Props {
-  dataItem: IProduct[];
+  data?: IProducts[];
 }
 
-export const TopRate = ({ dataItem }: Props) => {
+export const TopRate = ({ data }: Props) => {
   return (
     <Container direction="column" margin="auto" width="90%">
       <Container>
         <DeviderTitle position="start" title="TOP RATE PRODUCTS" />
       </Container>
       <RowWithRadius direction="row">
-        {dataItem.map((item: IProduct, i) => (
-          <ComplexCard />
+        {data?.map((item, i) => (
+          <ComplexCard
+            image={`https://proshop-ms.herokuapp.com${item.images[0]}`}
+            {...item}
+          />
         ))}
       </RowWithRadius>
     </Container>

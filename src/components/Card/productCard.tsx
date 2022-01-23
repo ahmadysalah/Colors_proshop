@@ -5,60 +5,78 @@ import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
+import { Container } from '..';
 
-const ComplexCard = () => {
-  const [disCount, setDisCount] = useState(false);
-  const [discountValue, setDiscountValue] = useState(0);
-  const [rates, setRate] = useState(3);
-
+export interface IProducts {
+  image: string;
+  rating: number;
+  price: number;
+  discount?: number;
+  countInStock: number;
+  _id: string;
+  name: string;
+  description: string;
+}
+const ComplexCard = ({ ...props }: IProducts) => {
   return (
     <MainCard
-      width="520px"
+      width="100%"
       height="655px"
       boxShadow="none"
       backgroundColor="white"
       flexDirection="column"
     >
-      {disCount ? (
+      {props.discount ? (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`${discountValue}`}
+            {`${props.discount}`}
           </Typography>
         </Discount>
       ) : null}
       <ContentAction>
         <img
-          src={img}
+          src={props.image}
           alt=""
           style={{ width: '342px', height: '342px', margin: 'auto' }}
         />
       </ContentAction>
       <Content>
-        <Typography variant="h3">Description for the product</Typography>
+        <Typography variant="h3">{props.name}</Typography>
       </Content>
       <Content>
-        {disCount ? (
+        {props.discount && (
           <Typography variant="h2" margin="0 10px" color="#FC4059">
-            $999
+            ${props.price - (props.price / props.discount) * props.discount}
           </Typography>
-        ) : null}
+        )}
         <Typography
           variant="h2"
-          text-decoration={disCount ? 'line-through' : 'none'}
+          text-decoration={props.discount ? 'line-through' : 'none'}
         >
-          $999
+          ${props.price}
         </Typography>
       </Content>
       <Content>
-        <ReactStars isHalf name="rate" edit={false} value={rates} size={40} />
+        <ReactStars
+          isHalf
+          name="rate"
+          edit={false}
+          value={props.rating}
+          size={40}
+        />
       </Content>
-      <ContentAction>
+      <Container
+        direction="row"
+        margin="auto"
+        justifyContent="center"
+        padding="15px"
+      >
         <Button
           height="62px"
           background="#F2F2F2"
           width="54px"
           padding="none"
-          margin="0 13px 34px 62px"
+          margin="0 13px 0px 62px"
         >
           <BsBookmark />
         </Button>
@@ -70,7 +88,7 @@ const ComplexCard = () => {
         >
           Add to cart
         </Button>
-      </ContentAction>
+      </Container>
     </MainCard>
   );
 };
