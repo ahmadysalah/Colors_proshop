@@ -17,4 +17,5 @@ export interface IStyleButton {
   letterSpace?: string;
   margin?: string;
   brand?: boolean;
+  type?: string;
 }

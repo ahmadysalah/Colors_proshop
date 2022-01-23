@@ -8,11 +8,13 @@ const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
 const Product = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
 const Home = Loadable(lazy(() => import('./pages/Gest/Home/index')));
+const Stripe = Loadable(lazy(() => import('./components/Stripe')));
 
 export const AllRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/pay" element={<Stripe />} />
       <Route path="/login" element={<Login />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Home" element={<Home />} />
