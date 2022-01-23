@@ -83,3 +83,5 @@ export const ReviewTow = () => {
     </WrapperCard>
   );
 };
+
+export default ReviewTow;

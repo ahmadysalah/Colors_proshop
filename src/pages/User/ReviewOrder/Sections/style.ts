@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Divider, Typography } from '../../../../components';
+import { Column, Container, Divider, Typography } from '../../../../components';
 
 export const ReviewText = styled(Typography)`
   font-family: normal normal 900 32px/15px Mulish;
@@ -61,11 +61,10 @@ export const WrapperReviewRow = styled('div')`
   align-items: center;
   width: 100%;
 `;
-export const InnerSection = styled('div')`
+export const InnerSection = styled(Column)`
   align-items: start;
   justify-content: start;
   margin: 0 auto;
-  max-width: 1517px;
   width: 100%;
   margin-top: 44px;
 `;
@@ -78,7 +77,9 @@ export const DividerTop = styled(Divider)`
 
 export const DividerFull = styled(Divider)`
   margin-top: 10px;
-  margin-bottom: 10px; ;
+  margin-bottom: 10px;
+  width: 100%;
+  position: relative;
 `;
 
 export const WrapperCard = styled('div')`
@@ -88,29 +89,47 @@ export const WrapperCard = styled('div')`
   justify-content: space-between;
   margin-top: 36px;
   /* margin-right: 50px; */
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
-
+export const OrfferSection = styled(Column)`
+  width: 90%;
+  margin: auto;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100;
+  }
+`;
 export const LeftSection = styled('div')`
   background: #f2f2f2;
   border-radius: 16px;
-  /* flex: 5; */
   opacity: 1;
-  padding: 45px 88px;
-  width: 950px;
+  padding: 45px 40px;
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 export const RightSection = styled(LeftSection)`
   /* flex: 2; */
-  margin-left: 54px;
-  padding-top: 35px;
-  padding-left: 22px;
-  width: 536px;
+  margin-left: 30px;
+  width: 40%;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 15px auto;
+    padding-left: 0;
+  }
 `;
 export const RightSectionTowReview = styled(LeftSection)`
   /* flex: 2; */
   margin-left: 54px;
   padding-top: 35px;
   padding-left: 22px;
-  width: 400px;
+  width: 70%;
   height: 280px;
 `;
 
@@ -152,14 +171,17 @@ export const Address = styled(Typography)`
   width: 209px;
 `;
 
-export const WrapperRowInput = styled('div')`
+export const WrapperRowInput = styled(Container)`
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin: auto;
   justify-content: space-between;
-  align-items: start;
-  margin-right: 50px;
-  margin-bottom: 41px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 export const HeaderTitleRight = styled('div')`
@@ -168,6 +190,10 @@ export const HeaderTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 export const FooterTitleRight = styled('div')`
   flex-direction: row;
@@ -175,7 +201,10 @@ export const FooterTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: start;
-  margin-top: 12px;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 
 export const ImageCard = styled.img`
@@ -192,14 +221,16 @@ export const OrderItemsWrapper = styled('div')`
   justify-content: space-between;
   align-items: start;
   margin-top: 20px;
-  padding-left: 20px;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 
 export const OrderPriceWrapper = styled('div')`
   flex-direction: row;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: start;
 `;
 

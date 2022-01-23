@@ -8,6 +8,9 @@ export const FiledWrapper = styled('div')<{ marginLeft?: string }>`
   width: 100%;
   height: 40px;
   margin-left: ${props => props.marginLeft || 0};
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `;
 
 export const Label = styled('label')`
