@@ -24,6 +24,7 @@ import {
   RightSection,
   BoxNumber,
   TextActive,
+  OrfferSection,
 } from './Sections/style';
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
@@ -32,7 +33,7 @@ import { ReviewTow } from './Sections/reviewtow';
 const initialValues: IShippingSchema = {
   country: '',
   city: '',
-  zip: 0,
+  zip: '',
   address: '',
 };
 
@@ -46,7 +47,7 @@ const ReviewOrder = () => {
   });
   const [stepperNumber, setstepperNumber] = useState(0);
   return (
-    <Column>
+    <OrfferSection>
       <InnerSection>
         <ReviewText variant="h1">Review Order</ReviewText>
         <WrapperReviewRow>
@@ -69,64 +70,67 @@ const ReviewOrder = () => {
                     formik.resetForm();
                   }}
                 >
-                  <Column>
+                  <Column
+                    style={{
+                      width: '90%',
+                      margin: 'auto',
+                      justifyContent: 'space-between',
+                    }}
+                  >
                     <ShapeAddress>Shipping Address</ShapeAddress>
 
                     <WrapperRowInput>
-                      <Row style={{ marginRight: '23px' }}>
-                        <InputController
-                          name="country"
-                          label="Country"
-                          type="text"
-                          placeholder="Palestine"
-                          isRequired
-                          errors={formik.errors?.country}
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.country}
-                        />
-                      </Row>
-                      <Row style={{ marginLeft: '23px' }}>
-                        <InputController
-                          name="city"
-                          label="City"
-                          type="text"
-                          placeholder="Gaza"
-                          isRequired
-                          errors={formik.errors?.city}
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.city}
-                        />
-                      </Row>
+                      <InputController
+                        name="country"
+                        label="Country"
+                        type="text"
+                        placeholder="Palestine"
+                        isRequired
+                        errors={formik.errors?.country}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.country}
+                      />
+                      <InputController
+                        name="city"
+                        label="City"
+                        type="text"
+                        placeholder="Gaza"
+                        isRequired
+                        errors={formik.errors?.city}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.city}
+                        marginLeft="10%"
+                      />
                     </WrapperRowInput>
                     <WrapperRowInput>
-                      <Row style={{ marginRight: '23px' }}>
-                        <InputController
-                          name="zip"
-                          label="Zip Code"
-                          type="text"
-                          placeholder="65555"
-                          isRequired
-                          errors={formik.errors?.zip}
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.zip}
-                        />
-                      </Row>
-                      <Row style={{ marginLeft: '23px' }}>
-                        <InputController
-                          name="address"
-                          label="Street Address"
-                          type="text"
-                          placeholder="65555"
-                          isRequired
-                          errors={formik.errors?.address}
-                          onBlur={formik.handleBlur}
-                          onChange={formik.handleChange}
-                          value={formik.values.address}
-                        />
-                      </Row>
+                      <InputController
+                        name="zip"
+                        label="Zip Code"
+                        type="text"
+                        placeholder="65555"
+                        isRequired
+                        errors={formik.errors?.zip}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.zip}
+                      />
+                      {/*
+                        47%
+                        */}
+                      <InputController
+                        name="address"
+                        label="Street Address"
+                        type="text"
+                        placeholder="65555"
+                        isRequired
+                        errors={formik.errors?.address}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.address}
+                        marginLeft="10%"
+                      />
                     </WrapperRowInput>
                     <ShapeAddress>Payment Details</ShapeAddress>
                   </Column>
@@ -135,26 +139,33 @@ const ReviewOrder = () => {
 
               <RightSection>
                 <HeaderTitleRight>
-                  <ReviewText fontWeight="bold" variant="h2">
-                    Order Details
-                  </ReviewText>
+                  <ShapeAddress>Order Details</ShapeAddress>
                   <ChangeText to="/cahnge">change</ChangeText>
                 </HeaderTitleRight>
                 <Column>
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                    isHr
-                  />
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                    isHr
-                  />
+                  <div
+                    style={{
+                      overflow: 'auto',
+                      height: '300px',
+                      overflowX: 'hidden',
+                      borderRadius: '15px',
+                    }}
+                  >
+                    <OrderDetails
+                      title="iPhone 11 Pro 256GB Memory"
+                      image={logo}
+                      priceItem={20}
+                      countItem={20}
+                      isHr
+                    />
+                    <OrderDetails
+                      title="iPhone 11 Pro 256GB Memory"
+                      image={logo}
+                      priceItem={20}
+                      countItem={20}
+                      isHr
+                    />
+                  </div>
                 </Column>
 
                 <FooterTitleRight>
@@ -186,7 +197,7 @@ const ReviewOrder = () => {
         )}
         {stepperNumber === 1 && <ReviewTow />}
       </InnerSection>
-    </Column>
+    </OrfferSection>
   );
 };
 

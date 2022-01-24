@@ -26,7 +26,7 @@ import {
 } from '../../../redux/Product/type';
 import { getAlCategory } from '../../../redux/Product/action';
 import { AppState } from '../../../redux/store';
-import ComplexCard from '../../Card/ProductCard';
+import ComplexCard from '../../Card/productCard';
 
 interface IObjFeaturedCategories {
   image: string;

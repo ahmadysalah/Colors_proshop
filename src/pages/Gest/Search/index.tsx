@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { Container } from '../../../components';
-import ComplexCard from '../../../components/Card/ProductCard';
+import ComplexCard from '../../../components/Card/productCard';
 import { getProducts } from '../../../redux/Product/action';
 import { TAllActionProduct } from '../../../redux/Product/type';
 import { AppState } from '../../../redux/store';
