@@ -13,7 +13,8 @@ interface AddItemPayload {
   qty: number;
 }
 
-export const upduteActionCart = (data: AddItemPayload) => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
   return async (
     dispatch: Dispatch<ActionCartType>,
     getState: () => AppState,
@@ -38,6 +39,7 @@ export const upduteActionCart = (data: AddItemPayload) => {
           payload: response.data,
         });
       }
+      fun?.();
     } catch (e: any) {
       dispatch({
         type: EnumCartAction.UPDATE_ITEM_FILL,

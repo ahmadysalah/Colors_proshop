@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react/destructuring-assignment */
+import React, { useState } from 'react';
 import { BsBookmarks } from 'react-icons/bs';
 import {
   Container,
@@ -8,6 +9,7 @@ import {
   Counter,
   GroupCircle,
 } from '../../../../components';
+import { IProducts } from '../../../../redux/Product/type';
 import { ProductImage } from './style';
 
 const images = [
@@ -17,9 +19,12 @@ const images = [
   'data:image/jpeg;base64,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',
 ];
 
-const ProductOverview: React.FC = () => {
+interface IProps {
+  product?: IProducts;
+}
+const ProductOverview = ({ product }: IProps) => {
   const [currentImages, setImages] = useState<string[]>(images);
-
+  // const navigation = useNavigate();
   const handleImageClick = (index: number) => {
     setImages([
       images[index],
@@ -27,116 +32,104 @@ const ProductOverview: React.FC = () => {
       ...images.slice(index + 1),
     ]);
   };
+
   return (
-    <>
-      <Container
-        align-Items="flex-start"
-        // flex-Wrap="wrap"
-        justify-ontent="space-between"
-      >
-        <Container direction="column" max-width="23rem">
-          <Container padding="2em" width="80%" height="300px">
-            <ProductImage size="lg" src={currentImages[0]} />
-          </Container>
-          <Container direction="row" margin=".1em 0">
-            {currentImages.map(
-              (image, index) =>
-                index > 0 && (
-                  <ProductImage
-                    key={index.toString()}
-                    src={image}
-                    onClick={() => handleImageClick(index)}
-                    border
-                    height="6em"
-                    width="5em"
-                  />
-                ),
-            )}
-          </Container>
+    <Container
+      align-Items="flex-start"
+      // flex-Wrap="wrap"
+      justify-ontent="space-between"
+    >
+      SSSS
+      {console.log('test', product)}
+      {/* <Container direction="column" max-width="23rem">
+        <Container padding="2em" width="80%" height="300px">
+          <ProductImage size="lg" src={currentImages[0]} />
         </Container>
-        <Container direction="column" margin-left="2em">
-          <Container justify-Content="space-between">
-            <Typography variant="h3" font-Size="1.2rem" bold>
-              Apple iPhone 11 Pro 256GB Memory
-            </Typography>
-            <Typography bold variant="h2" font-Size="1.3rem">
-              $499.99
-            </Typography>
-          </Container>
-          <Container margin="1em 0">
-            <Counter />
-          </Container>
-          <Container>
-            <Typography variant="h3" color="grey">
-              Color:
-            </Typography>
-            <Typography bold variant="h3" margin="0 1em">
-              silver
-            </Typography>
-          </Container>
+        <Container direction="row" margin=".1em 0">
+          {currentImages.map(
+            (image, index) =>
+              index > 0 && (
+                <ProductImage
+                  key={index.toString()}
+                  src={image}
+                  onClick={() => handleImageClick(index)}
+                  border
+                  height="6em"
+                  width="5em"
+                />
+              ),
+          )}
+        </Container>
+      </Container>
+      <Container direction="column" margin-left="2em">
+        <Container justify-Content="space-between">
+          <Typography variant="h3" font-Size="1.2rem" bold>
+            Apple iPhone 11 Pro 256GB Memory
+          </Typography>
+          <Typography bold variant="h2" font-Size="1.3rem">
+            $499.99
+          </Typography>
+        </Container>
+        <Container margin="1em 0">
+          <Counter />
+        </Container>
+        <Container>
+          <Typography variant="h3" color="grey">
+            Color:
+          </Typography>
+          <Typography bold variant="h3" margin="0 1em">
+            x
+          </Typography>
           <GroupCircle
             colors={['#EDEAE3', '#242424']}
             setColorActive={console.log}
           />
-          <Container>
-            <Typography variant="h3" color="grey">
-              Size:
-            </Typography>
-            <Typography bold variant="h3" margin="0 1em">
-              256GB
-            </Typography>
-          </Container>
-          <Container margin="1em 0 1em 0" justify-Content="space-between">
-            <Container>
-              <Button margin="0 1em 0 0" padding=".6em 2em">
-                64GB
-              </Button>
-              <Button margin="0 1em" padding=".6em 2em">
-                128GB
-              </Button>
-              <Button margin="0 1em" padding=".6em 2em">
-                256GB
-              </Button>
-            </Container>
-            <Button width="3rem" margin="0 1em">
-              <Icon size="20" icon={<BsBookmarks />} />
-            </Button>
-            <Button brand padding=".8em" width="15em">
-              Add To Cart
-            </Button>
-          </Container>
-          <Typography
-            variant="p"
-            line-Height={1.5}
-            text-Align="justify"
-            font-Family="Mulish"
-            font-Size=".8rem"
-          >
-            Et placeat odio voluptas saepe ullam enim sed. Sint rem sint. Ex
-            enim aperiam consequatur. Est temporibus ab. Pariatur aut ut
-            temporibus culpa. Aut adipisci veniam esse. Quidem dolor corporis
-            consequuntur non sunt et neque. Aut dolorem repellat quo architecto
-            sint minima doloremque. At quae laborum incidunt vel voluptas dolor
-            similique aut. Aut sunt saepe tempore eos sint ut amet voluptatibus
-            dicta. Nihil nemo animi. Est laboriosam tempore. Porro id voluptates
-            a nesciunt natus qui. Qui mollitia iusto. Perspiciatis reiciendis
-            laborum consequuntur sint porro omnis et facere. Voluptatem vitae
-            quo. Similique atque cumque culpa temporibus consequatur
-            voluptatibus id. Cupiditate alias quas non ab veritatis et. Sed et
-            qui consequatur aut. Eum consequuntur necessitatibus veritatis
-            voluptatem qui velit repellat numquam tempore. Qui quam eos modi.
-            Libero corporis ut et. Eligendi est expedita aspernatur non
-            repellendus nihil perferendis. Et deserunt doloremque esse. Iusto
-            veniam odio consequatur sint illum. Quis dolor doloribus. Nemo ut
-            sit adipisci dolores iure. Est qui rerum ullam mollitia molestiae
-            magnam porro at fugit. Neque ut debitis ut porro rerum. Occaecati
-            temporibus voluptatem quo eaque. Voluptas impedit veritatis dolore
-            assumenda. Aut doloribus unde repellat pariatur consequatur.
-            Blanditiis voluptas aut tempora facilis fugi.
+
+          <Typography bold variant="h3" margin="0 1em">
+            silver
           </Typography>
         </Container>
-      </Container>
-    </>
+        <GroupCircle
+          colors={['#EDEAE3', '#242424']}
+          setColorActive={console.log}
+        />
+        <Container>
+          <Typography variant="h3" color="grey">
+            Size:
+          </Typography>
+          <Typography bold variant="h3" margin="0 1em">
+            256GB
+          </Typography>
+        </Container>
+        <Container margin="1em 0 1em 0" justify-Content="space-between">
+          <Container>
+            <Button margin="0 1em 0 0" padding=".6em 2em">
+              64GB
+            </Button>
+            <Button margin="0 1em" padding=".6em 2em">
+              128GB
+            </Button>
+            <Button margin="0 1em" padding=".6em 2em">
+              256GB
+            </Button>
+          </Container>
+          <Button width="3rem" margin="0 1em">
+            <Icon size="20" icon={<BsBookmarks />} />
+          </Button>
+          <Button brand padding=".8em" width="15em">
+            Add To Cart
+          </Button>
+        </Container>
+        <Typography
+          variant="p"
+          line-Height={1.5}
+          text-Align="justify"
+          font-Family="Mulish"
+          font-Size=".8rem"
+        >
+        </Typography>
+      </Container> */}
+    </Container>
   );
 };
 

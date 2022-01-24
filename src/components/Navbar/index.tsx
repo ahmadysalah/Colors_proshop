@@ -80,7 +80,7 @@ export const Navbar = () => {
                 icon={<BiLogOut style={StyleObj} />}
               />
               <ListNavItem
-                to="/"
+                to="/cart"
                 onClick={() => console.log('out')}
                 icon={<BsFillCartFill style={StyleObj} />}
               />

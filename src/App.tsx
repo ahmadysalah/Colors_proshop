@@ -36,16 +36,21 @@ const App: React.FC = () => {
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const dispatch2 =
     useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  const dispatch3 =
+    useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
 
-  useEffect(() => {
-    // upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 1 }),
-    // dispatch(
-    //   upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 3 }),
-    // );
-    dispatch2(getOrders());
-    // deleteActionCart('61ec6095edddbd1f4c72e28a')
-    // upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 1 }),
-  }, [dispatch2]);
+  // useEffect(() => {
+  //   // dispatch(
+  //   //   upduteActionCart({ productId: '61ed84b90b6b211d7406d35f', qty: 1 }),
+  //   // );
+  //   // dispatch3(getProductById('61ed84b90b6b211d7406d35f'));
+  //   // dispatch(
+  //   //   upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 3 }),
+  //   // );
+  //   // dispatch2(getOrders());
+  //   // deleteActionCart('61ec6095edddbd1f4c72e28a')
+  //   // upduteActionCart({ productId: '61ec6095edddbd1f4c72e28a', qty: 1 }),
+  // }, []);
   // const dispatch =
   //   useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
 
@@ -72,7 +77,8 @@ const App: React.FC = () => {
   //   //     () => navigation('/me'),
   //   //   ),
   //   // );
-  //   dispatch(getAllUser());
+  // dispatch(getAllUser());
+
   //   dispatch(getProfile());
   //   // dispatch(
   //   //   updateUser({
@@ -88,7 +94,7 @@ const App: React.FC = () => {
 
   //   // dispatch(delateProduct('61e82f47167ef207d4cb42a5'));
 
-  //   // dispatch(getUserById('61e85bb5f896f300049ed1f7'));
+  // dispatch(getUserById('61e85bb5f896f300049ed1f7'));
   //   // dispatch(deleteUserById('61e85bb5f896f300049ed1f7'));
   //   // dispatch(getProducts('iphone'));
   //   // dispatch(getProducts('undefined',1));

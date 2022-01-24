@@ -113,10 +113,7 @@ export const addProduct = (product: ICreateProduct) => {
 
     // will  be  uplude  image  4 will  return  promise  it  call  api
     const imageUpload = product.images.map(image => {
-      return Api.post('/upload', () => {
-        // name  lable  in Api is image
-        return new FormData().append('image', image);
-      });
+      return Api.post('/upload', new FormData().append('image', image));
     });
 
     // just  add  the  roduct  and  link  with  user  id
