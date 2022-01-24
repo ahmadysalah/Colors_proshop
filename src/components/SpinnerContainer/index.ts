@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 const SpinnerContainer = styled.div`
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+  display: flex;
   border: 6px solid ${props => props.theme?.primary?.lightYallow};
+  width: 120px;
+  justify-content: center;
+  height: 120px;
   box-sizing: border-box;
   border-radius: 50%;
   border-top-color: #ddd;
-  margin: 0px auto;
+  align-items: center;
+  margin: 25% auto;
   animation: spin 3s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
   @keyframes spin {

@@ -1,6 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react';
 import { BsBookmarks } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ThunkDispatch } from 'redux-thunk';
 import {
   Container,
   Button,
@@ -9,11 +12,14 @@ import {
   Counter,
   GroupCircle,
 } from '../../../../components';
+import { upduteActionCart } from '../../../../redux/Cart/action';
+import { ActionCartType } from '../../../../redux/Cart/type';
 import { IProducts } from '../../../../redux/Product/type';
+import { AppState } from '../../../../redux/store';
 import { ProductImage } from './style';
 
 const ProductOverview: React.FC<IProducts> = props => {
-  const { images, colors } = props;
+  const { images, colors, _id } = props;
   const [colorActive, setColorActive] = useState(colors?.[0] || '');
   const [memory, setMemory] = useState('');
   const [currentImages, setImages] = useState<string[]>(images || []);
@@ -21,21 +27,18 @@ const ProductOverview: React.FC<IProducts> = props => {
 
   useEffect(() => {
     setImages(images);
-    console.log('images', images);
   }, [images]);
-
+  const navigation = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const handleAddToCart = () => {
-    console.log(
-      'colorActive',
-      colorActive,
-      'memory',
-      memory,
-      'count',
-      count,
-      'currentImages',
-      currentImages,
-      'itemId',
-      props?._id,
+    dispatch(
+      upduteActionCart(
+        {
+          productId: _id,
+          qty: count,
+        },
+        () => navigation('/cart'),
+      ),
     );
   };
 

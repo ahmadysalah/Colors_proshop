@@ -38,6 +38,10 @@ const ProductScreen: React.FC = () => {
                 key: 'Brand',
                 value: product?.brand,
               },
+              {
+                key: 'Brand',
+                value: product?.brand,
+              },
             ]}
           />
           <Review reviews={product!.reviews || []} />
