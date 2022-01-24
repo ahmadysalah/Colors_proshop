@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useMemo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -9,7 +9,7 @@ import Review from './Sections/Review';
 import { Container, PathNavigate, SpinnerContainer } from '../../../components';
 import { getProductById } from '../../../redux/Product/action';
 import { AppState } from '../../../redux/store';
-import { TAllActionProduct } from '../../../redux/Product/type';
+import { IProducts, TAllActionProduct } from '../../../redux/Product/type';
 
 const ProductScreen: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,8 +31,15 @@ const ProductScreen: React.FC = () => {
       ) : (
         <>
           <PathNavigate name={product?.name} />
-          <ProductOverview product={product} />
-          <Specifications />
+          <ProductOverview {...(product as IProducts)} />
+          <Specifications
+            data={[
+              {
+                key: 'Brand',
+                value: product?.brand,
+              },
+            ]}
+          />
           <Review reviews={product!.reviews || []} />
         </>
       )}

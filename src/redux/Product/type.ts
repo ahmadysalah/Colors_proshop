@@ -28,6 +28,7 @@ export interface IProducts {
   __v: number;
   createdAt: string;
   updatedAt: string;
+  size: string;
 }
 
 export interface IGetAllProduct {

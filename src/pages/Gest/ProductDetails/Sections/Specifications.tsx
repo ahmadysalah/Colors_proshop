@@ -1,33 +1,33 @@
 import { Container, Typography } from '../../../../components';
 
-const data = [
-  {
-    key: 'brand',
-    value: 'Apple',
-  },
-  {
-    key: 'model',
-    value: 'Iphone X',
-  },
-  {
-    key: 'model',
-    value: 'Iphone X',
-  },
-  {
-    key: 'model',
-    value: 'Iphone X',
-  },
-  {
-    key: 'model',
-    value: 'Iphone X',
-  },
-  {
-    key: 'model',
-    value: 'Iphone X',
-  },
-];
+// const data = [
+//   {
+//     key: 'brand',
+//     value: 'Apple',
+//   },
+//   {
+//     key: 'model',
+//     value: 'Iphone X',
+//   },
+//   {
+//     key: 'model',
+//     value: 'Iphone X',
+//   },
+//   {
+//     key: 'model',
+//     value: 'Iphone X',
+//   },
+//   {
+//     key: 'model',
+//     value: 'Iphone X',
+//   },
+//   {
+//     key: 'model',
+//     value: 'Iphone X',
+//   },
+// ];
 let i = 0;
-const Specifications: React.FC = () => {
+const Specifications: React.FC<objectType> = ({ data }) => {
   return (
     <Container direction="column">
       <Typography variant="h2" bold margin="2em 0 1em 0" font-Family="Mulish">
