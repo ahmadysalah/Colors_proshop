@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { AllRouter } from './AllRouter';
+import { Navbar } from './components';
 import ErrorBoundary from './components/ErrorBoundary';
 import { SpinnerContainer } from './components/SpinnerContainer';
 import { Providers } from './providers';
@@ -7,9 +8,9 @@ import { Providers } from './providers';
 const App: React.FC = () => {
   return (
     <Providers>
-      sss
       <Suspense fallback={<SpinnerContainer />}>
         <ErrorBoundary>
+          <Navbar />
           <AllRouter />
         </ErrorBoundary>
       </Suspense>

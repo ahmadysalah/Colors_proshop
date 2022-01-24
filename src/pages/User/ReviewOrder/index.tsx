@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import logo from '../../../assets/Images/card.png';
-import { Column, Row } from '../../../components';
+import { Column, Row, Typography } from '../../../components';
 import {
   IShippingSchema,
   ShippingSchema,
@@ -50,7 +50,9 @@ const ReviewOrder = () => {
   return (
     <OrfferSection>
       <InnerSection>
-        <ReviewText variant="h1">Review Order</ReviewText>
+        <Typography variant="h2" font-Family="Mulish">
+          Review Order
+        </Typography>
         <WrapperReviewRow>
           <BoxNumber isActive={stepperNumber === 0}>1</BoxNumber>
           <TextActive isActive={stepperNumber === 0}>
@@ -164,7 +166,6 @@ const ReviewOrder = () => {
                       image={logo}
                       priceItem={20}
                       countItem={20}
-                      isHr
                     />
                   </InnerOverFlow>
                 </Column>
