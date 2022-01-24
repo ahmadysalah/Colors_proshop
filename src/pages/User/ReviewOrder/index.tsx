@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { ThunkDispatch } from 'redux-thunk';
+import { useDispatch } from 'react-redux';
 import logo from '../../../assets/Images/card.png';
 import { Column, Row, Typography } from '../../../components';
 import {
@@ -30,6 +32,9 @@ import {
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
+import { AppState } from '../../../redux/store';
+import { ActionOrderType } from '../../../redux/Order/type';
+import { createOrder } from '../../../redux/Order/action';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -42,11 +47,19 @@ const ReviewOrder = () => {
   const [checkoutError, setCheckoutError] = useState();
   const stripe: any = useStripe();
   const elements = useElements();
-
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
     onSubmit: async values => {
+      dispatch(
+        createOrder({
+          address: values.address,
+          postalCode: values.zip,
+          city: values.city,
+          country: values.country,
+        }),
+      );
       const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
         type: 'card',
         card: elements?.getElement(CardElement),
