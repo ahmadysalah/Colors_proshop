@@ -3,7 +3,14 @@ import React, { useState, CSSProperties, useCallback, useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Column, CategoryCard, Container, SpinnerContainer } from '../..';
+import {
+  Row,
+  Column,
+  CategoryCard,
+  Container,
+  SpinnerContainer,
+  Typography,
+} from '../..';
 import { ColumnCusom, Divider, Title } from '../../DeviderTitle/style';
 import Play from '../../../assets/Images/play.jpg';
 import { CategDots, Dot } from '../../Slider/SliderStyle';
@@ -87,46 +94,77 @@ export const FeaturedCategories = ({ data }: IProps) => {
   };
 
   return (
-    <Container
-      direction="column"
-      background="white"
-      width="90%"
-      margin="60px auto"
-    >
-      <Container justifyContent="space-between">
-        <Container direction="column" width="auto">
+    <>
+      <Container
+        direction="column"
+        width="100%"
+        justify-content="center"
+        align-items="center"
+        margin-top="60px"
+      >
+        <Container direction="column" width="85.4%">
           <Title>Featured Categories</Title>
-          <Divider
-            width="200px"
-            height="7px"
-            color="#FCDD06"
-            style={{
-              marginTop: '0',
-            }}
-          />
-          <WrapperDots
-            item="center"
-            style={{
-              marginTop: '22px',
-            }}
-          >
-            {Array(getSlider().length)
-              .fill(0)
-              .map((x, i) => (
-                <CategDots
-                  style={DotsStyles}
-                  width="14px"
-                  isGrey={sliderIndex !== i}
-                  onClick={() => setSliderIndex(i)}
-                />
-              ))}
-          </WrapperDots>
+          <Divider width="12%" height="7px" color="#FCDD06" />
+          <Divider width="100%" height="0px" color="#707070" />
         </Container>
+        <Container direction="row" width="90%">
+          <SwipeableViews
+            enableMouseEvents
+            index={sliderIndex}
+            style={cssStyle}
+          >
+            {getSlider()}
+          </SwipeableViews>
+        </Container>
+        <WrapperDots item="center">
+          {Array(getSlider().length)
+            .fill(0)
+            .map((x, i) => (
+              <CategDots
+                style={DotsStyles}
+                width="14px"
+                isGrey={sliderIndex !== i}
+                onClick={() => setSliderIndex(i)}
+              />
+            ))}
+        </WrapperDots>
       </Container>
-      <Divider width="100%" height="1px" color="#707070" />
-      <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
-        {getSlider()}
-      </SwipeableViews>
-    </Container>
+    </>
   );
 };
+
+// <Container
+// direction="column"
+// background="white"
+// width="90%"
+// margin="60px auto"
+// >
+// <Container justifyContent="space-between">
+//   <Container direction="column" width="auto">
+//     <Title>Featured Categories</Title>
+//     <Divider width="12%" height="7px" color="#FCDD06" />
+//     <Divider width="88%" height="1px" color="#707070" />
+
+//     <WrapperDots
+//       item="center"
+//       style={{
+//         marginTop: '22px',
+//       }}
+//     >
+//       {Array(getSlider().length)
+//         .fill(0)
+//         .map((x, i) => (
+//           <CategDots
+//             style={DotsStyles}
+//             width="14px"
+//             isGrey={sliderIndex !== i}
+//             onClick={() => setSliderIndex(i)}
+//           />
+//         ))}
+//     </WrapperDots>
+//   </Container>
+// </Container>
+// <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+//   {getSlider()}
+// </SwipeableViews>
+// </Container>

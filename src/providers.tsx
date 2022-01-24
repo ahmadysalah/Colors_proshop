@@ -8,7 +8,7 @@ export const Providers: React.FC = ({ children }) => {
     <>
       <HelmetProvider>
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </HelmetProvider>{' '}
+      </HelmetProvider>
     </>
   );
 };

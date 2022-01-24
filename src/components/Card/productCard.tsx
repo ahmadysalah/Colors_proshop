@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
-import { BsFillBookmarkDashFill, BsBookmark } from 'react-icons/bs';
+import { BsBookmark } from 'react-icons/bs';
 import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
@@ -12,16 +12,16 @@ export interface IProducts {
   rating: number;
   price: number;
   discount?: number;
-  countInStock: number;
-  _id: string;
-  name: string;
+  countInStock?: number;
+  _id?: string;
+  name?: string;
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
   return (
     <MainCard
-      width="100%"
-      height="655px"
+      width="28.2%"
+      max-height="655px"
       boxShadow="none"
       backgroundColor="white"
       flexDirection="column"
@@ -29,19 +29,32 @@ const ComplexCard = ({ ...props }: IProducts) => {
       {props.discount ? (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`${props.discount}`}
+            {`-${props.discount}%`}
           </Typography>
         </Discount>
-      ) : null}
+      ) : (
+        <></>
+      )}
       <ContentAction>
         <img
           src={props.image}
           alt=""
-          style={{ width: '342px', height: '342px', margin: 'auto' }}
+          style={{ width: '100%', height: '100%' }}
         />
       </ContentAction>
       <Content>
-        <Typography variant="h3">{props.name}</Typography>
+        <Typography variant="h3" fontSize="24px">
+          {props.name}
+        </Typography>
+      </Content>
+      <Content>
+        <ReactStars
+          isHalf
+          name="rate"
+          edit={false}
+          value={props.rating}
+          size={40}
+        />
       </Content>
       <Content>
         {props.discount && (
@@ -56,35 +69,23 @@ const ComplexCard = ({ ...props }: IProducts) => {
           ${props.price}
         </Typography>
       </Content>
-      <Content>
-        <ReactStars
-          isHalf
-          name="rate"
-          edit={false}
-          value={props.rating}
-          size={40}
-        />
-      </Content>
-      <Container
-        direction="row"
-        margin="auto"
-        justifyContent="center"
-        padding="15px"
-      >
+
+      <Container direction="row" margin="auto" padding="15px">
         <Button
           height="62px"
           background="#F2F2F2"
-          width="54px"
+          width="10%"
           padding="none"
-          margin="0 13px 0px 62px"
+          margin-left="6%"
         >
-          <BsBookmark />
+          <BsBookmark size="24px" />
         </Button>
         <Button
           height="62px"
-          width="324px"
+          width="65.3%"
           background="#F2F2F2"
           fontSize="15px"
+          margin="0 5%"
         >
           Add to cart
         </Button>
