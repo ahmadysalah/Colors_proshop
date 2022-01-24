@@ -141,7 +141,6 @@ export const LeftSection = styled('div')`
   opacity: 1;
   padding: 25px 17px;
   width: 100%;
-
   @media (max-width: 768px) {
     width: 100%;
     padding: 30px;
@@ -179,7 +178,7 @@ export const InnerOverFlow = styled.div`
 export const RightSectionPlace = styled(RightSectionTowReview)`
   width: 20%;
 
-  height: 250px;
+  height: 90%;
   @media (max-width: 1500px) {
     width: 100%;
     padding: 10px;

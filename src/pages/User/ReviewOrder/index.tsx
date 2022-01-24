@@ -30,6 +30,11 @@ import {
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
+import {
+  StripeCardCvc,
+  StripeCardExpiry,
+  StripeCardInput,
+} from '../../../components/Stripe/Style';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -39,6 +44,8 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
+  const [checkoutError, setCheckoutError] = useState();
+
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
@@ -46,6 +53,11 @@ const ReviewOrder = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
+  const handleCardDetailsChange = (ev: any) => {
+    if (ev.error) setCheckoutError(ev.error.message);
+    else setCheckoutError(undefined);
+  };
   const [stepperNumber, setstepperNumber] = useState(0);
   return (
     <OrfferSection>
@@ -136,6 +148,14 @@ const ReviewOrder = () => {
                       />
                     </WrapperRowInput>
                     <ShapeAddress>Payment Details</ShapeAddress>
+                    <StripeCardInput onChange={handleCardDetailsChange} />
+                    <StripeCardExpiry />
+                    <StripeCardCvc />
+                    {checkoutError && (
+                      <Typography margin-Top="1rem" color="red">
+                        {checkoutError}
+                      </Typography>
+                    )}
                   </Column>
                 </form>
               </LeftSection>
