@@ -75,7 +75,7 @@ const Home: React.FC = () => {
   console.log('getProducts', featcheProduct.allProduct);
 
   return (
-    <Container width="100%" direction="column">
+    <Container width="100%" direction="column" justify-content="center">
       {topProducts.isLoading ? (
         <SpinnerContainer />
       ) : (

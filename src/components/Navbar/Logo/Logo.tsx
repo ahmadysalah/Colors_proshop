@@ -5,10 +5,9 @@ import { LogoSt } from './LogoSt';
 export default function Logo() {
   return (
     <LogoSt as={Link} to="/">
-      <Typography color="#FCDD06" display="inline" fontSize="40px">
-        pro
+      <Typography color="#FCDD06" font-size="40px" variant="h1">
+        ProShop
       </Typography>
-      shop
     </LogoSt>
   );
 }

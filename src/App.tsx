@@ -1,12 +1,12 @@
-import { Suspense, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { ThunkDispatch } from 'redux-thunk';
+import { Suspense } from 'react';
 import { AllRouter } from './AllRouter';
 import ErrorBoundary from './components/ErrorBoundary';
 import { SpinnerContainer } from './components/SpinnerContainer';
-import DashBoard from './pages/DashBoard';
 import { Providers } from './providers';
+
+
+const App: React.FC = () => {
+
 import { AuthActions } from './redux/Auth/action';
 import { TAllActionAuth, TLogin } from './redux/Auth/type';
 import {

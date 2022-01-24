@@ -1,41 +1,35 @@
-/* eslint-disable import/extensions */
 import { useState } from 'react';
-
-import { useSelector, useDispatch } from 'react-redux';
 import { FaUserAlt } from 'react-icons/fa';
-import { BsFillBookmarkDashFill, BsFillCartFill } from 'react-icons/bs';
+import { BsFillBookmarkDashFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { BiLogOut } from 'react-icons/bi';
 import { ListNavItem } from './ListNavItem';
 import {
   List,
-  LogoTextYellow,
-  LogoTextWhite,
   StyleObj,
   NavBox,
-  NavContainer,
   StyledSearchIcon,
   SearchButton,
   SearchInput,
-  NavInnerSection,
-  NavBoxLogo,
-  NavTitle,
 } from './NavBarStyles';
-import { ContainerWrapper } from '../Container/style';
-import Icon from '../Icon';
+import { Container, Typography } from '..';
+import Logo from './Logo/Logo';
 
 export const Navbar = () => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const token = 'usedfk';
   return (
-    <NavContainer>
-      <NavBoxLogo>
-        <LogoTextYellow to="/">Pro</LogoTextYellow>
-        <LogoTextWhite to="/">Shop</LogoTextWhite>
-      </NavBoxLogo>
-
-      <NavBox style={{ background: '#FFF', borderRadius: 6 }}>
+    <Container
+      direction="row"
+      width="100%"
+      height="85px"
+      background-color="#242424"
+      justifyContent="space-between"
+    >
+      <Container width="16.6%">
+        <Logo />
+      </Container>
+      <NavBox>
         <SearchInput
           value={value}
           type="text"
@@ -53,14 +47,22 @@ export const Navbar = () => {
           Search
         </SearchButton>
       </NavBox>
-      <NavBox>
+
+      <Container direction="row" padding-top="18px" width="19.4%">
         <List>
           <ListNavItem
             isBadge
             to={token ? '/profile' : '/login'}
             icon={<FaUserAlt style={StyleObj} />}
           >
-            <NavTitle>{token ? 'Profile' : 'Login / Sign up'}</NavTitle>
+            <Typography
+              variant="p"
+              fontSize="13px"
+              color="white"
+              margin-bottom="18px"
+            >
+              {token ? 'Profile' : 'Login / Sign up'}
+            </Typography>
           </ListNavItem>
           <ListNavItem
             isBadge
@@ -68,26 +70,17 @@ export const Navbar = () => {
             to={token ? '/profile' : '/login'}
             icon={<BsFillBookmarkDashFill style={StyleObj} />}
           >
-            <NavTitle>WishList</NavTitle>
+            <Typography
+              variant="p"
+              fontSize="13px"
+              color="white"
+              margin-bottom="18px"
+            >
+              WishList
+            </Typography>
           </ListNavItem>
-
-          {token && (
-            <>
-              <ListNavItem
-                to="/cart"
-                isBadge
-                countBadge={2}
-                icon={<BiLogOut style={StyleObj} />}
-              />
-              <ListNavItem
-                to="/"
-                onClick={() => console.log('out')}
-                icon={<BsFillCartFill style={StyleObj} />}
-              />
-            </>
-          )}
         </List>
-      </NavBox>
-    </NavContainer>
+      </Container>
+    </Container>
   );
 };
