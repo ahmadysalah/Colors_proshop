@@ -16,6 +16,7 @@ import { Dot } from '../../Slider/SliderStyle';
 import { InnerSection } from '../../../pages/User/ReviewOrder/Sections/style';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
 import { IGetAllProduct, IProducts } from '../../../redux/Product/type';
+import Play from '../../../assets/Images/play.jpg';
 
 interface Props {
   data: IProduct[];
@@ -75,7 +76,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx}>
+      <RowInnerSlider key={inx} style={{ margin: '0' }}>
         {i.map((item: IProducts) => (
           <ComplexCard {...item} image={item.images[0]} />
         ))}
@@ -90,32 +91,60 @@ export const FeaturedProduct = ({ data }: IProps) => {
   return fetchFeathers.isLoading ? (
     <SpinnerContainer />
   ) : (
-    <Container direction="column" padding="0" background="#F7F8FC">
-      <Container
-        direction="column"
-        padding="0"
-        background="#F7F8FC"
-        width="90%"
-        margin="auto"
-      >
+    <Container
+      direction="column"
+      align-items="center"
+      background="#F7F8FC"
+      width="100%"
+    >
+      <Container direction="column" width="85.4%">
         <DeviderTitle title="Featured Product" position="center" />
+      </Container>
+
+      <Container direction="row" width="85.4%" justify-content="space-between">
         <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
           {getSlider()}
         </SwipeableViews>
-
-        <Container flexDirection="row" background="#F7F8FC" padding="1em">
-          {Array(getSlider().length)
-            .fill(0)
-            .map((x, i) => (
-              <Dot
-                style={DotsStyles}
-                width="14px"
-                isGrey={sliderIndex !== i}
-                onClick={() => setSliderIndex(i)}
-              />
-            ))}
-        </Container>
       </Container>
+      <Container flexDirection="row" background="#F7F8FC" padding="1em">
+        {Array(getSlider().length)
+          .fill(0)
+          .map((x, i) => (
+            <Dot
+              style={DotsStyles}
+              width="14px"
+              isGrey={sliderIndex !== i}
+              onClick={() => setSliderIndex(i)}
+            />
+          ))}
+      </Container>
+      <Container height="20px" />
     </Container>
   );
 };
+
+// <Container
+// direction="column"
+// padding="0"
+// background="#F7F8FC"
+// width="90%"
+// margin="auto"
+// >
+// <DeviderTitle title="Featured Product" position="center" />
+// <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+//   {getSlider()}
+// </SwipeableViews>
+
+// <Container flexDirection="row" background="#F7F8FC" padding="1em">
+//   {Array(getSlider().length)
+//     .fill(0)
+//     .map((x, i) => (
+//       <Dot
+//         style={DotsStyles}
+//         width="14px"
+//         isGrey={sliderIndex !== i}
+//         onClick={() => setSliderIndex(i)}
+//       />
+//     ))}
+// </Container>
+// </Container>

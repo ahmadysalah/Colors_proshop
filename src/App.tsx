@@ -1,37 +1,11 @@
-import { Suspense, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { ThunkDispatch } from 'redux-thunk';
+import { Suspense } from 'react';
 import { AllRouter } from './AllRouter';
 import ErrorBoundary from './components/ErrorBoundary';
 import { SpinnerContainer } from './components/SpinnerContainer';
-import DashBoard from './pages/DashBoard';
 import { Providers } from './providers';
-import { AuthActions } from './redux/Auth/action';
-import { TAllActionAuth, TLogin } from './redux/Auth/type';
-import {
-  addReview,
-  getAlCategory,
-  getCategoryByName,
-  getProductById,
-  getProducts,
-  getTopProducts,
-} from './redux/Product/action';
-import { TAllActionProduct } from './redux/Product/type';
-import { AppState } from './redux/store';
-import {
-  delateProduct,
-  deleteUserById,
-  getAllUser,
-  getUserById,
-} from './redux/Admin/action';
-import { getProfile, updateUser } from './redux/User/action';
-import { ActionCartType } from './redux/Cart/type';
-import { deleteActionCart, upduteActionCart } from './redux/Cart/action';
-import { getMyOrder, getOrders } from './redux/Order/action';
-import { ActionOrderType } from './redux/Order/type';
 
 const App: React.FC = () => {
+<<<<<<< HEAD
   // const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const dispatch2 =
@@ -109,6 +83,8 @@ const App: React.FC = () => {
   //   //   }),
   //   // );
   // }, []);
+=======
+>>>>>>> c762a92c6895da335efb794b8e21789356e4201b
   return (
     <Providers>
       <Suspense fallback={<SpinnerContainer />}>

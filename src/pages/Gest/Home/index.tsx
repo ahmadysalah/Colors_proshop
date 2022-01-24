@@ -72,7 +72,7 @@ const Home: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Container width="100%" direction="column">
+    <Container width="100%" direction="column" justify-content="center">
       {topProducts.isLoading ? (
         <SpinnerContainer />
       ) : (

@@ -4,7 +4,6 @@ import { CSSProperties } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { Column } from '../Col';
 import { FlexBox } from '../Row';
-import { ContainerWrapper } from '../Container/style';
 
 export const InnerSection = styled(Column)`
   margin: 0 auto;
@@ -32,47 +31,27 @@ export const SearchButton = styled(FlexBox)`
   background: #fcdd06;
   border-radius: 6px;
   display: flex;
-  height: 100%;
+  height: 42px;
   justify-content: center;
-  opacity: 1;
-  width: 152px;
+  width: 21.5%;
 `;
 export const StyledSearchIcon = styled(AiOutlineSearch)`
   font-size: 18;
   margin-right: 10px;
 `;
 
-export const NavInnerSection = styled(InnerSection)`
-  flex-direction: row;
+export const NavBox = styled('div')`
+  display: flex;
   justify-content: space-between;
+  width: 36.7%;
+  background: #fff;
+  border-radius: 6px;
 `;
 
-export const NavBox = styled('div')`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  justify-content: center;
-  width: 30%;
-`;
-export const NavBoxLogo = styled(NavBox)`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  justify-content: flex-start;
-  width: 30%;
-`;
 export const CustomLink = styled(Link)`
   color: none;
   position: relative;
   text-decoration: none;
-`;
-
-export const NavTitle = styled('p')`
-  margin-top: 11px;
-  font-size: 13px;
-  color: ${props => props.theme.primary?.disCount};
 `;
 
 export const Logo = styled('img')`
@@ -82,25 +61,13 @@ export const Logo = styled('img')`
   width: 180px;
 `;
 
-export const NavContainer = styled(ContainerWrapper)`
-  align-items: center;
-  background: #242424;
-  height: 85px;
-  justify-content: center;
-  justify-content: space-between;
-  opacity: 1;
-  width: 100%;
-  flex-wrap: wrap;
-`;
-
 export const SearchInput = styled('input')`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: none;
   border-radius: 6px;
   height: 40px;
   opacity: 1;
-  padding: 12px 26px;
-  width: 550px;
+  width: 36.7%;
   &:focus {
     border: none;
     outline: none;
@@ -128,23 +95,10 @@ export const ListItem = styled('li')`
   text-decoration: none;
   align-items: center;
 `;
-export const LogoTextYellow = styled(Link)`
-  color: ${props => props.theme.primary?.disCount};
-  font-size: 40px;
-  letter-spacing: 1.6px;
-  opacity: 1;
-  text-decoration: none;
-`;
-export const LogoTextWhite = styled(Link)`
-  color: ${props => props.theme.primary?.disCount};
-  font-size: 40px;
-  letter-spacing: 1.6px;
-  opacity: 1;
-  text-decoration: none;
-`;
+
 export const StyleObj: CSSProperties = {
   fontSize: 22,
-  color: '#FFF',
+  color: '#FCDD06',
   fill: '#FFF',
   margin: '0px auto',
   display: 'flex',
