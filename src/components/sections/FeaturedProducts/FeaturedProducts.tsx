@@ -83,7 +83,6 @@ export const FeaturedProduct = ({ data }: IProps) => {
       </RowInnerSlider>
     ));
   };
-  console.log('dflkjflflkj0', data);
 
   const fetchFeathers = {
     isLoading: false,

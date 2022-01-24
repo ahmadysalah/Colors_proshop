@@ -53,7 +53,6 @@ const Stripe: React.FC<IStripeIndex> = ({ children, clientSecret }) => {
         },
       },
     });
-    console.log({ error, paymentMethod });
   };
 
   return (

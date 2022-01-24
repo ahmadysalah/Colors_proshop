@@ -1,5 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ThunkDispatch } from 'redux-thunk';
+
 import { Container, Divider, Image, Typography } from '../../../components';
+import { AuthActions } from '../../../redux/Auth/action';
+import { IUser, TAllActionAuth } from '../../../redux/Auth/type';
+import { AppState } from '../../../redux/store';
 import {
   DashboardContainer,
   DashImgContainer,
@@ -7,7 +14,20 @@ import {
   OutLink,
 } from '../style';
 
-const ProfileDashboard: React.FC = () => {
+interface IProfileDashboard {
+  user?: IUser;
+}
+
+const ProfileDashboard = ({ user }: IProfileDashboard) => {
+  const navigation = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
+  const handleLoagout = () => {
+    dispatch(
+      AuthActions.logoutSuccess(() => {
+        navigation('/login');
+      }),
+    );
+  };
   return (
     <DashboardContainer
       direction="column"
@@ -21,13 +41,13 @@ const ProfileDashboard: React.FC = () => {
     >
       <DashImgContainer>
         <Image
-          src="https://image.winudf.com/v2/image1/Y29tLmJ1bnR5YXBweC5hdnRhcm1ha2VyX3NjcmVlbl8wXzE1NjM0OTUwODFfMDg3/screen-0.jpg?fakeurl=1&type=.jpg"
+          src={user?.profileImage}
           width="137px"
           height="137px"
           style={{ borderRadius: '50%' }}
         />
         <Typography variant="h2" margin="0.5em 0 0 0.5em">
-          Amy Mayer
+          {`${user?.firstName}  ${user?.lastName}`}
         </Typography>
       </DashImgContainer>
       <Container
@@ -42,7 +62,9 @@ const ProfileDashboard: React.FC = () => {
         <NavLink href="#">Settings</NavLink>
       </Container>
       <Divider color="#707070" />
-      <OutLink href="#">Logout</OutLink>
+      <OutLink href="#" onClick={handleLoagout}>
+        Logout
+      </OutLink>
     </DashboardContainer>
   );
 };
