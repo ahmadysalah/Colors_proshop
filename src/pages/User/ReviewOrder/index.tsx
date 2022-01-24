@@ -25,6 +25,7 @@ import {
   BoxNumber,
   TextActive,
   OrfferSection,
+  InnerOverFlow,
 } from './Sections/style';
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
@@ -143,14 +144,7 @@ const ReviewOrder = () => {
                   <ChangeText to="/cahnge">change</ChangeText>
                 </HeaderTitleRight>
                 <Column>
-                  <div
-                    style={{
-                      overflow: 'auto',
-                      height: '300px',
-                      overflowX: 'hidden',
-                      borderRadius: '15px',
-                    }}
-                  >
+                  <InnerOverFlow>
                     <OrderDetails
                       title="iPhone 11 Pro 256GB Memory"
                       image={logo}
@@ -165,7 +159,14 @@ const ReviewOrder = () => {
                       countItem={20}
                       isHr
                     />
-                  </div>
+                    <OrderDetails
+                      title="iPhone 11 Pro 256GB Memory"
+                      image={logo}
+                      priceItem={20}
+                      countItem={20}
+                      isHr
+                    />
+                  </InnerOverFlow>
                 </Column>
 
                 <FooterTitleRight>

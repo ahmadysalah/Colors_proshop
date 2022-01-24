@@ -69,7 +69,7 @@ export const TextActive = styled(Typography)<IBoxNumber>`
 
 export const WrapperReviewRow = styled('div')`
   display: flex;
-  margin-top: 36px;
+  margin-top: 16px;
   align-items: center;
   width: 100%;
 `;
@@ -78,7 +78,7 @@ export const InnerSection = styled(Column)`
   justify-content: start;
   margin: 0 auto;
   width: 100%;
-  margin-top: 44px;
+  margin-top: 20px;
 `;
 
 export const DividerTop = styled(Divider)`
@@ -99,7 +99,7 @@ export const WrapperCard = styled('div')`
   width: 100%;
   background: none;
   justify-content: space-between;
-  margin-top: 36px;
+  margin-top: 28px;
   /* margin-right: 50px; */
   @media (max-width: 768px) {
     display: flex;
@@ -110,7 +110,7 @@ export const WrapperCard = styled('div')`
 export const ProductContainer = styled.div`
   overflow: auto;
   width: 60%;
-  height: 300px;
+  height: 200px;
   overflow-x: hidden;
   border-radius: 15px;
   display: flex;
@@ -130,21 +130,24 @@ export const OrderWrapper = styled(WrapperCard)`
 `;
 export const OrfferSection = styled(Column)`
   width: 90%;
+  height: 95vh;
+  overflow: hidden;
   margin: auto;
   justify-content: space-between;
   @media (max-width: 768px) {
-    width: 100;
+    width: 90%;
+    height: auto;
   }
 `;
 export const LeftSection = styled('div')`
   background: #f2f2f2;
   border-radius: 16px;
   opacity: 1;
-  padding: 45px 40px;
+  padding: 25px 17px;
   width: 100%;
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0;
+    padding: 30px;
   }
 `;
 export const RightSection = styled(LeftSection)`
@@ -154,21 +157,30 @@ export const RightSection = styled(LeftSection)`
   @media (max-width: 768px) {
     width: 100%;
     margin: 15px auto;
-    padding-left: 0;
+    padding: 30px;
   }
 `;
 export const RightSectionTowReview = styled(LeftSection)`
   /* flex: 2; */
   margin-left: 30px;
-  height: 280px;
   width: 40%;
   @media (max-width: 768px) {
     width: 100%;
     margin: 15px auto;
-    padding-left: 0;
+    padding: 15px;
   }
 `;
-
+export const InnerOverFlow = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  overflow: auto;
+  height: 280px;
+  overflow-x: hidden;
+  border-radius: 15px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  padding: 0 15px;
+`;
 export const RightSectionPlace = styled(RightSectionTowReview)`
   width: 20%;
   height: 200px;
@@ -181,6 +193,7 @@ export const RightSectionPlace = styled(RightSectionTowReview)`
 
 export const ShapeAddress = styled('p')`
   font-size: 32px;
+  margin-bottom: 20px;
   font-weight: bold;
   letter-spacing: 0.88px;
   letter-spacing: 1.28px;
@@ -247,9 +260,10 @@ export const FooterTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: start;
+  margin-bottom: 20px;
   @media (max-width: 768px) {
     width: 90%;
-    margin: auto;
+    margin: 20px auto;
   }
 `;
 

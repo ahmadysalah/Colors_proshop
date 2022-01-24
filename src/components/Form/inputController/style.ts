@@ -18,7 +18,7 @@ export const Label = styled('label')`
   letter-spacing: 0.88px;
   color: #707070;
   padding-bottom: 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
 `;
 
