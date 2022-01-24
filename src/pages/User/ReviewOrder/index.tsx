@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import logo from '../../../assets/Images/card.png';
 import { Column, Row, Typography } from '../../../components';
 import {
@@ -8,7 +9,6 @@ import {
 } from '../../../utils/helper/validation';
 
 import {
-  ReviewText,
   FooterTitleRight,
   TextFooter,
   InnerSection,
@@ -30,11 +30,6 @@ import {
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
-import {
-  StripeCardCvc,
-  StripeCardExpiry,
-  StripeCardInput,
-} from '../../../components/Stripe/Style';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -45,12 +40,26 @@ const initialValues: IShippingSchema = {
 
 const ReviewOrder = () => {
   const [checkoutError, setCheckoutError] = useState();
+  const stripe: any = useStripe();
+  const elements = useElements();
 
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
+        type: 'card',
+        card: elements?.getElement(CardElement),
+      });
+      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      //   type: 'card',
+      //   card: elements.getElement(CardElement),
+      // });
+      console.log({
+        error,
+        paymentMethod,
+        values,
+      });
     },
   });
 
@@ -58,6 +67,7 @@ const ReviewOrder = () => {
     if (ev.error) setCheckoutError(ev.error.message);
     else setCheckoutError(undefined);
   };
+
   const [stepperNumber, setstepperNumber] = useState(0);
   return (
     <OrfferSection>
@@ -78,13 +88,7 @@ const ReviewOrder = () => {
           <Column>
             <WrapperCard>
               <LeftSection>
-                <form
-                  onSubmit={e => {
-                    e.preventDefault();
-                    formik.handleSubmit();
-                    formik.resetForm();
-                  }}
-                >
+                <form onSubmit={formik.handleSubmit}>
                   <Column
                     style={{
                       width: '90%',
@@ -148,14 +152,25 @@ const ReviewOrder = () => {
                       />
                     </WrapperRowInput>
                     <ShapeAddress>Payment Details</ShapeAddress>
-                    <StripeCardInput onChange={handleCardDetailsChange} />
+
+                    <CardElement
+                      options={cardElementOpts as any}
+                      onChange={handleCardDetailsChange}
+                    />
+
+                    {/* <StripeCardInput onChange={handleCardDetailsChange} />
                     <StripeCardExpiry />
-                    <StripeCardCvc />
+                    <StripeCardCvc /> */}
                     {checkoutError && (
                       <Typography margin-Top="1rem" color="red">
                         {checkoutError}
                       </Typography>
                     )}
+                    <Row JC="flex-end">
+                      <RevieworderButton type="submit">
+                        Review order
+                      </RevieworderButton>
+                    </Row>
                   </Column>
                 </form>
               </LeftSection>
@@ -210,11 +225,6 @@ const ReviewOrder = () => {
                 </FooterTitleRight>
               </RightSection>
             </WrapperCard>
-            <Row JC="flex-end">
-              <RevieworderButton onClick={() => setstepperNumber(1)}>
-                Review order
-              </RevieworderButton>
-            </Row>
           </Column>
         )}
         {stepperNumber === 1 && <ReviewTow />}
@@ -224,3 +234,30 @@ const ReviewOrder = () => {
 };
 
 export default ReviewOrder;
+
+const iframeStyles = {
+  base: {
+    iconColor: '#0F1112',
+    color: '#0F1112',
+    fontWeight: '500',
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+    border: '1px solid #4D4D4D',
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#4D4D4D',
+    },
+    '::-webkit-input-placeholder': {
+      color: '#4D4D4D',
+      border: '1px solid #4D4D4D',
+    },
+  },
+};
+
+const cardElementOpts = {
+  iconStyle: 'solid',
+  style: iframeStyles,
+};

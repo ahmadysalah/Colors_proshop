@@ -188,7 +188,7 @@ export const RightSectionPlace = styled(RightSectionTowReview)`
 
 export const ShapeAddress = styled('p')`
   font-size: 1.2rem;
-
+  margin-bottom: 2rem;
   font-weight: bold;
   letter-spacing: 0.88px;
   letter-spacing: 1.28px;
@@ -340,6 +340,9 @@ export const RevieworderButton = styled.button`
   font-size: 24px;
   margin-top: 20px;
   float: right;
+  position: absolute;
+  bottom: -1.5rem;
+  right: 6rem;
 `;
 
 export const LeftOrderSection = styled(LeftSection)`
