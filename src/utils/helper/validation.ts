@@ -81,3 +81,25 @@ export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
     address: Yup.string().required('Please enter your address'),
   });
 };
+
+export interface IAddProductSchema {
+  images: string[];
+  name: string;
+  brand: string;
+  categories: string[];
+  description: string;
+  countInStock: number;
+  price: number;
+}
+
+export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
+  return Yup.object().shape({
+    images: Yup.array().required('Please enter country name'),
+    name: Yup.string().required('Please enter a name'),
+    brand: Yup.string().required('Please enter a brand'),
+    categories: Yup.array().required('Please enter country name'),
+    description: Yup.string().required('Please enter your description'),
+    countInStock: Yup.number().required('Please enter your countInStock'),
+    price: Yup.number().required('Please enter your price'),
+  });
+};

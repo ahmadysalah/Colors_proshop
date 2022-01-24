@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import Select from 'react-select';
 import { Container } from '../../components';
 import { WarperFileBox } from '../../components/Form/checkBox/style';
 import { Input } from '../../components/Form/inputController/style';
@@ -50,3 +51,6 @@ export const InputsContainer = styled(Container)`
 `;
 
 export const Textarea = Input.withComponent('textarea');
+export const SelectStyle = styled(Select)`
+  width: 100%;
+`;
