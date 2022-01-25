@@ -27,7 +27,7 @@ import { Column, Row } from '../../../../components/Row';
 import logo from '../../../../assets/Images/card.png';
 import { AppState } from '../../../../redux/store';
 import { ActionOrderType, IMyOrder } from '../../../../redux/Order/type';
-import { getMyOrder } from '../../../../redux/Order/action';
+import { getMyOrder, getOrders } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
 
 // const iframeStyles = {
@@ -65,8 +65,9 @@ export const ReviewTow = () => {
   // console.log('dddddddddddd', orders?.orders[0].shippingAddress);
   // console.log(myOrder.orders);
   // console.log('my order aaaaaa', myOrder);
+  //   // dispatch2(getOrders());
   useEffect(() => {
-    dispatch(getMyOrder());
+    dispatch(getOrders());
   }, [dispatch]);
 
   // const [checkoutError, setCheckoutError] = useState();
@@ -78,7 +79,7 @@ export const ReviewTow = () => {
   // };
   return (
     <OrderWrapper>
-      {ordersA?.isLoading || !ordersA?.success ? (
+      {ordersA?.isLoading ? (
         <SpinnerContainer />
       ) : (
         <>

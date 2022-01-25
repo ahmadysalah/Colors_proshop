@@ -22,26 +22,19 @@ const SerachPage = () => {
   );
   useEffect(() => {
     dispatch(getProducts(keyword));
-  }, [dispatch, keyword]);
+  }, [keyword]);
 
-  console.log('searchProducts', searchProducts);
-  console.log(keyword);
+  console.log('searchProducts', searchProducts.allProduct);
+
   return (
     <Container>
-      {searchProducts.isLoading && searchProducts.error ? (
-        <SpinnerContainer />
-      ) : (
-        <>
-          (
-          {searchProducts.allProduct?.products.map(x => (
-            <ComplexCard
-              {...x}
-              image={`https://proshop-ms.herokuapp.com/${x.images[0]}`}
-            />
-          ))}
-          )
-        </>
-      )}
+      aaaaaa
+      {searchProducts.allProduct?.products.map(x => (
+        <ComplexCard
+          {...x}
+          image={`https://proshop-ms.herokuapp.com/${x.images[0]}`}
+        />
+      ))}
     </Container>
   );
 };
