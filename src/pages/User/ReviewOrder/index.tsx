@@ -44,9 +44,10 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
+  const [stepperNumber, setstepperNumber] = useState(1);
   const [checkoutError, setCheckoutError] = useState();
-  const stripe: any = useStripe();
-  const elements = useElements();
+  // const stripe: any = useStripe();
+  // const elements = useElements();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
   const formik = useFormik<IShippingSchema>({
     initialValues,
@@ -55,24 +56,26 @@ const ReviewOrder = () => {
       dispatch(
         createOrder({
           address: values.address,
-          postalCode: values.zip,
           city: values.city,
           country: values.country,
+          postalCode: values.zip,
         }),
       );
-      const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
-        type: 'card',
-        card: elements?.getElement(CardElement),
-      });
-      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      setstepperNumber(1);
+
+      // const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
       //   type: 'card',
-      //   card: elements.getElement(CardElement),
+      //   card: elements?.getElement(CardElement),
       // });
-      console.log({
-        error,
-        paymentMethod,
-        values,
-      });
+      // // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      // //   type: 'card',
+      // //   card: elements.getElement(CardElement),
+      // // });
+      // console.log({
+      //   error,
+      //   paymentMethod,
+      //   values,
+      // });
     },
   });
 
@@ -81,7 +84,6 @@ const ReviewOrder = () => {
     else setCheckoutError(undefined);
   };
 
-  const [stepperNumber, setstepperNumber] = useState(0);
   return (
     <OrfferSection>
       <InnerSection>
@@ -164,12 +166,12 @@ const ReviewOrder = () => {
                         marginLeft="10%"
                       />
                     </WrapperRowInput>
-                    <ShapeAddress>Payment Details</ShapeAddress>
+                    {/* <ShapeAddress>Payment Details</ShapeAddress>
 
                     <CardElement
                       options={cardElementOpts as any}
                       onChange={handleCardDetailsChange}
-                    />
+                    /> */}
 
                     {/* <StripeCardInput onChange={handleCardDetailsChange} />
                     <StripeCardExpiry />
@@ -180,9 +182,7 @@ const ReviewOrder = () => {
                       </Typography>
                     )}
                     <Row JC="flex-end">
-                      <RevieworderButton type="submit">
-                        Review order
-                      </RevieworderButton>
+                      <RevieworderButton>Review order</RevieworderButton>
                     </Row>
                   </Column>
                 </form>

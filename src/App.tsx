@@ -6,13 +6,12 @@ import { SpinnerContainer } from './components/SpinnerContainer';
 import { Providers } from './providers';
 
 const App: React.FC = () => {
-<<<<<<< HEAD
   // const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const dispatch2 =
-    useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
-  const dispatch3 =
-    useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
+  // const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  // const dispatch2 =
+  //   useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  // const dispatch3 =
+  //   useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
 
   // useEffect(() => {
   //   // dispatch(
@@ -84,13 +83,10 @@ const App: React.FC = () => {
   //   //   }),
   //   // );
   // }, []);
-=======
->>>>>>> c762a92c6895da335efb794b8e21789356e4201b
   return (
     <Providers>
       <Suspense fallback={<SpinnerContainer />}>
         <ErrorBoundary>
-          <Navbar />
           <AllRouter />
         </ErrorBoundary>
       </Suspense>

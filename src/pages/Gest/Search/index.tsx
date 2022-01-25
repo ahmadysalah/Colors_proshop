@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
-import { Container } from '../../../components';
+import { Container, SpinnerContainer, Typography } from '../../../components';
 import ComplexCard from '../../../components/Card/productCard';
 import { getProducts } from '../../../redux/Product/action';
 import { TAllActionProduct } from '../../../redux/Product/type';
@@ -22,19 +22,26 @@ const SerachPage = () => {
   );
   useEffect(() => {
     dispatch(getProducts(keyword));
-  }, [keyword]);
+  }, [dispatch, keyword]);
 
-  console.log('searchProducts', searchProducts.allProduct);
-
+  console.log('searchProducts', searchProducts);
+  console.log(keyword);
   return (
     <Container>
-      aaaaaa
-      {searchProducts.allProduct?.products.map(x => (
-        <ComplexCard
-          {...x}
-          image={`https://proshop-ms.herokuapp.com/${x.images[0]}`}
-        />
-      ))}
+      {searchProducts.isLoading && searchProducts.error ? (
+        <SpinnerContainer />
+      ) : (
+        <>
+          (
+          {searchProducts.allProduct?.products.map(x => (
+            <ComplexCard
+              {...x}
+              image={`https://proshop-ms.herokuapp.com/${x.images[0]}`}
+            />
+          ))}
+          )
+        </>
+      )}
     </Container>
   );
 };
