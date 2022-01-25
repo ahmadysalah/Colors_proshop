@@ -12,8 +12,11 @@ import {
   LeftSection,
   RightSection,
   TextActive,
-  RightSectionTowReview,
+  RightSectionPlace,
   OrderDetailsText,
+  LeftOrderSection,
+  OrderWrapper,
+  ProductContainer,
 } from './style';
 import { OrderDetails } from './orderDtails';
 import { Column, Row } from '../../../../components/Row';
@@ -21,8 +24,8 @@ import logo from '../../../../assets/Images/card.png';
 
 export const ReviewTow = () => {
   return (
-    <WrapperCard>
-      <LeftSection>
+    <OrderWrapper>
+      <LeftOrderSection>
         <Column>
           <ShapeAddress>Shipping Address</ShapeAddress>
           <UserName>John rose</UserName>
@@ -34,29 +37,34 @@ export const ReviewTow = () => {
             </ShapeAddress>
             <ChangeText to="/change">change</ChangeText>
           </HeaderTitleRight>
-          <Column style={{ width: '461px' }}>
-            <OrderDetails
-              title="iPhone 11 Pro 256GB Memory"
-              image={logo}
-              priceItem={20}
-              countItem={20}
-            />
-            <OrderDetails
-              title="iPhone 11 Pro 256GB Memory"
-              image={logo}
-              priceItem={20}
-              countItem={20}
-            />
-
-            <HeaderTitleRight style={{ marginTop: '32px' }}>
-              <ReviewText>Payment Details</ReviewText>
-              <ChangeText to="/change">change</ChangeText>
-            </HeaderTitleRight>
-            <span>visa</span>
+          <Column style={{ width: '100%' }}>
+            <ProductContainer>
+              <OrderDetails
+                title="iPhone 11 Pro 256GB Memory"
+                image={logo}
+                priceItem={20}
+                countItem={20}
+              />
+              <OrderDetails
+                title="iPhone 11 Pro 256GB Memory"
+                image={logo}
+                priceItem={20}
+                countItem={20}
+              />
+            </ProductContainer>
           </Column>
+          <HeaderTitleRight
+            style={{ marginTop: '32px', justifyContent: 'space-between' }}
+          >
+            <Column>
+              <ReviewText>Payment Details</ReviewText>
+              <span>visa</span>
+            </Column>
+            <ChangeText to="/change">change</ChangeText>
+          </HeaderTitleRight>
         </Column>
-      </LeftSection>
-      <RightSectionTowReview>
+      </LeftOrderSection>
+      <RightSectionPlace>
         <Column>
           <OrderDetailsText>Order Details</OrderDetailsText>
           <FooterTitleRight>
@@ -75,11 +83,11 @@ export const ReviewTow = () => {
             <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
             <TextFooter style={{ fontWeight: 'bold' }}>$589.98</TextFooter>
           </FooterTitleRight>
-          <Row JC="flex-end" style={{ marginTop: '20px' }}>
-            <RevieworderButton>Review order</RevieworderButton>
-          </Row>
         </Column>
-      </RightSectionTowReview>
-    </WrapperCard>
+        <RevieworderButton>Review order</RevieworderButton>
+      </RightSectionPlace>
+    </OrderWrapper>
   );
 };
+
+export default ReviewTow;

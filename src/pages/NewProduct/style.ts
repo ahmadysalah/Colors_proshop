@@ -31,9 +31,7 @@ export const WarperFile = styled(WarperFileBox)`
   flex-direction: column;
   width: 100%;
   height: 15rem;
-  justify-content: flex-start;
-  text-align: center;
-  padding-top: 1.5em;
+  justify-content: center;
 `;
 
 export const FormContainer = styled(Container)`

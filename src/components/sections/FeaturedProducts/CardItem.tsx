@@ -2,7 +2,7 @@
 import { CSSProperties } from 'react';
 import { useDispatch } from 'react-redux';
 import { BsFillBookmarkDashFill, BsBookmark } from 'react-icons/bs';
-import ReactStars from 'react-rating-stars-component';
+// import ReactStars from 'react-rating-stars-component';
 
 import {
   ContainerCard,
@@ -56,13 +56,13 @@ export const CardItem = ({
         <ImageCard src={image} alt={name} />
         <TitleCard>{name}</TitleCard>
         <Row JC="center" item="center">
-          <ReactStars
+          {/* <ReactStars
             isHalf
             name="rate"
             edit={false}
             value={rating}
             size={40}
-          />
+          /> */}
         </Row>
         <RowPrice>
           {discount && discount > 0 ? (

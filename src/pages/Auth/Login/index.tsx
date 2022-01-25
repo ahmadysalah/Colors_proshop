@@ -3,6 +3,8 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import {
   LoginText,
   LoginSubText,
@@ -23,29 +25,42 @@ import Divider from '../../../components/Divider';
 import { CheckBox } from '../../../components/Form/checkBox';
 import { InputController } from '../../../components/Form/inputController';
 import { Container, Image } from '../../../components';
-
-const initialValues: IschemaValidationLogin = {
-  email: '',
-  password: '',
-  ischeckbox: false,
-};
+import { AppState } from '../../../redux/store';
+import { TAllActionAuth } from '../../../redux/Auth/type';
+import { AuthActions } from '../../../redux/Auth/action';
 
 const Login = () => {
   const [checked, setChecked] = useState<boolean>(true);
-
+  const initialValues = {
+    email: '',
+    password: '',
+    ischeckbox: false,
+  };
   // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setChecked(event.target.checked);
   // };
   const navigate = useNavigate();
 
-  const formik = useFormik<IschemaValidationLogin>({
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
+
+  const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values, e: FormikHelpers<IschemaValidationLogin>) => {
-      console.log(values);
+    onSubmit: async values => {
+      console.log('values', values);
+      dispatch(
+        AuthActions.loginAction(
+          {
+            email: values.email,
+            password: values.password,
+          },
+          () => {
+            navigate('/');
+          },
+        ),
+      );
     },
   });
-
   return (
     <ContainerLogin
       height="100vh"
@@ -66,11 +81,7 @@ const Login = () => {
                 style={{
                   width: '100%',
                 }}
-                onSubmit={e => {
-                  e.preventDefault();
-                  formik.handleSubmit();
-                  formik.resetForm();
-                }}
+                onSubmit={formik.handleSubmit}
               >
                 <Container width="100%" direction="column" padding={0}>
                   <InputController

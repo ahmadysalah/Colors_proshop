@@ -4,6 +4,8 @@ import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { GrUserNew } from 'react-icons/gr';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import {
   LoginText,
   LoginSubText,
@@ -29,6 +31,9 @@ import {
   CheckBox,
   Divider,
 } from '../../../components';
+import { AuthActions } from '../../../redux/Auth/action';
+import { AppState } from '../../../redux/store';
+import { TAllActionAuth } from '../../../redux/Auth/type';
 
 const initialValues: ISchemaValidationSuginup = {
   name: '',
@@ -39,12 +44,30 @@ const initialValues: ISchemaValidationSuginup = {
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
 
   const formik = useFormik<ISchemaValidationSuginup>({
     initialValues,
     validationSchema,
-    onSubmit: (values, e: FormikHelpers<ISchemaValidationSuginup>) => {
-      console.log(values);
+    onSubmit: async values => {
+      console.log('values', values);
+
+      const firstName = values.name.split(' ')[0];
+      const lastName = values.name.split(' ')[1];
+      dispatch(
+        AuthActions.singUpSuccess(
+          {
+            email: values.email,
+            password: values.password,
+            firstName,
+            lastName,
+            passwordConfirmation: values.passwordConfirmation,
+          },
+          () => {
+            navigate('/');
+          },
+        ),
+      );
     },
   });
   return (
@@ -57,13 +80,7 @@ const Signup = () => {
               <LoginSubText>
                 Sign up and get exclusive offers from us
               </LoginSubText>
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  formik.handleSubmit();
-                  formik.resetForm();
-                }}
-              >
+              <form onSubmit={formik.handleSubmit}>
                 <Column>
                   <InputController
                     name="name"
@@ -111,22 +128,20 @@ const Signup = () => {
                 </Column>
                 <Column>
                   <InputController
-                    name="password"
+                    name="passwordConfirmation"
                     label="Confirm your password"
                     type="password"
                     placeholder="enter password"
                     isRequired
-                    errors={formik.errors?.password}
+                    errors={formik.errors?.passwordConfirmation}
                     touched={formik.touched?.passwordConfirmation}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<RiLockPasswordFill />}
-                    value={formik.values.password}
+                    value={formik.values.passwordConfirmation}
                   />
                 </Column>
-                <ButtonLogin disabled={!formik.isValid} type="submit">
-                  Sign up
-                </ButtonLogin>
+                <ButtonLogin type="submit">Sign up</ButtonLogin>
                 <Column item="center">
                   <Divider thick="2px" width="100%" margin="40px 0px" />
                   <Column item="center">

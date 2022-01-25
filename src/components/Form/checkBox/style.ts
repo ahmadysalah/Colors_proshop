@@ -38,6 +38,7 @@ export const Checkbox = styled('input').attrs({
 `;
 export const InputFile = styled('input').attrs({
   type: 'file',
+  accept: 'image/png,image/jpeg',
 })`
   display: none;
 `;

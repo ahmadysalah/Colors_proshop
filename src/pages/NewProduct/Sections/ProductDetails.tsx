@@ -13,7 +13,7 @@ import {
   Textarea,
 } from '../style';
 
-const ProductDetails = ({ formik }: any) => {
+const ProductDetails = ({ formik, categories }: any) => {
   const colourStyles = {
     control: styles => ({ ...styles, backgroundColor: '#F2F2F2' }),
   };

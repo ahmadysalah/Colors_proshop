@@ -14,7 +14,7 @@ interface InputControllerProps {
   icon?: ReactNode;
   isRequired?: boolean;
   onBlur?: (e: React.FocusEvent<any, Element>) => any;
-  onChange?: (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
   marginLeft?: string;
 }
