@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import { FC, ReactNode } from 'react';
-import { ListItem, CustomLink, Badge, NavTitle } from './NavBarStyles';
+import { ListItem, CustomLink, Badge } from './NavBarStyles';
 
 interface Props {
   icon: ReactNode;

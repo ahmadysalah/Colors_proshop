@@ -5,6 +5,18 @@ import { Column, Container, Divider, Typography } from '../../../../components';
 export const ReviewText = styled(Typography)`
   font-family: normal normal 900 32px/15px Mulish;
   letter-spacing: 1.28px;
+  /*
+    font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 0.88px;
+  letter-spacing: 1.28px;
+  color: #242424;
+  opacity: 1;
+  font-family: normal normal bold 32px/15px Mulish;
+  letter-spacing: 1.28px;
+  color: #242424;
+  
+  */
 `;
 export const OrderDetailsText = styled(ReviewText)`
   font-family: normal normal 900 32px/15px Mulish;
@@ -95,6 +107,27 @@ export const WrapperCard = styled('div')`
     width: 100%;
   }
 `;
+export const ProductContainer = styled.div`
+  overflow: auto;
+  width: 60%;
+  height: 300px;
+  overflow-x: hidden;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+export const OrderWrapper = styled(WrapperCard)`
+  width: 90%;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+`;
 export const OrfferSection = styled(Column)`
   width: 90%;
   margin: auto;
@@ -126,11 +159,24 @@ export const RightSection = styled(LeftSection)`
 `;
 export const RightSectionTowReview = styled(LeftSection)`
   /* flex: 2; */
-  margin-left: 54px;
-  padding-top: 35px;
-  padding-left: 22px;
-  width: 70%;
+  margin-left: 30px;
   height: 280px;
+  width: 40%;
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 15px auto;
+    padding-left: 0;
+  }
+`;
+
+export const RightSectionPlace = styled(RightSectionTowReview)`
+  width: 20%;
+  height: 200px;
+  @media (max-width: 1500px) {
+    width: 100%;
+    padding: 10px;
+    height: 240px;
+  }
 `;
 
 export const ShapeAddress = styled('p')`
@@ -191,7 +237,7 @@ export const HeaderTitleRight = styled('div')`
   justify-content: space-between;
   align-items: center;
   @media (max-width: 768px) {
-    width: 90%;
+    width: 80%;
     margin: auto;
   }
 `;
@@ -280,8 +326,15 @@ export const RevieworderButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  margin-right: 9px;
   margin-bottom: 61px;
   margin-top: 30px;
   float: right;
+`;
+
+export const LeftOrderSection = styled(LeftSection)`
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 10px;
+  }
 `;

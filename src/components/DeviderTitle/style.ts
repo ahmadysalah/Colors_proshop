@@ -5,7 +5,7 @@ export const Title = styled('p')`
   color: #242424;
   font-size: 32px;
   font-weight: bold;
-  margin-top: 22px;
+  // margin-top: 22px;
 `;
 
 interface IDivider {
@@ -16,8 +16,8 @@ interface IDivider {
 
 export const Divider = styled('hr')<IDivider>`
   color: #d3cdcd;
-  font-size: 32px;
   font-weight: bold;
+  margin: 0px;
   width: ${props => props.width};
   height: ${props => props.height};
   color: ${props => props.color};

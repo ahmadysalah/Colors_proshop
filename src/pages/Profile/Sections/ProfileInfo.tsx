@@ -10,7 +10,6 @@ import {
 import { IUser } from '../../../redux/Auth/type';
 import { formatDate } from '../../../utils/helper/formatDay';
 
-
 interface IProfileDashboard {
   user?: IUser;
 }
