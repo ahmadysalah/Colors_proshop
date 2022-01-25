@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GrFormClose } from 'react-icons/gr';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { Counter, Image, Typography } from '../../../components';
+import { deleteActionCart, upduteActionCart } from '../../../redux/Cart/action';
+import { ActionCartType } from '../../../redux/Cart/type';
+import { AppState } from '../../../redux/store';
 import { IItemCart } from '../../../redux/User/type';
 import {
   CloseIcon,
@@ -16,9 +21,20 @@ interface IProps {
 }
 const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
+  const [count, setCount] = useState<number>(qty);
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const cart = useSelector((state: AppState) => state.user.myProfile);
   const handleRemoveFormCart = (id: string) => {
-    console.log('The item removed from cart is: ', id);
+    dispatch(deleteActionCart(id));
   };
+
+  const handleIncress = () => {
+    dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
+  };
+  const handleDecress = () => {
+    dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
+  };
+
   return (
     <ItemContainer
       background-color="#F2F2F2"
@@ -67,7 +83,14 @@ const CartList = ({ data }: IProps) => {
         </ItemTitle>
       </ImgContainer>
       <WrapCounter>
-        <Counter />
+        <Counter
+          max={product?.countInStock}
+          min={1}
+          onFinish={setCount}
+          value={count}
+          handleIncrease={handleIncress}
+          handleDecrease={handleDecress}
+        />
       </WrapCounter>
       <Typography
         children={String(`$${product.price}`)}

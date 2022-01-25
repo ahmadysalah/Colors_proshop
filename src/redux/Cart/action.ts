@@ -36,7 +36,9 @@ export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
       if (response.status === 200) {
         dispatch({
           type: EnumCartAction.UPDATE_ITEM_SUCCESS,
-          payload: response.data,
+          payload: {
+            cart: response.data,
+          },
         });
       }
       fun?.();
@@ -66,7 +68,9 @@ export const deleteActionCart = (id: string) => {
       if (response.status === 200) {
         dispatch({
           type: EnumCartAction.DELETE_ITEM_SUCCESS,
-          payload: response.data.cart,
+          payload: {
+            _id: id,
+          },
         });
       }
     } catch (e: any) {

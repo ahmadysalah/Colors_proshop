@@ -19,19 +19,35 @@ const Value = styled.div`
   border: 1px solid #eeeeee;
 `;
 
-const Counter: React.FC<objectType> = ({ max, min, onFinish }) => {
-  const [number, setNumber] = useState(0);
-
+const Counter: React.FC<objectType> = ({
+  max,
+  min = 0,
+  onFinish,
+  value = 0,
+  handleIncrease,
+  handleDecrease,
+}) => {
+  const [number, setNumber] = useState(value);
   const increase = () => {
-    const newNumber = number + 1;
-    setNumber(newNumber);
-    onFinish(newNumber);
+    if (number > max && number > 1) {
+      return;
+    }
+    setNumber(prev => {
+      onFinish(prev + 1);
+      return prev + 1;
+    });
+    handleIncrease();
   };
 
   const decrease = () => {
-    const newNumber = number - 1;
-    setNumber(newNumber);
-    onFinish(newNumber);
+    if (number > max && number < 1) {
+      return;
+    }
+    setNumber(prev => {
+      onFinish(prev - 1);
+      return prev - 1;
+    });
+    handleDecrease();
   };
 
   return (

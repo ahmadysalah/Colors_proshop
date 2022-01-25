@@ -10,6 +10,7 @@ import { Container, PathNavigate, SpinnerContainer } from '../../../components';
 import { getProductById } from '../../../redux/Product/action';
 import { AppState } from '../../../redux/store';
 import { IProducts, TAllActionProduct } from '../../../redux/Product/type';
+import { TopRate } from '../../../components/sections/TopRate/TopRate';
 
 const ProductScreen: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,6 +46,7 @@ const ProductScreen: React.FC = () => {
             ]}
           />
           <Review reviews={product!.reviews || []} />
+          <TopRate />
         </>
       )}
     </Container>

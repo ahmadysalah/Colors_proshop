@@ -8,6 +8,11 @@ interface IItemCart {
   itemTotalPrice: number;
   qty: number;
 }
+export interface ICart {
+  items: Array<IItemCart>;
+  totalPrice: number;
+  totalQty: number;
+}
 export interface IUser {
   _id: string;
   email: string;
@@ -17,11 +22,7 @@ export interface IUser {
   profileImage: string;
   dateOfBirth: string;
   isAdmin: boolean;
-  cart: {
-    items: Array<IItemCart>;
-    totalPrice: number;
-    totalQty: number;
-  };
+  cart: ICart;
 }
 
 export interface LoginPayload {

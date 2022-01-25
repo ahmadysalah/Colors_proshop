@@ -115,7 +115,6 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           isLoading: true,
         },
       };
@@ -123,10 +122,8 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           isLoading: false,
           success: true,
-          // error: '',
           product: action.payload.product,
         },
       };
@@ -134,7 +131,6 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           error: action.payload.error,
           isLoading: false,
         },

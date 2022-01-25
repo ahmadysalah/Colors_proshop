@@ -70,7 +70,9 @@ export const getMyOrder = () => {
 
         dispatch({
           type: EnumOrderAction.GET_MY_ORDERS_SUCCESS,
-          payload: response.data,
+          payload: {
+            orders: response.data,
+          },
         });
       }
     } catch (e: any) {
@@ -92,10 +94,12 @@ export const createOrder = (data: IShippingAddress) => {
 
     try {
       const response = await Api.post<IShippingAddress>('/orders', data);
-      if (response.status === 200) {
+      if (response.status === 201) {
         dispatch({
           type: EnumOrderAction.CREATE_ORDER_SUCCESS,
-          payload: response.data,
+          payload: {
+            orders: response.data,
+          },
         });
       }
     } catch (e: any) {
@@ -119,7 +123,9 @@ export const deliverOrder = (id: string) => {
       if (response.status === 200) {
         dispatch({
           type: EnumOrderAction.UPDATE_DELIVER_ORDERS_SUCCESS,
-          payload: response.data,
+          payload: {
+            orders: response.data,
+          },
         });
       }
     } catch (e: any) {
