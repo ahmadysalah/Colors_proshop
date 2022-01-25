@@ -1,6 +1,7 @@
 import React from 'react';
 import { GrFormClose } from 'react-icons/gr';
 import { Counter, Image, Typography } from '../../../components';
+import { IItemCart } from '../../../redux/User/type';
 import {
   CloseIcon,
   OldPrice,
@@ -10,7 +11,11 @@ import {
   ImgContainer,
 } from '../styles';
 
-const CartList = ({ item }: any) => {
+interface IProps {
+  data: IItemCart;
+}
+const CartList = ({ data }: IProps) => {
+  const { product, qty, itemTotalPrice } = data;
   const handleRemoveFormCart = (id: string) => {
     console.log('The item removed from cart is: ', id);
   };
@@ -24,10 +29,10 @@ const CartList = ({ item }: any) => {
       margin-bottom="30px"
       justify-content="space-between"
     >
-      <CloseIcon onClick={() => handleRemoveFormCart(item.id)}>
+      <CloseIcon onClick={() => handleRemoveFormCart(product._id)}>
         <GrFormClose />
       </CloseIcon>
-      {item.isDescount && (
+      {product.discount && (
         <OldPrice>
           <Typography
             children="$999.97"
@@ -45,10 +50,15 @@ const CartList = ({ item }: any) => {
         align-items="start"
         justify-content="space-between"
       >
-        <Image src={item.imageUrl} alt={item.name} width="40%" fit="cover" />
-        <ItemTitle to={`/product/${item.id}`}>
+        <Image
+          src={product.images[0]}
+          alt={product.name}
+          width="40%"
+          fit="cover"
+        />
+        <ItemTitle to={`/product/${product._id}`}>
           <Typography
-            children={item.name}
+            children={product.name}
             variant="h2"
             margin-left="0.5em"
             padding="0.5em"
@@ -60,7 +70,7 @@ const CartList = ({ item }: any) => {
         <Counter />
       </WrapCounter>
       <Typography
-        children={String(`$${item.price}`)}
+        children={String(`$${product.price}`)}
         variant="h2"
         fontSize="38px"
         width="auto"

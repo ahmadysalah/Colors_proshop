@@ -1,11 +1,18 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { AllRouter } from './AllRouter';
 import ErrorBoundary from './components/ErrorBoundary';
 import { SpinnerContainer } from './components/SpinnerContainer';
+import { GlobalStyle } from './pages/Profile/style';
 import { Providers } from './providers';
+import { ActionCartType } from './redux/Cart/type';
+import { createOrder, getMyOrder } from './redux/Order/action';
+import { ActionOrderType } from './redux/Order/type';
+import { TAllActionProduct } from './redux/Product/type';
+import { AppState } from './redux/store';
 
 const App: React.FC = () => {
-<<<<<<< HEAD
   // const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const dispatch2 =
@@ -13,6 +20,17 @@ const App: React.FC = () => {
   const dispatch3 =
     useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
 
+  useEffect(() => {
+    dispatch2(getMyOrder());
+    // dispatch2(
+    //   createOrder({
+    //     address: 'Mjjjj',
+    //     city: 'dddjdj',
+    //     postalCode: 'strinddddg',
+    //     country: 'strin555*-***g',
+    //   }),
+    // );
+  }, []);
   // useEffect(() => {
   //   // dispatch(
   //   //   upduteActionCart({ productId: '61ed84b90b6b211d7406d35f', qty: 1 }),
@@ -83,11 +101,10 @@ const App: React.FC = () => {
   //   //   }),
   //   // );
   // }, []);
-=======
->>>>>>> c762a92c6895da335efb794b8e21789356e4201b
   return (
     <Providers>
       <Suspense fallback={<SpinnerContainer />}>
+        <GlobalStyle />
         <ErrorBoundary>
           <AllRouter />
         </ErrorBoundary>

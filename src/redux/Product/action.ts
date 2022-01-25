@@ -14,11 +14,13 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
     dispatch({
       type: EnumProductsAction.GET_ALL_PRODUCTS_START,
     });
+    console.log('test11111');
+
     let search = '';
     if (keyword && pageNumber) {
-      search = `?keyword${keyword}&pageNumber=${pageNumber}`;
+      search = `?keyword=${keyword}&pageNumber=${pageNumber}`;
     } else if (keyword) {
-      search = `?keyword${keyword}`;
+      search = `?keyword=${keyword}`;
     } else if (pageNumber) {
       search = `?pageNumber=${pageNumber}`;
     }

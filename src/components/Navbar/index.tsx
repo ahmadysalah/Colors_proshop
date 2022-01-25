@@ -79,25 +79,6 @@ export const Navbar = () => {
               WishList
             </Typography>
           </ListNavItem>
-<<<<<<< HEAD
-
-          {token && (
-            <>
-              <ListNavItem
-                to="/cart"
-                isBadge
-                countBadge={2}
-                icon={<BiLogOut style={StyleObj} />}
-              />
-              <ListNavItem
-                to="/cart"
-                onClick={() => console.log('out')}
-                icon={<BsFillCartFill style={StyleObj} />}
-              />
-            </>
-          )}
-=======
->>>>>>> c762a92c6895da335efb794b8e21789356e4201b
         </List>
       </Container>
     </Container>
