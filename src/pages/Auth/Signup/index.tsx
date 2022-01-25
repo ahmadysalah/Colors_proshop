@@ -17,6 +17,8 @@ import {
   ButtonSuginup,
   ButtonLogin,
   LeftLogin,
+  ContainerLogin,
+  FormContainer,
 } from '../Login/style';
 import {
   schemaValidationSignUp as validationSchema,
@@ -30,6 +32,7 @@ import {
   InputController,
   CheckBox,
   Divider,
+  Container,
 } from '../../../components';
 import { AuthActions } from '../../../redux/Auth/action';
 import { AppState } from '../../../redux/store';
@@ -71,16 +74,27 @@ const Signup = () => {
     },
   });
   return (
-    <Column>
+    <ContainerLogin
+      height="90vh"
+      padding={0}
+      overflow="hidden"
+      width="90%"
+      margin="0 auto"
+    >
       <InnerColSection>
         <Wrapper>
-          <LeftLogin>
-            <Column>
-              <LoginText>Signup.</LoginText>
-              <LoginSubText>
-                Sign up and get exclusive offers from us
-              </LoginSubText>
-              <form onSubmit={formik.handleSubmit}>
+          <Container>
+            <LoginText>Signup.</LoginText>
+            <LoginSubText>
+              Sign up and get exclusive offers from us
+            </LoginSubText>
+            <FormContainer width="100%">
+              <form
+                style={{
+                  width: '100%',
+                }}
+                onSubmit={formik.handleSubmit}
+              >
                 <Column>
                   <InputController
                     name="name"
@@ -149,14 +163,14 @@ const Signup = () => {
                   </Column>
                 </Column>
               </form>
-            </Column>
-          </LeftLogin>
+            </FormContainer>
+          </Container>
           <RightLogin>
             <ImageShape src={LoginImage} alt="image login continer" />
           </RightLogin>
         </Wrapper>
       </InnerColSection>
-    </Column>
+    </ContainerLogin>
   );
 };
 export default Signup;
