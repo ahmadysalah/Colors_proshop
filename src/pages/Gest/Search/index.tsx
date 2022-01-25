@@ -30,7 +30,7 @@ const SerachPage = () => {
   return allProducts.isLoading ? (
     <SpinnerContainer />
   ) : (
-    <div>
+    <Container>
       <Typography
         style={{ justifyContent: 'start' }}
         fontSize="32"
@@ -44,7 +44,7 @@ const SerachPage = () => {
           <ComplexCard {...x} image={x.images[0] || ''} />
         ))}
       </CardsBox>
-    </div>
+    </Container>
   );
 };
 

@@ -44,7 +44,7 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
-  const [stepperNumber, setstepperNumber] = useState(0);
+  const [stepperNumber, setstepperNumber] = useState(1);
   const [checkoutError, setCheckoutError] = useState();
   // const stripe: any = useStripe();
   // const elements = useElements();

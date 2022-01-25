@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import {
   ReviewText,
   FooterTitleRight,
@@ -24,6 +25,7 @@ import {
 } from './style';
 import { OrderDetails } from './orderDtails';
 import { Column, Row } from '../../../../components/Row';
+// @ts-ignore
 import logo from '../../../../assets/Images/card.png';
 import { AppState } from '../../../../redux/store';
 import { ActionOrderType, IMyOrder } from '../../../../redux/Order/type';
@@ -35,6 +37,20 @@ import {
 import { SpinnerContainer } from '../../../../components';
 
 export const ReviewTow = () => {
+  const stripe: any = useStripe();
+  const elements = useElements();
+  const [checkoutError, setCheckoutError] = useState();
+
+  const pay = () => {
+    const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
+      type: 'card',
+      card: elements?.getElement(CardElement),
+    });
+    console.log({
+      error,
+      paymentMethod,
+    });
+  };
   const dispatch =
     useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
   const ordersA = useSelector((state: AppState) => state.order.orderById);
@@ -43,8 +59,10 @@ export const ReviewTow = () => {
     dispatch(getOrderById('61f0050964b6f00004501d91'));
   }, [dispatch]);
 
-  console.log('ordersA', ordersA);
-
+  const handleCardDetailsChange = (ev: any) => {
+    if (ev.error) setCheckoutError(ev.error.message);
+    else setCheckoutError(undefined);
+  };
   return (
     <OrderWrapper>
       {ordersA?.isLoading && !ordersA.orders ? (
@@ -87,14 +105,17 @@ export const ReviewTow = () => {
               <HeaderTitleRight
                 style={{ marginTop: '32px', justifyContent: 'space-between' }}
               >
-                <form onSubmit={() => console.log('submitted')}>
+                <form
+                  onSubmit={() => console.log('submitted')}
+                  style={{ width: '100%' }}
+                >
                   <Column>
                     <ShapeAddress>Payment Details</ShapeAddress>
-                    {/* 
+
                     <CardElement
                       options={cardElementOpts as any}
                       onChange={handleCardDetailsChange}
-                    /> */}
+                    />
                   </Column>
                 </form>
               </HeaderTitleRight>
@@ -129,3 +150,30 @@ export const ReviewTow = () => {
 };
 
 export default ReviewTow;
+
+const iframeStyles = {
+  base: {
+    iconColor: '#0F1112',
+    color: '#0F1112',
+    fontWeight: '500',
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+    border: '1px solid #4D4D4D',
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#4D4D4D',
+    },
+    '::-webkit-input-placeholder': {
+      color: '#4D4D4D',
+      border: '1px solid #4D4D4D',
+    },
+  },
+};
+
+const cardElementOpts = {
+  iconStyle: 'solid',
+  style: iframeStyles,
+};

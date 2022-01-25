@@ -24,6 +24,7 @@ import {
   schemaValidationSignUp as validationSchema,
   ISchemaValidationSuginup,
 } from '../../../utils/helper/validation';
+// @ts-ignore
 import LoginImage from '../../../assets/Images/singup.png';
 
 import {
