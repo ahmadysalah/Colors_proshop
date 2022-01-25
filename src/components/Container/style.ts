@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ContainerWrapper = styled.div<any>`
   display: flex;
   flex-direction: ${props => props.direction || 'row'};
-  justify-content: ${props => props.justifyContent || 'center'};
+  justify-content: ${props => props.justifyContent || 'flex-start'};
   align-items: ${props =>
     props.direction === 'column' ? 'flex-start' : 'center'};
   width: 100%;

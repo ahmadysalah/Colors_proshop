@@ -26,7 +26,6 @@ Circle.defaultProps = {
 
 const GroupCircle = ({ colors, setColorActive }) => {
   const [active, setActive] = useState(-1);
-  console.log(active);
   return (
     <Container margin=".5em 0" min-Height="3.5rem">
       {colors.map((color, index) => (

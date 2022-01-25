@@ -3,7 +3,7 @@ import { IStyleButton } from './IStyleButton';
 
 // normal normal bold 16px/20px
 
-const ButtonStyle = styled.button<IStyleButton>(
+export const ButtonStyle = styled.button<IStyleButton>(
   ({
     width = 'none',
     height = 'none',

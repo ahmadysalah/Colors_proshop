@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { BsFillBookmarkDashFill } from 'react-icons/bs';
+import { BsFillBookmarkDashFill, BsFillCartFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { BiLogOut } from 'react-icons/bi';
 import { ListNavItem } from './ListNavItem';
 import {
   List,
@@ -79,6 +80,22 @@ export const Navbar = () => {
               WishList
             </Typography>
           </ListNavItem>
+
+          {token && (
+            <>
+              <ListNavItem
+                to="/cart"
+                isBadge
+                countBadge={2}
+                icon={<BiLogOut style={StyleObj} />}
+              />
+              <ListNavItem
+                to="/cart"
+                onClick={() => console.log('out')}
+                icon={<BsFillCartFill style={StyleObj} />}
+              />
+            </>
+          )}
         </List>
       </Container>
     </Container>

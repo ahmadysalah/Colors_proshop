@@ -13,12 +13,14 @@ export const LoginText = styled(Typography)`
   font-size: 35px;
   font-weight: bold;
   color: #242424;
+  margin-bottom: 25px;
 `;
 export const LoginSubText = styled('p')`
   font-size: 25px;
-  width: 25rem;
+  width: 35rem;
   color: #70707070;
   font-family: Mulish;
+  margin-bottom: 30px;
 `;
 
 export const LeftLogin = styled('div')`
@@ -62,7 +64,7 @@ export const ForgotPassword = styled(Typography)`
   color: #242424;
   text-align: center;
   font-family: normal normal 300 22px/15px Mulish;
-  margin-bottom: 1rem;
+  margin-bottom: 1rem auto;
 `;
 
 export const ButtonSuginup = styled('button')`

@@ -1,6 +1,8 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { ThunkDispatch } from 'redux-thunk';
+import { useDispatch } from 'react-redux';
 import logo from '../../../assets/Images/card.png';
 import { Column, Row, Typography } from '../../../components';
 import {
@@ -30,6 +32,9 @@ import {
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
+import { AppState } from '../../../redux/store';
+import { ActionOrderType } from '../../../redux/Order/type';
+import { createOrder } from '../../../redux/Order/action';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -39,27 +44,38 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
+  const [stepperNumber, setstepperNumber] = useState(1);
   const [checkoutError, setCheckoutError] = useState();
-  const stripe: any = useStripe();
-  const elements = useElements();
-
+  // const stripe: any = useStripe();
+  // const elements = useElements();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
     onSubmit: async values => {
-      const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
-        type: 'card',
-        card: elements?.getElement(CardElement),
-      });
-      // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      dispatch(
+        createOrder({
+          address: values.address,
+          city: values.city,
+          country: values.country,
+          postalCode: values.zip,
+        }),
+      );
+      setstepperNumber(1);
+
+      // const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
       //   type: 'card',
-      //   card: elements.getElement(CardElement),
+      //   card: elements?.getElement(CardElement),
       // });
-      console.log({
-        error,
-        paymentMethod,
-        values,
-      });
+      // // const { error, paymentMethod } = await stripe.createPaymentMethod({
+      // //   type: 'card',
+      // //   card: elements.getElement(CardElement),
+      // // });
+      // console.log({
+      //   error,
+      //   paymentMethod,
+      //   values,
+      // });
     },
   });
 
@@ -68,7 +84,6 @@ const ReviewOrder = () => {
     else setCheckoutError(undefined);
   };
 
-  const [stepperNumber, setstepperNumber] = useState(0);
   return (
     <OrfferSection>
       <InnerSection>
@@ -151,12 +166,12 @@ const ReviewOrder = () => {
                         marginLeft="10%"
                       />
                     </WrapperRowInput>
-                    <ShapeAddress>Payment Details</ShapeAddress>
+                    {/* <ShapeAddress>Payment Details</ShapeAddress>
 
                     <CardElement
                       options={cardElementOpts as any}
                       onChange={handleCardDetailsChange}
-                    />
+                    /> */}
 
                     {/* <StripeCardInput onChange={handleCardDetailsChange} />
                     <StripeCardExpiry />
