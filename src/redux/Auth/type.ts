@@ -1,7 +1,13 @@
 import { Action } from 'redux';
+import { IProducts } from '../Product/type';
 /* eslint-disable @typescript-eslint/ban-types */
 import { EnumAuthAction } from './constant';
 
+interface IItemCart {
+  product: IProducts;
+  itemTotalPrice: number;
+  qty: number;
+}
 export interface IUser {
   _id: string;
   email: string;
@@ -11,7 +17,11 @@ export interface IUser {
   profileImage: string;
   dateOfBirth: string;
   isAdmin: boolean;
-  cart: Object;
+  cart: {
+    items: Array<IItemCart>;
+    totalPrice: number;
+    totalQty: number;
+  };
 }
 
 export interface LoginPayload {

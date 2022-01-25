@@ -27,81 +27,41 @@ import { Column, Row } from '../../../../components/Row';
 import logo from '../../../../assets/Images/card.png';
 import { AppState } from '../../../../redux/store';
 import { ActionOrderType, IMyOrder } from '../../../../redux/Order/type';
-import { getMyOrder, getOrders } from '../../../../redux/Order/action';
+import {
+  getMyOrder,
+  getOrderById,
+  getOrders,
+} from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
-
-// const iframeStyles = {
-//   base: {
-//     iconColor: '#0F1112',
-//     color: '#0F1112',
-//     fontWeight: '500',
-//     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-//     fontSize: '16px',
-//     fontSmoothing: 'antialiased',
-//     border: '1px solid #4D4D4D',
-//     ':-webkit-autofill': {
-//       color: '#fce883',
-//     },
-//     '::placeholder': {
-//       color: '#4D4D4D',
-//     },
-//     '::-webkit-input-placeholder': {
-//       color: '#4D4D4D',
-//       border: '1px solid #4D4D4D',
-//     },
-//   },
-// };
-
-// const cardElementOpts = {
-//   iconStyle: 'solid',
-//   style: iframeStyles,
-// };
 
 export const ReviewTow = () => {
   const dispatch =
     useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
-  const ordersA = useSelector((state: AppState) => state.order.myOrder);
-  // console.log('order', ordersA.orders?.orders[0].shippingAddress.address);
-  // console.log('dddddddddddd', orders?.orders[0].shippingAddress);
-  // console.log(myOrder.orders);
-  // console.log('my order aaaaaa', myOrder);
-  //   // dispatch2(getOrders());
+  const ordersA = useSelector((state: AppState) => state.order.orderById);
+
   useEffect(() => {
-    dispatch(getOrders());
+    dispatch(getOrderById('61f0050964b6f00004501d91'));
   }, [dispatch]);
 
-  // const [checkoutError, setCheckoutError] = useState();
-  // const stripe: any = useStripe();
-  // const elements = useElements();
-  // const handleCardDetailsChange = (ev: any) => {
-  //   if (ev.error) setCheckoutError(ev.error.message);
-  //   else setCheckoutError(undefined);
-  // };
+  console.log('ordersA', ordersA);
+
   return (
     <OrderWrapper>
-      {ordersA?.isLoading ? (
+      {ordersA?.isLoading && !ordersA.orders ? (
         <SpinnerContainer />
       ) : (
         <>
           <LeftOrderSection>
             <Column>
-              {console.log(ordersA.isLoading, ordersA.success)}
+              {/* {console.log(ordersA.isLoading, ordersA.success)}
               {console.log(
                 ordersA?.orders ? ordersA.orders[0].shippingAddress : undefined,
-              )}
-              {console.log('spinner finish')}
+              )} */}
+              {console.log('spinner finish', ordersA.orders?.shippingAddress)}
               <ShapeAddress>Shipping Address</ShapeAddress>
-              {console.log('shipping address tag done')}
+              {/* {console.log('shipping address tag done')} */}
               <UserName>John rose</UserName>
-              <Address>
-                {
-                  // ordersA?.orders ? (
-                  //   <>{ordersA.orders[0].shippingAddress}</>
-                  // ) : (
-                  //   <>there is no address</>
-                  // )
-                }
-              </Address>
+              <Address>{ordersA.orders?.shippingAddress?.country}</Address>
               <HeaderTitleRight style={{ marginTop: '32px' }}>
                 <ShapeAddress style={{ marginTop: '5px' }}>
                   Order Details
@@ -131,10 +91,10 @@ export const ReviewTow = () => {
                   <Column>
                     <ShapeAddress>Payment Details</ShapeAddress>
                     {/* 
-                <CardElement
-                  options={cardElementOpts as any}
-                  onChange={handleCardDetailsChange}
-                /> */}
+                    <CardElement
+                      options={cardElementOpts as any}
+                      onChange={handleCardDetailsChange}
+                    /> */}
                   </Column>
                 </form>
               </HeaderTitleRight>

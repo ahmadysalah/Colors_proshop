@@ -182,7 +182,9 @@ const ReviewOrder = () => {
                       </Typography>
                     )}
                     <Row JC="flex-end">
-                      <RevieworderButton>Review order</RevieworderButton>
+                      <RevieworderButton type="submit">
+                        Review order
+                      </RevieworderButton>
                     </Row>
                   </Column>
                 </form>

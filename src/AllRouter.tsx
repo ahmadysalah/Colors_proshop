@@ -11,6 +11,7 @@ const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
 const Home = Loadable(lazy(() => import('./pages/Gest/Home/index')));
 const Search = Loadable(lazy(() => import('./pages/Gest/Search/index')));
 const Profile = Loadable(lazy(() => import('./pages/Profile/index')));
+const Cart = Loadable(lazy(() => import('./pages/Cart/index')));
 
 export const AllRouter = () => {
   return (
@@ -24,6 +25,7 @@ export const AllRouter = () => {
         <Route path="/review" element={<ReviewOrder />} />
         <Route path="/search" element={<Search />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </>
   );

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ThunkDispatch } from 'redux-thunk';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   CartContainer,
   GlobalStyle,
@@ -6,11 +8,20 @@ import {
   TotalContainer,
 } from './styles';
 import EmptyCart from './Sections/EmptyCart';
-import { PathNavigate } from '../../components';
+import { PathNavigate, SpinnerContainer } from '../../components';
 import CartList from './Sections/CartList';
 import Subtotal from './Sections/Subtotal';
+import { AppState } from '../../redux/store';
+import { ActionCartType } from '../../redux/Cart/type';
+import { getProfile } from '../../redux/User/action';
 
 const Cart = () => {
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const cart = useSelector((state: AppState) => state.user.myProfile);
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   const [cartItems, setCartItems] = useState([
     {
       id: 'One',
@@ -33,18 +44,21 @@ const Cart = () => {
       isDescount: true,
     },
   ]);
+
+  console.log('cart', cart.user?.cart?.items);
   return (
     <>
-      <GlobalStyle />
       <PathNavigate name="Shopping Cart" />
-      {cartItems.length === 0 ? (
+      {!cartItems.length ? (
         <EmptyCart />
+      ) : cart.isLoading ? (
+        <SpinnerContainer />
       ) : (
         <CartContainer align-items="flex-start">
           <ListContainer direction="column" width="70%">
-            {cartItems.map((item: IProduct) => {
-              return <CartList item={item} key={item.id} />;
-            })}
+            {cart.user?.cart?.items.map(item => (
+              <CartList data={item} key={item.product._id} />
+            ))}
           </ListContainer>
 
           <TotalContainer
