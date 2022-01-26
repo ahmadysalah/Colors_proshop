@@ -5,6 +5,7 @@ import { AppState } from '../store';
 import Api from '../../utils/Api/axios';
 import { EnumAdminAction } from './constant';
 import { ICreateProduct, IProducts, TAllActionAdmin } from './type';
+import { formDataCstom } from '../../utils/helper/formData';
 
 //  ?keyword=iphone&pageNumber=1
 export const getAllUser = (pageNumber?: number) => {
@@ -112,18 +113,19 @@ export const addProduct = (product: ICreateProduct) => {
     });
 
     // will  be  uplude  image  4 will  return  promise  it  call  api
-    const imageUpload = product.images.map(image => {
-      return Api.post('/upload', new FormData().append('image', image));
-    });
+    console.log('test lemmmee enter');
 
-    // just  add  the  roduct  and  link  with  user  id
-    const urlImages = await Promise.all<AxiosResponse>(imageUpload);
+
+    const imageUpload = product.images.map(image => {
+      return Api.post('/upload', formDataCstom(image));
+    });
+    let  images=Promise.all<AxiosResponse>(imageUpload)
+
     const data = {
       ...product,
-      images: urlImages.map(urlImage => urlImage.data),
-      user: getState().auth.user._id,
-    } as IProducts & {
-      _id: string;
+      images: images,
+      colors: ['black'],
+    }
     };
 
     try {
@@ -177,8 +179,6 @@ export const delateProduct = (id: string) => {
           },
         });
       }
-
-      //   history.push('/profile');
     } catch (e: any) {
       dispatch({
         type: EnumAdminAction.DELETE_USER_START_FILL,
