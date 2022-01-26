@@ -40,9 +40,13 @@ const ComplexCard = ({ ...props }: IProducts) => {
         <></>
       )}
       <ContentAction height="340px">
-        <Image src={img} alt="" style={{ borderRadius: '16px' }} />
+        <Image
+          src={props.image}
+          alt=""
+          style={{ borderRadius: '16px', height: '100%' }}
+        />
       </ContentAction>
-      <Content>
+      <Content margin="0 0 0 20px">
         <Typography variant="h3" fontSize="20px" fontFamily="mulish">
           {props.name}
         </Typography>

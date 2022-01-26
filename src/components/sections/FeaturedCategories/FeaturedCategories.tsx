@@ -58,6 +58,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
         justify-content="center"
         align-items="center"
         margin-top="60px"
+        flex-wrap="wrape"
       >
         <Container direction="column" width="85.4%">
           <Title>Featured Categories</Title>

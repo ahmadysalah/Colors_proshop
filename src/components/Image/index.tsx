@@ -1,4 +1,5 @@
 import { StyledImage } from './style';
+import img from '../../assets/Images/defaultProduct.png';
 
 interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   width?: string;
@@ -9,8 +10,11 @@ interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   variant?: 'circle' | 'square';
   border?: boolean;
   responsive?: boolean;
+  src: any;
 }
 
-const Image: React.FC<IProps> = props => <StyledImage {...props} />;
+const Image: React.FC<IProps> = ({ src, ...props }) => (
+  <StyledImage src={[src, img]} {...props} />
+);
 
 export default Image;
