@@ -2,7 +2,7 @@
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GrUserNew } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -34,6 +34,7 @@ import {
   CheckBox,
   Divider,
   Container,
+  Image,
 } from '../../../components';
 import { AuthActions } from '../../../redux/Auth/action';
 import { AppState } from '../../../redux/store';
@@ -75,28 +76,26 @@ const Signup = () => {
     },
   });
   return (
-    <ContainerLogin
-      height="90vh"
-      padding={0}
-      overflow="hidden"
-      width="90%"
-      margin="0 auto"
-    >
+    <ContainerLogin>
       <InnerColSection>
         <Wrapper>
-          <Container>
+          <Container
+            direction="column"
+            overflow="hidden"
+            justifyContent="space-between"
+          >
             <LoginText>Signup.</LoginText>
             <LoginSubText>
               Sign up and get exclusive offers from us
             </LoginSubText>
-            <FormContainer width="100%">
+            <FormContainer>
               <form
                 style={{
                   width: '100%',
                 }}
                 onSubmit={formik.handleSubmit}
               >
-                <Column>
+                <Container width="100%" direction="column" padding={0}>
                   <InputController
                     name="name"
                     label="Name"
@@ -110,8 +109,6 @@ const Signup = () => {
                     icon={<GrUserNew />}
                     value={formik.values.name}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="email"
                     label="Enter your email address"
@@ -125,8 +122,6 @@ const Signup = () => {
                     icon={<AiOutlineMail />}
                     value={formik.values.email}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="password"
                     label="Enter your password"
@@ -140,8 +135,6 @@ const Signup = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.password}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="passwordConfirmation"
                     label="Confirm your password"
@@ -155,20 +148,27 @@ const Signup = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.passwordConfirmation}
                   />
-                </Column>
+                </Container>
                 <ButtonLogin type="submit">Sign up</ButtonLogin>
                 <Column item="center">
                   <Divider thick="2px" width="100%" margin="40px 0px" />
                   <Column item="center">
-                    <ForgotPassword>Have an account ? Login</ForgotPassword>
+                    <Link to="/login" style={{ textDecoration: 'none' }}>
+                      <ForgotPassword>Have an account ? Login</ForgotPassword>
+                    </Link>
                   </Column>
                 </Column>
               </form>
             </FormContainer>
           </Container>
-          <RightLogin>
-            <ImageShape src={LoginImage} alt="image login continer" />
-          </RightLogin>
+          <Container>
+            <Image
+              src={LoginImage}
+              alt="image register continer"
+              size="xxxl"
+              responsive
+            />
+          </Container>
         </Wrapper>
       </InnerColSection>
     </ContainerLogin>

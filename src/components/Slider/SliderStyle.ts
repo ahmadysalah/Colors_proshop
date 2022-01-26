@@ -13,6 +13,7 @@ export const SectionSlider = styled(FlexBox)`
 
 export const SliderSection = styled(ContainerWrapper)`
   margin: auto;
+  overflow: hidden;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -25,6 +26,7 @@ export const ShopeButton = styled(Button)`
   letter-spacing: 0.88px;
   opacity: 1;
   outline: none;
+  font-family: mulish;
   text-transform: uppercase;
   width: 220px;
 `;
@@ -33,6 +35,7 @@ export const PriceText = styled<any>(Typography)`
   font-size: 2rem;
   margin-bottom: 10px;
   letter-spacing: 1.28px;
+  font-family: mulish;
   @media (max-width: 768px) {
     font-size: 1rem;
     margin-bottom: 5px;
@@ -43,6 +46,7 @@ export const PriceText = styled<any>(Typography)`
 export const DescriptionText = styled(PriceText)`
   color: #242424;
   font-size: 32px;
+  font-family: mulish;
   margin-bottom: 42px;
 `;
 
@@ -76,7 +80,7 @@ export const ButtonHero = styled(Link)`
   align-items: center;
   text-decoration: none;
   letter-spacing: 1.28px;
-  font-family: normal normal 300 32px/15px Muli;
+  font-family: mulish;
   max-width: 220px;
 `;
 

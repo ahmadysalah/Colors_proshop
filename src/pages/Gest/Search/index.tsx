@@ -30,7 +30,7 @@ const SerachPage = () => {
   return allProducts.isLoading ? (
     <SpinnerContainer />
   ) : (
-    <Container>
+    <Container background="F7F8FC">
       <Typography
         style={{ justifyContent: 'start' }}
         fontSize="32"

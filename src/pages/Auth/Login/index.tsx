@@ -63,13 +63,7 @@ const Login = () => {
     },
   });
   return (
-    <ContainerLogin
-      height="65vh"
-      padding={0}
-      overflow="hidden"
-      width="90%"
-      margin="0 auto"
-    >
+    <ContainerLogin>
       <InnerColSection>
         <Wrapper>
           <Container direction="column" justifyContent="space-between">
@@ -139,7 +133,7 @@ const Login = () => {
             <Image
               src={LoginImage}
               alt="image login continer"
-              size="xl"
+              size="xxxl"
               responsive
             />
           </Container>

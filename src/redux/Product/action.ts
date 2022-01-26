@@ -14,8 +14,6 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
     dispatch({
       type: EnumProductsAction.GET_ALL_PRODUCTS_START,
     });
-    console.log('test11111');
-
     let search = '';
     if (keyword && pageNumber) {
       search = `?keyword=${keyword}&pageNumber=${pageNumber}`;
@@ -143,8 +141,6 @@ export const getAlCategory = () => {
             product: response.data,
           },
         });
-
-        console.log('allCatogory.categories', response.data);
       } else {
         throw new Error('some  error habbend  in th e Top  reated  peoduct');
       }

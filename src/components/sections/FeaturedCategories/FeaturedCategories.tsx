@@ -1,43 +1,11 @@
 /* eslint-disable import/extensions */
-import React, { useState, CSSProperties, useCallback, useEffect } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import { ThunkDispatch } from 'redux-thunk';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Row,
-  Column,
-  CategoryCard,
-  Container,
-  SpinnerContainer,
-  Typography,
-} from '../..';
-import { ColumnCusom, Divider, Title } from '../../DeviderTitle/style';
-import Play from '../../../assets/Images/play.jpg';
-import { CategDots, Dot } from '../../Slider/SliderStyle';
-import {
-  CardsCategory,
-  RowInnerSlider,
-  WrapperDots,
-} from '../FeaturedProducts/styles';
-import {
-  IGetAllCategory,
-  IProducts,
-  TAllActionProduct,
-} from '../../../redux/Product/type';
-import { getAlCategory } from '../../../redux/Product/action';
-import { AppState } from '../../../redux/store';
-import ComplexCard from '../../Card/productCard';
-
-interface IObjFeaturedCategories {
-  image: string;
-  title: string;
-  url: string;
-}
-const obj: IObjFeaturedCategories = {
-  image: 'https://proshop-ms.herokuapp.com/images/phone.jpg',
-  title: 'Labptop',
-  url: '/Labptop',
-};
+import { CategoryCard, Container } from '../..';
+import { Divider, Title } from '../../DeviderTitle/style';
+import { CategDots } from '../../Slider/SliderStyle';
+import { RowInnerSlider, WrapperDots } from '../FeaturedProducts/styles';
+import { IProducts } from '../../../redux/Product/type';
 
 const cssStyle: CSSProperties = {
   position: 'relative',
@@ -56,17 +24,6 @@ interface IProps {
 export const FeaturedCategories = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [width, setWidth] = useState(window.innerWidth);
-  const [dataNew, setDataNew] = useState(data);
-  //   const handleSize = () => {
-  //     setWidth(window.innerWidth);
-  //   };
-  //   // dispatch(getAlCategory());
-
-  //   setSliderIndex(0);
-  //   window.addEventListener('resize', handleSize);
-  //   return () => window.removeEventListener('resize', handleSize);
-  // }
-  console.log('dataccccccc', dataNew);
 
   const chunkSize =
     window.innerWidth > 1100 ? 4 : window.innerWidth > 1100 ? 3 : 1;
@@ -87,7 +44,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx}>
         {i.map(item => (
-          <CategoryCard description="dkloo" img={item.images[0]} />
+          <CategoryCard description={item.name} img={item.images[0]} />
         ))}
       </RowInnerSlider>
     ));
@@ -117,7 +74,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
           </SwipeableViews>
         </Container>
         <WrapperDots item="center">
-          {Array(getSlider().length)
+          {Array(getSlider().length / 2)
             .fill(0)
             .map((x, i) => (
               <CategDots

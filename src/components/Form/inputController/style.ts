@@ -20,6 +20,7 @@ export const Label = styled('label')`
   padding-bottom: 10px;
   font-size: 15px;
   font-weight: bold;
+  font-family: mulish;
 `;
 
 interface IInput {
