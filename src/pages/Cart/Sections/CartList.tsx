@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -23,17 +23,20 @@ const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
   const [count, setCount] = useState<number>(qty);
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
   const handleRemoveFormCart = (id: string) => {
     dispatch(deleteActionCart(id));
   };
 
-  const handleIncress = () => {
+  const handleIncress = useCallback(() => {
+    setCount(prev => prev + 1);
     dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
-  };
-  const handleDecress = () => {
+  }, [count]);
+
+  const handleDecress = useCallback(() => {
+    setCount(prev => prev - 1);
+
     dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
-  };
+  }, [count]);
 
   return (
     <ItemContainer
@@ -51,13 +54,14 @@ const CartList = ({ data }: IProps) => {
       {product.discount && (
         <OldPrice>
           <Typography
-            children="$999.97"
             variant="span"
             color="#707070"
             fontSize="24px"
             letter-spacing="0.48px"
             text-decoration="line-through"
-          />
+          >
+            {product.price}
+          </Typography>
         </OldPrice>
       )}
 
@@ -93,7 +97,7 @@ const CartList = ({ data }: IProps) => {
         />
       </WrapCounter>
       <Typography
-        children={String(`$${product.price}`)}
+        children={String(`$${product.price - product.discount}`)}
         variant="h2"
         fontSize="38px"
         width="auto"

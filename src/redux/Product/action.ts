@@ -30,8 +30,6 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
       } else {
         console.log('response', response.data.error);
       }
-
-      //   history.push('/profile');
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_ALL_PRODUCTS_FILL,

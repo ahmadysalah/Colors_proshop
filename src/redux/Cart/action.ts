@@ -1,10 +1,13 @@
-/* eslint-disable no-underscore-dangle */
 import { Dispatch } from 'redux';
+import { getProfile } from '../User/action';
+import { TAllActionUser, ICart } from '../User/type';
+import { EnumUserAction } from '../User/constant';
+/* eslint-disable no-underscore-dangle */
 import { AppState } from '../store';
 import { IProducts } from '../Product/type';
 
 import { ActionCartType } from './type';
-import { ICart } from '../User/type';
+
 import { EnumCartAction } from './constant';
 import Api from '../../utils/Api/axios';
 
@@ -24,8 +27,10 @@ export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
     });
 
     try {
-      const oldNumber = getState().cart.cart.items;
-      //  console.log('oldNumber', oldNumber.find(x=>x.p));
+      getProfile();
+      const oldNumber = getState().user.myProfile;
+      // const oldNumber = getState();
+      console.log('oldNumber', oldNumber);
 
       const response = await Api.update<AddItemPayload>(
         '/users/profile/cart',

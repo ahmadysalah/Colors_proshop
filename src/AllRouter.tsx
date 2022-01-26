@@ -30,6 +30,7 @@ export const AllRouter = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/addNewProduct" element={<AddNewProduct />} />
+      <Route path="/addNewProduct/:id" element={<AddNewProduct />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/search" element={<Search />} />
