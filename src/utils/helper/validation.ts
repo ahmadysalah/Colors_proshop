@@ -42,15 +42,16 @@ export const schemaValidationSignUp =
         .max(50, 'Too Long!')
         .required('Required'),
 
-      passwordConfirmation: Yup.string()
-        .required('Please confirm your password')
-        .when('password', {
-          is: (password: string) => !!(password && password.length > 0),
-          then: Yup.string().oneOf(
-            [Yup.ref('password'), null],
-            "Password doesn't match",
-          ),
-        }),
+      /**
+         * passwordConfirm: Yup.mixed().test('match', 'Passwords do not match', function (password) {
+        return password === this.parent.passwordConfirm
+      }).required('Password confirm is required')
+         */
+      passwordConfirmation: Yup.mixed()
+        .test('match', 'Passwords do not match', function (password) {
+          return password === this.parent.passwordConfirmation;
+        })
+        .required('Password confirm is required'),
     });
   };
 
@@ -79,36 +80,5 @@ export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
     city: Yup.string().required('Please enter city name'),
     zip: Yup.string().required('Please enter your address'),
     address: Yup.string().required('Please enter your address'),
-  });
-};
-
-export interface IAddProductSchema {
-  id?: string;
-  images: Array<any>;
-  name: string;
-  brand: string;
-  categories: string[];
-  description: string;
-  countInStock: number;
-  price: number;
-  colors: string[];
-}
-
-export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
-  return Yup.object().shape({
-    id: Yup.string(),
-    images: Yup.array().required(),
-    name: Yup.string().required('Please enter product name'),
-    brand: Yup.string().required('Please enter product brand'),
-    categories: Yup.array().required('Please enter product categories'),
-    description: Yup.string()
-      .required('Please enter product description')
-      .max(200, 'Max 200 Char'),
-    countInStock: Yup.number()
-      .required('Please enter product count In Stock')
-      .positive()
-      .integer(),
-    price: Yup.number().required('Please enter product price').positive(),
-    colors: Yup.array().required('Please enter product colors'),
   });
 };

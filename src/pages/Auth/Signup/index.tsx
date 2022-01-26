@@ -55,17 +55,15 @@ const Signup = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      console.log('values', values);
-
       const firstName = values.name.split(' ')[0];
       const lastName = values.name.split(' ')[1];
       dispatch(
         AuthActions.singUpSuccess(
           {
-            email: values.email,
-            password: values.password,
             firstName,
             lastName,
+            email: values.email,
+            password: values.password,
             passwordConfirmation: values.passwordConfirmation,
           },
           () => {
