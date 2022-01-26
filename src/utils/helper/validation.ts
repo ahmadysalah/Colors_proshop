@@ -83,6 +83,7 @@ export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
 };
 
 export interface IAddProductSchema {
+  id?: string;
   images: Array<any>;
   name: string;
   brand: string;
@@ -90,16 +91,24 @@ export interface IAddProductSchema {
   description: string;
   countInStock: number;
   price: number;
+  colors: string[];
 }
 
 export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
   return Yup.object().shape({
-    images: Yup.array().required('Please enter country name'),
-    name: Yup.string().required('Please enter a name'),
-    brand: Yup.string().required('Please enter a brand'),
-    categories: Yup.array().required('Please enter country name'),
-    description: Yup.string().required('Please enter your description'),
-    countInStock: Yup.number().required('Please enter your countInStock'),
-    price: Yup.number().required('Please enter your price'),
+    id: Yup.string(),
+    images: Yup.array().required(),
+    name: Yup.string().required('Please enter product name'),
+    brand: Yup.string().required('Please enter product brand'),
+    categories: Yup.array().required('Please enter product categories'),
+    description: Yup.string()
+      .required('Please enter product description')
+      .max(200, 'Max 200 Char'),
+    countInStock: Yup.number()
+      .required('Please enter product count In Stock')
+      .positive()
+      .integer(),
+    price: Yup.number().required('Please enter product price').positive(),
+    colors: Yup.array().required('Please enter product colors'),
   });
 };

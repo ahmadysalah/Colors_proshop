@@ -11,10 +11,10 @@ import { InputFile } from '../../../components/Form/checkBox/style';
 import { ImagesContainer, WarperFile } from '../style';
 
 const ProductImages = ({ formik }: any) => {
-  const [preview0, setPreview0] = useState<any>('');
-  const [preview1, setPreview1] = useState<any>('');
-  const [preview2, setPreview2] = useState<any>('');
-  const [preview3, setPreview3] = useState<any>('');
+  const [preview0, setPreview0] = useState<any>(formik.values.images[0]);
+  const [preview1, setPreview1] = useState<any>(formik.values.images[1]);
+  const [preview2, setPreview2] = useState<any>(formik.values.images[2]);
+  const [preview3, setPreview3] = useState<any>(formik.values.images[3]);
   return (
     <ImagesContainer
       direction="column"

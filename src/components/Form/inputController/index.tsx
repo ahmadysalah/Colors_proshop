@@ -17,6 +17,7 @@ interface InputControllerProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   style?: React.CSSProperties;
   marginLeft?: string;
+  disabled?: boolean;
 }
 
 export const InputController = ({ ...props }: InputControllerProps) => {
@@ -44,6 +45,7 @@ export const InputController = ({ ...props }: InputControllerProps) => {
             required={props.isRequired}
             placeholder={props.placeholder}
             autoComplete="off"
+            disabled={props.disabled}
           />
         </InputWrapper>
         <ErrorSection errors={props.errors} touched={props.touched} />

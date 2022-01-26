@@ -1,6 +1,6 @@
 import React from 'react';
-import Select from 'react-select';
 import { Container, Typography, InputController } from '../../../components';
+// import { ErrorSection } from '../../../components/Form/inputController/errorSection';
 import {
   FiledWrapper,
   Label,
@@ -15,7 +15,19 @@ import {
 
 const ProductDetails = ({ formik, categories }: any) => {
   const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: '#F2F2F2' }),
+    control: styles => ({
+      ...styles,
+      backgroundColor: '#F2F2F2',
+      height: '100%',
+      overflow: 'auto',
+      boxShadow: 'none',
+      border: 'none',
+      borderRadius: '6px',
+    }),
+    option: styles => ({
+      ...styles,
+      backgroundColor: '#F2F2F2',
+    }),
   };
   return (
     <FormContainer direction="column" margin-left="2em" width="calc(70% - 2em)">
@@ -36,31 +48,56 @@ const ProductDetails = ({ formik, categories }: any) => {
             label="Product Name"
             type="text"
             isRequired
+            value={formik.values.name}
             onChange={formik.handleChange}
-            // onBlur={formik.handleBlur}
-            errors={formik.errors?.name}
-            touched={formik.touched?.name}
+            // errors={formik.errors.name}
           />
           <InputController
             name="brand"
             label="Product Brand"
             type="text"
             isRequired
+            value={formik.values.brand}
             onChange={formik.handleChange}
-            // onBlur={formik.handleBlur}
-            errors={formik.errors?.brand}
-            touched={formik.touched?.brand}
+            // errors={formik.errors.brand}
             marginLeft="0.5em"
           />
         </InputsContainer>
 
         <InputsContainer justify-Content="space-between">
-          <InputController
-            name="id"
-            label="Product ID"
-            type="text"
-            onChange={formik.handleChange}
-          />
+          {formik.values.id ? (
+            <InputController
+              name="id"
+              label="Product ID"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.id}
+              disabled
+            />
+          ) : (
+            <FiledWrapper>
+              <Label htmlFor="select">Product Colors</Label>
+              <InputWrapper>
+                <SelectStyle
+                  id="select"
+                  name="colors"
+                  styles={colourStyles}
+                  defaultInputValue={formik.values.colors}
+                  onChange={(selectedOption: any) => {
+                    const col = selectedOption.map(x => x.value);
+                    formik.setFieldValue('colors', col);
+                  }}
+                  isMulti
+                  options={[
+                    { value: 'Pink', label: 'Pink' },
+                    { value: 'Silver', label: 'Silver' },
+                    { value: 'Gold', label: 'Gold' },
+                  ]}
+                />
+              </InputWrapper>
+              {/* <ErrorSection errors={formik.errors.colors} /> */}
+            </FiledWrapper>
+          )}
           <FiledWrapper style={{ marginLeft: '0.5em' }}>
             <Label htmlFor="select">Product Category</Label>
             <InputWrapper>
@@ -68,17 +105,19 @@ const ProductDetails = ({ formik, categories }: any) => {
                 id="select"
                 name="categories"
                 styles={colourStyles}
+                defaultInputValue={formik.values.categories}
                 onChange={(selectedOption: any) => {
-                  formik.setFieldValue('categories', selectedOption);
+                  const cat = selectedOption.map(x => x.value);
+                  formik.setFieldValue('categories', cat);
                 }}
                 isMulti
-                options={[
-                  { value: 'bugatti', label: 'Bugatti' },
-                  { value: 'ferrari', label: 'Ferrari' },
-                  { value: 'am', label: 'Aston Martin' },
-                ]}
+                options={categories?.categories?.map(el => ({
+                  value: el?.name,
+                  label: el?.name,
+                }))}
               />
             </InputWrapper>
+            {/* <ErrorSection errors={formik.errors.categories} /> */}
           </FiledWrapper>
         </InputsContainer>
 
@@ -90,12 +129,11 @@ const ProductDetails = ({ formik, categories }: any) => {
                 id="textarea"
                 name="description"
                 rows={5}
+                value={formik.values.description}
                 onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                // touched={formik.touched?.description}
-                // errors={formik.errors?.description}
               />
             </InputWrapper>
+            {/* <ErrorSection errors={formik.errors.description} /> */}
           </FiledWrapper>
         </Container>
 
@@ -105,20 +143,18 @@ const ProductDetails = ({ formik, categories }: any) => {
             label="Count in Stock"
             type="number"
             isRequired
-            errors={formik.errors?.countInStock}
-            touched={formik.touched?.countInStock}
+            value={formik.values.countInStock}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            // errors={formik.errors.countInStock}
           />
           <InputController
             name="price"
             label="Price"
             type="number"
             isRequired
-            errors={formik.errors?.price}
-            touched={formik.touched?.price}
+            value={formik.values.price}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            // errors={formik.errors.price}
             marginLeft="0.5em"
           />
         </InputsContainer>

@@ -3,8 +3,7 @@ import { useFormik } from 'formik';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, PathNavigate } from '../../components';
-import Sections from './Sections';
-import { ProductContainer, GlobalStyle } from './style';
+import { ProductContainer } from './style';
 import {
   AddProductSchema as validationSchema,
   IAddProductSchema,
@@ -25,6 +24,7 @@ const initialValues: IAddProductSchema = {
   description: '',
   countInStock: 0,
   price: 0,
+  colors: [],
 };
 
 function NewProduct() {
@@ -37,19 +37,33 @@ function NewProduct() {
     (state: AppState) => state.product.allCategory,
   );
   const { categories } = allCategory;
-  console.log('allCategory', categories);
+
+  const updateProduct: IAddProductSchema = {
+    id: 'one',
+    images: [
+      'https://image.winudf.com/v2/image1/Y29tLmJ1bnR5YXBweC5hdnRhcm1ha2VyX3NjcmVlbl8wXzE1NjM0OTUwODFfMDg3/screen-0.jpg?fakeurl=1&type=.jpg',
+    ],
+    name: 'name',
+    brand: 'brand',
+    categories: ['LAPTOP', 'Cars'],
+    description: 'description',
+    countInStock: 10,
+    price: 5,
+    colors: ['Pink'],
+  };
 
   const formik = useFormik<IAddProductSchema>({
-    initialValues,
+    initialValues: updateProduct || initialValues,
     validationSchema,
+    enableReinitialize: true,
     onSubmit: async values => {
-      console.log('values', values);
       dispatch(
+        // formik.values.id? updateProduct() :
         addProduct({
           brand: values.brand,
           images: values.images as File[],
-          colors: [],
-          categories: values.categories.map((x: any) => x.value),
+          colors: values.colors,
+          categories: values.categories,
           price: values.price,
           discount: 0,
           countInStock: values.countInStock,
@@ -62,7 +76,13 @@ function NewProduct() {
 
   return (
     <ProductContainer direction="column" padding-left="7.3%">
-      <PathNavigate name="Create New Product" />
+      <PathNavigate
+        name={
+          formik.values.id
+            ? `update Product ${formik.values.id}`
+            : 'Create New Product'
+        }
+      />
       <form style={{ width: '100%' }} onSubmit={formik.handleSubmit}>
         <Container direction="column" align-Items="flex-end" width="71%">
           <Container
@@ -84,7 +104,7 @@ function NewProduct() {
             padding="1em"
             borderRadius="6px"
           >
-            Create New Product
+            {formik.values.id ? 'Update Product' : 'Create New Product'}
           </Button>
         </Container>
       </form>
