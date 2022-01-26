@@ -1,3 +1,4 @@
+import { ErrorMessage } from 'formik';
 import styled from 'styled-components';
 import { Row } from '../../Row';
 
@@ -11,6 +12,11 @@ export const FiledWrapper = styled('div')<{ marginLeft?: string }>`
   @media (max-width: 768px) {
     margin-left: 0;
   }
+`;
+export const Errors = styled(ErrorMessage)`
+  color: red;
+  font-size: 12px;
+  margin: 5px;
 `;
 
 export const Label = styled('label')`
