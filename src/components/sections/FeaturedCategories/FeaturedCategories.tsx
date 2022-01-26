@@ -70,6 +70,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
             enableMouseEvents
             index={sliderIndex}
             style={cssStyle}
+            onChangeIndex={setSliderIndex}
           >
             {getSlider()}
           </SwipeableViews>

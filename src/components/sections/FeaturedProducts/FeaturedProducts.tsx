@@ -80,7 +80,12 @@ export const FeaturedProduct = ({ data }: IProps) => {
       </Container>
 
       <Container direction="row" width="85.4%" justify-content="space-between">
-        <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+        <SwipeableViews
+          enableMouseEvents
+          index={sliderIndex}
+          style={cssStyle}
+          onChangeIndex={setSliderIndex}
+        >
           {getSlider()}
         </SwipeableViews>
       </Container>

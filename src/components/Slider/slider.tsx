@@ -41,7 +41,6 @@ export const Slider = ({ data }: IProps) => {
     data.length &&
     data.map(item => (
       <SliderItem
-        // eslint-disable-next-line no-underscore-dangle
         _id={item._id}
         name={item.name}
         price={item.price}
@@ -58,7 +57,12 @@ export const Slider = ({ data }: IProps) => {
       overflow="hidden"
     >
       <SliderSection>
-        <SwipeableViews index={sliderIndex} style={cssStyle} enableMouseEvents>
+        <SwipeableViews
+          index={sliderIndex}
+          style={cssStyle}
+          enableMouseEvents
+          onChangeIndex={setSliderIndex}
+        >
           {sliders}
         </SwipeableViews>
       </SliderSection>
