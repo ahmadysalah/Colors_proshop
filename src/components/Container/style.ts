@@ -17,6 +17,7 @@ export const ContainerWrapper = styled.div<any>`
       .join(';')};
 
   @media (max-width: 768px) {
+    display: ${props => (props.hideAtMobile ? 'none' : 'flex')};
     font-size: 12px;
     flex-wrap: wrap;
     margin-top: 1em;

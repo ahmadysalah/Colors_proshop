@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
 import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
-import { Image, Typography } from '..';
+import { Container, Image, Typography } from '..';
 import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
@@ -14,6 +14,7 @@ export const SectionSlider = styled(FlexBox)`
 export const SliderSection = styled(ContainerWrapper)`
   margin: 0 auto;
   overflow: hidden;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -58,8 +59,8 @@ export const NameText = styled(PriceText)`
 `;
 
 export const ImageSlider = styled(Image)`
-  width: 85%;
-  height: 85%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
   margin-top: 30px;
 `;
@@ -90,9 +91,6 @@ export const WrapperImageHero = styled(Column)`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 920px) {
-    display: none;
-  }
 `;
 
 interface IDot {
@@ -146,4 +144,22 @@ export const Arrow = styled('div')<IArrow>`
     css`
       transform: rotate(0.5turn);
     `}
+`;
+
+export const ContentContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 90%;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    height: 38rem;
+    justify-content: flex-end;
+    & > *:last-child {
+      width: 25rem;
+      margin-top: -2rem;
+    }
+  }
 `;

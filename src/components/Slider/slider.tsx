@@ -9,8 +9,6 @@ import { IProducts } from '../../redux/Product/type';
 const cssStyle: CSSProperties = {
   position: 'relative',
   width: '100%',
-  height: '678px',
-  margin: 'auto',
   backgroundColor: '#f2f2f2',
 };
 
@@ -58,8 +56,6 @@ export const Slider = ({ data }: IProps) => {
       background="#F2F2F2"
       padding="0 5%"
       overflow="hidden"
-      height="500px"
-      margin="4rem 0"
     >
       <SliderSection>
         <SwipeableViews index={sliderIndex} style={cssStyle} enableMouseEvents>
