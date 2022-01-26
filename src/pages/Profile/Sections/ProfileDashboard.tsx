@@ -32,21 +32,21 @@ const ProfileDashboard = ({ user }: IProfileDashboard) => {
     <DashboardContainer
       direction="column"
       align-items="flex-start"
-      flex-basis="30%"
+      width="30%"
       height="528px"
       background="#F2F2F2"
       border-radius="16px"
-      margin="0 0 2em 0"
-      padding="0"
     >
-      <DashImgContainer>
+      <DashImgContainer padding="1em">
         <Image
           src={user?.profileImage}
           width="137px"
           height="137px"
-          style={{ borderRadius: '50%' }}
+          variant="circle"
+          border
+          style={{ margin: '0' }}
         />
-        <Typography variant="h2" margin="0.5em 0 0 0.5em">
+        <Typography variant="h2" fontSize="2rem" margin="0.5em 0 0 0.5em">
           {`${user?.firstName}  ${user?.lastName}`}
         </Typography>
       </DashImgContainer>
@@ -54,15 +54,17 @@ const ProfileDashboard = ({ user }: IProfileDashboard) => {
         direction="column"
         align-items="flex-start"
         justify-content="space-between"
-        margin-bottom="2em"
+        margin-bottom="1em"
+        min-height="150px"
+        padding="1em"
       >
-        <NavLink href="#">My Orders</NavLink>
-        <NavLink href="#">Wishlist</NavLink>
-        <NavLink href="#">Notifications</NavLink>
-        <NavLink href="#">Settings</NavLink>
+        <NavLink to="#">My Orders</NavLink>
+        <NavLink to="#">Wishlist</NavLink>
+        <NavLink to="#">Notifications</NavLink>
+        <NavLink to="#">Settings</NavLink>
       </Container>
       <Divider color="#707070" />
-      <OutLink href="#" onClick={handleLoagout}>
+      <OutLink to="#" onClick={handleLoagout}>
         Logout
       </OutLink>
     </DashboardContainer>

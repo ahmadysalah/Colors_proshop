@@ -5,7 +5,6 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { Column } from '../Col';
 import { FlexBox } from '../Row';
 import { Container } from '..';
-import { theme } from '../../theme';
 
 interface Props {
   open: boolean;
