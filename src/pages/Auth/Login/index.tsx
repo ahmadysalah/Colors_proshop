@@ -81,11 +81,7 @@ const Login = () => {
                 style={{
                   width: '100%',
                 }}
-                onSubmit={e => {
-                  e.preventDefault();
-                  formik.handleSubmit();
-                  formik.resetForm();
-                }}
+                onSubmit={formik.handleSubmit}
               >
                 <Container width="100%" direction="column" padding={0}>
                   <InputController
