@@ -73,23 +73,17 @@ const Home: React.FC = () => {
 
   return (
     <Container width="100%" direction="column" justify-content="center">
-      {topProducts.isLoading ? (
+      {(topProducts.isLoading && allCatogory.isLoading) ||
+      !featcheProduct.allProduct ? (
         <SpinnerContainer />
       ) : (
-        <Slider data={topProducts.product} />
+        <>
+          <Slider data={topProducts.product} />
+          <FeaturedCategories data={featcheProduct.allProduct.products} />
+          <FeaturedProduct data={featcheProduct.allProduct.products} />
+          <TopRate data={topProducts.product} />
+        </>
       )}
-      {allCatogory.isLoading || !featcheProduct.allProduct ? (
-        <SpinnerContainer />
-      ) : (
-        <FeaturedCategories data={featcheProduct.allProduct.products} />
-      )}
-      {/* <FeaturedCategories /> */}
-      {topProducts.isLoading || !featcheProduct.allProduct ? (
-        <SpinnerContainer />
-      ) : (
-        <FeaturedProduct data={featcheProduct.allProduct.products} />
-      )}
-      <TopRate data={topProducts.product} />
     </Container>
   );
 };

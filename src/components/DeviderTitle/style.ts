@@ -4,7 +4,7 @@ import { Column } from '../Row/index';
 
 export const Title = styled(Typography)`
   color: #242424;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
   text-transform: uppercase;

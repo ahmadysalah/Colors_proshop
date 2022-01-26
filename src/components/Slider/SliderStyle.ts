@@ -8,11 +8,11 @@ import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
   background: #f2f2f2;
-  height: 678px;
+  // height: 70%px;
 `;
 
 export const SliderSection = styled(ContainerWrapper)`
-  margin: auto;
+  margin: 0 auto;
   overflow: hidden;
   @media (max-width: 768px) {
     flex-direction: column;
@@ -32,7 +32,7 @@ export const ShopeButton = styled(Button)`
 `;
 export const PriceText = styled<any>(Typography)`
   color: #242424;
-  font-size: 2rem;
+  font-size: 24px;
   margin-bottom: 10px;
   letter-spacing: 1.28px;
   font-family: mulish;
@@ -45,21 +45,21 @@ export const PriceText = styled<any>(Typography)`
 
 export const DescriptionText = styled(PriceText)`
   color: #242424;
-  font-size: 32px;
+  font-size: 20px;
   font-family: mulish;
   margin-bottom: 42px;
 `;
 
 export const NameText = styled(PriceText)`
   color: #242424;
-  font-size: 3.75rem;
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
 `;
 
 export const ImageSlider = styled('img')`
-  width: 100%;
-  height: 90%;
+  width: 85%;
+  height: 85%;
   object-fit: cover;
   margin-top: 30px;
 `;
@@ -70,7 +70,7 @@ export const ButtonHero = styled(Link)`
   font-size: 22px;
   height: 56px;
   outline: none;
-  margin-top: 42px;
+  margin-top: 10px;
   border-radius: 20px;
   opacity: 1;
   text-transform: uppercase;
@@ -109,6 +109,7 @@ export const Dot = styled('div')<IDot>`
   justify-content: center;
   align-items: center;
   margin: 0 20px;
+  cursor: pointer;
 `;
 
 export const CategDots = styled(Dot)`
@@ -139,6 +140,7 @@ export const Arrow = styled('div')<IArrow>`
   align-items: center;
   width: 30px;
   height: 30px;
+  cursor: pointer;
   ${props =>
     props.isLeft &&
     css`

@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { FiSettings } from 'react-icons/fi';
 import { ListNavItem } from './ListNavItem';
 import {
   List,
@@ -30,6 +31,7 @@ import { logoutSuccess } from '../../redux/Auth/action';
 const Style = {
   color: '#FFF',
   fill: '#FFF',
+  marginRight: '5px',
   marginBottom: '2px',
   lineHieght: '1px',
 };
@@ -72,6 +74,12 @@ export const Navbar = ({ open }) => {
       </NavBox>
 
       <NavIcon style={{ width: '15%' }}>
+        {user.isAdmin ? (
+          <IconList>
+            <FiSettings size="1.2em" style={Style} />
+            Admin
+          </IconList>
+        ) : null}
         {user?._id ? (
           <Link
             to="/profile"

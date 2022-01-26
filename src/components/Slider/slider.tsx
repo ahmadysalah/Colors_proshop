@@ -55,47 +55,37 @@ export const Slider = ({ data }: IProps) => {
   return (
     <Container
       direction="column"
-      padding="0"
       background="#F2F2F2"
+      padding="0 5%"
       overflow="hidden"
+      height="500px"
     >
+      <SliderSection>
+        <SwipeableViews index={sliderIndex} style={cssStyle} enableMouseEvents>
+          {sliders}
+        </SwipeableViews>
+      </SliderSection>
       <Container
-        direction="column"
-        width="90%"
+        flexDirection="row"
+        background="#F2F2F2"
+        padding="1em"
         margin="auto"
-        padding="0"
-        overflow="hidden"
+        width="auto"
+        height="10%"
       >
-        <SliderSection>
-          <SwipeableViews
-            index={sliderIndex}
-            style={cssStyle}
-            enableMouseEvents
-          >
-            {sliders}
-          </SwipeableViews>
-        </SliderSection>
-        <Container
-          flexDirection="row"
-          background="#F2F2F2"
-          padding="1em"
-          margin="auto"
-          width="auto"
-        >
-          <Arrow isLeft onClick={handleRight}>
-            &#8250;
-          </Arrow>
-          {Array(3)
-            .fill(0)
-            .map((x, index) => (
-              <Dot
-                width="25px"
-                isGrey={sliderIndex !== index}
-                onClick={() => setSliderIndex(index)}
-              />
-            ))}
-          <Arrow onClick={handleLeft}>&#8250;</Arrow>
-        </Container>
+        <Arrow isLeft onClick={handleRight}>
+          &#8250;
+        </Arrow>
+        {Array(3)
+          .fill(0)
+          .map((x, index) => (
+            <Dot
+              width="25px"
+              isGrey={sliderIndex !== index}
+              onClick={() => setSliderIndex(index)}
+            />
+          ))}
+        <Arrow onClick={handleLeft}>&#8250;</Arrow>
       </Container>
     </Container>
   );

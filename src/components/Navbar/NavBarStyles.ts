@@ -17,7 +17,7 @@ export const InnerSection = styled(Column)`
 `;
 export const ListNav = styled(Container)<Props>`
   background-color: ${props => props.theme.common?.black || '#242424'};
-  padding: 15px 5%;
+  padding: 7px 5%;
   @media (max-width: 768px) {
     flex-flow: column wrap;
     background-color: #242424;

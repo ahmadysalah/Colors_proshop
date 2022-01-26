@@ -44,7 +44,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx}>
         {i.map(item => (
-          <CategoryCard description={item.name} img={item.images[0]} />
+          <CategoryCard description={item.brand} img={item.images[0]} />
         ))}
       </RowInnerSlider>
     ));

@@ -1,54 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { BsBookmark } from 'react-icons/bs';
-import { Button } from '../Button/ButtonStyle';
-import img from '../../assets/tow.jpg';
+import img from '../../assets/Images/defaultProduct.png';
 import Typography from '../Typography';
-import { Content, ContentAction, Discount, MainCard } from './cardStyles';
+import {
+  AddCart,
+  Content,
+  ContentAction,
+  Discount,
+  MainCard,
+  SaveBtn,
+} from './cardStyles';
 import { Container, Image } from '..';
 
 export interface IProducts {
   image: string;
   rating: number;
   price: number;
-  discount?: number;
+  discount: number;
   countInStock?: number;
   _id?: string;
   name?: string;
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
+  const disCount = () => {
+    const percentage = (props.discount / props.price) * 100;
+    return Math.ceil(percentage);
+  };
   return (
-    <MainCard
-      width="28.2%"
-      max-height="655px"
-      boxShadow="none"
-      backgroundColor="white"
-      flexDirection="column"
-    >
+    <MainCard>
       {props.discount ? (
         <Discount>
-          <Typography
-            width="none"
-            color="white"
-            fontSize="24px"
-            fontFamily="mulish"
-          >
-            {`-${props.discount}%`}
+          <Typography width="none" color="white" fontSize="24px">
+            {`-${disCount()}%`}
           </Typography>
         </Discount>
       ) : (
         <></>
       )}
-      <ContentAction>
-        <Image
-          src={props.image}
-          alt=""
-          style={{ width: '100%', height: '100%' }}
-        />
+      <ContentAction height="340px">
+        <Image src={img} alt="" style={{ borderRadius: '16px' }} />
       </ContentAction>
       <Content>
-        <Typography variant="h3" fontSize="24px" fontFamily="mulish">
+        <Typography variant="h3" fontSize="20px" fontFamily="mulish">
           {props.name}
         </Typography>
       </Content>
@@ -62,15 +57,12 @@ const ComplexCard = ({ ...props }: IProducts) => {
         />
       </Content>
       <Content>
-        {props.discount && (
-          <Typography
-            variant="h2"
-            margin="0 10px"
-            color="#FC4059"
-            fontFamily="mulish"
-          >
-            ${props.price - (props.price / props.discount) * props.discount}
+        {props.discount ? (
+          <Typography variant="h2" margin="0 10px" color="#FC4059">
+            ${`${props.discount}`}
           </Typography>
+        ) : (
+          <></>
         )}
         <Typography
           variant="h2"
@@ -82,24 +74,10 @@ const ComplexCard = ({ ...props }: IProducts) => {
       </Content>
 
       <Container direction="row" margin="auto" padding="15px">
-        <Button
-          height="62px"
-          background="#F2F2F2"
-          width="10%"
-          padding="none"
-          margin-left="6%"
-        >
+        <SaveBtn>
           <BsBookmark size="24px" />
-        </Button>
-        <Button
-          height="62px"
-          width="65.3%"
-          background="#F2F2F2"
-          fontSize="15px"
-          margin="0 5%"
-        >
-          Add to cart
-        </Button>
+        </SaveBtn>
+        <AddCart>Add to cart</AddCart>
       </Container>
     </MainCard>
   );

@@ -1,6 +1,7 @@
 import { Image } from '..';
 import Typography from '../Typography';
 import { Content, ContentAction, MainCard } from './cardStyles';
+import imgs from '../../assets/Images/defaultProduct.png';
 import { ICategoryProps } from './interface';
 
 const CategoryCard = ({ img, description }: ICategoryProps) => {
@@ -9,8 +10,8 @@ const CategoryCard = ({ img, description }: ICategoryProps) => {
       <ContentAction
         padding="none"
         margin="none"
-        borderRadius="16px"
         boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
+        height="280px"
       >
         <Image src={img} alt="" width="100%" style={{ borderRadius: '16px' }} />
       </ContentAction>
