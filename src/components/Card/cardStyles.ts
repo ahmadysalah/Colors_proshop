@@ -34,12 +34,14 @@ export const MainCard = styled('div')<IstyleMainCard>(
     boxShadow: `${boxShadow}`,
     transition: '0.3s',
     width: `${width}`,
+    minWidth: '300px',
     margin: `${margin}`,
     padding: `${padding}`,
     display: 'flex',
     flexDirection: `${(props.flexDirection as 'row') || ('column' as const)}`,
     borderRadius: `${props.borderRadius || '10px'}`,
     backgroundColor: `${props.backgroundColor || 'white'}`,
+    flexWrap: 'wrap',
   }),
 );
 
@@ -70,7 +72,7 @@ export const ContentAction = styled.div<CSSProperties>(
     width = '100%',
     height = 'none',
     border = 'none',
-    margin = ' auto',
+    margin = ' auto 2rem',
   }) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -94,4 +96,13 @@ export const Discount = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 1 rem;
 `;

@@ -50,12 +50,7 @@ const CartList = ({ data }: IProps) => {
         align-items="start"
         justify-content="space-between"
       >
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          width="40%"
-          fit="cover"
-        />
+        <Image src={product.images[0]} width="40%" fit="cover" />
         <ItemTitle to={`/product/${product._id}`}>
           <Typography
             children={product.name}

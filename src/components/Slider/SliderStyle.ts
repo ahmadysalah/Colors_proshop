@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
 import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
-import { Typography } from '..';
+import { Image, Typography } from '..';
 import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
@@ -57,7 +57,7 @@ export const NameText = styled(PriceText)`
   margin-bottom: 10px;
 `;
 
-export const ImageSlider = styled('img')`
+export const ImageSlider = styled(Image)`
   width: 85%;
   height: 85%;
   object-fit: cover;

@@ -17,6 +17,8 @@ export const InnerSection = styled(Column)`
 `;
 export const ListNav = styled(Container)<Props>`
   background-color: ${props => props.theme.common?.black || '#242424'};
+  height: ${props => (props.open ? '100vh' : '60px')};
+  z-index: 999;
   padding: 7px 5%;
   @media (max-width: 768px) {
     flex-flow: column wrap;
@@ -33,7 +35,10 @@ export const ListNav = styled(Container)<Props>`
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
     align-items: center;
+    flex-direction: column;
   }
+  position: fixed;
+  top: 0;
 `;
 export const Badge = styled('div')`
   background: #fcdd06;
@@ -125,6 +130,13 @@ export const IconList = styled('li')`
     top: 10px;
     z-index: 1;
   }
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    width: 10rem;
+    justify-content: center;
+    font-size: 18px;
+  }
 `;
 export const Hamburger = styled.div`
   display: none;
@@ -198,3 +210,17 @@ export const StyleObj: CSSProperties = {
   alignContent: 'space-between',
   marginBottom: '10px',
 };
+
+export const IConsContainer = styled('div')`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;

@@ -28,7 +28,7 @@ export const SliderItem = ({ name, description, price, image, _id }: Props) => (
       <ButtonHero to={`/product/${_id}`}>Shop now</ButtonHero>
     </Column>
     <WrapperImageHero>
-      <ImageSlider src={image} alt={name + _id} />
+      <ImageSlider size="lg" src={image} variant="square" />
     </WrapperImageHero>
   </Container>
 );

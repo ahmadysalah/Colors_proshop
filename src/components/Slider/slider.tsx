@@ -59,6 +59,7 @@ export const Slider = ({ data }: IProps) => {
       padding="0 5%"
       overflow="hidden"
       height="500px"
+      margin="4rem 0"
     >
       <SliderSection>
         <SwipeableViews index={sliderIndex} style={cssStyle} enableMouseEvents>

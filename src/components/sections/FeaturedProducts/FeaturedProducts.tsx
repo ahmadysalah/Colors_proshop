@@ -60,11 +60,11 @@ export const FeaturedProduct = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx} style={{ margin: '0' }}>
+      <Container key={inx} flex-wrap="wrap">
         {i.map((item: IProducts) => (
           <ComplexCard {...item} image={item.images[0]} />
         ))}
-      </RowInnerSlider>
+      </Container>
     ));
   };
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Typography } from '..';
 
 export const ContainerWrapper = styled.div<any>`
   display: flex;
@@ -23,7 +24,8 @@ export const ContainerWrapper = styled.div<any>`
     & > button{
       margin: 1.5em .2em;
     }
+   
   & > img {
-    font-size: 14px;
-  }   
+     font-size: 14px;
+  }  
 `;
