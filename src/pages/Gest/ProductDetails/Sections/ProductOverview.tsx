@@ -63,7 +63,7 @@ const ProductOverview: React.FC<IProducts> = props => {
     >
       <Container direction="column" max-width="23rem">
         <Container padding="2em" width="80%" height="300px">
-          <ProductImage size="lg" src={currentImages?.[0]} />
+          <ProductImage size="md" src={currentImages?.[0]} />
         </Container>
         <Container direction="row" margin=".1em 0">
           {currentImages?.map(

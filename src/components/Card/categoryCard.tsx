@@ -1,3 +1,4 @@
+import { Image } from '..';
 import Typography from '../Typography';
 import { Content, ContentAction, MainCard } from './cardStyles';
 import { ICategoryProps } from './interface';
@@ -11,10 +12,12 @@ const CategoryCard = ({ img, description }: ICategoryProps) => {
         borderRadius="16px"
         boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       >
-        <img src={img} alt="" width="100%" style={{ borderRadius: '16px' }} />
+        <Image src={img} alt="" width="100%" style={{ borderRadius: '16px' }} />
       </ContentAction>
       <Content margin="16px auto">
-        <Typography variant="h1">{description}</Typography>
+        <Typography variant="h1" fontFamily="mulish">
+          {description}
+        </Typography>
       </Content>
     </MainCard>
   );

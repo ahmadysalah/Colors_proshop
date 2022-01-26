@@ -43,6 +43,7 @@ const Cart = () => {
             background-color="#F2F2F2"
             border-radius="16px"
             margin-left="2em"
+            height="50%"
           >
             <Subtotal data={cart.user?.cart} />
           </TotalContainer>

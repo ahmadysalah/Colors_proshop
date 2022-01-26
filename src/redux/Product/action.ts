@@ -8,7 +8,6 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
     dispatch({
       type: EnumProductsAction.GET_ALL_PRODUCTS_START,
     });
-
     let search = '';
     if (keyword && pageNumber) {
       search = `?keyword=${keyword}&pageNumber=${pageNumber}`;

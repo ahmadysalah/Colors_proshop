@@ -13,12 +13,15 @@ export const LoginText = styled(Typography)`
   font-size: 35px;
   font-weight: bold;
   color: #242424;
+  margin-bottom: 25px;
+  font-family: mulish;
 `;
 export const LoginSubText = styled('p')`
   font-size: 25px;
-  width: 25rem;
+  width: 35rem;
   color: #70707070;
-  font-family: Mulish;
+  font-family: mulish;
+  margin-bottom: 30px;
 `;
 
 export const LeftLogin = styled('div')`
@@ -61,8 +64,8 @@ export const ForgotPassword = styled(Typography)`
   letter-spacing: 0.88px;
   color: #242424;
   text-align: center;
-  font-family: normal normal 300 22px/15px Mulish;
-  margin-bottom: 1rem;
+  font-family: mulish;
+  margin-bottom: 1rem auto;
 `;
 
 export const ButtonSuginup = styled('button')`
@@ -106,7 +109,13 @@ export const FormContainer = styled(Container)`
   }
 `;
 export const ContainerLogin = styled(Container)`
+  height: 90vh;
+  padding: 0;
+  overflow: hidden;
+  width: 90%;
+  margin: 0 auto;
   @media (max-width: 768px) {
-    width: 90%;
+    width: 95%;
+    margin: auto;
   }
 `;

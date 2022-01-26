@@ -2,7 +2,7 @@
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GrUserNew } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -17,11 +17,14 @@ import {
   ButtonSuginup,
   ButtonLogin,
   LeftLogin,
+  ContainerLogin,
+  FormContainer,
 } from '../Login/style';
 import {
   schemaValidationSignUp as validationSchema,
   ISchemaValidationSuginup,
 } from '../../../utils/helper/validation';
+// @ts-ignore
 import LoginImage from '../../../assets/Images/singup.png';
 
 import {
@@ -30,6 +33,8 @@ import {
   InputController,
   CheckBox,
   Divider,
+  Container,
+  Image,
 } from '../../../components';
 import { AuthActions } from '../../../redux/Auth/action';
 import { AppState } from '../../../redux/store';
@@ -71,17 +76,26 @@ const Signup = () => {
     },
   });
   return (
-    <Column>
+    <ContainerLogin>
       <InnerColSection>
         <Wrapper>
-          <LeftLogin>
-            <Column>
-              <LoginText>Signup.</LoginText>
-              <LoginSubText>
-                Sign up and get exclusive offers from us
-              </LoginSubText>
-              <form onSubmit={formik.handleSubmit}>
-                <Column>
+          <Container
+            direction="column"
+            overflow="hidden"
+            justifyContent="space-between"
+          >
+            <LoginText>Signup.</LoginText>
+            <LoginSubText>
+              Sign up and get exclusive offers from us
+            </LoginSubText>
+            <FormContainer>
+              <form
+                style={{
+                  width: '100%',
+                }}
+                onSubmit={formik.handleSubmit}
+              >
+                <Container width="100%" direction="column" padding={0}>
                   <InputController
                     name="name"
                     label="Name"
@@ -95,8 +109,6 @@ const Signup = () => {
                     icon={<GrUserNew />}
                     value={formik.values.name}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="email"
                     label="Enter your email address"
@@ -110,8 +122,6 @@ const Signup = () => {
                     icon={<AiOutlineMail />}
                     value={formik.values.email}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="password"
                     label="Enter your password"
@@ -125,8 +135,6 @@ const Signup = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.password}
                   />
-                </Column>
-                <Column>
                   <InputController
                     name="passwordConfirmation"
                     label="Confirm your password"
@@ -140,23 +148,30 @@ const Signup = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.passwordConfirmation}
                   />
-                </Column>
+                </Container>
                 <ButtonLogin type="submit">Sign up</ButtonLogin>
                 <Column item="center">
                   <Divider thick="2px" width="100%" margin="40px 0px" />
                   <Column item="center">
-                    <ForgotPassword>Have an account ? Login</ForgotPassword>
+                    <Link to="/login" style={{ textDecoration: 'none' }}>
+                      <ForgotPassword>Have an account ? Login</ForgotPassword>
+                    </Link>
                   </Column>
                 </Column>
               </form>
-            </Column>
-          </LeftLogin>
-          <RightLogin>
-            <ImageShape src={LoginImage} alt="image login continer" />
-          </RightLogin>
+            </FormContainer>
+          </Container>
+          <Container>
+            <Image
+              src={LoginImage}
+              alt="image register continer"
+              size="xxxl"
+              responsive
+            />
+          </Container>
         </Wrapper>
       </InnerColSection>
-    </Column>
+    </ContainerLogin>
   );
 };
 export default Signup;

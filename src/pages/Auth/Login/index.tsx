@@ -20,7 +20,7 @@ import {
   schemaValidationLogin as validationSchema,
 } from '../../../utils/helper/validation';
 import LoginImage from '../../../assets/Images/login.png';
-import { InnerColSection } from '../../../components/Row';
+import { InnerColSection, Row } from '../../../components/Row';
 import Divider from '../../../components/Divider';
 import { CheckBox } from '../../../components/Form/checkBox';
 import { InputController } from '../../../components/Form/inputController';
@@ -28,6 +28,7 @@ import { Container, Image } from '../../../components';
 import { AppState } from '../../../redux/store';
 import { TAllActionAuth } from '../../../redux/Auth/type';
 import { AuthActions } from '../../../redux/Auth/action';
+import { Column } from '../../../components/Col';
 
 const Login = () => {
   const [checked, setChecked] = useState<boolean>(true);
@@ -47,7 +48,6 @@ const Login = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      console.log('values', values);
       dispatch(
         AuthActions.loginAction(
           {
@@ -62,16 +62,10 @@ const Login = () => {
     },
   });
   return (
-    <ContainerLogin
-      height="100vh"
-      padding={0}
-      overflow="hidden"
-      width="90%"
-      margin="0 auto"
-    >
+    <ContainerLogin>
       <InnerColSection>
         <Wrapper>
-          <Container direction="column">
+          <Container direction="column" justifyContent="space-between">
             <LoginText>Login.</LoginText>
             <LoginSubText>
               Login with your data that you entered during registration
@@ -79,7 +73,7 @@ const Login = () => {
             <FormContainer>
               <form
                 style={{
-                  width: '100%',
+                  width: '80%',
                 }}
                 onSubmit={formik.handleSubmit}
               >
@@ -111,12 +105,21 @@ const Login = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.password}
                   />
-
-                  <ButtonLogin disabled={!formik.isValid} type="submit">
+                  <ButtonLogin
+                    disabled={!formik.isValid}
+                    type="submit"
+                    style={{ padding: '5px 0', marginBottom: '20px' }}
+                  >
                     Login
                   </ButtonLogin>
-                  <CheckBox label="Remember me" name="Remember me" />
-                  <ForgotPassword>Forgot your password?</ForgotPassword>
+                  <Column>
+                    <CheckBox label="Remember me" name="Remember me" />
+                    <ForgotPassword
+                      style={{ marginTop: '15px', marginBottom: '15px' }}
+                    >
+                      Forgot your password?
+                    </ForgotPassword>
+                  </Column>
                   <Divider thick="2px" width="100%" />
                   <ButtonSuginup onClick={() => navigate('/signup')}>
                     Sign up now
@@ -129,7 +132,7 @@ const Login = () => {
             <Image
               src={LoginImage}
               alt="image login continer"
-              size="xl"
+              size="xxxl"
               responsive
             />
           </Container>

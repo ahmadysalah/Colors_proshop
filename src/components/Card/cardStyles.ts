@@ -97,10 +97,10 @@ export const Discount = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: red;
+  background: #fc4059 0% 0% no-repeat padding-box;
   width: 87px;
   height: 87px;
   position: absolute;
-  right: 22px;
-  top: 19px;
+  right: 10px;
+  top: 15px;
 `;

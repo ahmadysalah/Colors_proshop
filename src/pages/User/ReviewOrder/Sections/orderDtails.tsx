@@ -1,3 +1,4 @@
+import { Image } from '../../../../components';
 import { Column, Row } from '../../../../components/Row';
 import {
   OrderItemsWrapper,
@@ -28,7 +29,7 @@ export const OrderDetails = ({
   return (
     <Column>
       <OrderItemsWrapper>
-        <ImageCard src={image} alt={title} />
+        <Image src={image} alt={title} size="sm" variant="square" />
         <Column>
           <TextTitle>{title}</TextTitle>
           <OrderPriceWrapper>

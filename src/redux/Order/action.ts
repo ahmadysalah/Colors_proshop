@@ -14,12 +14,14 @@ export const getOrderById = (id: string) => {
 
     try {
       const response = await Api.get(`/orders/${id}`);
-      if (response.status === 200) {
-        dispatch({
-          type: EnumOrderAction.GET_ORDER_BY_ID_SUCCESS,
-          payload: response.data,
-        });
-      }
+      console.log('GET_ORDER_BY_ID_SUCCESS', response.data);
+
+      dispatch({
+        type: EnumOrderAction.GET_ORDER_BY_ID_SUCCESS,
+        payload: {
+          orders: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumOrderAction.GET_ORDER_BY_ID_FILL,
@@ -43,7 +45,9 @@ export const getOrders = () => {
       if (response.status === 200) {
         dispatch({
           type: EnumOrderAction.GET_ORDERS_SUCCESS,
-          payload: response.data,
+          payload: {
+            orders: response.data,
+          },
         });
       }
     } catch (e: any) {
@@ -94,14 +98,12 @@ export const createOrder = (data: IShippingAddress) => {
 
     try {
       const response = await Api.post<IShippingAddress>('/orders', data);
-      if (response.status === 201) {
-        dispatch({
-          type: EnumOrderAction.CREATE_ORDER_SUCCESS,
-          payload: {
-            orders: response.data,
-          },
-        });
-      }
+      dispatch({
+        type: EnumOrderAction.CREATE_ORDER_SUCCESS,
+        payload: {
+          order: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumOrderAction.CREATE_ORDER_FILL,

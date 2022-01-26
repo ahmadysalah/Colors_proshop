@@ -47,7 +47,7 @@ const Subtotal = ({ data }: Props) => {
           letter-spacing="0.76px"
           margin-bottom="1em"
         >
-          {data?.totalPrice}
+          $989.97
         </Typography>
       </Container>
       <Divider color="#E8E8E8" />
@@ -55,10 +55,21 @@ const Subtotal = ({ data }: Props) => {
         as="Link"
         to="/review"
         width="80%"
-        style={{ margin: '2em auto', padding: '1em' }}
+        style={{ margin: '2em auto', padding: '1.2em' }}
         background="#FCDD06"
       >
-        Proceed to checkout
+        <Button
+          to="/review"
+          style={{
+            fontFamily: 'mulish',
+            fontVariant: 'inherit',
+            fontSize: '22px',
+            color: 'white',
+            textDecoration: 'none',
+          }}
+        >
+          Proceed to checkout
+        </Button>
       </Button>
     </>
   );

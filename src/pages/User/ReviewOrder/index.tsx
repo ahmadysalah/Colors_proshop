@@ -1,14 +1,16 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { ThunkDispatch } from 'redux-thunk';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../../assets/Images/card.png';
-import { Column, Row } from '../../../components';
+import { Column, Row, Typography } from '../../../components';
 import {
   IShippingSchema,
   ShippingSchema,
 } from '../../../utils/helper/validation';
 
 import {
-  ReviewText,
   FooterTitleRight,
   TextFooter,
   InnerSection,
@@ -25,10 +27,16 @@ import {
   BoxNumber,
   TextActive,
   OrfferSection,
+  InnerOverFlow,
 } from './Sections/style';
 import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
+import { AppState } from '../../../redux/store';
+import { ActionOrderType } from '../../../redux/Order/type';
+import { createOrder } from '../../../redux/Order/action';
+import { getProfile } from '../../../redux/User/action';
+import { ActionCartType } from '../../../redux/Cart/type';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -38,18 +46,43 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
+  const [stepperNumber, setstepperNumber] = useState(0);
+  const [checkoutError, setCheckoutError] = useState();
+  // const stripe: any = useStripe();
+  // const elements = useElements();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const cart = useSelector((state: AppState) => state.user.myProfile);
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+  console.log('this is order first step', cart);
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      dispatch(
+        createOrder({
+          address: values.address,
+          city: values.city,
+          country: values.country,
+          postalCode: values.zip,
+        }),
+      );
+      setstepperNumber(1);
     },
   });
-  const [stepperNumber, setstepperNumber] = useState(0);
+
+  const handleCardDetailsChange = (ev: any) => {
+    if (ev.error) setCheckoutError(ev.error.message);
+    else setCheckoutError(undefined);
+  };
+
   return (
     <OrfferSection>
       <InnerSection>
-        <ReviewText variant="h1">Review Order</ReviewText>
+        <Typography variant="h2" font-Family="Mulish">
+          Review Order
+        </Typography>
         <WrapperReviewRow>
           <BoxNumber isActive={stepperNumber === 0}>1</BoxNumber>
           <TextActive isActive={stepperNumber === 0}>
@@ -63,13 +96,7 @@ const ReviewOrder = () => {
           <Column>
             <WrapperCard>
               <LeftSection>
-                <form
-                  onSubmit={e => {
-                    e.preventDefault();
-                    formik.handleSubmit();
-                    formik.resetForm();
-                  }}
-                >
+                <form onSubmit={formik.handleSubmit}>
                   <Column
                     style={{
                       width: '90%',
@@ -90,6 +117,7 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.country}
+                        style={{ fontFamily: 'mulish' }}
                       />
                       <InputController
                         name="city"
@@ -102,6 +130,7 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.city}
                         marginLeft="10%"
+                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     <WrapperRowInput>
@@ -115,6 +144,7 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.zip}
+                        style={{ fontFamily: 'mulish' }}
                       />
                       {/*
                         47%
@@ -130,27 +160,47 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.address}
                         marginLeft="10%"
+                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
-                    <ShapeAddress>Payment Details</ShapeAddress>
+                    {/* <ShapeAddress>Payment Details</ShapeAddress>
+
+                    <CardElement
+                      options={cardElementOpts as any}
+                      onChange={handleCardDetailsChange}
+                    /> */}
+
+                    {/* <StripeCardInput onChange={handleCardDetailsChange} />
+                    <StripeCardExpiry />
+                    <StripeCardCvc /> */}
+                    {checkoutError && (
+                      <Typography margin-Top="1rem" color="red">
+                        {checkoutError}
+                      </Typography>
+                    )}
+                    <Row JC="flex-end">
+                      <RevieworderButton
+                        style={{ fontFamily: 'mulish' }}
+                        type="submit"
+                      >
+                        Review order
+                      </RevieworderButton>
+                    </Row>
                   </Column>
                 </form>
               </LeftSection>
 
               <RightSection>
                 <HeaderTitleRight>
-                  <ShapeAddress>Order Details</ShapeAddress>
-                  <ChangeText to="/cahnge">change</ChangeText>
+                  <ShapeAddress style={{ fontFamily: 'mulish' }}>
+                    Order Details
+                  </ShapeAddress>
+                  <ChangeText style={{ fontFamily: 'mulish' }} to="/cahnge">
+                    change
+                  </ChangeText>
                 </HeaderTitleRight>
                 <Column>
-                  <div
-                    style={{
-                      overflow: 'auto',
-                      height: '300px',
-                      overflowX: 'hidden',
-                      borderRadius: '15px',
-                    }}
-                  >
+                  <InnerOverFlow>
                     <OrderDetails
                       title="iPhone 11 Pro 256GB Memory"
                       image={logo}
@@ -165,7 +215,13 @@ const ReviewOrder = () => {
                       countItem={20}
                       isHr
                     />
-                  </div>
+                    <OrderDetails
+                      title="iPhone 11 Pro 256GB Memory"
+                      image={logo}
+                      priceItem={20}
+                      countItem={20}
+                    />
+                  </InnerOverFlow>
                 </Column>
 
                 <FooterTitleRight>
@@ -188,11 +244,6 @@ const ReviewOrder = () => {
                 </FooterTitleRight>
               </RightSection>
             </WrapperCard>
-            <Row JC="flex-end">
-              <RevieworderButton onClick={() => setstepperNumber(1)}>
-                Review order
-              </RevieworderButton>
-            </Row>
           </Column>
         )}
         {stepperNumber === 1 && <ReviewTow />}
@@ -202,3 +253,30 @@ const ReviewOrder = () => {
 };
 
 export default ReviewOrder;
+
+const iframeStyles = {
+  base: {
+    iconColor: '#0F1112',
+    color: '#0F1112',
+    fontWeight: '500',
+    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+    fontSize: '16px',
+    fontSmoothing: 'antialiased',
+    border: '1px solid #4D4D4D',
+    ':-webkit-autofill': {
+      color: '#fce883',
+    },
+    '::placeholder': {
+      color: '#4D4D4D',
+    },
+    '::-webkit-input-placeholder': {
+      color: '#4D4D4D',
+      border: '1px solid #4D4D4D',
+    },
+  },
+};
+
+const cardElementOpts = {
+  iconStyle: 'solid',
+  style: iframeStyles,
+};

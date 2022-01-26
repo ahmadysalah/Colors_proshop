@@ -1,17 +1,16 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { lazy } from 'react';
 import Loadable from './components/Loadable';
 import { Navbar } from './components';
+import Profile from './pages/Profile';
 
 const Signup = Loadable(lazy(() => import('./pages/Auth/Signup')));
 const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
 const Product = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
-const Home = Loadable(lazy(() => import('./pages/Gest/Home/index')));
-const Search = Loadable(lazy(() => import('./pages/Gest/Search/index')));
-const Profile = Loadable(lazy(() => import('./pages/Profile/index')));
-const Cart = Loadable(lazy(() => import('./pages/Cart/index')));
+const Home = Loadable(lazy(() => import('./pages/Gest/Home')));
+const Cart = Loadable(lazy(() => import('./pages/Cart'))); // bug
 const Dashboard = Loadable(lazy(() => import('./pages/DashBoard'))); // working
 const AddNewProduct = Loadable(lazy(() => import('./pages/NewProduct'))); // bug
 const ProductDetails = Loadable(
@@ -33,8 +32,9 @@ export const AllRouter = () => {
       <Route path="/addNewProduct/:id" element={<AddNewProduct />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/product/:id" element={<ProductDetails />} />
-      <Route path="/search" element={<Search />} />
+      {/* <Route path="/search" element={<Search />} /> */}
       <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

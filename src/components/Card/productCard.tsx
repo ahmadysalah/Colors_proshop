@@ -5,7 +5,7 @@ import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
-import { Container } from '..';
+import { Container, Image } from '..';
 
 export interface IProducts {
   image: string;
@@ -28,7 +28,12 @@ const ComplexCard = ({ ...props }: IProducts) => {
     >
       {props.discount ? (
         <Discount>
-          <Typography width="none" color="white" fontSize="24px">
+          <Typography
+            width="none"
+            color="white"
+            fontSize="24px"
+            fontFamily="mulish"
+          >
             {`-${props.discount}%`}
           </Typography>
         </Discount>
@@ -36,14 +41,14 @@ const ComplexCard = ({ ...props }: IProducts) => {
         <></>
       )}
       <ContentAction>
-        <img
+        <Image
           src={props.image}
           alt=""
           style={{ width: '100%', height: '100%' }}
         />
       </ContentAction>
       <Content>
-        <Typography variant="h3" fontSize="24px">
+        <Typography variant="h3" fontSize="24px" fontFamily="mulish">
           {props.name}
         </Typography>
       </Content>
@@ -58,13 +63,19 @@ const ComplexCard = ({ ...props }: IProducts) => {
       </Content>
       <Content>
         {props.discount && (
-          <Typography variant="h2" margin="0 10px" color="#FC4059">
+          <Typography
+            variant="h2"
+            margin="0 10px"
+            color="#FC4059"
+            fontFamily="mulish"
+          >
             ${props.price - (props.price / props.discount) * props.discount}
           </Typography>
         )}
         <Typography
           variant="h2"
           text-decoration={props.discount ? 'line-through' : 'none'}
+          fontFamily="mulish"
         >
           ${props.price}
         </Typography>

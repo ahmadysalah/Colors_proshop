@@ -5,21 +5,9 @@ import { Column, Container, Divider, Typography } from '../../../../components';
 export const ReviewText = styled(Typography)`
   font-family: normal normal 900 32px/15px Mulish;
   letter-spacing: 1.28px;
-  /*
-    font-size: 32px;
-  font-weight: bold;
-  letter-spacing: 0.88px;
-  letter-spacing: 1.28px;
-  color: #242424;
-  opacity: 1;
-  font-family: normal normal bold 32px/15px Mulish;
-  letter-spacing: 1.28px;
-  color: #242424;
-  
-  */
 `;
 export const OrderDetailsText = styled(ReviewText)`
-  font-family: normal normal 900 32px/15px Mulish;
+  font-family: normal normal 900 32px/15px mulish;
   letter-spacing: 1.28px;
   font-size: 2rem;
   font-weight: bold;
@@ -36,6 +24,7 @@ export const ChangeText = styled(Link)`
   color: #707070;
   opacity: 1;
   text-decoration: underline;
+  font-family: mulish;
 `;
 
 interface IBoxNumber {
@@ -45,22 +34,20 @@ export const BoxNumber = styled('div')<IBoxNumber>`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 40px;
-  width: 40px;
-  font-size: 22px;
+  width: 2em;
+  font-size: 15px;
   font-weight: bold;
   margin-right: 9px;
-  height: 40px;
+  height: 2em;
   background: ${props =>
     props.isActive
       ? `${props.theme?.primary?.lightYallow}; 0% 0% no-repeat padding-box`
       : '#707070 0% 0% no-repeat padding-box'};
   color: ${props => (props.isActive ? '#242424' : '#FFFFFF ')};
-  margin-left: 9px;
 `;
 
 export const TextActive = styled(Typography)<IBoxNumber>`
-  font-size: 1.375rem;
+  font-size: 1.1rem;
   font-family: normal normal bold 22px/15px Mulish;
   letter-spacing: 0.88px;
   width: auto;
@@ -69,7 +56,7 @@ export const TextActive = styled(Typography)<IBoxNumber>`
 
 export const WrapperReviewRow = styled('div')`
   display: flex;
-  margin-top: 36px;
+  margin-top: 0.8rem;
   align-items: center;
   width: 100%;
 `;
@@ -78,7 +65,7 @@ export const InnerSection = styled(Column)`
   justify-content: start;
   margin: 0 auto;
   width: 100%;
-  margin-top: 44px;
+  margin-top: 1.5rem;
 `;
 
 export const DividerTop = styled(Divider)`
@@ -88,8 +75,7 @@ export const DividerTop = styled(Divider)`
 `;
 
 export const DividerFull = styled(Divider)`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0.2rem 0;
   width: 100%;
   position: relative;
 `;
@@ -99,8 +85,7 @@ export const WrapperCard = styled('div')`
   width: 100%;
   background: none;
   justify-content: space-between;
-  margin-top: 36px;
-  /* margin-right: 50px; */
+  margin-top: 1em;
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -110,7 +95,7 @@ export const WrapperCard = styled('div')`
 export const ProductContainer = styled.div`
   overflow: auto;
   width: 60%;
-  height: 300px;
+  height: 200px;
   overflow-x: hidden;
   border-radius: 15px;
   display: flex;
@@ -130,48 +115,59 @@ export const OrderWrapper = styled(WrapperCard)`
 `;
 export const OrfferSection = styled(Column)`
   width: 90%;
+  height: 95vh;
+  overflow: hidden;
   margin: auto;
   justify-content: space-between;
   @media (max-width: 768px) {
-    width: 100;
+    width: 90%;
+    height: auto;
   }
 `;
 export const LeftSection = styled('div')`
   background: #f2f2f2;
   border-radius: 16px;
   opacity: 1;
-  padding: 45px 40px;
+  padding: 25px 17px;
   width: 100%;
   @media (max-width: 768px) {
     width: 100%;
-    padding: 0;
+    padding: 30px;
   }
 `;
 export const RightSection = styled(LeftSection)`
-  /* flex: 2; */
   margin-left: 30px;
   width: 40%;
+  padding: 0.5rem;
   @media (max-width: 768px) {
     width: 100%;
     margin: 15px auto;
-    padding-left: 0;
+    padding: 30px;
   }
 `;
 export const RightSectionTowReview = styled(LeftSection)`
   /* flex: 2; */
   margin-left: 30px;
-  height: 280px;
   width: 40%;
   @media (max-width: 768px) {
     width: 100%;
     margin: 15px auto;
-    padding-left: 0;
+    padding: 15px;
   }
 `;
-
+export const InnerOverFlow = styled.div`
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  max-height: 15em;
+  overflow-x: hidden;
+  border-radius: 15px;
+  box-size: border-box;
+  width: 100%;
+`;
 export const RightSectionPlace = styled(RightSectionTowReview)`
   width: 20%;
-  height: 200px;
+
+  height: 90%;
   @media (max-width: 1500px) {
     width: 100%;
     padding: 10px;
@@ -179,14 +175,15 @@ export const RightSectionPlace = styled(RightSectionTowReview)`
   }
 `;
 
-export const ShapeAddress = styled('p')`
-  font-size: 32px;
+export const ShapeAddress = styled(Typography)`
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
   font-weight: bold;
   letter-spacing: 0.88px;
   letter-spacing: 1.28px;
   color: #242424;
   opacity: 1;
-  font-family: normal normal bold 32px/15px Mulish;
+  font-family: mulish;
   letter-spacing: 1.28px;
   color: #242424;
 `;
@@ -236,6 +233,8 @@ export const HeaderTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
   @media (max-width: 768px) {
     width: 80%;
     margin: auto;
@@ -247,9 +246,11 @@ export const FooterTitleRight = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: start;
+  margin: 1rem auto;
+  padding: 0 0.5rem;
   @media (max-width: 768px) {
     width: 90%;
-    margin: auto;
+    margin: 20px auto;
   }
 `;
 
@@ -264,9 +265,9 @@ export const OrderItemsWrapper = styled('div')`
   flex-direction: row;
   width: 100%;
   display: flex;
+  padding: 0.5rem;
   justify-content: space-between;
   align-items: start;
-  margin-top: 20px;
   @media (max-width: 768px) {
     width: 90%;
     margin: auto;
@@ -280,31 +281,33 @@ export const OrderPriceWrapper = styled('div')`
   align-items: start;
 `;
 
-export const TextTitle = styled('p')`
-  font-size: 22px;
+export const TextTitle = styled(Typography)`
+  font-size: 1rem;
   letter-spacing: 0.44px;
   color: #707070;
   opacity: 1;
   margin-left: 10px;
-  font-family: normal normal normal 22px/30px Mulish;
+  font-family: mulish;
   color: #707070;
 `;
 
-export const PriceText = styled('p')`
-  font-size: 22px;
+export const PriceText = styled(Typography)`
+  font-size: 1rem;
   letter-spacing: 0.44px;
   color: ${props => props.theme?.background?.darkGrey};
   padding-left: 10px;
+  font-family: mulish;
 `;
-export const TotalPriceText = styled('p')`
-  font-size: 22px;
+export const TotalPriceText = styled(Typography)`
+  font-size: 1rem;
   letter-spacing: 0.44px;
   color: #242424;
   opacity: 1;
+  font-family: mulish;
   padding-left: 10px;
 `;
-export const CountText = styled('p')`
-  font-size: 16px;
+export const CountText = styled(Typography)`
+  font-size: 1rem;
   letter-spacing: 0.44px;
   color: #707070;
   opacity: 1;
@@ -326,9 +329,11 @@ export const RevieworderButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  margin-bottom: 61px;
-  margin-top: 30px;
+  margin-top: 20px;
   float: right;
+  position: absolute;
+  bottom: -1.5rem;
+  right: 6rem;
 `;
 
 export const LeftOrderSection = styled(LeftSection)`

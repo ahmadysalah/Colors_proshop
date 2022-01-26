@@ -46,7 +46,7 @@ export const Column = styled(Row)`
 export const InnerSection = styled(Column)`
   align-items: center;
   margin: 0 auto;
-  max-width: 1640px;
+  max-width: 100%;
   width: 100%;
 `;
 export const InnerColSection = styled(InnerSection)`

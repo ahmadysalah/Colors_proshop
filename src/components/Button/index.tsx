@@ -1,5 +1,4 @@
-import { Button, ButtonStyle } from './ButtonStyle';
-import { IStyleButton } from './IStyleButton';
+import { Button } from './ButtonStyle';
 
 export default function ButtonComponent(props: any) {
   return <Button {...(props as any)} />;

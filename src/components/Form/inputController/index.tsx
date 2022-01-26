@@ -45,6 +45,7 @@ export const InputController = ({ ...props }: InputControllerProps) => {
             required={props.isRequired}
             placeholder={props.placeholder}
             autoComplete="off"
+            style={{ fontFamily: 'mulish' }}
             disabled={props.disabled}
           />
         </InputWrapper>
