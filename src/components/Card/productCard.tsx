@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { BsBookmark } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
 import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
 import { Container, Image } from '..';
+import { AppState } from '../../redux/store';
+import { ActionCartType } from '../../redux/Cart/type';
+import { upduteActionCart } from '../../redux/Cart/action';
 
 export interface IProducts {
   image: string;
@@ -13,11 +19,21 @@ export interface IProducts {
   price: number;
   discount?: number;
   countInStock?: number;
-  _id?: string;
+  _id: string;
   name?: string;
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const navigate = useNavigate();
+
+  const handelAddCart = () => {
+    dispatch(
+      upduteActionCart({ productId: props._id, qty: 1 }, () => {
+        navigate('/cart');
+      }),
+    );
+  };
   return (
     <MainCard
       width="28.2%"
@@ -40,14 +56,14 @@ const ComplexCard = ({ ...props }: IProducts) => {
       ) : (
         <></>
       )}
-      <ContentAction>
+      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
         <Image
           src={props.image}
           alt=""
           style={{ width: '100%', height: '100%' }}
         />
       </ContentAction>
-      <Content>
+      <Content onClick={() => navigate(`/product/${props._id}`)}>
         <Typography variant="h3" fontSize="24px" fontFamily="mulish">
           {props.name}
         </Typography>
@@ -97,6 +113,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
           background="#F2F2F2"
           fontSize="15px"
           margin="0 5%"
+          onClick={handelAddCart}
         >
           Add to cart
         </Button>

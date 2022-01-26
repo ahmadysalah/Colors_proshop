@@ -7,12 +7,13 @@ import { SpinnerContainer } from './components/SpinnerContainer';
 import { Providers } from './providers';
 
 const App: React.FC = () => {
+  const [open, setstate] = useState(true);
   return (
     <Providers>
       <Suspense fallback={<SpinnerContainer />}>
         <ErrorBoundary>
-          {/* <Burger open={open} setOpen={setOpen} /> */}
-          {/* <Navbar open={open} /> */}
+          <Burger open={open} setOpen={setstate} />
+          <Navbar open={open} />
           <AllRouter />
         </ErrorBoundary>
       </Suspense>

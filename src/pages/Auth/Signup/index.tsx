@@ -55,17 +55,13 @@ const Signup = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      console.log('values', values);
-
-      const firstName = values.name.split(' ')[0];
-      const lastName = values.name.split(' ')[1];
       dispatch(
         AuthActions.singUpSuccess(
           {
             email: values.email,
             password: values.password,
-            firstName,
-            lastName,
+            firstName: values.name.split(' ')[0],
+            lastName: values.name.split(' ')[1],
             passwordConfirmation: values.passwordConfirmation,
           },
           () => {
@@ -102,21 +98,21 @@ const Signup = () => {
                     type="text"
                     placeholder="your  Name"
                     isRequired
-                    errors={formik.errors?.name}
-                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    touched={formik.touched?.name}
                     icon={<GrUserNew />}
                     value={formik.values.name}
+                    errors={formik.errors?.name}
+                    touched={formik.touched.name}
+                    onBlur={formik.handleBlur}
                   />
                   <InputController
                     name="email"
                     label="Enter your email address"
                     type="email"
-                    placeholder="test@test.com"
+                    placeholder="Enter Email"
                     isRequired
                     errors={formik.errors?.email}
-                    touched={formik.touched?.email}
+                    touched={formik.touched.email}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<AiOutlineMail />}
@@ -129,7 +125,7 @@ const Signup = () => {
                     placeholder="enter password"
                     isRequired
                     errors={formik.errors?.password}
-                    touched={formik.touched?.password}
+                    touched={formik.touched.password}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<RiLockPasswordFill />}

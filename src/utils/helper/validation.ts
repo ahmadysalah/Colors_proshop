@@ -29,7 +29,7 @@ export interface ISchemaValidationSuginup {
 
 export const schemaValidationSignUp =
   (): Yup.SchemaOf<ISchemaValidationSuginup> => {
-    return Yup.object({
+    return Yup.object().shape({
       email: Yup.string()
         .email('it should be correct email ')
         .min(5, 'Too Short!')

@@ -10,13 +10,14 @@ const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
 const Product = Loadable(lazy(() => import('./pages/Gest/ProductDetails')));
 const ReviewOrder = Loadable(lazy(() => import('./pages/User/ReviewOrder')));
 const Home = Loadable(lazy(() => import('./pages/Gest/Home')));
-const Cart = Loadable(lazy(() => import('./pages/Cart'))); // bug
-const Dashboard = Loadable(lazy(() => import('./pages/DashBoard'))); // working
-const AddNewProduct = Loadable(lazy(() => import('./pages/NewProduct'))); // bug
+const Search = Loadable(lazy(() => import('./pages/Gest/Search')));
+const Cart = Loadable(lazy(() => import('./pages/Cart')));
+const Dashboard = Loadable(lazy(() => import('./pages/DashBoard')));
+const AddNewProduct = Loadable(lazy(() => import('./pages/NewProduct')));
 const ProductDetails = Loadable(
   lazy(() => import('./pages/Gest/ProductDetails')),
-); // bug
-const PaymentSuccess = Loadable(lazy(() => import('./pages/PaymentSuccess'))); // need style
+);
+const PaymentSuccess = Loadable(lazy(() => import('./pages/PaymentSuccess')));
 
 export const AllRouter = () => {
   return (
@@ -32,7 +33,7 @@ export const AllRouter = () => {
       <Route path="/addNewProduct/:id" element={<AddNewProduct />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/product/:id" element={<ProductDetails />} />
-      {/* <Route path="/search" element={<Search />} /> */}
+      <Route path="/search" element={<Search />} />
       <Route path="/paymentSuccess" element={<PaymentSuccess />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

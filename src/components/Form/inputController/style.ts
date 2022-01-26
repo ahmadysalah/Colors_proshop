@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { Row } from '../../Row';
 
 export const FiledWrapper = styled('div')<{ marginLeft?: string }>`
-  margin-bottom: 3rem;
+  margin-bottom: 0.8rem;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 40px;
+  /* height: 40px; */
   margin-left: ${props => props.marginLeft || 0};
   @media (max-width: 768px) {
     margin-left: 0;
@@ -68,7 +68,7 @@ export const InputWrapper = styled('div')<{
   border-radius: 6px;
   width: 100%;
   display: flex;
-  min-height: 40px;
+  height: auto;
 `;
 
 export const WrapperIcon = styled(Row)`
@@ -81,4 +81,6 @@ InputWrapper.defaultProps = {
   isError: false,
 };
 
-export const ErrorWrapper = styled(Row)``;
+export const ErrorWrapper = styled(Row)`
+  margin: 8px 0px;
+`;

@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { Dispatch } from 'redux';
 import Api from '../../utils/Api/axios';
 import { EnumProductsAction } from './constant';
@@ -112,25 +113,20 @@ export const getTopProducts = () => {
  * getTopProducts to  Catogogry
  *
  */
+
 export const getAlCategory = () => {
   return async (dispatch: Dispatch<TAllActionProduct>) => {
     dispatch({
-      type: EnumProductsAction.GET_ALL_CATEGORY_START,
+      type: EnumProductsAction.GET_PRODUCTS_BY_ID_START,
     });
 
     try {
       const response = await Api.get('/products/category/all');
-
-      if (response.status === 200) {
-        dispatch({
-          type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
-          payload: {
-            product: response.data,
-          },
-        });
-      } else {
-        throw new Error('some  error habbend  in th e Top  reated  peoduct');
-      }
+      console.log('dddd', response.data.categories);
+      dispatch({
+        type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
+        payload: response.data.categories || [],
+      });
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_ALL_CATEGORY_FILL,
@@ -141,6 +137,33 @@ export const getAlCategory = () => {
     }
   };
 };
+// export const getAlCategory = () => {
+//   return async (dispatch: Dispatch<TAllActionProduct>) => {
+//     dispatch({
+//       type: EnumProductsAction.GET_ALL_CATEGORY_START,
+//     });
+
+//     try {
+//       const response = await Api.get('/products/category/all');
+//       console.log('ee', response.data);
+
+//       dispatch({
+//         type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
+//         payload: {
+//           // categories: [],
+//           categories: response.data,
+//         },
+//       });
+//     } catch (e: any) {
+//       dispatch({
+//         type: EnumProductsAction.GET_ALL_CATEGORY_FILL,
+//         payload: {
+//           error: e?.response?.data?.message,
+//         },
+//       });
+//     }
+//   };
+// };
 
 /**
  *
