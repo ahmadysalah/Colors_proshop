@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GrUserNew } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { useState } from 'react';
 import {
   LoginText,
   LoginSubText,
@@ -50,11 +51,14 @@ const initialValues: ISchemaValidationSuginup = {
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
-
+  const [validateAfterSubmit, setValidateAfterSubmit] = useState(false);
   const formik = useFormik<ISchemaValidationSuginup>({
     initialValues,
     validationSchema,
+    validateOnChange: validateAfterSubmit,
+    enableReinitialize: true,
     onSubmit: async values => {
+      setValidateAfterSubmit(true);
       const firstName = values.name.split(' ')[0];
       const lastName = values.name.split(' ')[1];
       dispatch(
@@ -98,12 +102,9 @@ const Signup = () => {
                     name="name"
                     label="Name"
                     type="text"
-                    placeholder="your  Name"
-                    isRequired
+                    placeholder="your Name"
                     errors={formik.errors?.name}
-                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    touched={formik.touched?.name}
                     icon={<GrUserNew />}
                     value={formik.values.name}
                   />
@@ -112,10 +113,7 @@ const Signup = () => {
                     label="Enter your email address"
                     type="email"
                     placeholder="test@test.com"
-                    isRequired
                     errors={formik.errors?.email}
-                    touched={formik.touched?.email}
-                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<AiOutlineMail />}
                     value={formik.values.email}
@@ -125,10 +123,7 @@ const Signup = () => {
                     label="Enter your password"
                     type="password"
                     placeholder="enter password"
-                    isRequired
                     errors={formik.errors?.password}
-                    touched={formik.touched?.password}
-                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<RiLockPasswordFill />}
                     value={formik.values.password}
@@ -138,10 +133,7 @@ const Signup = () => {
                     label="Confirm your password"
                     type="password"
                     placeholder="enter password"
-                    isRequired
                     errors={formik.errors?.passwordConfirmation}
-                    touched={formik.touched?.passwordConfirmation}
-                    onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     icon={<RiLockPasswordFill />}
                     value={formik.values.passwordConfirmation}
