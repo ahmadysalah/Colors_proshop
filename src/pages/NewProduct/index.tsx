@@ -75,7 +75,7 @@ function NewProduct() {
   });
 
   return (
-    <ProductContainer direction="column" padding-left="7.3%">
+    <ProductContainer direction="column" margin-left="7.3%">
       <PathNavigate
         name={
           formik.values.id

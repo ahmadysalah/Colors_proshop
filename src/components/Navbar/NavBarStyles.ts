@@ -31,7 +31,11 @@ export const SearchButton = styled(FlexBox)`
   background: #fcdd06;
   border-radius: 6px;
   display: flex;
+<<<<<<< HEAD
+  height: 100%;
+=======
   height: 42px;
+>>>>>>> c762a92c6895da335efb794b8e21789356e4201b
   justify-content: center;
   width: 21.5%;
 `;
