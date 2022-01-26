@@ -48,7 +48,6 @@ const Login = () => {
     initialValues,
     validationSchema,
     onSubmit: async values => {
-      console.log('values', values);
       dispatch(
         AuthActions.loginAction(
           {

@@ -5,21 +5,9 @@ import { Column, Container, Divider, Typography } from '../../../../components';
 export const ReviewText = styled(Typography)`
   font-family: normal normal 900 32px/15px Mulish;
   letter-spacing: 1.28px;
-  /*
-    font-size: 32px;
-  font-weight: bold;
-  letter-spacing: 0.88px;
-  letter-spacing: 1.28px;
-  color: #242424;
-  opacity: 1;
-  font-family: normal normal bold 32px/15px Mulish;
-  letter-spacing: 1.28px;
-  color: #242424;
-  
-  */
 `;
 export const OrderDetailsText = styled(ReviewText)`
-  font-family: normal normal 900 32px/15px Mulish;
+  font-family: normal normal 900 32px/15px mulish;
   letter-spacing: 1.28px;
   font-size: 2rem;
   font-weight: bold;
@@ -36,6 +24,7 @@ export const ChangeText = styled(Link)`
   color: #707070;
   opacity: 1;
   text-decoration: underline;
+  font-family: mulish;
 `;
 
 interface IBoxNumber {
@@ -186,7 +175,7 @@ export const RightSectionPlace = styled(RightSectionTowReview)`
   }
 `;
 
-export const ShapeAddress = styled('p')`
+export const ShapeAddress = styled(Typography)`
   font-size: 1.2rem;
   margin-bottom: 2rem;
   font-weight: bold;
@@ -194,7 +183,7 @@ export const ShapeAddress = styled('p')`
   letter-spacing: 1.28px;
   color: #242424;
   opacity: 1;
-  font-family: normal normal bold 32px/15px Mulish;
+  font-family: mulish;
   letter-spacing: 1.28px;
   color: #242424;
 `;
@@ -292,30 +281,32 @@ export const OrderPriceWrapper = styled('div')`
   align-items: start;
 `;
 
-export const TextTitle = styled('p')`
+export const TextTitle = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
   color: #707070;
   opacity: 1;
   margin-left: 10px;
-  font-family: normal normal normal 22px/30px Mulish;
+  font-family: mulish;
   color: #707070;
 `;
 
-export const PriceText = styled('p')`
+export const PriceText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
   color: ${props => props.theme?.background?.darkGrey};
   padding-left: 10px;
+  font-family: mulish;
 `;
-export const TotalPriceText = styled('p')`
+export const TotalPriceText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
   color: #242424;
   opacity: 1;
+  font-family: mulish;
   padding-left: 10px;
 `;
-export const CountText = styled('p')`
+export const CountText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
   color: #707070;

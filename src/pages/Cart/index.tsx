@@ -14,6 +14,7 @@ import Subtotal from './Sections/Subtotal';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
 import { getProfile } from '../../redux/User/action';
+import { OrfferSection } from '../User/ReviewOrder/Sections/style';
 
 const Cart = () => {
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
@@ -47,9 +48,9 @@ const Cart = () => {
 
   console.log('cart', cart.user?.cart?.items);
   return (
-    <>
+    <OrfferSection style={{ marginTop: '20px' }}>
       <PathNavigate name="Shopping Cart" />
-      {!cartItems.length ? (
+      {!cart.user?.cart.items.length ? (
         <EmptyCart />
       ) : cart.isLoading ? (
         <SpinnerContainer />
@@ -67,12 +68,13 @@ const Cart = () => {
             background-color="#F2F2F2"
             border-radius="16px"
             margin-left="2em"
+            height="50%"
           >
-            <Subtotal />
+            <Subtotal total={4} />
           </TotalContainer>
         </CartContainer>
       )}
-    </>
+    </OrfferSection>
   );
 };
 

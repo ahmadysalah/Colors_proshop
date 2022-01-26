@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { Container, SpinnerContainer, Typography } from '../../../components';
 import ComplexCard from '../../../components/Card/productCard';
+import { DeviderTitle } from '../../../components/DeviderTitle/deviderTitle';
 import { getProducts } from '../../../redux/Product/action';
 import { TAllActionProduct } from '../../../redux/Product/type';
 import { AppState } from '../../../redux/store';
@@ -30,15 +31,20 @@ const SerachPage = () => {
   return allProducts.isLoading ? (
     <SpinnerContainer />
   ) : (
-    <Container background="F7F8FC">
-      <Typography
-        style={{ justifyContent: 'start' }}
-        fontSize="32"
-        color="#242424"
-        fontWeight="700"
+    <Container
+      background="F7F8FC"
+      direction="column"
+      align-items="center"
+      width="100%"
+    >
+      <Container
+        direction="row"
+        width="85.4%"
+        marginBottom="30px"
+        alignItems="flex-start"
       >
-        Search Results...
-      </Typography>
+        <DeviderTitle title="Featured Product" position="center" />
+      </Container>
       <CardsBox>
         {allProducts?.allProduct?.products?.map(x => (
           <ComplexCard {...x} image={x.images[0] || ''} />

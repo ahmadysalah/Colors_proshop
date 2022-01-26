@@ -19,7 +19,12 @@ const Value = styled.div`
   border: 1px solid #eeeeee;
 `;
 
-const Counter: React.FC<objectType> = ({ max, min, onFinish }) => {
+interface IProps {
+  max: number;
+  min: number;
+  onFinish: any;
+}
+const Counter: React.FC<any> = ({ max, min, onFinish }: IProps) => {
   const [number, setNumber] = useState(0);
 
   const increase = () => {

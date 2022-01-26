@@ -67,7 +67,7 @@ const CartList = ({ data }: IProps) => {
         </ItemTitle>
       </ImgContainer>
       <WrapCounter>
-        <Counter />
+        <Counter min={0} max={8} />
       </WrapCounter>
       <Typography
         children={String(`$${product.price}`)}

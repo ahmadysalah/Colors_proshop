@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../../../assets/Images/card.png';
 import { Column, Row, Typography } from '../../../components';
 import {
@@ -35,6 +35,8 @@ import { ReviewTow } from './Sections/reviewtow';
 import { AppState } from '../../../redux/store';
 import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
+import { getProfile } from '../../../redux/User/action';
+import { ActionCartType } from '../../../redux/Cart/type';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -44,11 +46,16 @@ const initialValues: IShippingSchema = {
 };
 
 const ReviewOrder = () => {
-  const [stepperNumber, setstepperNumber] = useState(1);
+  const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
   // const stripe: any = useStripe();
   // const elements = useElements();
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const cart = useSelector((state: AppState) => state.user.myProfile);
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+  console.log('this is order first step', cart);
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
@@ -62,20 +69,6 @@ const ReviewOrder = () => {
         }),
       );
       setstepperNumber(1);
-
-      // const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
-      //   type: 'card',
-      //   card: elements?.getElement(CardElement),
-      // });
-      // // const { error, paymentMethod } = await stripe.createPaymentMethod({
-      // //   type: 'card',
-      // //   card: elements.getElement(CardElement),
-      // // });
-      // console.log({
-      //   error,
-      //   paymentMethod,
-      //   values,
-      // });
     },
   });
 
@@ -124,6 +117,7 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.country}
+                        style={{ fontFamily: 'mulish' }}
                       />
                       <InputController
                         name="city"
@@ -136,6 +130,7 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.city}
                         marginLeft="10%"
+                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     <WrapperRowInput>
@@ -149,6 +144,7 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.zip}
+                        style={{ fontFamily: 'mulish' }}
                       />
                       {/*
                         47%
@@ -164,6 +160,7 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.address}
                         marginLeft="10%"
+                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     {/* <ShapeAddress>Payment Details</ShapeAddress>
@@ -182,7 +179,10 @@ const ReviewOrder = () => {
                       </Typography>
                     )}
                     <Row JC="flex-end">
-                      <RevieworderButton type="submit">
+                      <RevieworderButton
+                        style={{ fontFamily: 'mulish' }}
+                        type="submit"
+                      >
                         Review order
                       </RevieworderButton>
                     </Row>
@@ -192,8 +192,12 @@ const ReviewOrder = () => {
 
               <RightSection>
                 <HeaderTitleRight>
-                  <ShapeAddress>Order Details</ShapeAddress>
-                  <ChangeText to="/cahnge">change</ChangeText>
+                  <ShapeAddress style={{ fontFamily: 'mulish' }}>
+                    Order Details
+                  </ShapeAddress>
+                  <ChangeText style={{ fontFamily: 'mulish' }} to="/cahnge">
+                    change
+                  </ChangeText>
                 </HeaderTitleRight>
                 <Column>
                   <InnerOverFlow>
