@@ -5,6 +5,7 @@ import { AppState } from '../store';
 import Api from '../../utils/Api/axios';
 import { EnumAdminAction } from './constant';
 import { ICreateProduct, IProducts, TAllActionAdmin } from './type';
+import { formDataCstom } from '../../utils/helper/formData';
 
 //  ?keyword=iphone&pageNumber=1
 export const getAllUser = (pageNumber?: number) => {
@@ -112,19 +113,26 @@ export const addProduct = (product: ICreateProduct) => {
     });
 
     // will  be  uplude  image  4 will  return  promise  it  call  api
+    console.log('test lemmmee enter');
+
+    const getImageURL = async (file: File): Promise<string> => {
+      const { data } = await Api.post('/upload', formDataCstom(file));
+      return data as string;
+    };
     const imageUpload = product.images.map(image => {
-      return Api.post('/upload', () => {
-        // name  lable  in Api is image
-        return new FormData().append('image', image);
-      });
+      return getImageURL(image);
     });
 
+    console.log('test lemmmee enter 2222', imageUpload);
+
     // just  add  the  roduct  and  link  with  user  id
-    const urlImages = await Promise.all<AxiosResponse>(imageUpload);
+    // imageUpload as unknown as Array<string>/
+    console.log('product', product.categories);
     const data = {
       ...product,
-      images: urlImages.map(urlImage => urlImage.data),
+      images: ['1', '2'], // urlImages.map(urlImage => urlImage.data),
       user: getState().auth.user._id,
+      colors: ['black'],
     } as IProducts & {
       _id: string;
     };
@@ -180,8 +188,6 @@ export const delateProduct = (id: string) => {
           },
         });
       }
-
-      //   history.push('/profile');
     } catch (e: any) {
       dispatch({
         type: EnumAdminAction.DELETE_USER_START_FILL,

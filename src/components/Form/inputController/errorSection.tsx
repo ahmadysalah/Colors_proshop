@@ -13,9 +13,13 @@ interface Props {
 }
 
 export const ErrorSection = ({ touched, errors }: Props) => {
-  if (touched && errors) {
+  if (touched || errors) {
     return (
-      <Row JC="space-between" item="center" style={{ marginTop: '30px' }}>
+      <Row
+        JC="space-between"
+        item="center"
+        style={{ marginTop: '3px', color: 'red', fontSize: '14px' }}
+      >
         <p className="text-xs">{errors}</p>
         <BiErrorAlt />
       </Row>

@@ -1,13 +1,34 @@
 import React from 'react';
 import { Container, Typography, InputController } from '../../../components';
+// import { ErrorSection } from '../../../components/Form/inputController/errorSection';
 import {
   FiledWrapper,
   Label,
   InputWrapper,
 } from '../../../components/Form/inputController/style';
-import { FormContainer, InputsContainer, Textarea } from '../style';
+import {
+  FormContainer,
+  InputsContainer,
+  SelectStyle,
+  Textarea,
+} from '../style';
 
-const ProductDetails = () => {
+const ProductDetails = ({ formik, categories }: any) => {
+  const colourStyles = {
+    control: styles => ({
+      ...styles,
+      backgroundColor: '#F2F2F2',
+      height: '100%',
+      overflow: 'auto',
+      boxShadow: 'none',
+      border: 'none',
+      borderRadius: '6px',
+    }),
+    option: styles => ({
+      ...styles,
+      backgroundColor: '#F2F2F2',
+    }),
+  };
   return (
     <FormContainer direction="column" margin-left="2em" width="calc(70% - 2em)">
       <Container direction="column" justify-Content="space-between">
@@ -23,63 +44,117 @@ const ProductDetails = () => {
 
         <InputsContainer>
           <InputController
-            name="productName"
-            label="Product name"
+            name="name"
+            label="Product Name"
             type="text"
             isRequired
-            touched
+            value={formik.values.name}
+            onChange={formik.handleChange}
+            // errors={formik.errors.name}
           />
           <InputController
-            name="productBrand"
+            name="brand"
             label="Product Brand"
             type="text"
             isRequired
-            touched
+            value={formik.values.brand}
+            onChange={formik.handleChange}
+            // errors={formik.errors.brand}
             marginLeft="0.5em"
           />
         </InputsContainer>
 
         <InputsContainer justify-Content="space-between">
-          <InputController
-            name="productId"
-            label="Product ID"
-            type="text"
-            isRequired
-            touched
-          />
-          <InputController
-            name="productCategory"
-            label="Product Category"
-            type="text"
-            isRequired
-            touched
-            marginLeft="0.5em"
-          />
+          {formik.values.id ? (
+            <InputController
+              name="id"
+              label="Product ID"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.id}
+              disabled
+            />
+          ) : (
+            <FiledWrapper>
+              <Label htmlFor="select">Product Colors</Label>
+              <InputWrapper>
+                <SelectStyle
+                  id="select"
+                  name="colors"
+                  styles={colourStyles}
+                  defaultInputValue={formik.values.colors}
+                  onChange={(selectedOption: any) => {
+                    const col = selectedOption.map(x => x.value);
+                    formik.setFieldValue('colors', col);
+                  }}
+                  isMulti
+                  options={[
+                    { value: 'Pink', label: 'Pink' },
+                    { value: 'Silver', label: 'Silver' },
+                    { value: 'Gold', label: 'Gold' },
+                  ]}
+                />
+              </InputWrapper>
+              {/* <ErrorSection errors={formik.errors.colors} /> */}
+            </FiledWrapper>
+          )}
+          <FiledWrapper style={{ marginLeft: '0.5em' }}>
+            <Label htmlFor="select">Product Category</Label>
+            <InputWrapper>
+              <SelectStyle
+                id="select"
+                name="categories"
+                styles={colourStyles}
+                defaultInputValue={formik.values.categories}
+                onChange={(selectedOption: any) => {
+                  const cat = selectedOption.map(x => x.value);
+                  formik.setFieldValue('categories', cat);
+                }}
+                isMulti
+                options={categories?.categories?.map(el => ({
+                  value: el?.name,
+                  label: el?.name,
+                }))}
+              />
+            </InputWrapper>
+            {/* <ErrorSection errors={formik.errors.categories} /> */}
+          </FiledWrapper>
         </InputsContainer>
 
         <Container>
           <FiledWrapper style={{ height: 'auto', marginBottom: '1.5em' }}>
             <Label htmlFor="textarea">Product Description</Label>
             <InputWrapper>
-              <Textarea id="textarea" name="productDesc" rows={5} />
+              <Textarea
+                id="textarea"
+                name="description"
+                rows={5}
+                value={formik.values.description}
+                onChange={formik.handleChange}
+              />
             </InputWrapper>
+            {/* <ErrorSection errors={formik.errors.description} /> */}
           </FiledWrapper>
         </Container>
 
         <InputsContainer justify-Content="space-between">
           <InputController
-            name="productStock"
+            name="countInStock"
             label="Count in Stock"
             type="number"
             isRequired
-            touched
+            value={formik.values.countInStock}
+            onChange={formik.handleChange}
+            // errors={formik.errors.countInStock}
           />
           <InputController
-            name="productPrice"
+            name="price"
             label="Price"
             type="number"
             isRequired
-            touched
+            value={formik.values.price}
+            onChange={formik.handleChange}
+            // errors={formik.errors.price}
             marginLeft="0.5em"
           />
         </InputsContainer>
