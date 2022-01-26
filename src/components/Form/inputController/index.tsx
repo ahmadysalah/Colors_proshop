@@ -34,14 +34,13 @@ export const InputController = ({ ...props }: InputControllerProps) => {
           )}
 
           <Input
-            isError={!!props.errors?.length}
+            isError={!props.errors?.length}
             onChange={props.onChange}
             type={props.type}
             defaultValue={props.defaultValue}
             value={props.value}
             id={props.name}
             name={props.name}
-            onBlur={props.onBlur}
             required={props.isRequired}
             placeholder={props.placeholder}
             autoComplete="off"
