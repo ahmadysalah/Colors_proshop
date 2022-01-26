@@ -112,26 +112,21 @@ export const addProduct = (product: ICreateProduct) => {
       type: EnumAdminAction.CREATE_PRODUCTS_START,
     });
 
-    // will  be  uplude  image  4 will  return  promise  it  call  api
-    console.log('test lemmmee enter');
-
-
-    const imageUpload = product.images.map(image => {
-      return Api.post('/upload', formDataCstom(image));
-    });
-    let  images=Promise.all<AxiosResponse>(imageUpload)
-
-    const data = {
-      ...product,
-      images: images,
-      colors: ['black'],
-    }
-    };
-
     try {
-      const response = await Api.post<IProducts>('/products', data);
+      const imageUpload = product.images.map(image => {
+        return Api.post('/upload', formDataCstom(image));
+      });
+      const imagesUrl = await Promise.all<AxiosResponse>(imageUpload);
+      const images = imagesUrl.map(x => x.data) as Array<string>;
+
+      const data = {
+        ...product,
+        images,
+        colors: ['black'],
+      };
+
+      const response = await Api.post<any>('/products', data);
       if (response.status === 201) {
-        console.log('response', response);
         dispatch({
           type: EnumAdminAction.DELETE_USER_START_SUCCESS,
           payload: {
@@ -141,8 +136,6 @@ export const addProduct = (product: ICreateProduct) => {
       } else {
         throw new Error('some  error habbend  in the Top  reated  peoduct');
       }
-
-      //   history.push('/profile');
     } catch (e: any) {
       dispatch({
         type: EnumAdminAction.DELETE_USER_START_FILL,
