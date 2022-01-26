@@ -15,7 +15,7 @@ export const CloseIcon = styled.i`
   top: 17px;
   right: 1em;
   color: #242424;
-  &: hover {
+  &:hover {
     cursor: pointer;
   }
 `;

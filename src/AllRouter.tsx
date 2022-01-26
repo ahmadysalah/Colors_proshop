@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { lazy } from 'react';
 import Loadable from './components/Loadable';
@@ -34,6 +34,7 @@ export const AllRouter = () => {
       <Route path="/productDetails/:id" element={<ProductDetails />} />
       <Route path="/search" element={<Search />} />
       <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

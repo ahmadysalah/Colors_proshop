@@ -120,7 +120,7 @@ export interface ICreateOrderStart extends Action<string> {
 export interface ICreateOrderSuccess extends Action<string> {
   type: EnumOrderAction.CREATE_ORDER_SUCCESS;
   payload: {
-    orders: IOrders;
+    order: IOrders;
   };
 }
 

@@ -161,7 +161,7 @@ export const OrderReducer = (
         createOrder: {
           isLoading: false,
           success: true,
-          orders: action.payload.orders,
+          orders: action.payload.order,
         },
       };
     case EnumOrderAction.CREATE_ORDER_FILL:

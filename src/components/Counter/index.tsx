@@ -19,15 +19,24 @@ const Value = styled.div`
   border: 1px solid #eeeeee;
 `;
 
-const Counter = () => {
+interface IProps {
+  max: number;
+  min: number;
+  onFinish: any;
+}
+const Counter: React.FC<any> = ({ max, min, onFinish }: IProps) => {
   const [number, setNumber] = useState(0);
 
   const increase = () => {
-    setNumber(prev => prev + 1);
+    const newNumber = number + 1;
+    setNumber(newNumber);
+    onFinish(newNumber);
   };
 
   const decrease = () => {
-    setNumber(prev => prev - 1);
+    const newNumber = number - 1;
+    setNumber(newNumber);
+    onFinish(newNumber);
   };
 
   return (
@@ -40,6 +49,7 @@ const Counter = () => {
           background="#FFFFFF"
           padding="none"
           onClick={decrease}
+          disabled={number === min}
         >
           <Icon icon={<AiOutlineMinus />} />
         </Button>
@@ -51,6 +61,7 @@ const Counter = () => {
           background="#FFFFFF"
           padding="none"
           onClick={increase}
+          disabled={number === max}
         >
           <Icon icon={<AiOutlinePlus />} />
         </Button>

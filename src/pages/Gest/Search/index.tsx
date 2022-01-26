@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
-import { Container } from '../../../components';
+import { Container, SpinnerContainer, Typography } from '../../../components';
 import ComplexCard from '../../../components/Card/productCard';
+import { DeviderTitle } from '../../../components/DeviderTitle/deviderTitle';
 import { getProducts } from '../../../redux/Product/action';
 import { TAllActionProduct } from '../../../redux/Product/type';
 import { AppState } from '../../../redux/store';
+import { CardsBox } from './style';
 
 const SerachPage = () => {
   const { search } = useLocation();
@@ -17,24 +19,37 @@ const SerachPage = () => {
   ) as string;
   const dispatch =
     useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
-  const searchProducts = useSelector(
+  const allProducts = useSelector(
     (state: AppState) => state.product.allProducts,
   );
   useEffect(() => {
     dispatch(getProducts(keyword));
-  }, [keyword]);
+  }, [keyword, dispatch]);
 
-  console.log('searchProducts', searchProducts.allProduct);
+  console.log('searchProducts', allProducts.allProduct);
 
-  return (
-    <Container>
-      aaaaaa
-      {searchProducts.allProduct?.products.map(x => (
-        <ComplexCard
-          {...x}
-          image={`https://proshop-ms.herokuapp.com/${x.images[0]}`}
-        />
-      ))}
+  return allProducts.isLoading ? (
+    <SpinnerContainer />
+  ) : (
+    <Container
+      background="F7F8FC"
+      direction="column"
+      align-items="center"
+      width="100%"
+    >
+      <Container
+        direction="row"
+        width="85.4%"
+        marginBottom="30px"
+        alignItems="flex-start"
+      >
+        <DeviderTitle title="Featured Product" position="center" />
+      </Container>
+      <CardsBox>
+        {allProducts?.allProduct?.products?.map(x => (
+          <ComplexCard {...x} image={x.images[0] || ''} />
+        ))}
+      </CardsBox>
     </Container>
   );
 };

@@ -48,13 +48,24 @@ export const Slider = ({ data }: IProps) => {
         name={item.name}
         price={item.price}
         description={item.description}
-        image="https://proshop-ms.herokuapp.com/images/playstation.jpg"
+        image={item.images[0]}
       />
     ));
 
   return (
-    <Container direction="column" padding="0" background="#F2F2F2">
-      <Container direction="column" width="90%" margin="auto" padding="0">
+    <Container
+      direction="column"
+      padding="0"
+      background="#F2F2F2"
+      overflow="hidden"
+    >
+      <Container
+        direction="column"
+        width="90%"
+        margin="auto"
+        padding="0"
+        overflow="hidden"
+      >
         <SliderSection>
           <SwipeableViews
             index={sliderIndex}
@@ -69,6 +80,7 @@ export const Slider = ({ data }: IProps) => {
           background="#F2F2F2"
           padding="1em"
           margin="auto"
+          width="auto"
         >
           <Arrow isLeft onClick={handleRight}>
             &#8250;

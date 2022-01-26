@@ -1,6 +1,15 @@
 import { Action } from 'redux';
 import { EnumProductsAction } from './constant';
 
+export interface IReview {
+  _id: string;
+  name: string;
+  rating: number;
+  comment: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface IProducts {
   images: Array<string>;
   colors: Array<string>;
@@ -15,15 +24,11 @@ export interface IProducts {
   description: string;
   brand: string;
   user: string;
-  reviews: [
-    {
-      rating: number;
-      comment: string;
-    },
-  ];
+  reviews: Array<IReview>;
   __v: number;
   createdAt: string;
   updatedAt: string;
+  size: string;
 }
 
 export interface IGetAllProduct {

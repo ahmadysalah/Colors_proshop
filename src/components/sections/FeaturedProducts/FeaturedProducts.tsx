@@ -28,11 +28,6 @@ const cssStyle: CSSProperties = {
   height: '100%',
 };
 
-const cssWrapper: CSSProperties = {
-  width: '100%',
-  height: '90%',
-  background: '#F7F8FC',
-};
 const DotsStyles: CSSProperties = {
   color: '#707070',
   zIndex: 2,
@@ -83,7 +78,6 @@ export const FeaturedProduct = ({ data }: IProps) => {
       </RowInnerSlider>
     ));
   };
-  console.log('dflkjflflkj0', data);
 
   const fetchFeathers = {
     isLoading: false,
@@ -107,7 +101,12 @@ export const FeaturedProduct = ({ data }: IProps) => {
           {getSlider()}
         </SwipeableViews>
       </Container>
-      <Container flexDirection="row" background="#F7F8FC" padding="1em">
+      <Container
+        flexDirection="row"
+        background="#F7F8FC"
+        padding="1em"
+        width="auto"
+      >
         {Array(getSlider().length)
           .fill(0)
           .map((x, i) => (
@@ -123,29 +122,3 @@ export const FeaturedProduct = ({ data }: IProps) => {
     </Container>
   );
 };
-
-// <Container
-// direction="column"
-// padding="0"
-// background="#F7F8FC"
-// width="90%"
-// margin="auto"
-// >
-// <DeviderTitle title="Featured Product" position="center" />
-// <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
-//   {getSlider()}
-// </SwipeableViews>
-
-// <Container flexDirection="row" background="#F7F8FC" padding="1em">
-//   {Array(getSlider().length)
-//     .fill(0)
-//     .map((x, i) => (
-//       <Dot
-//         style={DotsStyles}
-//         width="14px"
-//         isGrey={sliderIndex !== i}
-//         onClick={() => setSliderIndex(i)}
-//       />
-//     ))}
-// </Container>
-// </Container>

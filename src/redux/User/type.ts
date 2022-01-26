@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { IProducts } from '../Product/type';
 import { IUser } from '../Auth/type';
 import { EnumUserAction } from './constant';
 
@@ -14,9 +15,15 @@ export interface IUserProfile {
   cart: ICart;
 }
 export interface ICart {
-  items: Array<any>;
+  items: Array<IItemCart>;
   totalQty: number;
   totalPrice: number;
+}
+
+export interface IItemCart {
+  itemTotalPrice: number;
+  product: IProducts;
+  qty: number;
 }
 
 export interface IStateUser {

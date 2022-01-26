@@ -16,9 +16,9 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
     });
     let search = '';
     if (keyword && pageNumber) {
-      search = `?keyword${keyword}&pageNumber=${pageNumber}`;
+      search = `?keyword=${keyword}&pageNumber=${pageNumber}`;
     } else if (keyword) {
-      search = `?keyword${keyword}`;
+      search = `?keyword=${keyword}`;
     } else if (pageNumber) {
       search = `?pageNumber=${pageNumber}`;
     }
@@ -141,8 +141,6 @@ export const getAlCategory = () => {
             product: response.data,
           },
         });
-
-        console.log('allCatogory.categories', response.data);
       } else {
         throw new Error('some  error habbend  in th e Top  reated  peoduct');
       }

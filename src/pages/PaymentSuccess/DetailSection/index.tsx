@@ -1,12 +1,15 @@
 import React from 'react';
 import { Container, Typography } from '../../../components';
 import { Button } from '../../../components/Button/ButtonStyle';
+import { ButtonHero } from '../../../components/Slider/SliderStyle';
+import { ButtonKeep } from './style';
 
 interface IDetailProps {
   orderNumber?: string;
   shippingAddress?: string;
   orderItem?: string;
 }
+
 const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
   return (
     <>
@@ -22,20 +25,31 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           direction="column"
           margin-top="31px"
           justify-content="space-between"
+          padding="40px"
         >
-          <Typography variant="h2" bold margin-bottom="38px">
+          <Typography
+            variant="h2"
+            bold
+            margin-bottom="30px"
+            fontFamily="mulish"
+          >
             Payment Success !
           </Typography>
-          <Typography variant="h3" bold>
+          <Typography variant="h3" bold fontFamily="mulish">
             Order number
           </Typography>
-          <Typography variant="h3" bold>
+          <Typography variant="h3" bold fontFamily="mulish">
             Shipping address
           </Typography>
-          <Typography variant="h3" bold>
+          <Typography variant="h3" bold fontFamily="mulish">
             Order item
           </Typography>
-          <Typography variant="p" width="50%" margin-bottom="31px">
+          <Typography
+            variant="p"
+            width="50%"
+            margin-bottom="31px"
+            fontFamily="mulish"
+          >
             An email will be sent to your email address contains order
             confirmation and tracking code
           </Typography>
@@ -46,21 +60,23 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           height="140px"
           margin-top="20px"
         >
-          <Typography variant="p" font-size="16px">
+          <Typography variant="p" font-size="16px" fontFamily="mulish">
             {orderNumber}
           </Typography>
-          <Typography variant="p" font-size="16px">
+          <Typography variant="p" font-size="16px" fontFamily="mulish">
             {shippingAddress}
           </Typography>
-          <Typography variant="p" font-size="16px">
+          <Typography variant="p" font-size="16px" fontFamily="mulish">
             {orderItem}
           </Typography>
         </Container>
       </Container>
-      <Container padding="0" width="16.8%" float="right" margin-right="6.3%">
-        <Button width="324px" background="#FCDD06" color="#242424">
-          <Typography font-size="24px">Keep Shopping</Typography>
-        </Button>
+      <Container padding="0" width="14%" float="right" margin-right="6%">
+        <ButtonKeep to="/">
+          <Typography font-size="24px" fontFamily="mulish">
+            Keep Shopping
+          </Typography>
+        </ButtonKeep>
       </Container>
     </>
   );

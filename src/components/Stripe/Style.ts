@@ -7,9 +7,9 @@ import {
 } from '@stripe/react-stripe-js';
 
 export const StripeCardInput = styled(CardNumberElement)`
-  border: 1px solid #e6e6e6;
+  border: 1px solid #131313;
   padding: 10px;
-  width: 20rem;
+  width: 22rem;
   font-size: 1.2rem;
   font-family: 'Roboto', sans-serif;
   border-radius: 5px;
