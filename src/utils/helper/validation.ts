@@ -47,7 +47,7 @@ export const schemaValidationSignUp =
         .when('password', {
           is: (password: string) => !!(password && password.length > 0),
           then: Yup.string().oneOf(
-            [Yup.ref('password')],
+            [Yup.ref('password'), null],
             "Password doesn't match",
           ),
         }),
