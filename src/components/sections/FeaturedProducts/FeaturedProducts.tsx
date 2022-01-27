@@ -9,7 +9,6 @@ import ComplexCard from '../../Card/productCard';
 import { Dot } from '../../Slider/SliderStyle';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
 import { IProducts } from '../../../redux/Product/type';
-import Play from '../../../assets/Images/play.jpg';
 
 const cssStyle: CSSProperties = {
   position: 'relative',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GrFormClose } from 'react-icons/gr';
 import { Counter, Image, Typography } from '../../../components';
 import { IItemCart } from '../../../redux/User/type';
@@ -19,6 +19,12 @@ const CartList = ({ data }: IProps) => {
   const handleRemoveFormCart = (id: string) => {
     alert(`The item removed from cart is:${id} `);
   };
+  const [total, setTotal] = useState(0);
+  console.log(data, 'joijjiiiiiiiiiiiiiiiiiiiiiiiii');
+
+  useEffect(() => {
+    setTotal(prev => prev + itemTotalPrice);
+  }, [itemTotalPrice]);
   return (
     <ItemContainer
       background-color="#F2F2F2"

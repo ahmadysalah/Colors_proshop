@@ -32,14 +32,15 @@ const ComplexCard = ({ ...props }: IProducts) => {
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
 
-  const AddToCart = () => {
+  const addToCart = () => {
+    console.log('hiiiiii');
     dispatch(
       upduteActionCart(
         {
           productId: props._id,
           qty: 1,
         },
-        () => navigation('/cart', { state: 1 }),
+        () => navigation('/cart'),
       ),
     );
   };
@@ -113,7 +114,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
           <SaveBtn>
             <BsBookmark size="24px" />
           </SaveBtn>
-          <AddCart>Add to cart</AddCart>
+          <AddCart onClick={addToCart}>Add to cart</AddCart>
         </Actions>
       </Container>
     </MainCard>

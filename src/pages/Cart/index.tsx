@@ -20,12 +20,15 @@ import { OrfferSection } from '../User/ReviewOrder/Sections/style';
 const Cart = () => {
   // const { state } = useLocation();
 
+  const [TotalPrice, setTotalPrice] = useState(0);
+
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const cart = useSelector((states: AppState) => states.user.myProfile);
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
 
+  console.log(TotalPrice, 'lklkkkkkkkkkkkkkkkkkkkk');
   return (
     <OrfferSection style={{ marginTop: '20px' }}>
       <PathNavigate name="Shopping Cart" />
@@ -33,7 +36,9 @@ const Cart = () => {
         <Container direction="column" width="80%">
           <Container direction="column" overflow="auto" height="500px">
             {cart.user?.cart?.items.map((item, i) => (
-              <CartList data={item} key={i} />
+              <>
+                <CartList data={item} key={i} />
+              </>
             ))}
           </Container>
         </Container>
@@ -45,7 +50,13 @@ const Cart = () => {
             margin-left="2em"
             height="50%"
           >
-            <Subtotal total={4} />
+            <Subtotal
+              total={cart.user?.cart?.items.reduce(
+                (prev: any, current) =>
+                  (current += current + prev.itemTotalPrice),
+                0,
+              )}
+            />
           </TotalContainer>
         </Container>
       </Container>
