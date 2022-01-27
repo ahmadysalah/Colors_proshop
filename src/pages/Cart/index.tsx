@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import {
   CartContainer,
   GlobalStyle,
@@ -8,7 +9,7 @@ import {
   TotalContainer,
 } from './styles';
 import EmptyCart from './Sections/EmptyCart';
-import { PathNavigate, SpinnerContainer } from '../../components';
+import { Container, PathNavigate, SpinnerContainer } from '../../components';
 import CartList from './Sections/CartList';
 import Subtotal from './Sections/Subtotal';
 import { AppState } from '../../redux/store';
@@ -17,54 +18,28 @@ import { getProfile } from '../../redux/User/action';
 import { OrfferSection } from '../User/ReviewOrder/Sections/style';
 
 const Cart = () => {
+  // const { state } = useLocation();
+
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const cart = useSelector((states: AppState) => states.user.myProfile);
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
 
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 'One',
-      name: 'Apple iPhone 11 Pro 256GB Memory',
-      price: 5000,
-      imageUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIC2m4o5Ff_s_BOIL0-y7uq8m_Kqrn0Yq1Q&usqp=CAU',
-      description: 'productOne description',
-      quantity: 5,
-      isDescount: false,
-    },
-    {
-      id: 'Two',
-      name: 'Apple Airpods Wireless Bluetooth Headset',
-      price: 3700,
-      imageUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIC2m4o5Ff_s_BOIL0-y7uq8m_Kqrn0Yq1Q&usqp=CAU',
-      description: 'productOne description',
-      quantity: 5,
-      isDescount: true,
-    },
-  ]);
-
-  console.log('cart', cart.user?.cart?.items);
   return (
     <OrfferSection style={{ marginTop: '20px' }}>
       <PathNavigate name="Shopping Cart" />
-      {!cart.user?.cart.items.length ? (
-        <EmptyCart />
-      ) : cart.isLoading ? (
-        <SpinnerContainer />
-      ) : (
-        <CartContainer align-items="flex-start">
-          <ListContainer direction="column" width="70%">
-            {cart.user?.cart?.items.map(item => (
-              <CartList data={item} key={item.product._id} />
+      <Container direction="row" width="85%" margin="10px auto">
+        <Container direction="column" width="80%">
+          <Container direction="column" overflow="auto" height="500px">
+            {cart.user?.cart?.items.map((item, i) => (
+              <CartList data={item} key={i} />
             ))}
-          </ListContainer>
-
+          </Container>
+        </Container>
+        <Container direction="column" width="30%">
           <TotalContainer
             direction="column"
-            width="30%"
             background-color="#F2F2F2"
             border-radius="16px"
             margin-left="2em"
@@ -72,10 +47,33 @@ const Cart = () => {
           >
             <Subtotal total={4} />
           </TotalContainer>
-        </CartContainer>
-      )}
+        </Container>
+      </Container>
     </OrfferSection>
   );
 };
 
 export default Cart;
+
+// {cart.isLoading ? (
+//   <SpinnerContainer />
+// ) : (
+//   <CartContainer align-items="flex-start">
+//     <ListContainer direction="column" width="70%">
+//       {cart.user?.cart?.items.map(item => (
+//         <CartList data={item} key={item.product._id} />
+//       ))}
+//     </ListContainer>
+
+//     <TotalContainer
+//       direction="column"
+//       width="30%"
+//       background-color="#F2F2F2"
+//       border-radius="16px"
+//       margin-left="2em"
+//       height="50%"
+//     >
+//       <Subtotal total={4} />
+//     </TotalContainer>
+//   </CartContainer>
+// )}

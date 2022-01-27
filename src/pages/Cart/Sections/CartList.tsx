@@ -17,12 +17,12 @@ interface IProps {
 const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
   const handleRemoveFormCart = (id: string) => {
-    console.log('The item removed from cart is: ', id);
+    alert(`The item removed from cart is:${id} `);
   };
   return (
     <ItemContainer
       background-color="#F2F2F2"
-      height="242px"
+      height="180px"
       border-radius="16px"
       position="relative"
       padding="1em"
@@ -32,10 +32,10 @@ const CartList = ({ data }: IProps) => {
       <CloseIcon onClick={() => handleRemoveFormCart(product._id)}>
         <GrFormClose />
       </CloseIcon>
-      {product.discount && (
+      {product.discount ? (
         <OldPrice>
           <Typography
-            children="$999.97"
+            children={`${product.price}`}
             variant="span"
             color="#707070"
             fontSize="24px"
@@ -43,8 +43,7 @@ const CartList = ({ data }: IProps) => {
             text-decoration="line-through"
           />
         </OldPrice>
-      )}
-
+      ) : null}
       <ImgContainer
         width="60%"
         align-items="start"
@@ -67,10 +66,10 @@ const CartList = ({ data }: IProps) => {
         </ItemTitle>
       </ImgContainer>
       <WrapCounter>
-        <Counter min={0} max={8} />
+        <Counter min={0} max={8} addQnt={qty} />
       </WrapCounter>
       <Typography
-        children={String(`$${product.price}`)}
+        children={String(`$${product.price - product.discount}`)}
         variant="h2"
         fontSize="38px"
         width="auto"

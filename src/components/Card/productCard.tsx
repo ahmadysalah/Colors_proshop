@@ -1,7 +1,8 @@
-import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { BsBookmark } from 'react-icons/bs';
-import img from '../../assets/Images/defaultProduct.png';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
 import Typography from '../Typography';
 import {
   AddCart,
@@ -12,6 +13,9 @@ import {
   SaveBtn,
 } from './cardStyles';
 import { Container, Image } from '..';
+import { AppState } from '../../redux/store';
+import { ActionCartType } from '../../redux/Cart/type';
+import { upduteActionCart } from '../../redux/Cart/action';
 
 export interface IProducts {
   image: string;
@@ -24,6 +28,20 @@ export interface IProducts {
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
+  const navigation = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+
+  const AddToCart = () => {
+    dispatch(
+      upduteActionCart(
+        {
+          productId: props._id,
+          qty: 1,
+        },
+        () => navigation('/cart', { state: 1 }),
+      ),
+    );
+  };
   const disCount = () => {
     const percentage = (props.discount / props.price) * 100;
     return Math.ceil(percentage);
@@ -81,7 +99,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
         <SaveBtn>
           <BsBookmark size="24px" />
         </SaveBtn>
-        <AddCart>Add to cart</AddCart>
+        <AddCart onClick={AddToCart}>Add to cart</AddCart>
       </Container>
     </MainCard>
   );

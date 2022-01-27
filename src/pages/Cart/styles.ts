@@ -22,8 +22,8 @@ export const CloseIcon = styled.i`
 
 export const OldPrice = styled.div`
   position: absolute;
-  top: 4em;
-  right: 1em;
+  top: 3em;
+  right: 1.2em;
   @media only screen and (max-width: 767px) {
     top: unset;
     bottom: 1.6em;

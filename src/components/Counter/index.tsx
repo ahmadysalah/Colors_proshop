@@ -23,14 +23,13 @@ interface IProps {
   max: number;
   min: number;
   onFinish: any;
+  addQnt: number;
 }
-const Counter: React.FC<any> = ({ max, min, onFinish }: IProps) => {
-  const [number, setNumber] = useState(0);
+const Counter: React.FC<any> = ({ max, min, onFinish, addQnt = 0 }: IProps) => {
+  const [number, setNumber] = useState(1);
 
   const increase = () => {
-    const newNumber = number + 1;
-    setNumber(newNumber);
-    onFinish(newNumber);
+    setNumber(prev => prev + addQnt);
   };
 
   const decrease = () => {

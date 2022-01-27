@@ -114,9 +114,9 @@ export const OrderWrapper = styled(WrapperCard)`
   }
 `;
 export const OrfferSection = styled(Column)`
-  width: 90%;
-  height: 95vh;
-  overflow: hidden;
+  width: 100%;
+  height: 700px;
+  // overflow: auto;
   margin: auto;
   justify-content: space-between;
   @media (max-width: 768px) {

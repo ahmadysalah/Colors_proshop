@@ -11,7 +11,7 @@ const CategoryCard = ({ img, description }: ICategoryProps) => {
         padding="none"
         margin="none"
         boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
-        height="280px"
+        height="250px"
       >
         <Image src={img} alt="" width="100%" style={{ borderRadius: '16px' }} />
       </ContentAction>

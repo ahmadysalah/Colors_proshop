@@ -5,6 +5,7 @@ export const PathWrapper = styled.div`
   flex-direction: row;
   width: 100%;
   padding: 1em;
+  margin-left: 6.5%;
   // padding-bottom: 0;
   letter-spacing: 0.96px;
 `;
