@@ -12,18 +12,17 @@ interface Props {
 
 export const TopRate = ({ data }: Props) => {
   return (
-    <Container direction="column" margin="auto" width="90%">
-      <Container>
-        <DeviderTitle position="start" title="TOP RATE PRODUCTS" />
+    <Container direction="column" align-items="center" width="100%">
+      <Container direction="column" width="85.4%">
+        <DeviderTitle title="Featured Product" position="start" />
       </Container>
-      <RowWithRadius direction="row">
-        {data?.map((item, i) => (
-          <ComplexCard
-            image={`https://proshop-ms.herokuapp.com${item.images[0]}`}
-            {...item}
-          />
-        ))}
-      </RowWithRadius>
+      <Container direction="row" width="85.4%" justify-content="space-between">
+        <RowWithRadius direction="row">
+          {data?.map((item, i) => (
+            <ComplexCard key={i} image={item.images[0]} {...item} />
+          ))}
+        </RowWithRadius>
+      </Container>
     </Container>
   );
 };

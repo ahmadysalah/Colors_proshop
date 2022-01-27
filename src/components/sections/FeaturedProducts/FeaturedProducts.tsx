@@ -1,26 +1,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/extensions */
 /* eslint-disable no-underscore-dangle */
-import { useState, CSSProperties, useCallback, useEffect } from 'react';
+import { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
-import { CardItem } from './CardItem';
-import {
-  FeaturedProductsContainer,
-  WrapperDots,
-  RowInnerSlider,
-} from './styles';
-import { Container, SpinnerContainer } from '../..';
+import { RowInnerSlider } from './styles';
+import { Container } from '../..';
 import ComplexCard from '../../Card/productCard';
-import { ContainerWrapper } from '../../Container/style';
 import { Dot } from '../../Slider/SliderStyle';
-import { InnerSection } from '../../../pages/User/ReviewOrder/Sections/style';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
-import { IGetAllProduct, IProducts } from '../../../redux/Product/type';
+import { IProducts } from '../../../redux/Product/type';
 import Play from '../../../assets/Images/play.jpg';
-
-interface Props {
-  data: IProduct[];
-}
 
 const cssStyle: CSSProperties = {
   position: 'relative',
@@ -71,21 +60,15 @@ export const FeaturedProduct = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx} style={{ margin: '0' }}>
+      <Container key={inx} flex-wrap="wrap">
         {i.map((item: IProducts) => (
           <ComplexCard {...item} image={item.images[0]} />
         ))}
-      </RowInnerSlider>
+      </Container>
     ));
   };
 
-  const fetchFeathers = {
-    isLoading: false,
-  };
-
-  return fetchFeathers.isLoading ? (
-    <SpinnerContainer />
-  ) : (
+  return (
     <Container
       direction="column"
       align-items="center"
@@ -97,7 +80,12 @@ export const FeaturedProduct = ({ data }: IProps) => {
       </Container>
 
       <Container direction="row" width="85.4%" justify-content="space-between">
-        <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+        <SwipeableViews
+          enableMouseEvents
+          index={sliderIndex}
+          style={cssStyle}
+          onChangeIndex={setSliderIndex}
+        >
           {getSlider()}
         </SwipeableViews>
       </Container>

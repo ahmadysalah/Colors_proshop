@@ -9,6 +9,7 @@ import {
   DescriptionText,
   ButtonHero,
   ImageSlider,
+  ContentContainer,
 } from './SliderStyle';
 
 interface Props {
@@ -20,15 +21,19 @@ interface Props {
 }
 
 export const SliderItem = ({ name, description, price, image, _id }: Props) => (
-  <Container key={_id} justifyContent="space-between" background="#F2F2F2">
-    <Column style={{ marginTop: '173px', maxWidth: '521px' }}>
+  <ContentContainer
+    key={_id}
+    justifyContent="space-between"
+    background="#F2F2F2"
+  >
+    <Column style={{ maxWidth: '521px' }}>
       <PriceText variant="p"> Save up to ${price}</PriceText>
       <NameText>{name.substring(0, 15)}</NameText>
       <DescriptionText> {description.substring(0, 80)}</DescriptionText>
       <ButtonHero to={`/product/${_id}`}>Shop now</ButtonHero>
     </Column>
     <WrapperImageHero>
-      <ImageSlider src={image} alt={name + _id} />
+      <ImageSlider size="lg" src={image} variant="square" />
     </WrapperImageHero>
-  </Container>
+  </ContentContainer>
 );

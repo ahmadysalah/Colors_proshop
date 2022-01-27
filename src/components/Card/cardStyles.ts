@@ -1,17 +1,29 @@
 import styled, { CSSProperties } from 'styled-components';
-import {
-  IstyleMainCard,
-  IcontentProp,
-  IheaderProps,
-  IactionProps,
-} from './interface';
+import { Button } from '../Button/ButtonStyle';
+import { IstyleMainCard, IcontentProp } from './interface';
+
+export const SaveBtn = styled(Button)`
+  height: 62px;
+  background: #f2f2f2;
+  width: 14%;
+  padding: 0;
+  margin-left: 7%;
+`;
+
+export const AddCart = styled(Button)`
+  height: 62px;
+  width: 65.3%;
+  background: #f2f2f2;
+  font-size: 15px;
+  margin: 0 5%;
+`;
 
 export const MainCard = styled('div')<IstyleMainCard>(
   ({
     alignItems = 'baseline',
     alignContent = 'baseline',
-    boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-    width = '25%',
+    boxShadow = 'none',
+    width = '28.2%',
     margin = '20px auto',
     padding = 'none',
     ...props
@@ -22,15 +34,18 @@ export const MainCard = styled('div')<IstyleMainCard>(
     boxShadow: `${boxShadow}`,
     transition: '0.3s',
     width: `${width}`,
+    minWidth: '300px',
     margin: `${margin}`,
     padding: `${padding}`,
     display: 'flex',
     flexDirection: `${(props.flexDirection as 'row') || ('column' as const)}`,
     borderRadius: `${props.borderRadius || '10px'}`,
-    backgroundColor: `${props.backgroundColor || 'none'}`,
+    backgroundColor: `${props.backgroundColor || 'white'}`,
+    flexWrap: 'wrap',
   }),
 );
 
+// '0 4px 8px 0 rgba(0, 0, 0, 0.2)'
 export const Content = styled('div')<IcontentProp>(
   ({
     padding = '0',
@@ -41,35 +56,13 @@ export const Content = styled('div')<IcontentProp>(
   }: // ...props
   IcontentProp) => ({
     display: 'flex',
+    justifyContent: 'center',
+    alignItem: 'center',
     padding: `${padding}`,
     width: `${width}`,
     height: `${height}`,
     maxHeight: `${maxHeight}`,
     margin: `${margin}`,
-  }),
-);
-
-export const Header = styled('div')(
-  ({
-    height = '50px',
-    width = '100%',
-    padding = '10px',
-  }: // ...props
-  IheaderProps) => ({
-    display: 'flex',
-    height: `${height}`,
-    width: `${width}`,
-    padding: `${padding}`,
-  }),
-);
-
-export const Action = styled('div')<IactionProps>(
-  ({ padding = '10px', width = '100%' }: IactionProps) => ({
-    display: 'flex',
-    flexDirection: 'row' as const,
-    padding: `${padding}`,
-    width: `${width}`,
-    boxSizing: 'border-box',
   }),
 );
 
@@ -79,7 +72,7 @@ export const ContentAction = styled.div<CSSProperties>(
     width = '100%',
     height = 'none',
     border = 'none',
-    margin = '5px auto',
+    margin = ' auto 2rem',
   }) => ({
     display: 'flex',
     flexDirection: 'row',
@@ -98,9 +91,18 @@ export const Discount = styled.div`
   align-items: center;
   border-radius: 50%;
   background: #fc4059 0% 0% no-repeat padding-box;
-  width: 87px;
-  height: 87px;
+  width: 70px;
+  height: 70px;
   position: absolute;
   right: 10px;
-  top: 15px;
+  top: 10px;
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 1 rem;
 `;

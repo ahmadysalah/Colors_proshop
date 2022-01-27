@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { FiSettings } from 'react-icons/fi';
 import { ListNavItem } from './ListNavItem';
 import {
   List,
@@ -17,6 +18,7 @@ import {
   IconList,
   NavIcon,
   Hamburger,
+  IConsContainer,
 } from './NavBarStyles';
 import { Container, Typography } from '..';
 import Logo from './Logo/Logo';
@@ -30,6 +32,7 @@ import { logoutSuccess } from '../../redux/Auth/action';
 const Style = {
   color: '#FFF',
   fill: '#FFF',
+  marginRight: '5px',
   marginBottom: '2px',
   lineHieght: '1px',
 };
@@ -70,44 +73,51 @@ export const Navbar = ({ open }) => {
           Search
         </SearchButton>
       </NavBox>
-
       <NavIcon style={{ width: '15%' }}>
-        {user?._id ? (
+        <IConsContainer>
+          {user.isAdmin ? (
+            <IconList>
+              <FiSettings size="1.2em" style={Style} />
+              Admin
+            </IconList>
+          ) : null}
+          {user?._id ? (
+            <Link
+              to="/profile"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList>
+                <FaUserAlt size="1.5em" style={Style} />
+                {`${user.firstName} ${user.lastName}`}
+              </IconList>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList>
+                <FaUserAlt size="1.2em" style={Style} />
+                Login/Signup
+              </IconList>
+            </Link>
+          )}
           <Link
-            to="/profile"
+            to="/cart"
             style={{ textDecoration: 'none', fontFamily: 'mulish' }}
           >
             <IconList>
-              <FaUserAlt size="1.5em" style={Style} />
-              {`${user.firstName} ${user.lastName}`}
+              <span>5</span> <BsFillCartFill size="1.2em" style={Style} />
+              Cart
             </IconList>
           </Link>
-        ) : (
-          <Link
-            to="/login"
-            style={{ textDecoration: 'none', fontFamily: 'mulish' }}
-          >
-            <IconList>
-              <FaUserAlt size="1.2em" style={Style} />
-              Login/Signup
+          {user?._id && (
+            <IconList onClick={Logout}>
+              <BiLogOut size="2em" style={Style} />
+              Logout
             </IconList>
-          </Link>
-        )}
-        <Link
-          to="/cart"
-          style={{ textDecoration: 'none', fontFamily: 'mulish' }}
-        >
-          <IconList>
-            <span>5</span> <BsFillCartFill size="5em" style={Style} />
-            Cart
-          </IconList>
-        </Link>
-        {user?._id && (
-          <IconList onClick={Logout}>
-            <BiLogOut size="2em" style={Style} />
-            Logout
-          </IconList>
-        )}
+          )}
+        </IConsContainer>
       </NavIcon>
     </ListNav>
   );
