@@ -9,7 +9,7 @@ import { EnumCartAction } from './constant';
 import Api from '../../utils/Api/axios';
 
 interface AddItemPayload {
-  productId: string;
+  productId?: string;
   qty: number;
 }
 

@@ -34,7 +34,7 @@ const Subtotal = ({ total }: IProps) => {
           letter-spacing="0.76px"
           margin-bottom="1em"
         >
-          $989.97
+          {total}$
         </Typography>
       </Container>
       <Divider color="#E8E8E8" />

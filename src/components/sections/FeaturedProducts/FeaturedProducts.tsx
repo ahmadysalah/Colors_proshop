@@ -9,7 +9,6 @@ import ComplexCard from '../../Card/productCard';
 import { Dot } from '../../Slider/SliderStyle';
 import { DeviderTitle } from '../../DeviderTitle/deviderTitle';
 import { IProducts } from '../../../redux/Product/type';
-import Play from '../../../assets/Images/play.jpg';
 
 const cssStyle: CSSProperties = {
   position: 'relative',
@@ -62,7 +61,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
     return chunks.map((i: any, inx: number) => (
       <Container key={inx} flex-wrap="wrap">
         {i.map((item: IProducts) => (
-          <ComplexCard {...item} image={item.images[0]} />
+          <ComplexCard key={item._id} {...item} image={item.images[0]} />
         ))}
       </Container>
     ));
