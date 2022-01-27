@@ -65,14 +65,18 @@ const ProductDetails = ({ formik, categories }: any) => {
         </InputsContainer>
 
         <InputsContainer justify-Content="space-between">
-          <InputController
-            name="id"
-            label="Product ID"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.id}
-            disabled
-          />
+          {formik.values.id.length ? (
+            <InputController
+              name="id"
+              label="Product ID"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.id}
+              disabled
+            />
+          ) : (
+            <p />
+          )}
 
           <FiledWrapper>
             <Label htmlFor="select">Product Colors</Label>
@@ -110,7 +114,7 @@ const ProductDetails = ({ formik, categories }: any) => {
                   formik.setFieldValue('categories', cat);
                 }}
                 isMulti
-                options={categories?.categories?.map(el => ({
+                options={categories?.map(el => ({
                   value: el?.name,
                   label: el?.name,
                 }))}

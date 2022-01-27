@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartContainer, ListContainer, TotalContainer } from './styles';
@@ -21,8 +21,9 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getProfile());
-  }, [dispatch]);
+  }, []);
 
+  const TopRateComp = useCallback(() => <TopRate />, []);
   return (
     <>
       <PathNavigate name="Shopping Cart" />
@@ -49,7 +50,7 @@ const Cart = () => {
           </TotalContainer>
         </CartContainer>
       )}
-      <TopRate />
+      {TopRateComp()}
     </>
   );
 };

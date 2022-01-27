@@ -5,7 +5,7 @@ import { CategoryCard, Container } from '../..';
 import { Divider, Title } from '../../DeviderTitle/style';
 import { CategDots } from '../../Slider/SliderStyle';
 import { RowInnerSlider, WrapperDots } from '../FeaturedProducts/styles';
-import { IProducts } from '../../../redux/Product/type';
+import { IGetAllCategory, IProducts } from '../../../redux/Product/type';
 
 const cssStyle: CSSProperties = {
   position: 'relative',
@@ -19,12 +19,11 @@ const DotsStyles: CSSProperties = {
   margin: 10,
 };
 interface IProps {
-  data?: IProducts[];
+  data?: IGetAllCategory[];
 }
 export const FeaturedCategories = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
-  const [width, setWidth] = useState(window.innerWidth);
-
+  console.log('IGetAllCategory', data);
   const chunkSize =
     window.innerWidth > 1100 ? 4 : window.innerWidth > 1100 ? 3 : 1;
   const chunks: any = [];
@@ -43,8 +42,12 @@ export const FeaturedCategories = ({ data }: IProps) => {
     });
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx}>
-        {i.map(item => (
-          <CategoryCard description={item.name} img={item.images[0]} />
+        {i.map((item, index) => (
+          <CategoryCard
+            name={item.name}
+            image={item.image}
+            key={index + item.name}
+          />
         ))}
       </RowInnerSlider>
     ));

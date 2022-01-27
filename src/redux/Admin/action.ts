@@ -159,15 +159,11 @@ export const updateProduct = (
       const imageString: Array<string> = (
         responseData.data.images as Array<any>
       ).filter(x => typeof x === 'string');
-      const imageUpload = imageNeeedUpdated.map(image => {
+      const imageUpload = product.images.map(image => {
         return Api.post('/upload', formDataCstom(image));
       });
       const imagesUrl = await Promise.all<AxiosResponse>(imageUpload);
       const images = imagesUrl.map(x => x.data) as Array<string>;
-      if (imageString) {
-        images.concat(imageString);
-      }
-
       const data = {
         ...product,
         images,

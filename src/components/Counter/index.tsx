@@ -21,9 +21,9 @@ const Value = styled.div`
 
 const Counter: React.FC<objectType> = ({
   max,
-  min = 0,
+  min = 1,
   onFinish,
-  value = 0,
+  value = 1,
   handleIncrease,
   handleDecrease,
 }) => {

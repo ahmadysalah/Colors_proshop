@@ -89,7 +89,7 @@ export interface IAddProductSchema {
   images: Array<string | Object>;
   name: string;
   brand: string;
-  categories: Array<string>;
+  categories: Array<any>;
   description: string;
   countInStock: number;
   price: number;
