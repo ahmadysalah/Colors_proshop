@@ -71,9 +71,9 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           </Typography>
         </Container>
       </Container>
-      <Container padding="0" width="14%" float="right" margin-right="6%">
+      <Container padding="0" width="14%" float="right" margin-right="7.5%">
         <ButtonKeep to="/">
-          <Typography font-size="24px" fontFamily="mulish">
+          <Typography font-size="20px" fontFamily="mulish">
             Keep Shopping
           </Typography>
         </ButtonKeep>
