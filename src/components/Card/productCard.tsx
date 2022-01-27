@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import Typography from '../Typography';
 import {
+  Actions,
   AddCart,
   Content,
   ContentAction,
@@ -48,58 +49,72 @@ const ComplexCard = ({ ...props }: IProducts) => {
   };
   return (
     <MainCard>
-      {props.discount ? (
+      {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
             {`-${disCount()}%`}
           </Typography>
         </Discount>
-      ) : (
-        <></>
       )}
-      <ContentAction height="340px">
+      <Container
+        background="white"
+        direction="column"
+        height="35rem"
+        border-Radius="12px"
+      >
         <Image
           src={props.image}
-          alt=""
-          style={{ borderRadius: '16px', height: '100%' }}
+          variant="square"
+          size="lg"
+          style={{
+            flexShrink: 0,
+            minWidth: '100%',
+            maxHeight: '18rem',
+          }}
         />
-      </ContentAction>
-      <Content margin="0 0 0 20px">
-        <Typography variant="h3" fontSize="20px" fontFamily="mulish">
-          {props.name}
-        </Typography>
-      </Content>
-      <Content>
-        <ReactStars
-          isHalf
-          name="rate"
-          edit={false}
-          value={props.rating}
-          size={40}
-        />
-      </Content>
-      <Content>
-        {props.discount ? (
-          <Typography variant="h2" margin="0 10px" color="#FC4059">
-            ${`${props.discount}`}
-          </Typography>
-        ) : (
-          <></>
-        )}
-        <Typography
-          variant="h2"
-          text-decoration={props.discount ? 'line-through' : 'none'}
-          fontFamily="mulish"
-        >
-          ${props.price}
-        </Typography>
-      </Content>
 
-      <Container direction="row" margin="auto" padding="15px">
-        <SaveBtn>
-          <BsBookmark size="24px" />
-        </SaveBtn>
-        <AddCart onClick={AddToCart}>Add to cart</AddCart>
+        <Content margin="1rem 0 0 20px">
+          <Typography
+            variant="h3"
+            fontSize="20px"
+            fontFamily="mulish"
+            text-Align="center"
+            width="90%"
+          >
+            {props.name}
+          </Typography>
+        </Content>
+        <Content>
+          <ReactStars
+            isHalf
+            name="rate"
+            edit={false}
+            value={props.rating}
+            size={40}
+          />
+        </Content>
+        <Content>
+          {props.discount ? (
+            <Typography variant="h2" margin="0 10px" color="#FC4059">
+              ${`${props.discount}`}
+            </Typography>
+          ) : (
+            <></>
+          )}
+          <Typography
+            variant="h2"
+            text-decoration={props.discount ? 'line-through' : 'none'}
+            fontFamily="mulish"
+          >
+            ${props.price}
+          </Typography>
+        </Content>
+        <Actions>
+          <SaveBtn>
+            <BsBookmark size="24px" />
+          </SaveBtn>
+          <AddCart>Add to cart</AddCart>
+        </Actions>
       </Container>
     </MainCard>
   );

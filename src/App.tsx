@@ -1,6 +1,6 @@
 import { Suspense, useState } from 'react';
 import { AllRouter } from './AllRouter';
-import { Navbar } from './components';
+import { Container, Navbar } from './components';
 import ErrorBoundary from './components/ErrorBoundary';
 import Burger from './components/Navbar/Burger';
 import { SpinnerContainer } from './components/SpinnerContainer';
@@ -14,6 +14,7 @@ const App: React.FC = () => {
         <ErrorBoundary>
           <Burger open={open} setOpen={setOpen} />
           <Navbar open={open} />
+          <Container height="3rem" hideAtMobile />
           <AllRouter />
         </ErrorBoundary>
       </Suspense>

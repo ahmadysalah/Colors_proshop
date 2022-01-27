@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Typography } from '..';
 
 export const ContainerWrapper = styled.div<any>`
   display: flex;
@@ -16,6 +17,7 @@ export const ContainerWrapper = styled.div<any>`
       .join(';')};
 
   @media (max-width: 768px) {
+    display: ${props => (props.hideAtMobile ? 'none' : 'flex')};
     font-size: 12px;
     flex-wrap: wrap;
     margin-top: 1em;
@@ -23,7 +25,8 @@ export const ContainerWrapper = styled.div<any>`
     & > button{
       margin: 1.5em .2em;
     }
+   
   & > img {
-    font-size: 14px;
-  }   
+     font-size: 14px;
+  }  
 `;

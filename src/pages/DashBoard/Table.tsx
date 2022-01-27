@@ -29,12 +29,11 @@ const row = (PRODUCTID, PRODUCTNAME, PRODUCTPRICE, CATEGORY, ACTION) => ({
 
 const Table = ({ data }: IProps) => {
   const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAdmin>>();
-  console.log('dataaaaaaaaaaaaa', data);
 
-  const deleteOnClick: any = (id: string) => {
-    console.log('iddddddddddd', id);
-    dispatch(delateProduct(`${id}`));
-  };
+  // const deleteOnClick: any = (id: string) => {
+  //   console.log('iddddddddddd', id);
+  //   dispatch(delateProduct(`${id}`));
+  // };
 
   const getRowData = () => {
     return data?.map(e => {
@@ -48,7 +47,8 @@ const Table = ({ data }: IProps) => {
           <Link to="/addNewProduct">
             <StyledEdit />
           </Link>
-          <StyledDelete onClick={deleteOnClick(e._id)} />
+          <StyledDelete />
+          {/* onClick={deleteOnClick(e._id)} */}
         </>,
       );
     });

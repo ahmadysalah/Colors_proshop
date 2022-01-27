@@ -60,11 +60,11 @@ export const FeaturedProduct = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx} style={{ margin: '0' }}>
+      <Container key={inx} flex-wrap="wrap">
         {i.map((item: IProducts) => (
           <ComplexCard key={item._id} {...item} image={item.images[0]} />
         ))}
-      </RowInnerSlider>
+      </Container>
     ));
   };
 
@@ -80,7 +80,12 @@ export const FeaturedProduct = ({ data }: IProps) => {
       </Container>
 
       <Container direction="row" width="85.4%" justify-content="space-between">
-        <SwipeableViews enableMouseEvents index={sliderIndex} style={cssStyle}>
+        <SwipeableViews
+          enableMouseEvents
+          index={sliderIndex}
+          style={cssStyle}
+          onChangeIndex={setSliderIndex}
+        >
           {getSlider()}
         </SwipeableViews>
       </Container>

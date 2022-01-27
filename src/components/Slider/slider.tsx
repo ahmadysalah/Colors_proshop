@@ -9,8 +9,6 @@ import { IProducts } from '../../redux/Product/type';
 const cssStyle: CSSProperties = {
   position: 'relative',
   width: '100%',
-  height: '678px',
-  margin: 'auto',
   backgroundColor: '#f2f2f2',
 };
 
@@ -43,7 +41,6 @@ export const Slider = ({ data }: IProps) => {
     data.length &&
     data.map(item => (
       <SliderItem
-        // eslint-disable-next-line no-underscore-dangle
         _id={item._id}
         name={item.name}
         price={item.price}
@@ -58,10 +55,14 @@ export const Slider = ({ data }: IProps) => {
       background="#F2F2F2"
       padding="0 5%"
       overflow="hidden"
-      height="500px"
     >
       <SliderSection>
-        <SwipeableViews index={sliderIndex} style={cssStyle} enableMouseEvents>
+        <SwipeableViews
+          index={sliderIndex}
+          style={cssStyle}
+          enableMouseEvents
+          onChangeIndex={setSliderIndex}
+        >
           {sliders}
         </SwipeableViews>
       </SliderSection>

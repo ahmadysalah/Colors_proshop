@@ -10,7 +10,7 @@ const getImageWidth = (size: sizes) => {
     case 'md':
       return '15em';
     case 'lg':
-      return '25em';
+      return '25rem';
     case 'xl':
       return '35em';
     case 'xxl':
@@ -29,7 +29,7 @@ const getImageHeight = (size: sizes) => {
     case 'md':
       return '17em';
     case 'lg':
-      return '20em';
+      return '20rem';
     case 'xl':
       return '35em';
     case 'xxl':
