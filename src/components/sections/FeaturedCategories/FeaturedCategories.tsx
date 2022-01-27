@@ -23,7 +23,7 @@ interface IProps {
 }
 export const FeaturedCategories = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
-  const [width, setWidth] = useState(window.innerWidth);
+  // const [width, setWidth] = useState(window.innerWidth);
 
   const chunkSize =
     window.innerWidth > 1100 ? 4 : window.innerWidth > 1100 ? 3 : 1;
@@ -42,11 +42,11 @@ export const FeaturedCategories = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <RowInnerSlider key={inx}>
+      <Container key={inx}>
         {i.map(item => (
-          <CategoryCard description={item.name} img={item.images[0]} />
+          <CategoryCard description={item.brand} img={item.images[0]} />
         ))}
-      </RowInnerSlider>
+      </Container>
     ));
   };
 
@@ -58,6 +58,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
         justify-content="center"
         align-items="center"
         margin-top="60px"
+        flex-wrap="wrape"
       >
         <Container direction="column" width="85.4%">
           <Title>Featured Categories</Title>
@@ -69,6 +70,7 @@ export const FeaturedCategories = ({ data }: IProps) => {
             enableMouseEvents
             index={sliderIndex}
             style={cssStyle}
+            onChangeIndex={setSliderIndex}
           >
             {getSlider()}
           </SwipeableViews>

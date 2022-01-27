@@ -129,12 +129,7 @@ const Login = () => {
             </FormContainer>
           </Container>
           <Container>
-            <Image
-              src={LoginImage}
-              alt="image login continer"
-              size="xxxl"
-              responsive
-            />
+            <Image src={LoginImage} size="xxxl" responsive />
           </Container>
         </Wrapper>
       </InnerColSection>

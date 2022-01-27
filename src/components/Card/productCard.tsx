@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactStars from 'react-rating-stars-component';
 import { BsBookmark } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '../Button/ButtonStyle';
-import img from '../../assets/tow.jpg';
+import img from '../../assets/Images/defaultProduct.png';
 import Typography from '../Typography';
-import { Content, ContentAction, Discount, MainCard } from './cardStyles';
+import {
+  Actions,
+  AddCart,
+  Content,
+  ContentAction,
+  Discount,
+  MainCard,
+  SaveBtn,
+} from './cardStyles';
 import { Container, Image } from '..';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
@@ -17,106 +21,85 @@ export interface IProducts {
   image: string;
   rating: number;
   price: number;
-  discount?: number;
+  discount: number;
   countInStock?: number;
   _id: string;
   name?: string;
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const navigate = useNavigate();
-
-  const handelAddCart = () => {
-    dispatch(
-      upduteActionCart({ productId: props._id, qty: 1 }, () => {
-        navigate('/cart');
-      }),
-    );
+  const disCount = () => {
+    const percentage = (props.discount / props.price) * 100;
+    return Math.ceil(percentage);
   };
   return (
-    <MainCard
-      width="28.2%"
-      max-height="655px"
-      boxShadow="none"
-      backgroundColor="white"
-      flexDirection="column"
-    >
-      {props.discount ? (
+    <MainCard>
+      {props?.discount > 0 && (
         <Discount>
-          <Typography
-            width="none"
-            color="white"
-            fontSize="24px"
-            fontFamily="mulish"
-          >
-            {`-${props.discount}%`}
+          <Typography width="none" color="white" fontSize="24px">
+            {`-${disCount()}%`}
           </Typography>
         </Discount>
-      ) : (
-        <></>
       )}
-      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
+      <Container
+        background="white"
+        direction="column"
+        height="35rem"
+        border-Radius="12px"
+      >
         <Image
           src={props.image}
-          alt=""
-          style={{ width: '100%', height: '100%' }}
+          variant="square"
+          size="lg"
+          style={{
+            flexShrink: 0,
+            minWidth: '100%',
+            maxHeight: '18rem',
+          }}
         />
-      </ContentAction>
-      <Content onClick={() => navigate(`/product/${props._id}`)}>
-        <Typography variant="h3" fontSize="24px" fontFamily="mulish">
-          {props.name}
-        </Typography>
-      </Content>
-      <Content>
-        <ReactStars
-          isHalf
-          name="rate"
-          edit={false}
-          value={props.rating}
-          size={40}
-        />
-      </Content>
-      <Content>
-        {props.discount && (
+
+        <Content margin="1rem 0 0 20px">
+          <Typography
+            variant="h3"
+            fontSize="20px"
+            fontFamily="mulish"
+            text-Align="center"
+            width="90%"
+          >
+            {props.name}
+          </Typography>
+        </Content>
+        <Content>
+          <ReactStars
+            isHalf
+            name="rate"
+            edit={false}
+            value={props.rating}
+            size={40}
+          />
+        </Content>
+        <Content>
+          {props.discount ? (
+            <Typography variant="h2" margin="0 10px" color="#FC4059">
+              ${`${props.discount}`}
+            </Typography>
+          ) : (
+            <></>
+          )}
           <Typography
             variant="h2"
-            margin="0 10px"
-            color="#FC4059"
+            text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
           >
-            ${props.price - (props.price / props.discount) * props.discount}
+            ${props.price}
           </Typography>
-        )}
-        <Typography
-          variant="h2"
-          text-decoration={props.discount ? 'line-through' : 'none'}
-          fontFamily="mulish"
-        >
-          ${props.price}
-        </Typography>
-      </Content>
-
-      <Container direction="row" margin="auto" padding="15px">
-        <Button
-          height="62px"
-          background="#F2F2F2"
-          width="10%"
-          padding="none"
-          margin-left="6%"
-        >
-          <BsBookmark size="24px" />
-        </Button>
-        <Button
-          height="62px"
-          width="65.3%"
-          background="#F2F2F2"
-          fontSize="15px"
-          margin="0 5%"
-          onClick={handelAddCart}
-        >
-          Add to cart
-        </Button>
+        </Content>
+        <Actions>
+          <SaveBtn>
+            <BsBookmark size="24px" />
+          </SaveBtn>
+          <AddCart>Add to cart</AddCart>
+        </Actions>
       </Container>
     </MainCard>
   );

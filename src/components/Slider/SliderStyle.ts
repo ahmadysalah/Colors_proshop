@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
 import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
-import { Typography } from '..';
+import { Container, Image, Typography } from '..';
 import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
   background: #f2f2f2;
-  height: 678px;
+  // height: 70%px;
 `;
 
 export const SliderSection = styled(ContainerWrapper)`
-  margin: auto;
+  margin: 0 auto;
   overflow: hidden;
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -32,7 +33,7 @@ export const ShopeButton = styled(Button)`
 `;
 export const PriceText = styled<any>(Typography)`
   color: #242424;
-  font-size: 2rem;
+  font-size: 24px;
   margin-bottom: 10px;
   letter-spacing: 1.28px;
   font-family: mulish;
@@ -45,21 +46,21 @@ export const PriceText = styled<any>(Typography)`
 
 export const DescriptionText = styled(PriceText)`
   color: #242424;
-  font-size: 32px;
+  font-size: 20px;
   font-family: mulish;
   margin-bottom: 42px;
 `;
 
 export const NameText = styled(PriceText)`
   color: #242424;
-  font-size: 3.75rem;
+  font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
 `;
 
-export const ImageSlider = styled('img')`
-  width: 100%;
-  height: 90%;
+export const ImageSlider = styled(Image)`
+  width: 80%;
+  height: 80%;
   object-fit: cover;
   margin-top: 30px;
 `;
@@ -70,7 +71,7 @@ export const ButtonHero = styled(Link)`
   font-size: 22px;
   height: 56px;
   outline: none;
-  margin-top: 42px;
+  margin-top: 10px;
   border-radius: 20px;
   opacity: 1;
   text-transform: uppercase;
@@ -90,9 +91,6 @@ export const WrapperImageHero = styled(Column)`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 920px) {
-    display: none;
-  }
 `;
 
 interface IDot {
@@ -109,6 +107,7 @@ export const Dot = styled('div')<IDot>`
   justify-content: center;
   align-items: center;
   margin: 0 20px;
+  cursor: pointer;
 `;
 
 export const CategDots = styled(Dot)`
@@ -139,9 +138,28 @@ export const Arrow = styled('div')<IArrow>`
   align-items: center;
   width: 30px;
   height: 30px;
+  cursor: pointer;
   ${props =>
     props.isLeft &&
     css`
       transform: rotate(0.5turn);
     `}
+`;
+
+export const ContentContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 90%;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    height: 38rem;
+    justify-content: flex-end;
+    & > *:last-child {
+      width: 25rem;
+      margin-top: -2rem;
+    }
+  }
 `;

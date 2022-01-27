@@ -86,5 +86,3 @@ export const TotalContainer = styled(Container)`
     margin: 0;
   }
 `;
-
-

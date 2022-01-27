@@ -9,8 +9,6 @@ import { IProducts } from '../../redux/Product/type';
 const cssStyle: CSSProperties = {
   position: 'relative',
   width: '100%',
-  height: '678px',
-  margin: 'auto',
   backgroundColor: '#f2f2f2',
 };
 
@@ -43,7 +41,6 @@ export const Slider = ({ data }: IProps) => {
     data.length &&
     data.map(item => (
       <SliderItem
-        // eslint-disable-next-line no-underscore-dangle
         _id={item._id}
         name={item.name}
         price={item.price}
@@ -55,47 +52,41 @@ export const Slider = ({ data }: IProps) => {
   return (
     <Container
       direction="column"
-      padding="0"
       background="#F2F2F2"
+      padding="0 5%"
       overflow="hidden"
     >
-      <Container
-        direction="column"
-        width="90%"
-        margin="auto"
-        padding="0"
-        overflow="hidden"
-      >
-        <SliderSection>
-          <SwipeableViews
-            index={sliderIndex}
-            style={cssStyle}
-            enableMouseEvents
-          >
-            {sliders}
-          </SwipeableViews>
-        </SliderSection>
-        <Container
-          flexDirection="row"
-          background="#F2F2F2"
-          padding="1em"
-          margin="auto"
-          width="auto"
+      <SliderSection>
+        <SwipeableViews
+          index={sliderIndex}
+          style={cssStyle}
+          enableMouseEvents
+          onChangeIndex={setSliderIndex}
         >
-          <Arrow isLeft onClick={handleRight}>
-            &#8250;
-          </Arrow>
-          {Array(3)
-            .fill(0)
-            .map((x, index) => (
-              <Dot
-                width="25px"
-                isGrey={sliderIndex !== index}
-                onClick={() => setSliderIndex(index)}
-              />
-            ))}
-          <Arrow onClick={handleLeft}>&#8250;</Arrow>
-        </Container>
+          {sliders}
+        </SwipeableViews>
+      </SliderSection>
+      <Container
+        flexDirection="row"
+        background="#F2F2F2"
+        padding="1em"
+        margin="auto"
+        width="auto"
+        height="10%"
+      >
+        <Arrow isLeft onClick={handleRight}>
+          &#8250;
+        </Arrow>
+        {Array(3)
+          .fill(0)
+          .map((x, index) => (
+            <Dot
+              width="25px"
+              isGrey={sliderIndex !== index}
+              onClick={() => setSliderIndex(index)}
+            />
+          ))}
+        <Arrow onClick={handleLeft}>&#8250;</Arrow>
       </Container>
     </Container>
   );
