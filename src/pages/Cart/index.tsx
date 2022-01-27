@@ -52,8 +52,7 @@ const Cart = () => {
           >
             <Subtotal
               total={cart.user?.cart?.items.reduce(
-                (prev: any, current) =>
-                  (current += current + prev.itemTotalPrice),
+                (prev: any, current) => prev + current.itemTotalPrice,
                 0,
               )}
             />
