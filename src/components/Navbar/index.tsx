@@ -1,12 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { BsFillBookmarkDashFill, BsFillCartFill } from 'react-icons/bs';
+import {
+  BsFillBookmarkDashFill,
+  BsFillCartFill,
+  BsToggleOff,
+  BsToggleOn,
+} from 'react-icons/bs';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { FiSettings } from 'react-icons/fi';
+import { DarkTheme } from 'styled-components';
 import { ListNavItem } from './ListNavItem';
+
 import {
   List,
   StyleObj,
@@ -37,12 +44,22 @@ const Style = {
   lineHieght: '1px',
 };
 
-export const Navbar = ({ open }) => {
+export const Navbar = ({ open, theme, setTheme }) => {
+  const [toogle, setToogle] = useState<'dark' | 'light'>('light');
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const user: IUser = useToken();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const cart = useSelector((state: AppState) => state.user.myProfile);
+  const handleChangeTheme = useCallback(() => {
+    if (theme.theme === 'light') {
+      setTheme({ theme: 'dark' });
+      localStorage.setItem('theme', 'dark');
+    } else {
+      setTheme({ theme: 'light' });
+      localStorage.setItem('theme', 'light');
+    }
+  }, [theme, setTheme]);
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);

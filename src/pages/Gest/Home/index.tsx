@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { useTheme } from 'styled-components';
 import { Container, SpinnerContainer } from '../../../components';
 import { FeaturedCategories } from '../../../components/sections/FeaturedCategories/FeaturedCategories';
 import { FeaturedProduct } from '../../../components/sections/FeaturedProducts/FeaturedProducts';
@@ -15,6 +16,8 @@ import { TAllActionProduct } from '../../../redux/Product/type';
 import { AppState } from '../../../redux/store';
 
 const Home: React.FC = () => {
+  const theme = useTheme();
+  console.log(theme);
   const dispatch =
     useDispatch<ThunkDispatch<AppState, any, TAllActionProduct>>();
   const topProducts = useSelector(

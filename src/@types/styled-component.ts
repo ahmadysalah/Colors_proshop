@@ -23,4 +23,25 @@ declare module 'styled-components' {
       fontFamily: string;
     };
   }
+  export interface DarkTheme {
+    common?: {
+      black: string;
+      white: string;
+    };
+    primary?: {
+      SantaFeLight: string;
+      SantaFeDark: string;
+    };
+    background?: {
+      grey: string;
+      lightGrey: string;
+      darkGrey: string;
+      border: string;
+    };
+
+    Typography?: {
+      color: string;
+      fontFamily: string;
+    };
+  }
 }

@@ -16,7 +16,7 @@ export const InnerSection = styled(Column)`
   width: 100%;
 `;
 export const ListNav = styled(Container)<Props>`
-  background-color: ${props => props.theme.common?.black || '#242424'};
+  background-color: ${({ theme }) => theme.common?.black};
   height: ${props => (props.open ? '100vh' : '60px')};
   z-index: 999;
   padding: 7px 5%;
