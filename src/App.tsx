@@ -25,7 +25,7 @@ const App: React.FC = () => {
       <Suspense fallback={<SpinnerContainer />}>
         <ErrorBoundary>
           <Burger open={open} setOpen={setOpen} />
-          <Navbar open={open} theme={state} setTheme={setState} />
+          <Navbar open={open} />
           <Container height="3rem" hideAtMobile />
           <AllRouter />
         </ErrorBoundary>

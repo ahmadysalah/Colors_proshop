@@ -44,22 +44,13 @@ const Style = {
   lineHieght: '1px',
 };
 
-export const Navbar = ({ open, theme, setTheme }) => {
-  const [toogle, setToogle] = useState<'dark' | 'light'>('light');
+export const Navbar = ({ open }) => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const user: IUser = useToken();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const cart = useSelector((state: AppState) => state.user.myProfile);
-  const handleChangeTheme = useCallback(() => {
-    if (theme.theme === 'light') {
-      setTheme({ theme: 'dark' });
-      localStorage.setItem('theme', 'dark');
-    } else {
-      setTheme({ theme: 'light' });
-      localStorage.setItem('theme', 'light');
-    }
-  }, [theme, setTheme]);
+
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);

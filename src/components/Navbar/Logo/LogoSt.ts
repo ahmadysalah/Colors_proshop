@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { lightTheme } from '../../../theme';
+import { theme } from '../../../theme';
 
 export const LogoSt = styled.span`
   font-size: 40px;
-  color: ${lightTheme.primary?.darkYallow};
+  color: ${theme.primary?.darkYallow};
   text-decoration: none;
   cursor: pointer;
 `;

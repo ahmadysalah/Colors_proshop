@@ -28,7 +28,7 @@ interface IProps {
 }
 const ReviewSection = ({ reviews }: IProps) => {
   return (
-    <Container direction="column" margin="2em 0">
+    <Container direction="column" margin="2em 0" width="90%">
       <Typography variant="h2" bold margin="2em 0 1em 0" font-Family="Mulish">
         Reviews
       </Typography>
