@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Typography } from '../../../components';
+import ButtonComponent from '../../../components/Button';
 import { ICart } from '../../../redux/Auth/type';
 import { IItemCart } from '../../../redux/User/type';
 
@@ -52,12 +54,24 @@ const Subtotal = ({ data }: Props) => {
       </Container>
       <Divider color="#E8E8E8" />
       <Button
+        margin="4px auto"
+        as={Link}
+        brand
+        padding=".8em"
+        width="80%"
+        to="/review"
+        style={{ margin: '2em auto', padding: '1.2em' }}
+      >
+        Proceed to checkout
+      </Button>{' '}
+      {/* <Button
         as="Link"
         to="/review"
         width="80%"
         style={{ margin: '2em auto', padding: '1.2em' }}
         background="#FCDD06"
       >
+        cccccccccccc
         <Button
           to="/review"
           style={{
@@ -70,7 +84,7 @@ const Subtotal = ({ data }: Props) => {
         >
           Proceed to checkout
         </Button>
-      </Button>
+      </Button> */}
     </>
   );
 };

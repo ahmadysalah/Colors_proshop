@@ -43,15 +43,16 @@ export const schemaValidationSignUp =
         .max(50, 'Too Long!')
         .required('Required'),
 
-      passwordConfirmation: Yup.string()
-        .required('Please confirm your password')
-        .when('password', {
-          is: (password: string) => !!(password && password.length > 0),
-          then: Yup.string().oneOf(
-            [Yup.ref('password')],
-            "Password doesn't match",
-          ),
-        }),
+      /**
+         * passwordConfirm: Yup.mixed().test('match', 'Passwords do not match', function (password) {
+        return password === this.parent.passwordConfirm
+      }).required('Password confirm is required')
+         */
+      passwordConfirmation: Yup.mixed()
+        .test('match', 'Passwords do not match', function (password) {
+          return password === this.parent.passwordConfirmation;
+        })
+        .required('Password confirm is required'),
     });
   };
 
