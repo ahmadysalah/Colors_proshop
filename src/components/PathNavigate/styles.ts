@@ -26,7 +26,7 @@ export const PathLink = styled.button`
   font-size: 1rem;
   letter-spacing: 0.96px;
   font-weight: 500;
-  &: hover {
+  &:hover {
     color: rgba(112, 112, 112, 0.8);
     cursor: pointer;
   }

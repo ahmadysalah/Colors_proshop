@@ -55,7 +55,6 @@ const ReviewOrder = () => {
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
-  console.log('this is order first step', cart);
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,

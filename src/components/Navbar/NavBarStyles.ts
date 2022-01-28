@@ -17,7 +17,7 @@ export const InnerSection = styled(Column)`
 `;
 export const ListNav = styled(Container)<Props>`
   background-color: ${props => props.theme.common?.black || '#242424'};
-  height: ${props => (props.open ? '100vh' : '60px')};
+  height: ${props => (props.open ? '100vh' : '70px')};
   z-index: 999;
   padding: 7px 5%;
   @media (max-width: 768px) {
@@ -46,8 +46,9 @@ export const Badge = styled('div')`
   color: #242424;
   text-align: center;
   font-family: normal normal normal 10px/13px Muli;
-  height: 15px;
-  width: 15px;
+  height: 22px;
+  width: 22px;
+  z-index: 10;
   right: 8px;
   position: absolute;
   top: -5px;

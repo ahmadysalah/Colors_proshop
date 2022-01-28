@@ -15,8 +15,11 @@ export const SliderSection = styled(ContainerWrapper)`
   margin: 0 auto;
   overflow: hidden;
   flex-wrap: wrap;
+  padding-top: 60px;
+  padding-bottom: 30px;
   @media (max-width: 768px) {
     flex-direction: column;
+    margin: auto;
   }
 `;
 export const ShopeButton = styled(Button)`
@@ -154,6 +157,7 @@ export const ContentContainer = styled(Container)`
   flex-wrap: wrap;
   height: 90%;
   @media (max-width: 768px) {
+    margin: auto;
     flex-direction: column-reverse;
     height: 38rem;
     justify-content: flex-end;

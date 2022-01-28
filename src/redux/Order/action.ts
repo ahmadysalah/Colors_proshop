@@ -40,7 +40,6 @@ export const getOrders = () => {
 
     try {
       const response = await Api.get('/orders');
-      console.log('response orders', response.data);
 
       if (response.status === 200) {
         dispatch({
@@ -70,8 +69,6 @@ export const getMyOrder = () => {
     try {
       const response = await Api.get('/orders/myorders');
       if (response.status === 200) {
-        console.log('response.data', response.data);
-
         dispatch({
           type: EnumOrderAction.GET_MY_ORDERS_SUCCESS,
           payload: {

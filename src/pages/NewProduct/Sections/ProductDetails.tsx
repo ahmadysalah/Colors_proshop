@@ -65,7 +65,7 @@ const ProductDetails = ({ formik, categories }: any) => {
         </InputsContainer>
 
         <InputsContainer justify-Content="space-between">
-          {formik.values.id ? (
+          {formik.values.id.length ? (
             <InputController
               name="id"
               label="Product ID"
@@ -75,29 +75,32 @@ const ProductDetails = ({ formik, categories }: any) => {
               disabled
             />
           ) : (
-            <FiledWrapper>
-              <Label htmlFor="select">Product Colors</Label>
-              <InputWrapper>
-                <SelectStyle
-                  id="select"
-                  name="colors"
-                  styles={colourStyles}
-                  defaultInputValue={formik.values.colors}
-                  onChange={(selectedOption: any) => {
-                    const col = selectedOption.map(x => x.value);
-                    formik.setFieldValue('colors', col);
-                  }}
-                  isMulti
-                  options={[
-                    { value: 'Pink', label: 'Pink' },
-                    { value: 'Silver', label: 'Silver' },
-                    { value: 'Gold', label: 'Gold' },
-                  ]}
-                />
-              </InputWrapper>
-              {/* <ErrorSection errors={formik.errors.colors} /> */}
-            </FiledWrapper>
+            <p />
           )}
+
+          <FiledWrapper>
+            <Label htmlFor="select">Product Colors</Label>
+            <InputWrapper>
+              <SelectStyle
+                id="select"
+                name="colors"
+                styles={colourStyles}
+                defaultInputValue={formik.values.colors}
+                onChange={(selectedOption: any) => {
+                  const col = selectedOption.map(x => x.value);
+                  formik.setFieldValue('colors', col);
+                }}
+                isMulti
+                options={[
+                  { value: 'Pink', label: 'Pink' },
+                  { value: 'Silver', label: 'Silver' },
+                  { value: 'Gold', label: 'Gold' },
+                ]}
+              />
+            </InputWrapper>
+            {/* <ErrorSection errors={formik.errors.colors} /> */}
+          </FiledWrapper>
+
           <FiledWrapper style={{ marginLeft: '0.5em' }}>
             <Label htmlFor="select">Product Category</Label>
             <InputWrapper>
@@ -111,7 +114,7 @@ const ProductDetails = ({ formik, categories }: any) => {
                   formik.setFieldValue('categories', cat);
                 }}
                 isMulti
-                options={categories?.categories?.map(el => ({
+                options={categories?.map(el => ({
                   value: el?.name,
                   label: el?.name,
                 }))}

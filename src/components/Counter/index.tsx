@@ -33,9 +33,14 @@ const Counter: React.FC<any> = ({ max, min, onFinish, addQnt = 0 }: IProps) => {
   };
 
   const decrease = () => {
-    const newNumber = number - 1;
-    setNumber(newNumber);
-    onFinish(newNumber);
+    if (number > max && number < 1) {
+      return;
+    }
+    setNumber(prev => {
+      onFinish(prev - 1);
+      return prev - 1;
+    });
+    handleDecrease();
   };
 
   return (
@@ -70,3 +75,6 @@ const Counter: React.FC<any> = ({ max, min, onFinish, addQnt = 0 }: IProps) => {
 };
 
 export default Counter;
+function handleDecrease() {
+  console.log('Function not implemented.');
+}

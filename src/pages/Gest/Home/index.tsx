@@ -33,19 +33,26 @@ const Home: React.FC = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
+  console.log('allCatogory', allCatogory);
   return (
     <Container width="100%" direction="column" justify-content="center">
-      {(topProducts.isLoading && allCatogory.isLoading) ||
-      !featcheProduct.allProduct ? (
+      {topProducts.isLoading ? (
         <SpinnerContainer />
       ) : (
-        <>
-          <Slider data={topProducts.product} />
-          <FeaturedCategories data={featcheProduct.allProduct.products} />
-          <FeaturedProduct data={featcheProduct.allProduct.products} />
-          <TopRate data={topProducts.product} />
-        </>
+        <Slider data={topProducts.product} />
       )}
+      {allCatogory.isLoading || !allCatogory.categories ? (
+        <SpinnerContainer />
+      ) : (
+        <FeaturedCategories data={allCatogory?.categories} />
+      )}
+      {/* <FeaturedCategories /> */}
+      {topProducts.isLoading || !featcheProduct.allProduct ? (
+        <SpinnerContainer />
+      ) : (
+        <FeaturedProduct data={featcheProduct.allProduct.products} />
+      )}
+      <TopRate />
     </Container>
   );
 };

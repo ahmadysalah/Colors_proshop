@@ -1,8 +1,8 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BsBookmarks } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import {
   Container,
@@ -19,22 +19,25 @@ import { AppState } from '../../../../redux/store';
 import { ProductImage } from './style';
 
 const ProductOverview: React.FC<IProducts> = props => {
+  const { id } = useParams<{ id: string }>();
+
   const { images, colors, _id } = props;
   const [colorActive, setColorActive] = useState(colors?.[0] || '');
   const [memory, setMemory] = useState('');
   const [currentImages, setImages] = useState<string[]>(images || []);
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState<number>(1);
 
-  useEffect(() => {
-    setImages(images);
-  }, [images]);
+  //  useCallback
+  // useEffect(() => {
+  //   // setImages(images);
+  // }, [images]);
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const handleAddToCart = () => {
     dispatch(
       upduteActionCart(
         {
-          productId: _id,
+          productId: id as string,
           qty: count,
         },
         () => navigation('/cart'),
@@ -50,7 +53,6 @@ const ProductOverview: React.FC<IProducts> = props => {
       ...images.slice(index + 1),
     ]);
   };
-  console.log(props);
   return (
     <Container
       align-Items="flex-start"
@@ -88,7 +90,12 @@ const ProductOverview: React.FC<IProducts> = props => {
         </Container>
 
         <Container margin="1em 0">
-          <Counter max={props?.countInStock} min={1} onFinish={setCount} />
+          <Counter
+            max={props?.countInStock}
+            min={1}
+            onFinish={setCount}
+            value={count}
+          />
         </Container>
         <Container>
           <Typography variant="h3" color="grey">
