@@ -14,6 +14,8 @@ export const loginAction = (userData: LoginPayload, fun?: Function) => {
       const response = await Api.post('/users/login', userData);
       localStorage.setItem('user', JSON.stringify(response.data));
       localStorage.setItem('token', JSON.stringify(response.data.token));
+      localStorage.setItem('role', JSON.stringify(response.data.isAdmin));
+
       dispatch({
         type: EnumAuthAction.USER_LOGIN_SUCCESS,
         payload: {
@@ -43,6 +45,7 @@ export const singUpSuccess = (data: ISignupPayload, fun?: Function) => {
       if (response.status === 201) {
         localStorage.setItem('user', JSON.stringify(response.data));
         localStorage.setItem('token', JSON.stringify(response.data.token));
+        localStorage.setItem('role', JSON.stringify(response.data.isAdmin));
 
         dispatch({
           type: EnumAuthAction.USER_SIGHUP_SUCCESS,

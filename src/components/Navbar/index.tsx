@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { BsFillBookmarkDashFill, BsFillCartFill } from 'react-icons/bs';
+import {
+  BsFillBookmarkDashFill,
+  BsFillCartFill,
+  BsToggleOff,
+  BsToggleOn,
+} from 'react-icons/bs';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +23,6 @@ import {
   NavIcon,
   Hamburger,
 } from './NavBarStyles';
-import { Container, Typography } from '..';
 import Logo from './Logo/Logo';
 import { useToken } from '../../utils/helper/useToken';
 import { AppState } from '../../redux/store';
@@ -26,6 +30,7 @@ import { ActionCartType } from '../../redux/Cart/type';
 import { getProfile } from '../../redux/User/action';
 import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
+import useTheme from '../../Hoc/UseTheme';
 
 const Style = {
   color: '#FFF',
@@ -34,10 +39,11 @@ const Style = {
   lineHieght: '1px',
 };
 
-export const Navbar = ({ open }) => {
+export const Navbar = ({ open, setToggle }) => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const user: IUser = useToken();
+  const { theme } = useTheme();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const cart = useSelector((state: AppState) => state.user.myProfile);
   useEffect(() => {
@@ -97,8 +103,9 @@ export const Navbar = ({ open }) => {
           to="/cart"
           style={{ textDecoration: 'none', fontFamily: 'mulish' }}
         >
+          {console.log('cart.user?.cart?.items?.length', cart.user)}
           <IconList>
-            <span>5</span> <BsFillCartFill size="5em" style={Style} />
+            <span>0</span> <BsFillCartFill size="5em" style={Style} />
             Cart
           </IconList>
         </Link>
@@ -108,6 +115,13 @@ export const Navbar = ({ open }) => {
             Logout
           </IconList>
         )}
+        <IconList>
+          {theme === 'dark' ? (
+            <BsToggleOff onClick={setToggle} size="2em" style={Style} />
+          ) : (
+            <BsToggleOn onClick={setToggle} size="2em" style={Style} />
+          )}
+        </IconList>
       </NavIcon>
     </ListNav>
   );

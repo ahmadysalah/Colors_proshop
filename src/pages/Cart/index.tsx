@@ -9,25 +9,21 @@ import Subtotal from './Sections/Subtotal';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
 import { getProfile } from '../../redux/User/action';
-import { TAllActionProduct } from '../../redux/Product/type';
 import { TopRate } from '../../components/sections/TopRate/TopRate';
 
 const Cart = () => {
-  const dispatch =
-    useDispatch<
-      ThunkDispatch<AppState, any, ActionCartType | TAllActionProduct>
-    >();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const cart = useSelector((state: AppState) => state.user.myProfile);
 
   useEffect(() => {
     dispatch(getProfile());
-  }, []);
+  }, [dispatch]);
 
   const TopRateComp = useCallback(() => <TopRate />, []);
   return (
     <>
       <PathNavigate name="Shopping Cart" />
-      {!cart.user?.cart?.items.length ? (
+      {/* {!cart.user?.cart?.items.length ? (
         <EmptyCart />
       ) : cart.isLoading ? (
         <SpinnerContainer />
@@ -49,7 +45,7 @@ const Cart = () => {
             <Subtotal data={cart.user?.cart} />
           </TotalContainer>
         </CartContainer>
-      )}
+      )} */}
       {TopRateComp()}
     </>
   );
