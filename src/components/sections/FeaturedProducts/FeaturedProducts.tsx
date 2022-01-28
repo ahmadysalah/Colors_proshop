@@ -72,8 +72,8 @@ export const FeaturedProduct = ({ data }: IProps) => {
     });
     return chunks.map((i: any, inx: number) => (
       <RowInnerSlider key={inx} style={{ margin: '0' }}>
-        {i.map((item: IProducts) => (
-          <ComplexCard {...item} image={item.images[0]} />
+        {i.map((item: IProducts, index) => (
+          <ComplexCard {...item} image={item.images[0]} key={index} />
         ))}
       </RowInnerSlider>
     ));

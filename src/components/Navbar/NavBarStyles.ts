@@ -41,8 +41,9 @@ export const Badge = styled('div')`
   color: #242424;
   text-align: center;
   font-family: normal normal normal 10px/13px Muli;
-  height: 15px;
-  width: 15px;
+  height: 22px;
+  width: 22px;
+  z-index: 10;
   right: 8px;
   position: absolute;
   top: -5px;

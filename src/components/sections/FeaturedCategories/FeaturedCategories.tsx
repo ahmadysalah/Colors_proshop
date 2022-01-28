@@ -23,7 +23,6 @@ interface IProps {
 }
 export const FeaturedCategories = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
-  console.log('IGetAllCategory', data);
   const chunkSize =
     window.innerWidth > 1100 ? 4 : window.innerWidth > 1100 ? 3 : 1;
   const chunks: any = [];

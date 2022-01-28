@@ -7,30 +7,30 @@ import { PathNavigate, SpinnerContainer } from '../../components';
 import CartList from './Sections/CartList';
 import Subtotal from './Sections/Subtotal';
 import { AppState } from '../../redux/store';
-import { ActionCartType } from '../../redux/Cart/type';
-import { getProfile } from '../../redux/User/action';
 import { TopRate } from '../../components/sections/TopRate/TopRate';
+import { myActionCart } from '../../redux/Cart/action';
 
 const Cart = () => {
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, any>>();
+  const cart = useSelector((state: AppState) => state.cart);
 
   useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
+    dispatch(myActionCart());
+    // dispatch(getTopProducts());
+  }, []);
 
   const TopRateComp = useCallback(() => <TopRate />, []);
   return (
     <>
       <PathNavigate name="Shopping Cart" />
-      {/* {!cart.user?.cart?.items.length ? (
+      {!cart.cart?.items.length ? (
         <EmptyCart />
       ) : cart.isLoading ? (
         <SpinnerContainer />
       ) : (
         <CartContainer align-items="flex-start">
           <ListContainer direction="column" width="70%">
-            {cart.user?.cart?.items.map(item => (
+            {cart.cart?.items.map(item => (
               <CartList data={item} key={item.product._id} />
             ))}
           </ListContainer>
@@ -42,10 +42,10 @@ const Cart = () => {
             margin-left="2em"
             height="50%"
           >
-            <Subtotal data={cart.user?.cart} />
+            <Subtotal data={cart.cart} />
           </TotalContainer>
         </CartContainer>
-      )} */}
+      )}
       {TopRateComp()}
     </>
   );

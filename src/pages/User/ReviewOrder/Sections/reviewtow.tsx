@@ -71,13 +71,7 @@ export const ReviewTow = () => {
         <>
           <LeftOrderSection>
             <Column>
-              {/* {console.log(ordersA.isLoading, ordersA.success)}
-              {console.log(
-                ordersA?.orders ? ordersA.orders[0].shippingAddress : undefined,
-              )} */}
-              {console.log('spinner finish', ordersA.orders?.shippingAddress)}
               <ShapeAddress>Shipping Address</ShapeAddress>
-              {/* {console.log('shipping address tag done')} */}
               <UserName>John rose</UserName>
               <Address>{ordersA.orders?.shippingAddress?.country}</Address>
               <HeaderTitleRight style={{ marginTop: '32px' }}>

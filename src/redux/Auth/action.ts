@@ -68,6 +68,7 @@ export const logoutSuccess = (fun?: Function) => {
     dispatch({ type: EnumAuthAction.USER_LOGOUT });
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     fun?.();
   };
 };

@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { log } from 'console';
 import { Container, PathNavigate } from '../../components';
 import { ProductContainer } from './style';
 import {
@@ -50,8 +49,6 @@ function NewProduct() {
     price: product.product?.price || 0,
     colors: product.product?.colors || [],
   };
-
-  console.log('test', product.product?.images);
 
   const formik = useFormik<IAddProductSchema>({
     initialValues,

@@ -22,15 +22,16 @@ import {
   IconList,
   NavIcon,
   Hamburger,
+  Badge,
 } from './NavBarStyles';
 import Logo from './Logo/Logo';
 import { useToken } from '../../utils/helper/useToken';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
-import { getProfile } from '../../redux/User/action';
 import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
 import useTheme from '../../Hoc/UseTheme';
+import { myActionCart } from '../../redux/Cart/action';
 
 const Style = {
   color: '#FFF',
@@ -45,10 +46,12 @@ export const Navbar = ({ open, setToggle }) => {
   const user: IUser = useToken();
   const { theme } = useTheme();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const cart = useSelector((state: AppState) => state.cart);
+
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(myActionCart());
   }, [dispatch]);
+
   const Logout = () => {
     dispatch(logoutSuccess());
     navigate('/login');
@@ -103,9 +106,13 @@ export const Navbar = ({ open, setToggle }) => {
           to="/cart"
           style={{ textDecoration: 'none', fontFamily: 'mulish' }}
         >
-          {console.log('cart.user?.cart?.items?.length', cart.user)}
-          <IconList>
-            <span>0</span> <BsFillCartFill size="5em" style={Style} />
+          <IconList style={{ position: 'relative' }}>
+            {!cart.isLoading && cart.success ? (
+              <Badge>{cart?.cart?.items.length}</Badge>
+            ) : (
+              <Badge>0</Badge>
+            )}
+            <BsFillCartFill size="5em" style={Style} />
             Cart
           </IconList>
         </Link>

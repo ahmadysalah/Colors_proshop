@@ -21,16 +21,12 @@ export const getAllUser = (pageNumber?: number) => {
 
     try {
       const response = await Api.get(`/users${search}`);
-      if (response.status === 200) {
-        dispatch({
-          type: EnumAdminAction.GET_ALL_USER_SUCCESS,
-          payload: {
-            user: response.data,
-          },
-        });
-      } else {
-        console.log('response', response.data.error);
-      }
+      dispatch({
+        type: EnumAdminAction.GET_ALL_USER_SUCCESS,
+        payload: {
+          user: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumAdminAction.GET_ALL_USER_FILL,
