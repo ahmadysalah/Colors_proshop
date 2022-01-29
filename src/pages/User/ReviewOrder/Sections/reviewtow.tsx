@@ -56,9 +56,8 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
   const ordersA = useSelector((state: AppState) => state.order.orderById);
 
   useEffect(() => {
-    dispatch(getOrderById('61f0050964b6f00004501d91'));
+    dispatch(getOrderById('61f53c472d7c5e0004f0ecfc'));
   }, [dispatch]);
-
   return (
     <OrderWrapper>
       {ordersA?.isLoading && !ordersA.orders ? (

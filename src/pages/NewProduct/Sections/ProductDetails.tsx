@@ -57,7 +57,7 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
           fontSize="1.5rem"
           bold
           color="test"
-          margin="0 0 1em 0.3em"
+          margin="0 0 50px 0.3em"
         >
           Product Details
         </Typography>

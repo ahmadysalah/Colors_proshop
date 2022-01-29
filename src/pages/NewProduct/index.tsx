@@ -96,7 +96,7 @@ function NewProduct() {
   });
 
   return (
-    <ProductContainer direction="column" padding-left="7.3%">
+    <ProductContainer direction="column" padding-left="15%" margin-top="100px">
       <PathNavigate name={id ? `update Product ${id}` : 'Create New Product'} />
       <form style={{ width: '100%' }} onSubmit={formik.handleSubmit}>
         <Container direction="column" align-Items="flex-end" width="71%">
