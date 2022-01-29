@@ -41,7 +41,7 @@ const CartList = ({ data }: IProps) => {
   return (
     <ItemContainer
       background-color="#F2F2F2"
-      height="242px"
+      height="180px"
       border-radius="16px"
       position="relative"
       padding="1em"
@@ -51,7 +51,7 @@ const CartList = ({ data }: IProps) => {
       <CloseIcon onClick={() => handleRemoveFormCart(product._id)}>
         <GrFormClose />
       </CloseIcon>
-      {product.discount && (
+      {product.discount ? (
         <OldPrice>
           <Typography
             variant="span"
@@ -63,8 +63,7 @@ const CartList = ({ data }: IProps) => {
             {product.price}
           </Typography>
         </OldPrice>
-      )}
-
+      ) : null}
       <ImgContainer
         width="60%"
         align-items="start"

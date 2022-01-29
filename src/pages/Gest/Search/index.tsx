@@ -26,8 +26,6 @@ const SerachPage = () => {
     dispatch(getProducts(keyword));
   }, [keyword, dispatch]);
 
-  console.log('searchProducts', allProducts.allProduct);
-
   return allProducts.isLoading ? (
     <SpinnerContainer />
   ) : (

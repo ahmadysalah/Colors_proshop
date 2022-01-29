@@ -22,11 +22,12 @@ export const ContainerWrapper = styled.div<any>`
     flex-wrap: wrap;
     margin-top: 1em;
     width: 98%;
-    & > button{
-      margin: 1.5em .2em;
+    & > button {
+      margin: 1.5em 0.2em;
     }
-   
-  & > img {
-     font-size: 14px;
-  }  
+
+    & > img {
+      font-size: 14px;
+    }
+  }
 `;

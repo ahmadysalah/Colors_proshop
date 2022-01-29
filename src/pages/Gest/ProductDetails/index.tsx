@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -23,15 +23,17 @@ const ProductScreen: React.FC = () => {
   const { isLoading, product, success } = useSelector(
     (state: AppState) => state.product.getProductById,
   );
-  const myProfile = useSelector((state: AppState) => state.user.myProfile);
+  const TopRateComp = useCallback(() => <TopRate />, []);
+
+  // const myProfile = useSelector((state: AppState) => state.user.myProfile);
   useEffect(() => {
     dispatch(getProductById(id as string));
-    dispatch(getProfile());
+    // dispatch(getProfile());
   }, [dispatch]);
 
   return (
     <Container direction="column" width="80%" margin="0 auto" overflow="hidden">
-      {isLoading || !success ? (
+      {isLoading ? (
         <SpinnerContainer />
       ) : (
         <>
@@ -50,9 +52,9 @@ const ProductScreen: React.FC = () => {
             ]}
           />
           <Review reviews={product!.reviews || []} />
-          <TopRate />
         </>
       )}
+      {TopRateComp()}
     </Container>
   );
 };

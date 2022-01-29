@@ -49,7 +49,7 @@ const Subtotal = ({ data }: Props) => {
           letter-spacing="0.76px"
           margin-bottom="1em"
         >
-          $989.97
+          {data.totalPrice}$
         </Typography>
       </Container>
       <Divider color="#E8E8E8" />

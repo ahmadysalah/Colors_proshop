@@ -20,16 +20,12 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
 
     try {
       const response = await Api.get(`/products${search}`);
-      if (response.status === 200) {
-        dispatch({
-          type: EnumProductsAction.GET_ALL_PRODUCTS_SUCCESS,
-          payload: {
-            products: response.data,
-          },
-        });
-      } else {
-        console.log('response', response.data.error);
-      }
+      dispatch({
+        type: EnumProductsAction.GET_ALL_PRODUCTS_SUCCESS,
+        payload: {
+          products: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_ALL_PRODUCTS_FILL,
@@ -89,7 +85,6 @@ export const getTopProducts = () => {
 
     try {
       const response = await Api.get('/products/top');
-      console.log('ssssssssssss');
 
       dispatch({
         type: EnumProductsAction.GET_TOP_PRODUCTS_SUCCESS,
@@ -122,7 +117,6 @@ export const getAlCategory = () => {
 
     try {
       const response = await Api.get('/products/category/all');
-      console.log('dddd', response.data.categories);
       dispatch({
         type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
         payload: response.data.categories || [],

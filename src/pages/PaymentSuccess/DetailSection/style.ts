@@ -4,6 +4,6 @@ import { ButtonHero } from '../../../components/Slider/SliderStyle';
 export const ButtonKeep = styled(ButtonHero)`
   width: 410px;
   color: white;
-  height: 60px;
+  height: 50px;
   border-radius: 5px;
 `;

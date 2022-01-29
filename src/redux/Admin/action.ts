@@ -21,16 +21,12 @@ export const getAllUser = (pageNumber?: number) => {
 
     try {
       const response = await Api.get(`/users${search}`);
-      if (response.status === 200) {
-        dispatch({
-          type: EnumAdminAction.GET_ALL_USER_SUCCESS,
-          payload: {
-            user: response.data,
-          },
-        });
-      } else {
-        console.log('response', response.data.error);
-      }
+      dispatch({
+        type: EnumAdminAction.GET_ALL_USER_SUCCESS,
+        payload: {
+          user: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumAdminAction.GET_ALL_USER_FILL,
@@ -159,15 +155,11 @@ export const updateProduct = (
       const imageString: Array<string> = (
         responseData.data.images as Array<any>
       ).filter(x => typeof x === 'string');
-      const imageUpload = imageNeeedUpdated.map(image => {
+      const imageUpload = product.images.map(image => {
         return Api.post('/upload', formDataCstom(image));
       });
       const imagesUrl = await Promise.all<AxiosResponse>(imageUpload);
       const images = imagesUrl.map(x => x.data) as Array<string>;
-      if (imageString) {
-        images.concat(imageString);
-      }
-
       const data = {
         ...product,
         images,

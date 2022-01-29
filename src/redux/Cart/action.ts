@@ -1,10 +1,7 @@
 import { Dispatch } from 'redux';
-import { getProfile } from '../User/action';
-import { TAllActionUser, ICart } from '../User/type';
-import { EnumUserAction } from '../User/constant';
-/* eslint-disable no-underscore-dangle */
+import { ICart } from '../User/type';
+
 import { AppState } from '../store';
-import { IProducts } from '../Product/type';
 
 import { ActionCartType } from './type';
 
@@ -12,7 +9,7 @@ import { EnumCartAction } from './constant';
 import Api from '../../utils/Api/axios';
 
 interface AddItemPayload {
-  productId: string;
+  productId?: string;
   qty: number;
 }
 
@@ -27,16 +24,13 @@ export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
     });
 
     try {
-      getProfile();
       const oldNumber = getState().user.myProfile;
       // const oldNumber = getState();
-      console.log('oldNumber', oldNumber);
 
       const response = await Api.update<AddItemPayload>(
         '/users/profile/cart',
         data,
       );
-      console.log('res-----------', response.data);
 
       if (response.status === 200) {
         dispatch({
@@ -89,6 +83,31 @@ export const deleteActionCart = (id: string) => {
   };
 };
 
+export const myActionCart = () => {
+  return async (dispatch: Dispatch<ActionCartType>) => {
+    dispatch({
+      type: EnumCartAction.MY_CART_START,
+    });
+
+    try {
+      const response = await Api.get(`/users/profile`);
+      console.log('reee+++++', response.data.cart);
+      dispatch({
+        type: EnumCartAction.MY_CART_SUCCESS,
+        payload: {
+          cart: response.data.cart as ICart,
+        },
+      });
+    } catch (e: any) {
+      dispatch({
+        type: EnumCartAction.MY_CART_FILL,
+        payload: {
+          error: e?.response?.data?.message,
+        },
+      });
+    }
+  };
+};
 export const CartActions = {
   deleteActionCart,
   upduteActionCart,

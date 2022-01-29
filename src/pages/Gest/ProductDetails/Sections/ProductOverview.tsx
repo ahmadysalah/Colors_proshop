@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BsBookmarks } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -25,16 +25,15 @@ const ProductOverview: React.FC<IProducts> = props => {
   const [colorActive, setColorActive] = useState(colors?.[0] || '');
   const [memory, setMemory] = useState('');
   const [currentImages, setImages] = useState<string[]>(images || []);
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
 
-  useEffect(() => {
-    setImages(images);
-  }, [images]);
+  //  useCallback
+  // useEffect(() => {
+  //   // setImages(images);
+  // }, [images]);
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const handleAddToCart = () => {
-    console.log('count', count);
-
     dispatch(
       upduteActionCart(
         {
@@ -54,7 +53,6 @@ const ProductOverview: React.FC<IProducts> = props => {
       ...images.slice(index + 1),
     ]);
   };
-  console.log(props);
   return (
     <Container
       align-Items="flex-start"

@@ -4,6 +4,8 @@ import { lazy } from 'react';
 import Loadable from './components/Loadable';
 import { Navbar } from './components';
 import Profile from './pages/Profile';
+import { adminRoutes } from './Route/Admin';
+import { userRoutes } from './Route/user';
 
 const Signup = Loadable(lazy(() => import('./pages/Auth/Signup')));
 const Login = Loadable(lazy(() => import('./pages/Auth/Login')));
@@ -26,15 +28,9 @@ export const AllRouter = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/product/:id" element={<Product />} />
-      <Route path="/review" element={<ReviewOrder />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/addNewProduct" element={<AddNewProduct />} />
-      <Route path="/addNewProduct/:id" element={<AddNewProduct />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/search" element={<Search />} />
-      <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+      {adminRoutes()}
+      {userRoutes()}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
