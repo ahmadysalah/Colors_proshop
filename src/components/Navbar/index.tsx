@@ -85,10 +85,15 @@ export const Navbar = ({ open, setToggle }) => {
       <NavIcon style={{ width: '15%' }}>
         <IConsContainer>
           {user.isAdmin ? (
-            <IconList>
-              <FiSettings size="1.2em" style={Style} />
-              Admin
-            </IconList>
+            <Link
+              to="/dashboard"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList>
+                <FiSettings size="1.2em" style={Style} />
+                Admin
+              </IconList>
+            </Link>
           ) : null}
           {user?._id ? (
             <Link

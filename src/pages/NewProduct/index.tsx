@@ -109,7 +109,12 @@ function NewProduct() {
             margin-bottom="1em"
           >
             <ProductImages formik={formik} />
-            <ProductDetails formik={formik} categories={categories} />
+            <ProductDetails
+              formik={formik}
+              categories={categories}
+              product={product?.product}
+              edit={!!id}
+            />
           </Container>
           <Button
             type="submit"
