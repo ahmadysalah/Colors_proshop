@@ -40,7 +40,6 @@ export const ReviewTow = () => {
   const stripe: any = useStripe();
   const elements = useElements();
   const [checkoutError, setCheckoutError] = useState();
-
   const pay = () => {
     const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
       type: 'card',
@@ -56,9 +55,8 @@ export const ReviewTow = () => {
   const ordersA = useSelector((state: AppState) => state.order.orderById);
 
   useEffect(() => {
-    dispatch(getOrderById('61f0050964b6f00004501d91'));
+    dispatch(getOrderById('61f53c472d7c5e0004f0ecfc'));
   }, [dispatch]);
-
   const handleCardDetailsChange = (ev: any) => {
     if (ev.error) setCheckoutError(ev.error.message);
     else setCheckoutError(undefined);
