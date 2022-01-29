@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { toast } from 'react-toastify';
 import {
-  ReviewText,
   FooterTitleRight,
   TextFooter,
   UserName,
@@ -12,11 +12,7 @@ import {
   RevieworderButton,
   ChangeText,
   HeaderTitleRight,
-  WrapperCard,
   ShapeAddress,
-  LeftSection,
-  RightSection,
-  TextActive,
   RightSectionPlace,
   OrderDetailsText,
   LeftOrderSection,
@@ -36,21 +32,25 @@ import {
 } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
 
-export const ReviewTow = () => {
+export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
   const stripe: any = useStripe();
-  const elements = useElements();
-  const [checkoutError, setCheckoutError] = useState();
-
-  const pay = () => {
-    const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
-      type: 'card',
-      card: elements?.getElement(CardElement),
-    });
-    console.log({
-      error,
-      paymentMethod,
-    });
+  const pay = async () => {
+    try {
+      const { error } = await stripe.confirmCardPayment(
+        'pi_3KNHsTDcar7dV87r0FEw3O9L_secret_1NklnjOkUIBfIMfoVjCKOSIdZ',
+        {
+          payment_method: paymentId,
+        },
+      );
+      if (error) throw new Error(error.message);
+      toast('Payment Successful', {
+        type: 'success',
+      });
+    } catch (error: any) {
+      toast(error.message, { type: 'error' });
+    }
   };
+
   const dispatch =
     useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
   const ordersA = useSelector((state: AppState) => state.order.orderById);
@@ -59,10 +59,6 @@ export const ReviewTow = () => {
     dispatch(getOrderById('61f0050964b6f00004501d91'));
   }, [dispatch]);
 
-  const handleCardDetailsChange = (ev: any) => {
-    if (ev.error) setCheckoutError(ev.error.message);
-    else setCheckoutError(undefined);
-  };
   return (
     <OrderWrapper>
       {ordersA?.isLoading && !ordersA.orders ? (
@@ -96,23 +92,6 @@ export const ReviewTow = () => {
                   />
                 </ProductContainer>
               </Column>
-              <HeaderTitleRight
-                style={{ marginTop: '32px', justifyContent: 'space-between' }}
-              >
-                <form
-                  onSubmit={() => console.log('submitted')}
-                  style={{ width: '100%' }}
-                >
-                  <Column>
-                    <ShapeAddress>Payment Details</ShapeAddress>
-
-                    <CardElement
-                      options={cardElementOpts as any}
-                      onChange={handleCardDetailsChange}
-                    />
-                  </Column>
-                </form>
-              </HeaderTitleRight>
             </Column>
           </LeftOrderSection>
           <RightSectionPlace>
@@ -135,7 +114,7 @@ export const ReviewTow = () => {
                 <TextFooter style={{ fontWeight: 'bold' }}>$589.98</TextFooter>
               </FooterTitleRight>
             </Column>
-            <RevieworderButton type="submit">Review order</RevieworderButton>
+            <RevieworderButton onClick={pay}>Review order</RevieworderButton>
           </RightSectionPlace>
         </>
       )}
@@ -144,30 +123,3 @@ export const ReviewTow = () => {
 };
 
 export default ReviewTow;
-
-const iframeStyles = {
-  base: {
-    iconColor: '#0F1112',
-    color: '#0F1112',
-    fontWeight: '500',
-    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-    fontSize: '16px',
-    fontSmoothing: 'antialiased',
-    border: '1px solid #4D4D4D',
-    ':-webkit-autofill': {
-      color: '#fce883',
-    },
-    '::placeholder': {
-      color: '#4D4D4D',
-    },
-    '::-webkit-input-placeholder': {
-      color: '#4D4D4D',
-      border: '1px solid #4D4D4D',
-    },
-  },
-};
-
-const cardElementOpts = {
-  iconStyle: 'solid',
-  style: iframeStyles,
-};

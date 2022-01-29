@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from 'styled-components';
 import { Elements } from '@stripe/react-stripe-js';
@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { darkTheme, lightTheme, GlobalStyle } from './theme';
 import useTheme from './Hoc/UseTheme';
 
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+const stripePromise = loadStripe('pk_test_kvaWWuoOUKU8FfTgtn5U2LVC00If7nyUo0');
 
 export const Providers: React.FC = ({ children }) => {
   const { theme } = useTheme();

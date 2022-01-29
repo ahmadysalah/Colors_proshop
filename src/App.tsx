@@ -27,6 +27,7 @@ const App: React.FC = () => {
             <ErrorBoundary>
               <Burger open={open} setOpen={setstate} />
               <Navbar open={open} setToggle={setToggle} />
+              <Container height="3rem" />
               <AllRouter />
             </ErrorBoundary>
           </Suspense>{' '}
