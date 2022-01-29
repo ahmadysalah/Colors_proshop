@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { toast } from 'react-toastify';
 import { ICart } from '../User/type';
 
 import { AppState } from '../store';
@@ -17,14 +18,14 @@ interface AddItemPayload {
 export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
   return async (
     dispatch: Dispatch<ActionCartType>,
-    getState: () => AppState,
+    // getState: () => AppState,
   ) => {
     dispatch({
       type: EnumCartAction.UPDATE_ITEM_START,
     });
 
     try {
-      const oldNumber = getState().user.myProfile;
+      // const oldNumber = getState().user.myProfile;
       // const oldNumber = getState();
 
       const response = await Api.update<AddItemPayload>(
@@ -32,16 +33,26 @@ export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
         data,
       );
 
-      if (response.status === 200) {
-        dispatch({
-          type: EnumCartAction.UPDATE_ITEM_SUCCESS,
-          payload: {
-            cart: response.data,
-          },
-        });
-      }
+      console.log('response data', response.data);
+      // if (response.status === 200) {
+      dispatch({
+        type: EnumCartAction.UPDATE_ITEM_SUCCESS,
+        payload: {
+          cart: response.data.cart as ICart,
+        },
+      });
+      // }
       fun?.();
     } catch (e: any) {
+      toast(JSON.stringify(e?.response?.data?.message), {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       dispatch({
         type: EnumCartAction.UPDATE_ITEM_FILL,
         payload: {

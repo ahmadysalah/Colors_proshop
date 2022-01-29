@@ -24,12 +24,12 @@ const App: React.FC = () => {
         <ThemeProvider theme={currentTheme}>
           <GlobalStyle {...currentTheme} />
           <Suspense fallback={<SpinnerContainer />}>
-            <ErrorBoundary>
-              <Burger open={open} setOpen={setstate} />
-              <Navbar open={open} setToggle={setToggle} />
-              <Container height="3rem" />
-              <AllRouter />
-            </ErrorBoundary>
+            <Burger open={open} setOpen={setstate} />
+            <Navbar open={open} setToggle={setToggle} />
+            <Container height="3rem" />
+            <AllRouter />
+            {/* <ErrorBoundary>
+            </ErrorBoundary> */}
           </Suspense>{' '}
         </ThemeProvider>
       </HelmetProvider>

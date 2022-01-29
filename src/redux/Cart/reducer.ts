@@ -4,15 +4,14 @@ import { EnumCartAction } from './constant';
 import { ActionCartType, ICartState } from './type';
 
 const temp = localStorage.getItem('user');
+const cart = (temp ? JSON.parse(temp).cart : {}) as ICart;
 
 const initialState: ICartState = {
-  cart: temp
-    ? (JSON.parse(temp) as IUser).cart
-    : ({
-        items: [],
-        totalQty: 0,
-        totalPrice: 0,
-      } as ICart),
+  cart: {
+    items: cart.items || [],
+    totalQty: cart.totalQty || 0,
+    totalPrice: cart.totalPrice || 0,
+  },
   success: false,
   isLoading: false,
   error: '',

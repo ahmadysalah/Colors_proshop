@@ -19,6 +19,24 @@ import {
 interface IProps {
   data: IItemCart;
 }
+
+/**
+ * 
+ *    const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const handleAddToCart = useCallback(() => {
+    dispatch(
+      upduteActionCart(
+        {
+          productId: id as string,
+          qty: count,
+        },
+        () => navigation('/cart'),
+      ),
+    );
+    console.log('count', count);
+  }, [dispatch, upduteActionCart, count]);
+ *  
+ */
 const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
   const [count, setCount] = useState<number>(qty);

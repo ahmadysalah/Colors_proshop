@@ -33,7 +33,7 @@ const ProductOverview: React.FC<IProducts> = props => {
   // }, [images]);
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     dispatch(
       upduteActionCart(
         {
@@ -43,7 +43,20 @@ const ProductOverview: React.FC<IProducts> = props => {
         () => navigation('/cart'),
       ),
     );
-  };
+    console.log('count', count);
+  }, [dispatch, upduteActionCart, count]);
+
+  // const handleAddToCart = () => {
+  //   dispatch(
+  //     upduteActionCart(
+  //       {
+  //         productId: id as string,
+  //         qty: count,
+  //       },
+  //       () => navigation('/cart'),
+  //     ),
+  //   );
+  // };
 
   // const navigation = useNavigate();
   const handleImageClick = (index: number) => {
