@@ -28,7 +28,7 @@ export const lightTheme: DefaultTheme = {
 
   Typography: {
     color: '#242424',
-    fontFamily: 'normal normal',
+    fontFamily: 'mulish',
   },
 };
 
@@ -51,6 +51,6 @@ export const darkTheme: DefaultTheme = {
 
   Typography: {
     color: '#242424',
-    fontFamily: 'normal normal',
+    fontFamily: 'mulish',
   },
 };

@@ -14,6 +14,7 @@ import {
 } from '../style';
 
 const ProductDetails = ({ formik, categories }: any) => {
+  console.log('categ', categories);
   const colourStyles = {
     control: styles => ({
       ...styles,

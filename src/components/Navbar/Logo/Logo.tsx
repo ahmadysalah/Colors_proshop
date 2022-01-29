@@ -7,9 +7,8 @@ export default function Logo() {
     <LogoSt as={Link} to="/">
       <Typography
         // color="#FCDD06"
-        font-size="40px"
-        variant="h1"
-        fontFamily="mulish"
+        variant="h3"
+        font-family="mulish"
       >
         ProShop
       </Typography>

@@ -32,7 +32,7 @@ const DashBoard = () => {
           Products
         </Typography>
         <Btn>
-          <Link to="/addNewProduct" style={{ textDecoration: 'none' }}>
+          <Link to="/addproduct" style={{ textDecoration: 'none' }}>
             <Typography font-size="20px">New Product</Typography>
           </Link>
         </Btn>

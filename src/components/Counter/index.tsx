@@ -19,17 +19,24 @@ const Value = styled.div`
   border: 1px solid #eeeeee;
 `;
 
-interface IProps {
-  max: number;
-  min: number;
-  onFinish: any;
-  addQnt: number;
-}
-const Counter: React.FC<any> = ({ max, min, onFinish, addQnt = 0 }: IProps) => {
-  const [number, setNumber] = useState(1);
-
+const Counter: React.FC<objectType> = ({
+  max,
+  min = 1,
+  onFinish,
+  value = 1,
+  handleIncrease,
+  handleDecrease,
+}) => {
+  const [number, setNumber] = useState(value);
   const increase = () => {
-    setNumber(prev => prev + addQnt);
+    if (number > max && number > 1) {
+      return;
+    }
+    setNumber(prev => {
+      onFinish(prev + 1);
+      return prev + 1;
+    });
+    handleIncrease();
   };
 
   const decrease = () => {
@@ -75,6 +82,3 @@ const Counter: React.FC<any> = ({ max, min, onFinish, addQnt = 0 }: IProps) => {
 };
 
 export default Counter;
-function handleDecrease() {
-  console.log('Function not implemented.');
-}

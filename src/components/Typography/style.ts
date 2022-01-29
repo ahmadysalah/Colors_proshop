@@ -19,7 +19,7 @@ const getTypographySize = (variant: string) => {
   }
 };
 
-const Wrapper = styled.div<any>`
+const Wrapper = styled('p')<any>`
   /* color: ${props => props.color || 'black'}; */
   font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
   color: ${props =>
@@ -31,11 +31,10 @@ const Wrapper = styled.div<any>`
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
-  font-family: ${props => props?.fontFamily || 'PlusJakartaSans'};
-  ${props =>
-    Object.keys(props)
-      .map((key: any) => `${key}: ${props?.[key]};`)
-      .join(';')};
+  font-family: ${props => props?.['font-family'] || 'roboto'};
+  font-size: ${props =>
+    props?.['font-Size'] || getTypographySize(props?.variant || '')};
+  text-align: ${props => props?.['text-align'] || 'left'};
 `;
 
 export default Wrapper;

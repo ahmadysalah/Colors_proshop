@@ -21,7 +21,7 @@ const Cart = () => {
 
   const TopRateComp = useCallback(() => <TopRate />, []);
   return (
-    <>
+    <Container direction="column" width="90%" margin="80px auto">
       <PathNavigate name="Shopping Cart" />
       {!cart.cart?.items.length ? (
         <EmptyCart />
@@ -46,31 +46,8 @@ const Cart = () => {
         </CartContainer>
       )}
       {TopRateComp()}
-    </>
+    </Container>
   );
 };
 
 export default Cart;
-
-// {cart.isLoading ? (
-//   <SpinnerContainer />
-// ) : (
-//   <CartContainer align-items="flex-start">
-//     <ListContainer direction="column" width="70%">
-//       {cart.user?.cart?.items.map(item => (
-//         <CartList data={item} key={item.product._id} />
-//       ))}
-//     </ListContainer>
-
-//     <TotalContainer
-//       direction="column"
-//       width="30%"
-//       background-color="#F2F2F2"
-//       border-radius="16px"
-//       margin-left="2em"
-//       height="50%"
-//     >
-//       <Subtotal total={4} />
-//     </TotalContainer>
-//   </CartContainer>
-// )}
