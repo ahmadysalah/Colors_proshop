@@ -24,9 +24,9 @@ const Cart = () => {
     <Container direction="column" width="90%" margin="80px auto">
       <PathNavigate name="Shopping Cart" />
       {cart.isLoading ? (
-        <EmptyCart />
-      ) : !cart.cart?.items.length ? (
         <SpinnerContainer />
+      ) : !cart.cart?.items.length ? (
+        <EmptyCart />
       ) : (
         <CartContainer align-items="flex-start">
           <ListContainer direction="column" width="70%">

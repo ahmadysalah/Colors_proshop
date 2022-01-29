@@ -41,19 +41,23 @@ const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
   const [count, setCount] = useState<number>(qty);
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const handleRemoveFormCart = (id: string) => {
-    dispatch(deleteActionCart(id));
-  };
+  // const handleRemoveFormCart = (id: string) => {
+  // };
+
+  const removeFromCart = useCallback(() => {
+    dispatch(deleteActionCart(product._id));
+    // dispatch(upduteActionCart({ productId: product._id, qty: 0 }));
+    setCount(0);
+  }, [count]);
 
   const handleIncress = useCallback(() => {
-    setCount(prev => prev + 1);
     dispatch(upduteActionCart({ productId: product._id, qty: count + 1 }));
+    setCount(prev => prev + 1);
   }, [count]);
 
   const handleDecress = useCallback(() => {
-    setCount(prev => prev - 1);
-
     dispatch(upduteActionCart({ productId: product._id, qty: count - 1 }));
+    setCount(prev => prev - 1);
   }, [count]);
 
   return (
@@ -65,8 +69,9 @@ const CartList = ({ data }: IProps) => {
       padding="1em"
       margin-bottom="30px"
       justify-content="space-between"
+      display={count.toString()}
     >
-      <CloseIcon onClick={() => handleRemoveFormCart(product._id)}>
+      <CloseIcon onClick={removeFromCart}>
         <GrFormClose />
       </CloseIcon>
       {product.discount ? (
@@ -109,7 +114,7 @@ const CartList = ({ data }: IProps) => {
         />
       </WrapCounter>
       <Typography
-        children={String(`$${product.price - product.discount}`)}
+        children={String(`${product.discount}`)}
         variant="h2"
         fontSize="38px"
         width="auto"

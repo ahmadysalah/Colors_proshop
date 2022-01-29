@@ -40,7 +40,7 @@ const Subtotal = ({ data }: Props) => {
           margin-bottom="0.5em"
           text-decoration="line-through"
         >
-          {allDiscount}$
+          {data.totalPrice}$
         </Typography>
 
         <Typography
@@ -49,7 +49,7 @@ const Subtotal = ({ data }: Props) => {
           letter-spacing="0.76px"
           margin-bottom="1em"
         >
-          {data.totalPrice}$
+          {allDiscount}$
         </Typography>
       </Container>
       <Divider color="#E8E8E8" />
