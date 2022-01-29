@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { json } from 'stream/consumers';
 import logo from '../../../assets/Images/card.png';
-import { Column, Row, Typography } from '../../../components';
+import { Column, Row, SpinnerContainer, Typography } from '../../../components';
 import {
   IShippingSchema,
   ShippingSchema,
@@ -39,6 +39,7 @@ import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
 import { getProfile } from '../../../redux/User/action';
 import { ActionCartType } from '../../../redux/Cart/type';
+import { myActionCart } from '../../../redux/Cart/action';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -55,10 +56,10 @@ const ReviewOrder = () => {
   const elements = useElements();
 
   const dispatch = useDispatch<ThunkDispatch<AppState, any, any>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const cart = useSelector((state: AppState) => state.cart);
   const myOrder = useSelector((state: AppState) => state.order.createOrder);
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(myActionCart());
   }, [dispatch]);
 
   const formik = useFormik<IShippingSchema>({
@@ -222,7 +223,22 @@ const ReviewOrder = () => {
                 </HeaderTitleRight>
                 <Column>
                   <InnerOverFlow>
-                    <OrderDetails
+                    {cart.isLoading ? (
+                      <SpinnerContainer />
+                    ) : (
+                      <>
+                        {cart?.cart?.items?.map(x => (
+                          <OrderDetails
+                            title={x.product?.name}
+                            image={x.product?.images[0]}
+                            priceItem={x.product.price}
+                            countItem={x.qty}
+                            isHr
+                          />
+                        ))}
+                      </>
+                    )}
+                    {/* <OrderDetails
                       title="iPhone 11 Pro 256GB Memory"
                       image={logo}
                       priceItem={20}
@@ -241,26 +257,40 @@ const ReviewOrder = () => {
                       image={logo}
                       priceItem={20}
                       countItem={20}
-                    />
+                    /> */}
                   </InnerOverFlow>
                 </Column>
 
                 <FooterTitleRight>
                   <TextFooter>Subtotal</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>
+                    {cart?.cart?.items
+                      .reduce(
+                        (acc, item) => acc + item?.product?.price * item?.qty,
+                        0,
+                      )
+                      .toFixed(2)}{' '}
+                    $
+                  </TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter>Tax</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>0 $</TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter>Shipping</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>0 $</TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
                   <TextFooter style={{ fontWeight: 'bold' }}>
-                    $589.98
+                    {cart?.cart?.items
+                      .reduce(
+                        (acc, item) => acc + item?.product?.price * item?.qty,
+                        0,
+                      )
+                      .toFixed(2)}{' '}
+                    $
                   </TextFooter>
                 </FooterTitleRight>
               </RightSection>

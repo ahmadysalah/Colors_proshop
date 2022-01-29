@@ -111,4 +111,5 @@ export const myActionCart = () => {
 export const CartActions = {
   deleteActionCart,
   upduteActionCart,
+  myActionCart,
 };

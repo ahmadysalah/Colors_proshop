@@ -53,14 +53,14 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
 
   const dispatch =
     useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
-  const ordersA = useSelector((state: AppState) => state.order.orderById);
-
-  useEffect(() => {
-    dispatch(getOrderById('61f53c472d7c5e0004f0ecfc'));
-  }, [dispatch]);
+  const createdorder = useSelector(
+    (state: AppState) => state.order.createOrder,
+  );
+  console.log('order created', createdorder);
+  console.log('first--------.', createdorder?.orders?.shippingAddress);
   return (
     <OrderWrapper>
-      {ordersA?.isLoading && !ordersA.orders ? (
+      {createdorder?.isLoading && !createdorder.orders ? (
         <SpinnerContainer />
       ) : (
         <>
@@ -68,7 +68,11 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
             <Column>
               <ShapeAddress>Shipping Address</ShapeAddress>
               <UserName>John rose</UserName>
-              <Address>{ordersA.orders?.shippingAddress?.country}</Address>
+              <Address>
+                {createdorder?.orders?.shippingAddress?.address},
+                {createdorder?.orders?.shippingAddress?.city},
+                {createdorder?.orders?.shippingAddress?.country},
+              </Address>
               <HeaderTitleRight style={{ marginTop: '32px' }}>
                 <ShapeAddress style={{ marginTop: '5px' }}>
                   Order Details
@@ -77,18 +81,20 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
               </HeaderTitleRight>
               <Column style={{ width: '100%' }}>
                 <ProductContainer>
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                  />
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                  />
+                  {createdorder.isLoading ? (
+                    <SpinnerContainer />
+                  ) : (
+                    <>
+                      {createdorder.orders?.orderItems.map(e => (
+                        <OrderDetails
+                          title={e.product?.name}
+                          image={e.product?.images[0]}
+                          priceItem={e.product?.price}
+                          countItem={e.qty}
+                        />
+                      ))}
+                    </>
+                  )}
                 </ProductContainer>
               </Column>
             </Column>
@@ -98,19 +104,29 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
               <OrderDetailsText>Order Details</OrderDetailsText>
               <FooterTitleRight>
                 <TextFooter>Subtotal</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>
+                  {createdorder.orders?.orderItems
+                    ?.reduce(
+                      (acc, item) => acc + item?.product?.price * item?.qty,
+                      0,
+                    )
+                    .toFixed(2)}
+                  $
+                </TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Tax</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>0 $</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Shipping</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>0 $</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
-                <TextFooter style={{ fontWeight: 'bold' }}>$589.98</TextFooter>
+                <TextFooter style={{ fontWeight: 'bold' }}>
+                  {/* {createdorder?.orders?.totalPrice} */}
+                </TextFooter>
               </FooterTitleRight>
             </Column>
             <RevieworderButton onClick={pay}>Review order</RevieworderButton>

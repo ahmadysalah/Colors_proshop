@@ -98,7 +98,7 @@ export const createOrder = (data: IShippingAddress) => {
       dispatch({
         type: EnumOrderAction.CREATE_ORDER_SUCCESS,
         payload: {
-          order: response.data,
+          order: response.data.order,
         },
       });
     } catch (e: any) {
