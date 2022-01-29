@@ -46,7 +46,6 @@ const Home: React.FC = () => {
       ) : (
         <FeaturedCategories data={allCatogory?.categories} />
       )}
-      {/* <FeaturedCategories /> */}
       {topProducts.isLoading || !featcheProduct.allProduct ? (
         <SpinnerContainer />
       ) : (
