@@ -23,9 +23,9 @@ const Cart = () => {
   return (
     <Container direction="column" width="90%" margin="80px auto">
       <PathNavigate name="Shopping Cart" />
-      {!cart.cart?.items.length ? (
+      {cart.isLoading ? (
         <EmptyCart />
-      ) : cart.isLoading ? (
+      ) : !cart.cart?.items.length ? (
         <SpinnerContainer />
       ) : (
         <CartContainer align-items="flex-start">

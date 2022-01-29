@@ -32,7 +32,12 @@ const ProductScreen: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Container direction="column" width="80%" margin="0 auto" overflow="hidden">
+    <Container
+      direction="column"
+      width="80%"
+      margin="80px auto"
+      overflow="hidden"
+    >
       {isLoading ? (
         <SpinnerContainer />
       ) : (
