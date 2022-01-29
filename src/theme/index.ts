@@ -28,7 +28,7 @@ export const lightTheme: DefaultTheme = {
 
   Typography: {
     color: '#242424',
-    fontFamily: 'normal normal',
+    fontFamily: 'mulish',
   },
 };
 
