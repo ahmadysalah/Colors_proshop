@@ -12,7 +12,7 @@ import useTheme from './Hoc/UseTheme';
 import { Providers } from './providers';
 import { darkTheme, GlobalStyle, lightTheme } from './theme';
 
-const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+const stripePromise = loadStripe('pk_test_kvaWWuoOUKU8FfTgtn5U2LVC00If7nyUo0');
 
 const App: React.FC = () => {
   const [open, setstate] = useState(false);
@@ -24,12 +24,12 @@ const App: React.FC = () => {
         <ThemeProvider theme={currentTheme}>
           <GlobalStyle {...currentTheme} />
           <Suspense fallback={<SpinnerContainer />}>
-            <Burger open={open} setOpen={setstate} />
-            <Navbar open={open} setToggle={setToggle} />
-            <Container height="3rem" />
-            <AllRouter />
-            {/* <ErrorBoundary>
-            </ErrorBoundary> */}
+            <ErrorBoundary>
+              <Burger open={open} setOpen={setstate} />
+              <Navbar open={open} setToggle={setToggle} />
+              <Container height="3rem" />
+              <AllRouter />
+            </ErrorBoundary>
           </Suspense>{' '}
         </ThemeProvider>
       </HelmetProvider>

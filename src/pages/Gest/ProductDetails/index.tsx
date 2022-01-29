@@ -25,41 +25,17 @@ const ProductScreen: React.FC = () => {
   );
   const TopRateComp = useCallback(() => <TopRate />, []);
 
-  const handleAddToCart = useCallback(() => {
-    /**
-     * first call returns a function from getAllProducts
-     * second will call it and we pass dispatch as the first argument
-     */
-    // upduteActionCart(
-    //   {
-    //     productId: '61f29c52c7bb0c0004c1df3f',
-    //     qty: 1,
-    //   },
-    //   () => navigation('/cart'),
-    // )(dispatch);
-    dispatch(
-      upduteActionCart(
-        {
-          productId: '61f29c52c7bb0c0004c1df3f',
-          qty: 1,
-        },
-        () => navigation('/cart'),
-      ),
-    );
-  }, [dispatch, upduteActionCart]);
-
   // const handleAddToCart = useCallback(() => {
   //   dispatch(
   //     upduteActionCart(
   //       {
-  //         productId: '61f29c52c7bb0c0004c1df3f',
+  //         productId: id,
   //         qty: 1,
   //       },
-  //       // () => navigation('/cart'),
+  //       () => navigation('/cart'),
   //     ),
   //   );
-  // }, []);
-  // const myProfile = useSelector((state: AppState) => state.user.myProfile);
+  // }, [dispatch, upduteActionCart]);
   useEffect(() => {
     dispatch(getProductById(id as string));
     // dispatch(getProfile());
@@ -90,7 +66,6 @@ const ProductScreen: React.FC = () => {
               },
             ]}
           />
-          <Button onClick={handleAddToCart}>Add</Button>
           <Review reviews={product!.reviews || []} />
         </>
       )}

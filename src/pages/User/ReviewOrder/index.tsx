@@ -238,26 +238,6 @@ const ReviewOrder = () => {
                         ))}
                       </>
                     )}
-                    {/* <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                      isHr
-                    />
-                    <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                      isHr
-                    />
-                    <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                    /> */}
                   </InnerOverFlow>
                 </Column>
 
@@ -297,7 +277,13 @@ const ReviewOrder = () => {
             </WrapperCard>
           </Column>
         )}
-        {stepperNumber === 1 && <ReviewTow paymentId={paymentId} />}
+        {stepperNumber === 1 && (
+          <ReviewTow
+            paymentId={paymentId}
+            clientSec={myOrder?.orders?.clientSecret}
+            orderId={myOrder?.orders?._id}
+          />
+        )}
       </InnerSection>
     </OrfferSection>
   );

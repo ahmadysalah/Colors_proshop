@@ -4,6 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import {
   FooterTitleRight,
   TextFooter,
@@ -31,47 +32,57 @@ import {
   getOrders,
 } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
+import { myActionCart } from '../../../../redux/Cart/action';
 
-export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
+export const ReviewTow: React.FC<objectType> = ({
+  paymentId,
+  clientSec,
+  orderId,
+}) => {
+  const navigation = useNavigate();
   const stripe: any = useStripe();
   const pay = async () => {
     try {
-      const { error } = await stripe.confirmCardPayment(
-        'pi_3KNHsTDcar7dV87r0FEw3O9L_secret_1NklnjOkUIBfIMfoVjCKOSIdZ',
-        {
-          payment_method: paymentId,
-        },
-      );
+      const { error } = await stripe.confirmCardPayment(clientSec, {
+        payment_method: paymentId,
+      });
       if (error) throw new Error(error.message);
       toast('Payment Successful', {
         type: 'success',
       });
+      navigation(`/paymentSuccess`);
     } catch (error: any) {
       toast(error.message, { type: 'error' });
     }
   };
 
-  const dispatch =
-    useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  const getOrder = useSelector((state: AppState) => state.order.orderById);
   const createdorder = useSelector(
     (state: AppState) => state.order.createOrder,
   );
+  const cart = useSelector((state: AppState) => state.cart);
+  useEffect(() => {
+    dispatch(myActionCart());
+    dispatch(getOrderById(orderId));
+  }, [dispatch]);
   console.log('order created', createdorder);
   console.log('first--------.', createdorder?.orders?.shippingAddress);
+  console.log('this is id of order', getOrder);
   return (
     <OrderWrapper>
-      {createdorder?.isLoading && !createdorder.orders ? (
+      {getOrder?.isLoading && !getOrder.orders ? (
         <SpinnerContainer />
       ) : (
         <>
           <LeftOrderSection>
             <Column>
               <ShapeAddress>Shipping Address</ShapeAddress>
-              <UserName>John rose</UserName>
+              <UserName>{getOrder.orders?.user?.firstName}</UserName>
               <Address>
-                {createdorder?.orders?.shippingAddress?.address},
-                {createdorder?.orders?.shippingAddress?.city},
-                {createdorder?.orders?.shippingAddress?.country},
+                {getOrder?.orders?.shippingAddress?.address},
+                {getOrder?.orders?.shippingAddress?.city},
+                {getOrder?.orders?.shippingAddress?.country},
               </Address>
               <HeaderTitleRight style={{ marginTop: '32px' }}>
                 <ShapeAddress style={{ marginTop: '5px' }}>
@@ -81,16 +92,17 @@ export const ReviewTow: React.FC<objectType> = ({ paymentId }) => {
               </HeaderTitleRight>
               <Column style={{ width: '100%' }}>
                 <ProductContainer>
-                  {createdorder.isLoading ? (
+                  {getOrder.isLoading ? (
                     <SpinnerContainer />
                   ) : (
                     <>
-                      {createdorder.orders?.orderItems.map(e => (
+                      {getOrder.orders?.orderItems?.map(x => (
                         <OrderDetails
-                          title={e.product?.name}
-                          image={e.product?.images[0]}
-                          priceItem={e.product?.price}
-                          countItem={e.qty}
+                          title={x.product?.name}
+                          image={x.product?.images[0]}
+                          priceItem={x.product.price}
+                          countItem={x.qty}
+                          isHr
                         />
                       ))}
                     </>

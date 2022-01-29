@@ -47,13 +47,13 @@ const CartList = ({ data }: IProps) => {
 
   const handleIncress = useCallback(() => {
     setCount(prev => prev + 1);
-    dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
+    dispatch(upduteActionCart({ productId: product._id, qty: count + 1 }));
   }, [count]);
 
   const handleDecress = useCallback(() => {
     setCount(prev => prev - 1);
 
-    dispatch(upduteActionCart({ productId: product._id, qty: 1 }));
+    dispatch(upduteActionCart({ productId: product._id, qty: count - 1 }));
   }, [count]);
 
   return (

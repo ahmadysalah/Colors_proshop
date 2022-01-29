@@ -27,10 +27,6 @@ const ProductOverview: React.FC<IProducts> = props => {
   const [currentImages, setImages] = useState<string[]>(images || []);
   const [count, setCount] = useState<number>(1);
 
-  //  useCallback
-  // useEffect(() => {
-  //   // setImages(images);
-  // }, [images]);
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const handleAddToCart = useCallback(() => {
@@ -46,19 +42,6 @@ const ProductOverview: React.FC<IProducts> = props => {
     console.log('count', count);
   }, [dispatch, upduteActionCart, count]);
 
-  // const handleAddToCart = () => {
-  //   dispatch(
-  //     upduteActionCart(
-  //       {
-  //         productId: id as string,
-  //         qty: count,
-  //       },
-  //       () => navigation('/cart'),
-  //     ),
-  //   );
-  // };
-
-  // const navigation = useNavigate();
   const handleImageClick = (index: number) => {
     setImages([
       images[index],

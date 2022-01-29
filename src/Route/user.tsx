@@ -18,7 +18,7 @@ export const userRoutes = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/review" element={<ReviewOrder />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/aymentSuccess" element={<PaymentSuccess />} />
+          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
         </>
       )}
     </>
