@@ -3,10 +3,11 @@ import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 import { IColumn } from '../../../@types/table';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { IOrders } from '../../../redux/Order/type';
 
 interface IProps<T> {
   columns: IColumn[];
-  data: T[];
+  data?: IOrders[];
   frameworkComponents?: {
     [key: string]: any;
   };
@@ -25,7 +26,7 @@ export default class Table<T> extends React.PureComponent<IProps<T>> {
         style={{
           marginTop: '1em',
           height: '100%',
-          width: '100%',
+          minWidth: '100%',
         }}
       >
         <AgGridReact

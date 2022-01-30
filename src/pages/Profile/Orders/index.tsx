@@ -1,30 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '../../../components';
+import { SpinnerContainer, Typography } from '../../../components';
 import { IColumn } from '../../../@types/table';
 import Table from './Table';
 import { AppState } from '../../../redux/store';
-import { getMyOrder } from '../../../redux/Order/action';
+import { getOrders } from '../../../redux/Order/action';
 import { InfoContainer } from '../style';
 
 const columns: IColumn[] = [
   {
-    name: 'user',
-  },
-  {
-    name: 'orderItems',
-  },
-  {
-    name: 'shippingAddress',
-  },
-  {
-    name: 'paymentMethod',
-  },
-  {
-    name: 'clientSecret',
-  },
-  {
-    name: 'taxPrice',
+    name: 'user.firstName',
   },
   {
     name: 'shippingPrice',
@@ -36,25 +21,19 @@ const columns: IColumn[] = [
     name: 'isPaid',
   },
   {
-    name: 'paidAt',
-  },
-  {
     name: 'isDelivered',
-  },
-  {
-    name: 'deliveredAt',
   },
 ];
 
 export default function OrdersProduct() {
-  const { orders } = useSelector((state: AppState) => state.order.myOrder);
+  const order = useSelector((state: AppState) => state.order);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyOrder());
+    dispatch(getOrders());
   }, [dispatch]);
-
+  console.log('orders', order);
   return (
     <InfoContainer
       align-items="flex-start"
@@ -68,7 +47,11 @@ export default function OrdersProduct() {
       <Typography variant="h2" fontSize="1.5rem">
         My Orders
       </Typography>
-      <Table data={[]} columns={columns} />
+      {order.orders.isLoading ? (
+        <SpinnerContainer />
+      ) : (
+        <Table data={order.orders?.orders?.orders} columns={columns} />
+      )}
     </InfoContainer>
   );
 }
