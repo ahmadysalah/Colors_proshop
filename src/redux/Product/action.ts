@@ -1,14 +1,9 @@
+import { log } from 'console';
 import { Dispatch } from 'redux';
 import Api from '../../utils/Api/axios';
 import { EnumProductsAction } from './constant';
 import { IAddReviewPayload, TAllActionProduct } from './type';
-/**
- * getProducts
- * used  to  fech  all  the  peduct
- *
- */
 
-//  ?keyword=iphone&pageNumber=1
 export const getProducts = (keyword?: string, pageNumber?: number) => {
   return async (dispatch: Dispatch<TAllActionProduct>) => {
     dispatch({
@@ -25,18 +20,12 @@ export const getProducts = (keyword?: string, pageNumber?: number) => {
 
     try {
       const response = await Api.get(`/products${search}`);
-      if (response.status === 200) {
-        dispatch({
-          type: EnumProductsAction.GET_ALL_PRODUCTS_SUCCESS,
-          payload: {
-            products: response.data,
-          },
-        });
-      } else {
-        console.log('response', response.data.error);
-      }
-
-      //   history.push('/profile');
+      dispatch({
+        type: EnumProductsAction.GET_ALL_PRODUCTS_SUCCESS,
+        payload: {
+          products: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_ALL_PRODUCTS_FILL,
@@ -72,8 +61,6 @@ export const getProductById = (id: string) => {
       } else {
         throw new Error('some  error habbend  in the Top  reated  peoduct');
       }
-
-      //   history.push('/profile');
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_PRODUCTS_BY_ID_FILL,
@@ -99,16 +86,12 @@ export const getTopProducts = () => {
     try {
       const response = await Api.get('/products/top');
 
-      if (response.status === 200) {
-        dispatch({
-          type: EnumProductsAction.GET_TOP_PRODUCTS_SUCCESS,
-          payload: {
-            product: response.data,
-          },
-        });
-      } else {
-        throw new Error('some  error habbend  in the Top  reated  peoduct');
-      }
+      dispatch({
+        type: EnumProductsAction.GET_TOP_PRODUCTS_SUCCESS,
+        payload: {
+          product: response.data,
+        },
+      });
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_TOP_PRODUCTS_FILL,
@@ -125,25 +108,19 @@ export const getTopProducts = () => {
  * getTopProducts to  Catogogry
  *
  */
+
 export const getAlCategory = () => {
   return async (dispatch: Dispatch<TAllActionProduct>) => {
     dispatch({
-      type: EnumProductsAction.GET_ALL_CATEGORY_START,
+      type: EnumProductsAction.GET_PRODUCTS_BY_ID_START,
     });
 
     try {
       const response = await Api.get('/products/category/all');
-
-      if (response.status === 200) {
-        dispatch({
-          type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
-          payload: {
-            product: response.data,
-          },
-        });
-      } else {
-        throw new Error('some  error habbend  in th e Top  reated  peoduct');
-      }
+      dispatch({
+        type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
+        payload: response.data.categories || [],
+      });
     } catch (e: any) {
       dispatch({
         type: EnumProductsAction.GET_ALL_CATEGORY_FILL,
@@ -154,6 +131,33 @@ export const getAlCategory = () => {
     }
   };
 };
+// export const getAlCategory = () => {
+//   return async (dispatch: Dispatch<TAllActionProduct>) => {
+//     dispatch({
+//       type: EnumProductsAction.GET_ALL_CATEGORY_START,
+//     });
+
+//     try {
+//       const response = await Api.get('/products/category/all');
+//       console.log('ee', response.data);
+
+//       dispatch({
+//         type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS,
+//         payload: {
+//           // categories: [],
+//           categories: response.data,
+//         },
+//       });
+//     } catch (e: any) {
+//       dispatch({
+//         type: EnumProductsAction.GET_ALL_CATEGORY_FILL,
+//         payload: {
+//           error: e?.response?.data?.message,
+//         },
+//       });
+//     }
+//   };
+// };
 
 /**
  *

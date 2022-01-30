@@ -72,7 +72,7 @@ export const ContentAction = styled.div<CSSProperties>(
     width = '100%',
     height = 'none',
     border = 'none',
-    margin = ' auto 2rem',
+    margin = ' auto',
   }) => ({
     display: 'flex',
     flexDirection: 'row',

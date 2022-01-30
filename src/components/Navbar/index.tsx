@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import { BsFillBookmarkDashFill, BsFillCartFill } from 'react-icons/bs';
+import {
+  BsFillBookmarkDashFill,
+  BsFillCartFill,
+  BsToggleOff,
+  BsToggleOn,
+} from 'react-icons/bs';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,16 +23,17 @@ import {
   IconList,
   NavIcon,
   Hamburger,
+  Badge,
   IConsContainer,
 } from './NavBarStyles';
-import { Container, Typography } from '..';
 import Logo from './Logo/Logo';
 import { useToken } from '../../utils/helper/useToken';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
-import { getProfile } from '../../redux/User/action';
 import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
+import useTheme from '../../Hoc/UseTheme';
+import { myActionCart } from '../../redux/Cart/action';
 
 const Style = {
   color: '#FFF',
@@ -37,21 +43,24 @@ const Style = {
   lineHieght: '1px',
 };
 
-export const Navbar = ({ open }) => {
+export const Navbar = ({ open, setToggle }) => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const user: IUser = useToken();
+  const { theme } = useTheme();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const cart = useSelector((state: AppState) => state.cart);
+
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(myActionCart());
   }, [dispatch]);
+
   const Logout = () => {
     dispatch(logoutSuccess());
     navigate('/login');
   };
   return (
-    <ListNav open={open}>
+    <ListNav open={false}>
       <Logo />
       <NavBox style={{ margin: 'auto' }}>
         <SearchInput
@@ -76,10 +85,15 @@ export const Navbar = ({ open }) => {
       <NavIcon style={{ width: '15%' }}>
         <IConsContainer>
           {user.isAdmin ? (
-            <IconList>
-              <FiSettings size="1.2em" style={Style} />
-              Admin
-            </IconList>
+            <Link
+              to="/dashboard"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList>
+                <FiSettings size="1.2em" style={Style} />
+                Admin
+              </IconList>
+            </Link>
           ) : null}
           {user?._id ? (
             <Link
@@ -106,8 +120,13 @@ export const Navbar = ({ open }) => {
             to="/cart"
             style={{ textDecoration: 'none', fontFamily: 'mulish' }}
           >
-            <IconList>
-              <span>5</span> <BsFillCartFill size="1.2em" style={Style} />
+            <IconList style={{ position: 'relative' }}>
+              {!cart.isLoading && cart.success ? (
+                <Badge>{cart?.cart?.items.length}</Badge>
+              ) : (
+                <Badge>0</Badge>
+              )}
+              <BsFillCartFill size="5em" style={Style} />
               Cart
             </IconList>
           </Link>
@@ -117,6 +136,13 @@ export const Navbar = ({ open }) => {
               Logout
             </IconList>
           )}
+          <IconList>
+            {theme === 'dark' ? (
+              <BsToggleOff onClick={setToggle} size="2em" style={Style} />
+            ) : (
+              <BsToggleOn onClick={setToggle} size="2em" style={Style} />
+            )}
+          </IconList>
         </IConsContainer>
       </NavIcon>
     </ListNav>

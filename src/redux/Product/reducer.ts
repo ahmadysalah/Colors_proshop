@@ -58,7 +58,6 @@ export const ProductReducer = (
       return {
         ...state,
         allProducts: {
-          // ...state.allProducts,
           isLoading: true,
         },
       };
@@ -66,7 +65,6 @@ export const ProductReducer = (
       return {
         ...state,
         allProducts: {
-          // ...state.allProducts,
           isLoading: false,
           success: true,
           allProduct: action.payload.products,
@@ -76,7 +74,6 @@ export const ProductReducer = (
       return {
         ...state,
         allProducts: {
-          // ...state.allProducts,
           error: action.payload.error,
           isLoading: false,
         },
@@ -87,7 +84,6 @@ export const ProductReducer = (
       return {
         ...state,
         getProductById: {
-          // ...state.getProductById,
           isLoading: true,
         },
       };
@@ -95,7 +91,6 @@ export const ProductReducer = (
       return {
         ...state,
         getProductById: {
-          // ...state.getProductById,
           isLoading: false,
           success: true,
           product: action.payload.product,
@@ -105,7 +100,6 @@ export const ProductReducer = (
       return {
         ...state,
         getProductById: {
-          // ...state.getProductById,
           error: action.payload.error,
           isLoading: false,
         },
@@ -115,7 +109,6 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           isLoading: true,
         },
       };
@@ -123,10 +116,8 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           isLoading: false,
           success: true,
-          // error: '',
           product: action.payload.product,
         },
       };
@@ -134,7 +125,6 @@ export const ProductReducer = (
       return {
         ...state,
         topProducts: {
-          // ...state.topProducts,
           error: action.payload.error,
           isLoading: false,
         },
@@ -144,7 +134,6 @@ export const ProductReducer = (
       return {
         ...state,
         allCategory: {
-          ...state.allCategory,
           isLoading: true,
         },
       };
@@ -152,19 +141,16 @@ export const ProductReducer = (
       return {
         ...state,
         allCategory: {
-          ...state.allCategory,
           isLoading: false,
           success: true,
-          categories: action.payload.product,
+          categories: action.payload,
         },
       };
     case EnumProductsAction.GET_ALL_CATEGORY_FILL:
       return {
         ...state,
         allCategory: {
-          ...state.allCategory,
           error: action.payload.error,
-          isLoading: false,
         },
       };
 

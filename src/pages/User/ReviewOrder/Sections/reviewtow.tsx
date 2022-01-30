@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import {
-  ReviewText,
   FooterTitleRight,
   TextFooter,
   UserName,
@@ -12,11 +13,7 @@ import {
   RevieworderButton,
   ChangeText,
   HeaderTitleRight,
-  WrapperCard,
   ShapeAddress,
-  LeftSection,
-  RightSection,
-  TextActive,
   RightSectionPlace,
   OrderDetailsText,
   LeftOrderSection,
@@ -35,51 +32,58 @@ import {
   getOrders,
 } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
+import { myActionCart } from '../../../../redux/Cart/action';
 
-export const ReviewTow = () => {
+export const ReviewTow: React.FC<objectType> = ({
+  paymentId,
+  clientSec,
+  orderId,
+}) => {
+  const navigation = useNavigate();
   const stripe: any = useStripe();
-  const elements = useElements();
-  const [checkoutError, setCheckoutError] = useState();
-
-  const pay = () => {
-    const { error, paymentMethod } = stripe.confirmCardPayment('113123213', {
-      type: 'card',
-      card: elements?.getElement(CardElement),
-    });
-    console.log({
-      error,
-      paymentMethod,
-    });
+  const pay = async () => {
+    try {
+      const { error } = await stripe.confirmCardPayment(clientSec, {
+        payment_method: paymentId,
+      });
+      if (error) throw new Error(error.message);
+      toast('Payment Successful', {
+        type: 'success',
+      });
+      navigation(`/paymentSuccess`);
+    } catch (error: any) {
+      toast(error.message, { type: 'error' });
+    }
   };
-  const dispatch =
-    useDispatch<ThunkDispatch<AppState, IMyOrder, ActionOrderType>>();
-  const ordersA = useSelector((state: AppState) => state.order.orderById);
 
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  const getOrder = useSelector((state: AppState) => state.order.orderById);
+  const createdorder = useSelector(
+    (state: AppState) => state.order.createOrder,
+  );
+  const cart = useSelector((state: AppState) => state.cart);
   useEffect(() => {
-    dispatch(getOrderById('61f0050964b6f00004501d91'));
+    dispatch(myActionCart());
+    dispatch(getOrderById(orderId));
   }, [dispatch]);
-
-  const handleCardDetailsChange = (ev: any) => {
-    if (ev.error) setCheckoutError(ev.error.message);
-    else setCheckoutError(undefined);
-  };
+  console.log('order created', createdorder);
+  console.log('first--------.', createdorder?.orders?.shippingAddress);
+  console.log('this is id of order', getOrder);
   return (
     <OrderWrapper>
-      {ordersA?.isLoading && !ordersA.orders ? (
+      {getOrder?.isLoading && !getOrder.orders ? (
         <SpinnerContainer />
       ) : (
         <>
           <LeftOrderSection>
             <Column>
-              {/* {console.log(ordersA.isLoading, ordersA.success)}
-              {console.log(
-                ordersA?.orders ? ordersA.orders[0].shippingAddress : undefined,
-              )} */}
-              {console.log('spinner finish', ordersA.orders?.shippingAddress)}
               <ShapeAddress>Shipping Address</ShapeAddress>
-              {/* {console.log('shipping address tag done')} */}
-              <UserName>John rose</UserName>
-              <Address>{ordersA.orders?.shippingAddress?.country}</Address>
+              <UserName>{getOrder.orders?.user?.firstName}</UserName>
+              <Address>
+                {getOrder?.orders?.shippingAddress?.address},
+                {getOrder?.orders?.shippingAddress?.city},
+                {getOrder?.orders?.shippingAddress?.country},
+              </Address>
               <HeaderTitleRight style={{ marginTop: '32px' }}>
                 <ShapeAddress style={{ marginTop: '5px' }}>
                   Order Details
@@ -88,37 +92,23 @@ export const ReviewTow = () => {
               </HeaderTitleRight>
               <Column style={{ width: '100%' }}>
                 <ProductContainer>
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                  />
-                  <OrderDetails
-                    title="iPhone 11 Pro 256GB Memory"
-                    image={logo}
-                    priceItem={20}
-                    countItem={20}
-                  />
+                  {getOrder.isLoading ? (
+                    <SpinnerContainer />
+                  ) : (
+                    <>
+                      {getOrder.orders?.orderItems?.map(x => (
+                        <OrderDetails
+                          title={x.product?.name}
+                          image={x.product?.images[0]}
+                          priceItem={x.product.price}
+                          countItem={x.qty}
+                          isHr
+                        />
+                      ))}
+                    </>
+                  )}
                 </ProductContainer>
               </Column>
-              <HeaderTitleRight
-                style={{ marginTop: '32px', justifyContent: 'space-between' }}
-              >
-                <form
-                  onSubmit={() => console.log('submitted')}
-                  style={{ width: '100%' }}
-                >
-                  <Column>
-                    <ShapeAddress>Payment Details</ShapeAddress>
-
-                    <CardElement
-                      options={cardElementOpts as any}
-                      onChange={handleCardDetailsChange}
-                    />
-                  </Column>
-                </form>
-              </HeaderTitleRight>
             </Column>
           </LeftOrderSection>
           <RightSectionPlace>
@@ -126,22 +116,32 @@ export const ReviewTow = () => {
               <OrderDetailsText>Order Details</OrderDetailsText>
               <FooterTitleRight>
                 <TextFooter>Subtotal</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>
+                  {createdorder.orders?.orderItems
+                    ?.reduce(
+                      (acc, item) => acc + item?.product?.price * item?.qty,
+                      0,
+                    )
+                    .toFixed(2)}
+                  $
+                </TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Tax</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>0 $</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Shipping</TextFooter>
-                <TextFooter>$589.98</TextFooter>
+                <TextFooter>0 $</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
-                <TextFooter style={{ fontWeight: 'bold' }}>$589.98</TextFooter>
+                <TextFooter style={{ fontWeight: 'bold' }}>
+                  {/* {createdorder?.orders?.totalPrice} */}
+                </TextFooter>
               </FooterTitleRight>
             </Column>
-            <RevieworderButton type="submit">Review order</RevieworderButton>
+            <RevieworderButton onClick={pay}>Review order</RevieworderButton>
           </RightSectionPlace>
         </>
       )}
@@ -150,30 +150,3 @@ export const ReviewTow = () => {
 };
 
 export default ReviewTow;
-
-const iframeStyles = {
-  base: {
-    iconColor: '#0F1112',
-    color: '#0F1112',
-    fontWeight: '500',
-    fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
-    fontSize: '16px',
-    fontSmoothing: 'antialiased',
-    border: '1px solid #4D4D4D',
-    ':-webkit-autofill': {
-      color: '#fce883',
-    },
-    '::placeholder': {
-      color: '#4D4D4D',
-    },
-    '::-webkit-input-placeholder': {
-      color: '#4D4D4D',
-      border: '1px solid #4D4D4D',
-    },
-  },
-};
-
-const cardElementOpts = {
-  iconStyle: 'solid',
-  style: iframeStyles,
-};

@@ -5,8 +5,7 @@ import { EnumAuthAction } from '../../redux/Auth/constant';
 import Store from '../../redux/store';
 
 export const useToken = () => {
-  const token: string =
-    JSON.parse(localStorage.getItem('user') || '{}').token || '';
+  const token: string = JSON.parse(localStorage.getItem('token') || '') || '';
   return token;
 };
 

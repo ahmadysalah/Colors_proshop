@@ -62,16 +62,14 @@ export const updateUser = (data: InterfaceUpdateUser) => {
           dataObj,
         );
 
-        if (response.status === 200) {
-          dispatch({
-            type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
-            payload: {
-              user: response.data,
-            },
-          });
-          localStorage.setItem('user', JSON.stringify(response.data));
-          localStorage.setItem('token', JSON.stringify(response.data.token));
-        }
+        dispatch({
+          type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
+          payload: {
+            user: response.data,
+          },
+        });
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('token', JSON.stringify(response.data.token));
       } catch (e: any) {
         dispatch({
           type: EnumUserAction.GET_PROFILE_USER_FILL,

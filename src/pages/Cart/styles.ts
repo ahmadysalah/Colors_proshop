@@ -62,6 +62,7 @@ export const ListContainer = styled(Container)`
 `;
 
 export const ItemContainer = styled(Container)`
+  display: ${props => (props.display === '0' ? 'none' : 'flex')};
   @media only screen and (max-width: 767px) {
     width: 100%;
     max-width: 25rem;
@@ -80,6 +81,7 @@ export const ImgContainer = styled(Container)`
 `;
 
 export const TotalContainer = styled(Container)`
+  width: 30%;
   @media only screen and (max-width: 767px) {
     width: 100%;
     max-width: 25rem;

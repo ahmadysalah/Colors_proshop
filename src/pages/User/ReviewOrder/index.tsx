@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { json } from 'stream/consumers';
 import logo from '../../../assets/Images/card.png';
-import { Column, Row, Typography } from '../../../components';
+import { Column, Row, SpinnerContainer, Typography } from '../../../components';
 import {
   IShippingSchema,
   ShippingSchema,
@@ -37,6 +39,7 @@ import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
 import { getProfile } from '../../../redux/User/action';
 import { ActionCartType } from '../../../redux/Cart/type';
+import { myActionCart } from '../../../redux/Cart/action';
 
 const initialValues: IShippingSchema = {
   country: '',
@@ -48,27 +51,50 @@ const initialValues: IShippingSchema = {
 const ReviewOrder = () => {
   const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
-  // const stripe: any = useStripe();
-  // const elements = useElements();
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.user.myProfile);
+  const [paymentId, setPaymentId] = useState(null);
+  const stripe: any = useStripe();
+  const elements = useElements();
+
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, any>>();
+  const cart = useSelector((state: AppState) => state.cart);
+  const myOrder = useSelector((state: AppState) => state.order.createOrder);
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(myActionCart());
   }, [dispatch]);
-  console.log('this is order first step', cart);
+
   const formik = useFormik<IShippingSchema>({
     initialValues,
     validationSchema: ShippingSchema,
     onSubmit: async values => {
-      dispatch(
-        createOrder({
-          address: values.address,
-          city: values.city,
-          country: values.country,
-          postalCode: values.zip,
-        }),
-      );
-      setstepperNumber(1);
+      const billingDetails = {
+        address: values.address,
+        city: values.city,
+        country: values.country,
+        postalCode: values.zip,
+      };
+      try {
+        dispatch(createOrder(billingDetails));
+        console.log('myOrder', myOrder);
+        const paymentElement = elements?.getElement(CardElement);
+        const paymentMethodReq = await stripe.createPaymentMethod({
+          type: 'card',
+          card: paymentElement,
+          // billing_details: billingDetails,
+        });
+        if (paymentMethodReq?.error) throw paymentMethodReq.error;
+        setPaymentId(paymentMethodReq?.paymentMethod?.id);
+        setstepperNumber(1);
+      } catch (error: any) {
+        toast(JSON.stringify(error.message), {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     },
   });
 
@@ -163,16 +189,12 @@ const ReviewOrder = () => {
                         style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
-                    {/* <ShapeAddress>Payment Details</ShapeAddress>
+                    {/* {/* <ShapeAddress>Payment Details</ShapeAddress> */}
 
                     <CardElement
                       options={cardElementOpts as any}
                       onChange={handleCardDetailsChange}
-                    /> */}
-
-                    {/* <StripeCardInput onChange={handleCardDetailsChange} />
-                    <StripeCardExpiry />
-                    <StripeCardCvc /> */}
+                    />
                     {checkoutError && (
                       <Typography margin-Top="1rem" color="red">
                         {checkoutError}
@@ -201,52 +223,67 @@ const ReviewOrder = () => {
                 </HeaderTitleRight>
                 <Column>
                   <InnerOverFlow>
-                    <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                      isHr
-                    />
-                    <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                      isHr
-                    />
-                    <OrderDetails
-                      title="iPhone 11 Pro 256GB Memory"
-                      image={logo}
-                      priceItem={20}
-                      countItem={20}
-                    />
+                    {cart.isLoading ? (
+                      <SpinnerContainer />
+                    ) : (
+                      <>
+                        {cart?.cart?.items?.map(x => (
+                          <OrderDetails
+                            title={x.product?.name}
+                            image={x.product?.images[0]}
+                            priceItem={x.product.price}
+                            countItem={x.qty}
+                            isHr
+                          />
+                        ))}
+                      </>
+                    )}
                   </InnerOverFlow>
                 </Column>
 
                 <FooterTitleRight>
                   <TextFooter>Subtotal</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>
+                    {cart?.cart?.items
+                      .reduce(
+                        (acc, item) => acc + item?.product?.price * item?.qty,
+                        0,
+                      )
+                      .toFixed(2)}{' '}
+                    $
+                  </TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter>Tax</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>0 $</TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter>Shipping</TextFooter>
-                  <TextFooter>$589.98</TextFooter>
+                  <TextFooter>0 $</TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
                   <TextFooter style={{ fontWeight: 'bold' }}>
-                    $589.98
+                    {cart?.cart?.items
+                      .reduce(
+                        (acc, item) => acc + item?.product?.price * item?.qty,
+                        0,
+                      )
+                      .toFixed(2)}{' '}
+                    $
                   </TextFooter>
                 </FooterTitleRight>
               </RightSection>
             </WrapperCard>
           </Column>
         )}
-        {stepperNumber === 1 && <ReviewTow />}
+        {stepperNumber === 1 && (
+          <ReviewTow
+            paymentId={paymentId}
+            clientSec={myOrder?.orders?.clientSecret}
+            orderId={myOrder?.orders?._id}
+          />
+        )}
       </InnerSection>
     </OrfferSection>
   );
@@ -279,4 +316,5 @@ const iframeStyles = {
 const cardElementOpts = {
   iconStyle: 'solid',
   style: iframeStyles,
+  hidePostalCode: true,
 };
