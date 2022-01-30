@@ -67,11 +67,11 @@ const ComplexCard = ({ ...props }: IProducts) => {
         style={{ textAlign: 'center' }}
       >
         <Typography
-          variant="h3"
-          fontSize="24px"
-          fontFamily="mulish"
+          variant="h2"
+          font-size="30px"
+          font-family="mulish"
           width="80%"
-          margin="10px auto"
+          margin="20px auto"
         >
           {props.name}
         </Typography>
@@ -102,13 +102,13 @@ const ComplexCard = ({ ...props }: IProducts) => {
         </Typography>
       </Content>
 
-      <Container direction="row" margin="auto" padding="15px">
+      <Container direction="row" margin="0 auto" padding="15px">
         <Button
           height="62px"
           background="#F2F2F2"
-          width="10%"
+          width="25%"
           padding="none"
-          margin-left="6%"
+          margin-left="0 6%"
         >
           <BsBookmark size="24px" />
         </Button>

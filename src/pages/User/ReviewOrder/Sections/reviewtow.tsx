@@ -117,7 +117,7 @@ export const ReviewTow: React.FC<objectType> = ({
               <FooterTitleRight>
                 <TextFooter>Subtotal</TextFooter>
                 <TextFooter>
-                  {createdorder.orders?.orderItems
+                  {getOrder.orders?.orderItems
                     ?.reduce(
                       (acc, item) => acc + item?.product?.price * item?.qty,
                       0,
@@ -137,7 +137,7 @@ export const ReviewTow: React.FC<objectType> = ({
               <FooterTitleRight>
                 <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
                 <TextFooter style={{ fontWeight: 'bold' }}>
-                  {/* {createdorder?.orders?.totalPrice} */}
+                  {getOrder?.orders?.totalPrice}
                 </TextFooter>
               </FooterTitleRight>
             </Column>

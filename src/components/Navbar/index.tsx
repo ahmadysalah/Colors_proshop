@@ -136,13 +136,6 @@ export const Navbar = ({ open, setToggle }) => {
               Logout
             </IconList>
           )}
-          <IconList>
-            {theme === 'dark' ? (
-              <BsToggleOff onClick={setToggle} size="2em" style={Style} />
-            ) : (
-              <BsToggleOn onClick={setToggle} size="2em" style={Style} />
-            )}
-          </IconList>
         </IConsContainer>
       </NavIcon>
     </ListNav>

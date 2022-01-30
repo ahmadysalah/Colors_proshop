@@ -28,19 +28,19 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           padding="40px"
         >
           <Typography
-            variant="h2"
+            variant="h1"
             bold
             margin-bottom="30px"
             fontFamily="mulish"
           >
             Payment Success !
           </Typography>
-          <Typography variant="h3" bold fontFamily="mulish">
+          {/* <Typography variant="h3" bold fontFamily="mulish">
             Order number
           </Typography>
           <Typography variant="h3" bold fontFamily="mulish">
             Shipping address
-          </Typography>
+          </Typography> */}
           <Typography
             variant="p"
             width="50%"
@@ -57,12 +57,12 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           height="115px"
           margin-top="65px"
         >
-          <Typography variant="p" font-size="16px" fontFamily="mulish">
+          {/* <Typography variant="p" font-size="16px" fontFamily="mulish">
             61f5b5562d7c5e0004f10ec3
           </Typography>
           <Typography variant="p" font-size="16px" fontFamily="mulish">
             Palestine - Gaza
-          </Typography>
+          </Typography> */}
         </Container>
       </Container>
       <Container padding="0" width="14%" float="right" margin-right="7.5%">
