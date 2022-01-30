@@ -4,14 +4,6 @@ import { Container } from '../../components';
 import { WarperFileBox } from '../../components/Form/checkBox/style';
 import { Input } from '../../components/Form/inputController/style';
 
-export const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-`;
-
 export const ProductContainer = styled(Container)`
   @media only screen and (max-width: 767px) {
     width: 100%;

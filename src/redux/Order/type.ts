@@ -1,6 +1,7 @@
 import { Action } from 'redux';
 import { EnumOrderAction } from './constant';
 import { IProducts } from '../Product/type';
+import { IUser } from '../Auth/type';
 
 export interface IOrderState {
   myOrder: {
@@ -58,7 +59,7 @@ export interface IOrders {
   isPaid: boolean;
   isDelivered: boolean;
   _id: string;
-  user: string;
+  user: IUser;
   orderItems: Array<IOorderItems>;
   paymentMethod: string;
   createdAt: string;

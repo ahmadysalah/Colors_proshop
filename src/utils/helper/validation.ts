@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import * as Yup from 'yup';
 
 export interface IschemaValidationLogin {
@@ -28,7 +29,7 @@ export interface ISchemaValidationSuginup {
 
 export const schemaValidationSignUp =
   (): Yup.SchemaOf<ISchemaValidationSuginup> => {
-    return Yup.object({
+    return Yup.object().shape({
       email: Yup.string()
         .email('it should be correct email ')
         .min(5, 'Too Short!')
@@ -85,23 +86,24 @@ export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
 
 export interface IAddProductSchema {
   id?: string;
-  images: Array<any>;
+  images: Array<string | Object>;
   name: string;
   brand: string;
-  categories: string[];
+  categories: Array<any>;
   description: string;
   countInStock: number;
   price: number;
-  colors: string[];
+  colors: Array<string>;
 }
 
 export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
   return Yup.object().shape({
-    id: Yup.string(),
-    images: Yup.array().required(),
+    id: Yup.string().optional(),
+    images: Yup.array()
+      .of(Yup.mixed().oneOf([Yup.string(), Yup.object()]))
+      .required(),
     name: Yup.string().required('Please enter product name'),
     brand: Yup.string().required('Please enter product brand'),
-    categories: Yup.array().required('Please enter product categories'),
     description: Yup.string()
       .required('Please enter product description')
       .max(200, 'Max 200 Char'),
@@ -111,5 +113,6 @@ export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
       .integer(),
     price: Yup.number().required('Please enter product price').positive(),
     colors: Yup.array().required('Please enter product colors'),
+    categories: Yup.array().required('Please enter product categories'),
   });
 };

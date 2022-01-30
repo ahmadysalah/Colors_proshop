@@ -62,7 +62,7 @@ export interface IStateProduct {
   allCategory: {
     categories?: IGetAllCategory[];
     success?: boolean;
-    isLoading: boolean;
+    isLoading?: boolean;
     error?: string;
   };
   topProducts: {
@@ -156,17 +156,15 @@ export interface IGetTopProductFilled extends Action<string> {
  *
  */
 
-export interface IGetAllCategoryStart extends Action<string> {
+export interface IGetAllCategoryStart {
   type: EnumProductsAction.GET_ALL_CATEGORY_START;
 }
 
-export interface IGetAllCategorySuccess extends Action<string> {
+export interface IGetAllCategorySuccess {
   type: EnumProductsAction.GET_ALL_CATEGORY_SUCCESS;
-  payload: {
-    product: IGetAllCategory[];
-  };
+  payload: IGetAllCategory[];
 }
-export interface IGetAllCategoryFilled extends Action<string> {
+export interface IGetAllCategoryFilled {
   type: EnumProductsAction.GET_ALL_CATEGORY_FILL;
   payload: {
     error: string;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
@@ -16,9 +16,10 @@ import {
 
 interface IProfileDashboard {
   user?: IUser;
+  isActive: any;
 }
 
-const ProfileDashboard = ({ user }: IProfileDashboard) => {
+const ProfileDashboard = ({ user, isActive }: IProfileDashboard) => {
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
   const handleLoagout = () => {
@@ -58,7 +59,9 @@ const ProfileDashboard = ({ user }: IProfileDashboard) => {
         min-height="150px"
         padding="1em"
       >
-        <NavLink to="#">My Orders</NavLink>
+        <NavLink to="#" onClick={isActive}>
+          My Orders
+        </NavLink>
         <NavLink to="#">Wishlist</NavLink>
         <NavLink to="#">Notifications</NavLink>
         <NavLink to="#">Settings</NavLink>

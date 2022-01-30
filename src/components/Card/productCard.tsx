@@ -1,8 +1,10 @@
 import ReactStars from 'react-rating-stars-component';
 import { BsBookmark } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../Button/ButtonStyle';
+import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
 import {
   Actions,
@@ -24,45 +26,31 @@ export interface IProducts {
   price: number;
   discount: number;
   countInStock?: number;
-  _id?: string;
+  _id: string;
   name?: string;
   description: string;
 }
 const ComplexCard = ({ ...props }: IProducts) => {
-  const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const navigate = useNavigate();
 
-  const addToCart = () => {
-    console.log('hiiiiii');
+  const handelAddCart = () => {
     dispatch(
-      upduteActionCart(
-        {
-          productId: props._id,
-          qty: 1,
-        },
-        () => navigation('/cart'),
-      ),
+      upduteActionCart({ productId: props._id, qty: 1 }, () => {
+        navigate('/cart');
+      }),
     );
-  };
-  const disCount = () => {
-    const percentage = (props.discount / props.price) * 100;
-    return Math.ceil(percentage);
   };
   return (
     <MainCard>
       {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`-${disCount()}%`}
+            {`-${Math.floor(-100 * (props.discount / props.price - 1))}%`}
           </Typography>
         </Discount>
       )}
-      <Container
-        background="white"
-        direction="column"
-        height="35rem"
-        border-Radius="12px"
-      >
+      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
         <Image
           src={props.image}
           variant="square"
@@ -73,49 +61,67 @@ const ComplexCard = ({ ...props }: IProducts) => {
             maxHeight: '18rem',
           }}
         />
-
-        <Content margin="1rem 0 0 20px">
-          <Typography
-            variant="h3"
-            fontSize="20px"
-            fontFamily="mulish"
-            text-Align="center"
-            width="90%"
-          >
-            {props.name}
-          </Typography>
-        </Content>
-        <Content>
-          <ReactStars
-            isHalf
-            name="rate"
-            edit={false}
-            value={props.rating}
-            size={40}
-          />
-        </Content>
-        <Content>
-          {props.discount ? (
-            <Typography variant="h2" margin="0 10px" color="#FC4059">
-              ${`${props.discount}`}
-            </Typography>
-          ) : (
-            <></>
-          )}
+      </ContentAction>
+      <Content
+        onClick={() => navigate(`/product/${props._id}`)}
+        style={{ textAlign: 'center' }}
+      >
+        <Typography
+          variant="h2"
+          font-size="30px"
+          font-family="mulish"
+          width="80%"
+          margin="20px auto"
+        >
+          {props.name}
+        </Typography>
+      </Content>
+      <Content>
+        <ReactStars
+          isHalf
+          name="rate"
+          edit={false}
+          value={props.rating}
+          size={40}
+        />
+      </Content>
+      <Content>
+        {props.discount && (
           <Typography
             variant="h2"
             text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
+            color="red"
+            marginRight="20px"
           >
             ${props.price}
           </Typography>
-        </Content>
-        <Actions>
-          <SaveBtn>
-            <BsBookmark size="24px" />
-          </SaveBtn>
-          <AddCart onClick={addToCart}>Add to cart</AddCart>
-        </Actions>
+        )}
+        <Typography variant="h2" fontFamily="mulish">
+          ${props.discount}
+        </Typography>
+      </Content>
+
+      <Container direction="row" margin="0 auto" padding="15px">
+        <Button
+          height="62px"
+          background="#F2F2F2"
+          width="25%"
+          padding="none"
+          margin-left="0 6%"
+        >
+          <BsBookmark size="24px" />
+        </Button>
+        <Button
+          height="62px"
+          width="65.3%"
+          background="#F2F2F2"
+          fontSize="15px"
+          margin="0 5%"
+          onClick={handelAddCart}
+        >
+          Add to cart
+        </Button>
       </Container>
     </MainCard>
   );

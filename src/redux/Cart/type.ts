@@ -1,11 +1,12 @@
 import { Action } from 'redux';
 import { IProducts } from '../Product/type';
+import { IItemCart } from '../User/type';
 import { EnumCartAction } from './constant';
 
 interface ICart {
-  items: IProducts[];
-  totalQty: 0;
-  totalPrice: 0;
+  items: Array<IItemCart>;
+  totalPrice: number;
+  totalQty: number;
 }
 
 export interface IUpdateCardStart extends Action<string> {
@@ -44,13 +45,32 @@ export interface IDeleteCardFill extends Action<string> {
   };
 }
 
+export interface IMyCardStart extends Action<string> {
+  type: EnumCartAction.MY_CART_START;
+}
+export interface IMyCardSuccess extends Action<string> {
+  type: EnumCartAction.MY_CART_SUCCESS;
+  payload: {
+    cart: ICart;
+  };
+}
+export interface IMyCardFill extends Action<string> {
+  type: EnumCartAction.MY_CART_FILL;
+  payload: {
+    error: string;
+  };
+}
+
 export type ActionCartType =
   | IDeleteCardStart
   | IDeleteCardSuccess
   | IDeleteCardFill
   | IUpdateCardStart
   | IUpdateCardSuccess
-  | IUpdateCardFill;
+  | IUpdateCardFill
+  | IMyCardStart
+  | IMyCardSuccess
+  | IMyCardFill;
 
 export interface ICartState {
   cart: ICart;

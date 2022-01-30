@@ -107,6 +107,7 @@ export const ProductContainer = styled.div`
 `;
 export const OrderWrapper = styled(WrapperCard)`
   width: 90%;
+  margin: 10px auto;
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -114,10 +115,10 @@ export const OrderWrapper = styled(WrapperCard)`
   }
 `;
 export const OrfferSection = styled(Column)`
-  width: 100%;
+  width: 90%;
   height: 700px;
   // overflow: auto;
-  margin: auto;
+  margin: 50px auto;
   justify-content: space-between;
   @media (max-width: 768px) {
     width: 90%;
@@ -165,7 +166,7 @@ export const InnerOverFlow = styled.div`
   width: 100%;
 `;
 export const RightSectionPlace = styled(RightSectionTowReview)`
-  width: 20%;
+  width: 40%;
 
   height: 90%;
   @media (max-width: 1500px) {
@@ -329,10 +330,9 @@ export const RevieworderButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  margin-top: 20px;
   float: right;
   position: absolute;
-  bottom: -1.5rem;
+  bottom: 1.8rem;
   right: 6rem;
 `;
 

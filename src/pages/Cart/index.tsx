@@ -1,48 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import {
-  CartContainer,
-  GlobalStyle,
-  ListContainer,
-  TotalContainer,
-} from './styles';
+import { CartContainer, ListContainer, TotalContainer } from './styles';
 import EmptyCart from './Sections/EmptyCart';
 import { Container, PathNavigate, SpinnerContainer } from '../../components';
 import CartList from './Sections/CartList';
 import Subtotal from './Sections/Subtotal';
 import { AppState } from '../../redux/store';
-import { ActionCartType } from '../../redux/Cart/type';
-import { getProfile } from '../../redux/User/action';
-import { OrfferSection } from '../User/ReviewOrder/Sections/style';
+import { TopRate } from '../../components/sections/TopRate/TopRate';
+import { myActionCart } from '../../redux/Cart/action';
 
 const Cart = () => {
-  // const { state } = useLocation();
+  const dispatch = useDispatch<ThunkDispatch<AppState, any, any>>();
+  const cart = useSelector((state: AppState) => state.cart);
 
-  const [TotalPrice, setTotalPrice] = useState(0);
-
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((states: AppState) => states.user.myProfile);
   useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
+    dispatch(myActionCart());
+    // dispatch(getTopProducts());
+  }, []);
 
-  console.log(TotalPrice, 'lklkkkkkkkkkkkkkkkkkkkk');
+  const TopRateComp = useCallback(() => <TopRate />, []);
   return (
-    <OrfferSection style={{ marginTop: '20px' }}>
+    <Container direction="column" width="90%" margin="80px auto">
       <PathNavigate name="Shopping Cart" />
-      <Container direction="row" width="85%" margin="10px auto">
-        <Container direction="column" width="80%">
-          <Container direction="column" overflow="auto" height="500px">
-            {cart.user?.cart?.items.map((item, i) => (
-              <>
-                <CartList data={item} key={i} />
-              </>
+      {cart.isLoading ? (
+        <SpinnerContainer />
+      ) : !cart.cart?.items.length ? (
+        <EmptyCart />
+      ) : (
+        <CartContainer align-items="flex-start">
+          <ListContainer direction="column" width="70%">
+            {cart.cart?.items.map(item => (
+              <CartList data={item} key={item.product._id} />
             ))}
-          </Container>
-        </Container>
-        <Container direction="column" width="30%">
+          </ListContainer>
           <TotalContainer
             direction="column"
             background-color="#F2F2F2"
@@ -50,40 +41,13 @@ const Cart = () => {
             margin-left="2em"
             height="50%"
           >
-            <Subtotal
-              total={cart.user?.cart?.items.reduce(
-                (prev: any, current) => prev + current.itemTotalPrice,
-                0,
-              )}
-            />
+            <Subtotal data={cart.cart} />
           </TotalContainer>
-        </Container>
-      </Container>
-    </OrfferSection>
+        </CartContainer>
+      )}
+      {TopRateComp()}
+    </Container>
   );
 };
 
 export default Cart;
-
-// {cart.isLoading ? (
-//   <SpinnerContainer />
-// ) : (
-//   <CartContainer align-items="flex-start">
-//     <ListContainer direction="column" width="70%">
-//       {cart.user?.cart?.items.map(item => (
-//         <CartList data={item} key={item.product._id} />
-//       ))}
-//     </ListContainer>
-
-//     <TotalContainer
-//       direction="column"
-//       width="30%"
-//       background-color="#F2F2F2"
-//       border-radius="16px"
-//       margin-left="2em"
-//       height="50%"
-//     >
-//       <Subtotal total={4} />
-//     </TotalContainer>
-//   </CartContainer>
-// )}

@@ -58,16 +58,13 @@ const Signup = () => {
     validateOnChange: validateAfterSubmit,
     enableReinitialize: true,
     onSubmit: async values => {
-      setValidateAfterSubmit(true);
-      const firstName = values.name.split(' ')[0];
-      const lastName = values.name.split(' ')[1];
       dispatch(
         AuthActions.singUpSuccess(
           {
-            firstName,
-            lastName,
             email: values.email,
             password: values.password,
+            firstName: values.name.split(' ')[0],
+            lastName: values.name.split(' ')[1],
             passwordConfirmation: values.passwordConfirmation,
           },
           () => {
@@ -107,6 +104,8 @@ const Signup = () => {
                     onChange={formik.handleChange}
                     icon={<GrUserNew />}
                     value={formik.values.name}
+                    touched={formik.touched.name}
+                    onBlur={formik.handleBlur}
                   />
                   <InputController
                     name="email"

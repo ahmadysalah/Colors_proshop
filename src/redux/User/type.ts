@@ -24,6 +24,7 @@ export interface IItemCart {
   itemTotalPrice: number;
   product: IProducts;
   qty: number;
+  id?: string;
 }
 
 export interface IStateUser {

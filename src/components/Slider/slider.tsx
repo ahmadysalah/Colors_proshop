@@ -50,12 +50,7 @@ export const Slider = ({ data }: IProps) => {
     ));
 
   return (
-    <Container
-      direction="column"
-      background="#F2F2F2"
-      padding="0 5%"
-      overflow="hidden"
-    >
+    <Container direction="column" background="#F2F2F2" overflow="hidden">
       <SliderSection>
         <SwipeableViews
           index={sliderIndex}

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import './style.css';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AgGridColumn } from 'ag-grid-react/lib/shared/agGridColumn';
 import { columnDefs, defaultColDef, rowStyle, getRowStyle } from './data';
@@ -14,6 +14,7 @@ import { IProducts } from '../../redux/Product/type';
 import { AppState } from '../../redux/store';
 import { delateProduct } from '../../redux/Admin/action';
 import { TAllActionAdmin } from '../../redux/Admin/type';
+import { getProducts } from '../../redux/Product/action';
 
 interface IProps {
   data?: IProducts[];
@@ -28,33 +29,30 @@ const row = (PRODUCTID, PRODUCTNAME, PRODUCTPRICE, CATEGORY, ACTION) => ({
 });
 
 const Table = ({ data }: IProps) => {
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAdmin>>();
-
-  // const deleteOnClick: any = (id: string) => {
-  //   console.log('iddddddddddd', id);
-  //   dispatch(delateProduct(`${id}`));
-  // };
-
+  console.log('data of table', data);
   const getRowData = () => {
-    return data?.map(e => {
-      return row(
-        // eslint-disable-next-line no-underscore-dangle
-        e?._id,
-        e?.brand,
-        e?.price,
-        e?.categories[0],
-        <>
-          <Link to="/addNewProduct">
-            <StyledEdit />
-          </Link>
-          <StyledDelete />
-          {/* onClick={deleteOnClick(e._id)} */}
-        </>,
-      );
-    });
+    return (
+      data &&
+      data.length &&
+      data?.map(e => {
+        return row(
+          // eslint-disable-next-line no-underscore-dangle
+          e?._id,
+          e?.brand,
+          e?.price,
+          e?.categories[0],
+          <>
+            <Link to={`/updateroduct/${e._id}`}>
+              <StyledEdit />
+            </Link>
+            <StyledDelete />
+            {/* onClick={deleteOnClick(e._id)} */}
+          </>,
+        );
+      })
+    );
   };
-
-  const [rowData, setRowData] = useState(getRowData());
+  console.log('data of table 455', data);
 
   return (
     <>
@@ -65,7 +63,7 @@ const Table = ({ data }: IProps) => {
           rowStyle={rowStyle}
           rowHeight={62}
           defaultColDef={defaultColDef}
-          rowData={rowData}
+          rowData={getRowData() as any}
           // columnDefs={columnDefs}
         >
           <AgGridColumn field="PRODUCTID" width={300} />
